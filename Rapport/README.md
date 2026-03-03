@@ -119,7 +119,7 @@ SmartDress est une application mobile intelligente qui permet aux utilisateurs d
 
 # Scrum
 
-![Maquette application](images/scrum.jpg)
+![Maquette application](images/Scrum.png)
 
 La méthodologie Scrum est une méthodologie agile qui permet de gérer un projet de manière flexible et collaborative, en favorisant la livraison progressive de fonctionnalités. Elle repose sur l’itération, la priorisation des tâches et la communication régulière entre les membres de l’équipe.  
 
@@ -167,7 +167,7 @@ Cette phase consiste à comprendre les objectifs du projet, identifier les acteu
 
 # Design Thinking
 
-![Maquette application](images/designThinking.png) 
+![Maquette application](images/DesignThinking.png) 
 
 ## Qu’est-ce que le Design Thinking ?
 Le **Design Thinking** est une approche de résolution de problèmes centrée sur l’humain.
@@ -207,15 +207,12 @@ Exemple : « Comment pourrions-nous aider l’utilisateur à… ? »
 ## Carte d'empathie
 **Apprenant :**
 
-![Carte d'empathie d'apprenant](images/carte_d'empathie_apprenant.png) 
+![Carte d'empathie d'apprenant](images/mind_map_apprenant.jpg) 
 
-**Entreprise :**
-
-![Carte d'empathie d'entreprise](images/carte_d'empathie_entreprise.png) 
 
 **Administrateur :**
 
-![Carte d'empathie d'admin](images/carte_d'empathie_admin.png) 
+![Carte d'empathie d'admin](images/mind_map_admin.jpg) 
 
 ---
 
