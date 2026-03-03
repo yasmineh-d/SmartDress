@@ -4,10 +4,10 @@
 
 ---
 
-**Réalisée par :** Yasmine Had-dad  
+**Réalisée par :** Yasmine Haddad  
 **Encadré par :** Mr. Essarraj Fouad  
 
-**Année de Formation :** 2025/2026  
+**Année de Formation :** 2025/2026
 
 ---
 
@@ -64,11 +64,7 @@ De leur côté, les entreprises éprouvent des difficultés à gérer efficaceme
 
 # Contexte de projet
 
-Dans le cadre de ma formation en développement web, nous devons réaliser un projet de fin de formation qui reflète nos compétences techniques et répond à un besoin concret. En discutant avec mon entourage et en observant les habitudes quotidiennes, j’ai remarqué que beaucoup de personnes rencontrent des difficultés à choisir leurs tenues chaque matin. Le manque de temps, l’hésitation face aux différentes combinaisons possibles et l’oubli des conditions météorologiques rendent cette tâche plus complexe qu’elle ne paraît.
-
-Les vêtements sont souvent nombreux mais mal organisés, ce qui complique la visualisation des options disponibles et la création d’ensembles harmonieux. Cette situation m’a inspiré l’idée du projet SmartDress, une application web intelligente permettant de digitaliser la garde-robe, d’organiser les vêtements par catégories et de proposer automatiquement des suggestions de tenues adaptées à la météo et au contexte de la journée.
-
-Ce projet vise ainsi à simplifier la prise de décision vestimentaire, à faire gagner du temps et à offrir une expérience pratique et personnalisée aux utilisateurs.
+Dans le cadre de ma formation en développement web, nous devons réaliser un projet de fin de formation qui reflète nos compétences et répond à un besoin réel. En observant mon entourage et les difficultés quotidiennes liées au choix des tenues, j’ai constaté que beaucoup de personnes perdaient du temps chaque matin à décider quoi porter, sans toujours tenir compte de la météo ou des combinaisons possibles. Cette situation a inspiré l’idée du projet **SmartDress**, une application web permettant d’organiser sa garde-robe de manière digitale et de recevoir des suggestions de tenues adaptées, afin de simplifier le choix vestimentaire et gagner du temps au quotidien.
 
 ---
 
@@ -81,37 +77,39 @@ Ce projet vise ainsi à simplifier la prise de décision vestimentaire, à faire
 # Cahier de charge
 
 ## Description :
-StageFlow est une plateforme web centralisée qui permet aux étudiants de rechercher, consulter et postuler aux offres de stage, et aux entreprises de publier et gérer leurs offres et candidatures facilement.  
+SmartDress est une application mobile intelligente qui permet aux utilisateurs de gérer leur garde-robe de manière digitale et de recevoir des suggestions de tenues automatiques basées sur la météo et leurs préférences personnelles.
 
 ## Objectifs principaux
-- Centraliser la recherche et la gestion des stages.  
-- Simplifier la candidature pour les étudiants et le suivi des candidatures.  
-- Permettre aux entreprises de gérer efficacement leurs offres et candidats.  
-- Fournir des statistiques fiables pour améliorer la prise de décision.  
+- Numériser et organiser physiquement la garde-robe via une interface mobile.
+- Réduire le temps d'indécision matinale grâce à des suggestions intelligentes.
+- Adapter les tenues aux conditions météorologiques réelles.
+- Optimiser l'utilisation de tous les vêtements possédés (éviter l'oubli).
+- Faciliter une consommation de mode plus responsable et organisée.
 
 ## Utilisateurs et rôles
-1. **Étudiant** : consulter les offres, postuler et suivre ses candidatures.  
-2. **Entreprise / Admin** : publier, modifier, supprimer les offres, examiner les candidatures, suivre les statistiques.  
+1. **Etudiant** : Gère sa garde-robe, consulte les suggestions, classe ses vêtements par style.
+2. **Admin** : Supervise la plateforme, gère les comptes, surveille les flux de données (météo, IA) et assure la modération du contenu.
 
 ## Fonctionnalités clés
-- Création de compte et authentification.  
-- Recherche et filtrage des offres par domaine, durée et entreprise.  
-- Suivi des candidatures pour les étudiants.  
-- Gestion complète des offres et candidatures pour les entreprises.  
-- Tableau de bord et statistiques pour les entreprises.  
-- Notifications pour les réponses et nouvelles offres.  
+- Création de compte et authentification sécurisée.
+- Recherche et filtrage des vêtements par catégorie, style et saison.
+- Suivi des suggestions de tenues quotidiennes et historique.
+- Gestion complète de la garde-robe digitale (Ajout, Modification, Suppression).
+- Tableau de bord et statistiques d'utilisation (pour l'administrateur).
+- Notifications quotidiennes pour les tenues et alertes météo.
 
 ## Contraintes
-- Interface simple et intuitive.  
-- Compatible mobile et ordinateur.  
-- Accès sécurisé selon le rôle utilisateur.  
+- Interface mobile intuitive et esthétique.
+- Rapidité des algorithmes de recommandation.
+- Sécurité et confidentialité des données utilisateurs.
+- Accessibilité et ergonomie.
 
 ## Critères de réussite
-- Étudiants capables de trouver et postuler facilement.  
-- Entreprises pouvant gérer leurs offres correctement.  
-- Suivi des candidatures et notifications fonctionnelles.  
-- Statistiques lisibles et précises.  
-- Fonctionnalités des deux sprints implémentées et testées.
+- Fluidité de la numérisation des vêtements.
+- Pertinence des recommandations par rapport à la météo.
+- Réduction du temps passé par l'utilisateur à choisir sa tenue.
+- Stabilité technique (disponibilité des API externes).
+- Satisfaction globale des utilisateurs lors des phases de test.
 
 ---
 
