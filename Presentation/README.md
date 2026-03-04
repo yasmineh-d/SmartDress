@@ -167,8 +167,8 @@ style: |
 
 ---
 ## 1. Contexte du projet
-**Dans le cadre de ma formation en développement web, nous devons réaliser un projet de fin de formation répondant à un besoin réel. En observant les difficultés des étudiants pour trouver des stages adaptés, j’ai constaté que les offres étaient dispersées et le suivi des candidatures compliqué.**
-**C’est ainsi qu’est née l’idée de StageFlow, une application web visant à centraliser les offres de stages, faciliter la recherche pour les étudiants et simplifier la gestion des candidatures pour les entreprises.**
+**Dans le cadre de ma formation en développement web, nous devons réaliser un projet de fin d’études répondant à un besoin réel. En observant les difficultés liées au choix des tenues, j’ai constaté que beaucoup de personnes perdent du temps chaque matin à décider quoi porter.**
+**Cette situation a inspiré le projet SmartDress, une application web qui permet d’organiser sa garde-robe digitalement et de recevoir des suggestions de tenues adaptées afin de gagner du temps au quotidien.**
 
 ---
 
@@ -225,9 +225,9 @@ style: |
   <div class="dt-card" style="border-top-color: #f39c12;">
     <h4>Cadrage du problème</h4>
     <blockquote style="font-style: italic; background: white; padding: 15px; border-radius: 8px;">
-      <p>Comment pourrions-nous faciliter la recherche de stages pour les étudiants ?</p>
-      <p>Comment pourrions-nous aider les entreprises à publier et gérer efficacement leurs offres de stage ?</p>
-      <p>Comment pourrions-nous centraliser le processus de candidature et de suivi ?</p>
+      <p>Comment pourrions-nous aider les utilisateurs à mieux organiser leur garde-robe ?</p>
+      <p>Comment pourrions-nous automatiser la suggestion de tenues quotidiennes ?</p>
+      <p>Comment pourrions-nous réduire le temps passé à choisir ses vêtements chaque matin ?</p>
     </blockquote>
     .
   </div>
@@ -242,10 +242,10 @@ style: |
   <div class="dt-card" style="border-top-color: #f39c12;">
     <h4>Solutions retenues</h4>
     <ul>
-     <li>Plateforme web centralisée de gestion des stages.</li>
-     <li>Publication et gestion des offres par les entreprises.</li>
-     <li>Candidature en ligne avec suivi pour les étudiants.</li>
-     <li>Tableau de bord pour visualiser les candidatures.</li>
+      <li>Plateforme web de gestion de garde-robe digitale.</li>
+      <li>Ajout et catégorisation des vêtements avec photos.</li>
+      <li>Génération de suggestions de tenues personnalisées.</li>
+      <li>Calendrier de planification des tenues hebdomadaires.</li>
     </ul>
   </div>
 </div>
@@ -296,8 +296,8 @@ style: |
       <li><strong>Base de données:</strong> MySQL </li>
       <li><strong>Framework:</strong> Laravel 12</li>
       <li><strong>Architecture:</strong> N-Tiers</li>
-      <strong>Controller:</strong> Requêtes HTTP
-      <strong>Service:</strong> Logique métier
+      <strong>Controller:</strong> Requêtes HTTP<br>
+      <strong>Service:</strong> Logique métier<br>
       <strong>Model:</strong> Base de données
       <li><strong>Architecture:</strong> MVC</li>
       <li><strong> Blade :</strong>Templates réutilisables (components, layouts).</li>
