@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { 500: 'hsl(230, 60%, 50%)', 700: 'hsl(230, 60%, 35%)' },
+                        accent: { 500: 'hsl(15, 80%, 65%)' },
+                        slate: { 50: 'hsl(220, 15%, 98%)', 100: 'hsl(220, 15%, 95%)', 500: 'hsl(220, 15%, 50%)', 900: 'hsl(220, 15%, 10%)' }
+                    },
+                    fontFamily: {
+                        heading: ['Outfit', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-slate-100 min-h-screen flex items-center justify-center p-6 font-body">
+
+    <!-- Molécule : m-card-suggestion -->
+    <div
+        class="w-full max-w-sm bg-white rounded-[2rem] shadow-xl shadow-slate-200/50 overflow-hidden border border-slate-200/50">
+
+        <!-- Header Image Area -->
+        <div class="relative h-80 bg-slate-50 flex items-center justify-center p-8">
+            <div class="absolute top-4 left-4">
+                <span
+                    class="px-3 py-1 bg-white/80 backdrop-blur-sm text-accent-500 text-xs font-bold rounded-full shadow-sm">CONSEILLÉ</span>
+            </div>
+            <!-- Simulation d'une tenue suggérée -->
+            <div class="flex flex-col items-center gap-4">
+                <div
+                    class="w-32 h-32 bg-indigo-100 rounded-2xl flex items-center justify-center text-indigo-500 font-bold">
+                    HAUT</div>
+                <div
+                    class="w-32 h-40 bg-orange-50 rounded-2xl flex items-center justify-center text-orange-400 font-bold">
+                    BAS</div>
+            </div>
+        </div>
+
+        <!-- Content Area -->
+        <div class="p-8 space-y-6">
+            <div class="space-y-2">
+                <h2 class="text-2xl font-heading font-bold text-slate-900 leading-tight">Look Casual Chic</h2>
+                <p class="text-slate-500 text-sm leading-relaxed">Parfait pour une journée de travail avec une
+                    température de 18°C.</p>
+            </div>
+
+            <div class="flex flex-col gap-3">
+                <!-- atom : a-btn-primary -->
+                <button
+                    class="w-full py-4 bg-primary-500 text-white font-heading font-bold rounded-2xl shadow-lg shadow-primary-500/20 hover:bg-primary-700 transition-all">
+                    Valider cette tenue
+                </button>
+                <!-- atom : a-btn-ghost -->
+                <button
+                    class="w-full py-4 text-slate-500 font-heading font-semibold rounded-2xl hover:bg-slate-50 transition-colors">
+                    Autre idée ?
+                </button>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

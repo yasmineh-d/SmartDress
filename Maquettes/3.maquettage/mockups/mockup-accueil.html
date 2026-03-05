@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartDress - Bienvenue</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { 500: 'hsl(230, 60%, 50%)', 700: 'hsl(230, 60%, 35%)' },
+                        slate: { 50: 'hsl(220, 15%, 98%)', 100: 'hsl(220, 15%, 95%)', 200: 'hsl(220, 15%, 90%)', 500: 'hsl(220, 15%, 50%)', 900: 'hsl(220, 15%, 10%)' }
+                    },
+                    fontFamily: {
+                        heading: ['Outfit', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="../charte-graphique/style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700&display=swap');
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+
+<body class="bg-slate-900 font-body text-slate-900 overflow-x-hidden">
+
+    <!-- Section 1 : Hero Splash -->
+    <section id="splash" class="min-h-screen flex items-center justify-center p-6 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-indigo-950 to-slate-900 opacity-50"></div>
+
+        <!-- Background Decor -->
+        <div class="absolute -top-24 -left-24 w-96 h-96 bg-primary-500 rounded-full blur-[120px] opacity-20"></div>
+        <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-orange-500 rounded-full blur-[120px] opacity-10"></div>
+
+        <div
+            class="relative flex flex-col items-center text-center max-w-lg space-y-8 animate-in fade-in zoom-in duration-1000">
+            <!-- Molecule : m-hero-splash -->
+            <div class="relative group">
+                <div
+                    class="absolute -inset-2 bg-gradient-to-r from-indigo-500 to-orange-400 rounded-full blur opacity-25">
+                </div>
+                <img src="../charte-graphique/smartdress_logo.png" alt="Logo SmartDress"
+                    class="relative w-32 h-32 object-contain">
+            </div>
+
+            <h1 class="text-4xl md:text-6xl font-heading font-bold text-white tracking-tight leading-tight">
+                SmartDress : Votre garde-robe devient <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-orange-300">intelligente</span>
+            </h1>
+
+            <p class="text-slate-400 text-lg md:text-xl max-w-sm">
+                Simplifiez vos matins avec des suggestions de tenues basées sur la météo et votre style.
+            </p>
+
+            <a href="#auth"
+                class="px-10 py-5 bg-primary-500 text-white font-heading font-bold rounded-2xl shadow-2xl shadow-primary-500/30 hover:bg-primary-700 hover:scale-105 transition-all active:scale-95 block">
+                Commencer l'expérience
+            </a>
+        </div>
+    </section>
+
+    <!-- Section 2 : Authentification -->
+    <section id="auth" class="min-h-screen bg-slate-50 flex items-center justify-center p-6">
+        <div class="w-full max-w-md space-y-8">
+
+            <!-- Molecule : m-form-login (adaptée) -->
+            <div
+                class="bg-white p-10 rounded-[2.5rem] shadow-xl shadow-slate-200/50 border border-white space-y-8 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-indigo-500 to-orange-400"></div>
+
+                <div class="space-y-3">
+                    <h2 class="text-3xl font-heading font-bold text-slate-900">Bon retour !</h2>
+                    <p class="text-slate-500">Heureux de vous revoir parmi nous.</p>
+                </div>
+
+                <div class="flex gap-4 p-1.5 bg-slate-50 rounded-2xl">
+                    <button
+                        class="flex-1 py-3 text-sm font-bold bg-white text-slate-900 rounded-xl shadow-sm border border-slate-100">Connexion</button>
+                    <button
+                        class="flex-1 py-3 text-sm font-bold text-slate-500 hover:text-slate-900 transition-colors">Inscription</button>
+                </div>
+
+                <form class="space-y-5">
+                    <div class="space-y-1.5">
+                        <label class="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Email</label>
+                        <input type="email" placeholder="nom@exemple.com"
+                            class="w-full px-5 py-4 bg-slate-50 border-2 border-transparent rounded-2xl focus:border-primary-500 focus:bg-white outline-none transition-all placeholder:text-slate-300">
+                    </div>
+                    <div class="space-y-1.5">
+                        <div class="flex justify-between items-center ml-1">
+                            <label class="text-xs font-bold text-slate-400 uppercase tracking-widest">Mot de
+                                passe</label>
+                            <a href="#" class="text-xs font-bold text-primary-500 hover:underline">Oublié ?</a>
+                        </div>
+                        <input type="password" placeholder="••••••••"
+                            class="w-full px-5 py-4 bg-slate-50 border-2 border-transparent rounded-2xl focus:border-primary-500 focus:bg-white outline-none transition-all placeholder:text-slate-300">
+                    </div>
+
+                    <button type="button" onclick="location.href='./mockup-dashboard.html'"
+                        class="w-full py-5 bg-primary-500 text-white font-heading font-bold rounded-2xl shadow-lg shadow-primary-500/20 hover:bg-primary-700 hover:translate-y-[-2px] active:translate-y-0 transition-all mt-4">
+                        Se connecter
+                    </button>
+                </form>
+
+                <div class="relative py-2">
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-slate-100"></div>
+                    </div>
+                    <div class="relative flex justify-center text-xs font-bold uppercase tracking-widest"><span
+                            class="bg-white px-4 text-slate-300">Ou continuer avec</span></div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <button
+                        class="flex items-center justify-center py-4 border-2 border-slate-50 rounded-2xl hover:bg-slate-50 transition-colors group">
+                        <span class="font-bold text-slate-700 group-hover:text-slate-900">Google</span>
+                    </button>
+                    <button
+                        class="flex items-center justify-center py-4 border-2 border-slate-50 rounded-2xl hover:bg-slate-50 transition-colors group">
+                        <span class="font-bold text-slate-700 group-hover:text-slate-900">Apple</span>
+                    </button>
+                </div>
+            </div>
+
+            <p class="text-center text-slate-400 text-sm">
+                En continuant, vous acceptez nos <a href="#" class="font-bold text-slate-600 hover:underline">Conditions
+                    d'Utilisation</a>.
+            </p>
+        </div>
+    </section>
+
+</body>
+
+</html>

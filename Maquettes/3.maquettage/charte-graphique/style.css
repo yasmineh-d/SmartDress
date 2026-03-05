@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700&display=swap');
+
+:root {
+    /* Colors - Primary (Indigo) */
+    --color-primary-500: hsl(230, 60%, 50%);
+    --color-primary-700: hsl(230, 60%, 35%);
+    --color-primary-100: hsl(230, 60%, 95%);
+
+    /* Colors - Accent (Coral) */
+    --color-accent-500: hsl(15, 80%, 65%);
+    --color-accent-100: hsl(15, 80%, 95%);
+
+    /* Neutrals */
+    --color-slate-900: hsl(220, 15%, 10%);
+    --color-slate-500: hsl(220, 15%, 50%);
+    --color-slate-100: hsl(220, 15%, 95%);
+
+    /* Semantic */
+    --color-success: hsl(150, 60%, 45%);
+    --color-error: hsl(350, 70%, 55%);
+
+    /* Typography */
+    --font-heading: 'Outfit', sans-serif;
+    --font-body: 'Inter', sans-serif;
+
+    /* Transitions */
+    --transition-fast: 200ms ease-in-out;
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--color-slate-900);
+    background-color: var(--color-slate-100);
+    margin: 0;
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+}
