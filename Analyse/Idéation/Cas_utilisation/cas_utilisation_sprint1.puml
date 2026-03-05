@@ -1,0 +1,96 @@
+@startuml
+skinparam actorStyle awesome
+left to right direction
+skinparam package {
+    BackgroundColor White
+    BorderColor #2C3E50
+}
+skinparam usecase {
+    BackgroundColor #E8F6F3
+    BorderColor #117864
+    ArrowColor #117864
+}
+
+actor "Utilisateur" as U
+actor "Administrateur" as Admin
+
+package "Sprint 1 – MVP (SmartDress)" {
+
+    ' =========================
+    ' 🔐 Authentification (Commune)
+    ' =========================
+    package "Authentification" #FDEBD0 {
+        usecase "S'inscrire" as UC_REG
+        usecase "Se connecter" as UC_AUTH
+    }
+
+    U -- UC_REG
+    U -- UC_AUTH
+    Admin -- UC_AUTH
+
+    ' =========================
+    ' 🌐 Application Web
+    ' =========================
+    package "Application Web" {
+
+        ' -------- Espace Utilisateur --------
+        package "Espace Utilisateur" {
+            usecase "Gérer vêtement\n(Ajouter / Modifier /\nSupprimer / Consulter)" as UC1
+            usecase "Catégoriser vêtement" as UC2
+            usecase "Ajouter photo du vêtement" as UC3
+            usecase "Générer suggestion de tenue" as UC4
+            usecase "Planifier une tenue" as UC5
+            usecase "Enregistrer tenue favorite" as UC6
+            usecase "Modifier profil" as UC7
+            usecase "Gérer préférences" as UC8
+        }
+
+        U -- UC1
+        U -- UC4
+        U -- UC5
+        U -- UC7
+        U -- UC8
+
+        UC1 ..> UC_AUTH : <<include>>
+        UC1 ..> UC2 : <<extend>>
+        UC1 ..> UC3 : <<extend>>
+        UC4 ..> UC_AUTH : <<include>>
+        UC4 ..> UC6 : <<extend>>
+        UC5 ..> UC4 : <<include>>
+        UC7 ..> UC_AUTH : <<include>>
+        UC8 ..> UC_AUTH : <<include>>
+
+        ' -------- Espace Administrateur --------
+        package "Espace Administrateur" {
+            usecase "Gérer utilisateurs\n(CRUD)" as UC9
+            usecase "Modérer le contenu" as UC10
+            usecase "Consulter statistiques" as UC11
+        }
+
+        Admin -- UC9
+        Admin -- UC10
+        Admin -- UC11
+
+        UC9 ..> UC_AUTH : <<include>>
+        UC10 ..> UC_AUTH : <<include>>
+        UC11 ..> UC_AUTH : <<include>>
+    }
+
+    ' =========================
+    ' 📱 Application Mobile (Utilisateur uniquement)
+    ' =========================
+    package "Application Mobile – Utilisateur" #E8F8F5 {
+        usecase "Consulter ma garde-robe" as UC_M1
+        usecase "Voir suggestion du jour" as UC_M2
+        usecase "Recevoir notifications\nde planification" as UC_M3
+    }
+
+    U -- UC_M1
+    U -- UC_M2
+    U -- UC_M3
+
+    UC_M1 ..> UC_AUTH : <<include>>
+    UC_M2 ..> UC_AUTH : <<include>>
+    UC_M3 ..> UC_AUTH : <<include>>
+}
+@enduml

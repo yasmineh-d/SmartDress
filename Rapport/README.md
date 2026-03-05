@@ -1,4 +1,4 @@
-# Rapport de Projet de Fin de Formation  
+﻿# Rapport de Projet de Fin de Formation  
 ## SmartDress : Développement d’une Solution intelligente pour la recommandation et la gestion de garde-robe digitale 
 ### Formation de Développement Mobile – Mode Bootcamp  
 
@@ -236,20 +236,27 @@ Perte de temps quotidienne : Le temps passé à réfléchir à une tenue peut de
 
 # Diagramme de cas d’utilisation générale
 
+Le diagramme de cas d’utilisation de SmartDress présente les principales fonctionnalités accessibles aux deux acteurs du système : l’utilisateur et l’administrateur. L’utilisateur peut s’inscrire, se connecter, gérer ses vêtements, ajouter des photos, organiser ses articles, gérer ses préférences et recevoir des suggestions de tenues selon la météo, avec la possibilité d’enregistrer des tenues favorites. L’administrateur, quant à lui, peut gérer les utilisateurs, modérer le contenu et consulter les statistiques. Ce diagramme permet de visualiser les interactions entre les acteurs et le système avant le développement.
 
-.
+![Cas d'utilisation global](images/use_case_global.png)
 
 ---
 
 # Diagramme de cas d’utilisation Sprint 1
-.
-
-
+- Le premier sprint correspond au MVP de l’application SmartDress.
+- Il permet à l’utilisateur de se connecter, consulter sa garde-robe, gérer ses vêtements et préférences, planifier une tenue et recevoir des suggestions de tenues.
+- L’administrateur peut gérer les utilisateurs, modérer le contenu et consulter les statistiques.
+![Cas d'utilisation global](images/cas_utilisation_sprint1.png)
 
 ---
 
 # Diagramme de cas d’utilisation Sprint 2
-.
+- Ce deuxième sprint ajoute des fonctionnalités avancées à SmartDress.
+
+- L’utilisateur peut mieux gérer ses vêtements, ses préférences et enregistrer des tenues favorites, tandis que l’administrateur peut suivre l’activité et gérer les utilisateurs.
+![Cas d'utilisation global](images/use_case_sprint2.png)
+
+- Ce sprint permet ainsi d’améliorer l’expérience globale de l’application et d’optimiser la gestion de la garde-robe intelligente.
 
 ---
 

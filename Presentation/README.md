@@ -255,7 +255,7 @@ style: |
 ## Branche Fonctionnelle : Cas d'utilisation
 
 <div class="img-container">
-  <img src="images/" class="img-usecase" alt="Global Use Case">
+  <img src="images/use_case_global.png" class="img-usecase" alt="Global Use Case">
 </div>
 
 ---
@@ -263,7 +263,7 @@ style: |
 ## Branche Fonctionnelle : Cas d'utilisation - Sprint 1
 
 <div class="img-container">
-  <img src="images/diagramme_use_case_sprint1.png" class="img-usecase" alt="Global Use Case">
+  <img src="images/cas_utilisation_sprint1.png" class="img-usecase" alt="Global Use Case">
 </div>
 
 ---
@@ -271,7 +271,7 @@ style: |
 ## Branche Fonctionnelle : Cas d'utilisation - Sprint 2
 
 <div class="img-container">
-  <img src="images/diagramme_use_case_sprint2.png" class="img-usecase" alt="Global Use Case">
+  <img src="images/use_case_sprint2.png" class="img-usecase" alt="Global Use Case">
 </div>
 
 ---
