@@ -255,7 +255,7 @@ style: |
 ## Branche Fonctionnelle : Cas d'utilisation
 
 <div class="img-container">
-  <img src="images/diagramme_use_case.png" class="img-usecase" alt="Global Use Case">
+  <img src="images/" class="img-usecase" alt="Global Use Case">
 </div>
 
 ---
