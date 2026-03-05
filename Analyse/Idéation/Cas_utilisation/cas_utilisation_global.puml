@@ -1,0 +1,72 @@
+@startuml
+left to right direction
+
+actor Utilisateur
+actor Administrateur
+
+rectangle "SmartDress — Use Case Diagram (Mobile + Web)" {
+
+  ' =========================
+  ' AUTHENTIFICATION
+  ' =========================
+  usecase "S'inscrire" as UC1
+  usecase "Se connecter" as UC2
+  usecase "Se déconnecter" as UC3
+
+  Utilisateur -- UC1
+  Utilisateur -- UC2
+  Utilisateur -- UC3
+  Administrateur -- UC2
+  Administrateur -- UC3
+
+  ' =========================
+  ' GESTION DE LA GARDE-ROBE
+  ' =========================
+  usecase "Gérer vêtement\n(Ajouter, Modifier,\nSupprimer, Consulter)" as UC4
+  usecase "Catégoriser vêtement" as UC5
+  usecase "Ajouter photo" as UC6
+
+  Utilisateur -- UC4
+  UC4 ..> UC5 : <<extend>>
+  UC4 ..> UC6 : <<extend>>
+
+  ' =========================
+  ' GESTION DES TENUES
+  ' =========================
+  usecase "Générer suggestion de tenue" as UC7
+  usecase "Vérifier météo" as UC8
+  usecase "Analyser préférences" as UC9
+  usecase "Planifier tenue" as UC10
+  usecase "Enregistrer tenue favorite" as UC11
+
+  Utilisateur -- UC7
+  Utilisateur -- UC10
+
+  UC7 ..> UC8 : <<include>>
+  UC7 ..> UC9 : <<include>>
+  UC7 ..> UC11 : <<extend>>
+  UC10 ..> UC7 : <<include>>
+
+  ' =========================
+  ' PROFIL UTILISATEUR
+  ' =========================
+  usecase "Modifier profil" as UC12
+  usecase "Gérer préférences" as UC13
+
+  Utilisateur -- UC12
+  Utilisateur -- UC13
+
+  ' =========================
+  ' ADMINISTRATION
+  ' =========================
+  usecase "Gérer utilisateurs\n(Créer, Modifier,\nSupprimer, Consulter)" as UC14
+  usecase "Consulter statistiques" as UC15
+  usecase "Modérer contenu" as UC16
+
+  Administrateur -- UC14
+  Administrateur -- UC15
+  Administrateur -- UC16
+
+}
+
+@enduml
