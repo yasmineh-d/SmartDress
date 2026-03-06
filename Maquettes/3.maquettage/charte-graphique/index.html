@@ -1,112 +1,202 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Charte Graphique - SmartDress</title>
+
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="./style.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
+        rel="stylesheet" />
+
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: {
-                            100: 'hsl(230, 60%, 95%)',
-                            500: 'hsl(230, 60%, 50%)',
-                            700: 'hsl(230, 60%, 35%)',
-                        },
-                        accent: {
-                            100: 'hsl(15, 80%, 95%)',
-                            500: 'hsl(15, 80%, 65%)',
-                        },
-                        slate: {
-                            100: 'hsl(220, 15%, 95%)',
-                            500: 'hsl(220, 15%, 50%)',
-                            900: 'hsl(220, 15%, 10%)',
-                        }
+                        moss: '#889063',
+                        bark: '#5C4A35',
+                        tan: '#CFBB99',
+                        bone: '#E5D7C4',
+                        cream: '#F5EEE4',
+                        deeptan: '#B8A07E',
+                        offwhite: '#FDFAF6',
                     },
                     fontFamily: {
-                        heading: ['Outfit', 'sans-serif'],
-                        body: ['Inter', 'sans-serif'],
+                        heading: ['"Cormorant Garamond"', 'serif'],
+                        body: ['"DM Sans"', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
+    <style>
+        .font-heading {
+            font-family: "Cormorant Garamond", serif;
+        }
+
+        .font-body {
+            font-family: "DM Sans", sans-serif;
+        }
+    </style>
 </head>
-<body class="bg-slate-100 p-8 font-body">
-    <div class="max-w-4xl mx-auto space-y-12 bg-white p-12 rounded-2xl shadow-sm border border-slate-200">
-        
+
+<body class="bg-offwhite p-6 md:p-12 font-body text-bark min-h-screen">
+    <div class="max-w-5xl mx-auto space-y-16 bg-cream p-8 md:p-16 rounded-[38px] shadow-sm border border-bone">
+
         <!-- Header -->
-        <header class="flex items-center justify-between border-b pb-8">
-            <div class="flex items-center gap-4">
-                <img src="./smartdress_logo.png" alt="Logo" class="w-12 h-12">
-                <h1 class="text-3xl font-heading font-bold text-slate-900">Charte Graphique</h1>
+        <header class="flex flex-col md:flex-row items-center justify-between border-b border-tan/30 pb-10 gap-6">
+            <div class="flex items-center gap-6">
+                <h1 class="text-3xl md:text-5xl font-heading font-light text-bark ml-4 border-l border-tan/30 pl-8">
+                    Charte Graphique</h1>
             </div>
-            <span class="text-slate-500 font-medium">v1.0 - SmartDress</span>
         </header>
 
-        <!-- Palette -->
-        <section class="space-y-6">
-            <h2 class="text-2xl font-heading font-semibold text-slate-900">1. Palette Chromatique</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="space-y-2">
-                    <div class="h-24 bg-primary-500 rounded-xl shadow-inner"></div>
-                    <p class="font-bold">Primary (Indigo)</p>
-                    <code class="text-xs text-slate-500">hsl(230, 60%, 50%)</code>
+        <!-- 1. Palette de couleurs -->
+        <section class="space-y-8">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-[1px] bg-moss"></div>
+                <h2 class="text-3xl font-heading font-light italic">1. Palette de couleurs</h2>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-6">
+                <div class="space-y-3 group">
+                    <div
+                        class="h-28 bg-[#889063] rounded-2xl shadow-inner transition-transform group-hover:scale-105 border border-black/5">
+                    </div>
+                    <p class="font-bold text-sm">Moss Green</p>
+                    <code class="text-[10px] text-bark/50">#889063</code>
                 </div>
-                <div class="space-y-2">
-                    <div class="h-24 bg-accent-500 rounded-xl shadow-inner"></div>
-                    <p class="font-bold">Accent (Coral)</p>
-                    <code class="text-xs text-slate-500">hsl(15, 80%, 65%)</code>
+                <div class="space-y-3 group">
+                    <div
+                        class="h-28 bg-[#5C4A35] rounded-2xl shadow-inner transition-transform group-hover:scale-105 border border-black/5">
+                    </div>
+                    <p class="font-bold text-sm">Bark Brown</p>
+                    <code class="text-[10px] text-bark/50">#5C4A35</code>
                 </div>
-                <div class="space-y-2">
-                    <div class="h-24 bg-slate-900 rounded-xl shadow-inner"></div>
-                    <p class="font-bold">Neutral (Slate)</p>
-                    <code class="text-xs text-slate-500">hsl(220, 15%, 10%)</code>
+                <div class="space-y-3 group">
+                    <div
+                        class="h-28 bg-[#CFBB99] rounded-2xl shadow-inner transition-transform group-hover:scale-105 border border-black/5">
+                    </div>
+                    <p class="font-bold text-sm">Tan</p>
+                    <code class="text-[10px] text-bark/50">#CFBB99</code>
                 </div>
-                <div class="space-y-2">
-                    <div class="h-24 border border-emerald-500 bg-emerald-500 rounded-xl shadow-inner"></div>
-                    <p class="font-bold text-emerald-600">Success</p>
-                    <code class="text-xs text-slate-500">Hsl(150, 60%, 45%)</code>
+                <div class="space-y-3 group">
+                    <div
+                        class="h-28 bg-[#E5D7C4] rounded-2xl shadow-inner transition-transform group-hover:scale-105 border border-black/5">
+                    </div>
+                    <p class="font-bold text-sm">Bone</p>
+                    <code class="text-[10px] text-bark/50">#E5D7C4</code>
+                </div>
+                <div class="space-y-3 group">
+                    <div
+                        class="h-28 bg-[#F5EEE4] rounded-2xl shadow-inner transition-transform group-hover:scale-105 border border-black/5">
+                    </div>
+                    <p class="font-bold text-sm">Cream</p>
+                    <code class="text-[10px] text-bark/50">#F5EEE4</code>
+                </div>
+                <div class="space-y-3 group">
+                    <div
+                        class="h-28 bg-[#B8A07E] rounded-2xl shadow-inner transition-transform group-hover:scale-105 border border-black/5">
+                    </div>
+                    <p class="font-bold text-sm">Deep Tan</p>
+                    <code class="text-[10px] text-bark/50">#B8A07E</code>
+                </div>
+                <div class="space-y-3 group">
+                    <div
+                        class="h-28 bg-[#FDFAF6] rounded-2xl shadow-inner transition-transform group-hover:scale-105 border border-bone">
+                    </div>
+                    <p class="font-bold text-sm">Off-White</p>
+                    <code class="text-[10px] text-bark/50">#FDFAF6</code>
                 </div>
             </div>
         </section>
 
-        <!-- Typography -->
-        <section class="space-y-6 border-t pt-8">
-            <h2 class="text-2xl font-heading font-semibold text-slate-900">2. Typographie</h2>
-            <div class="space-y-4">
-                <div>
-                    <p class="text-sm text-slate-500 mb-1 font-medium">Titres - Outfit</p>
-                    <p class="text-4xl font-heading font-bold text-slate-900">ABCDEFGHIJKLM 12345</p>
+        <!-- 2. Typographie -->
+        <section class="space-y-8 border-t border-tan/20 pt-16">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-[1px] bg-moss"></div>
+                <h2 class="text-3xl font-heading font-light italic">2. Typographie</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div class="bg-offwhite/50 p-10 rounded-[32px] border border-tan/10 overflow-hidden">
+                    <p class="text-[10px] tracking-[0.3em] font-medium text-moss uppercase mb-6">Display — Titres</p>
+                    <p class="text-2xl font-heading font-light text-bark mb-4 italic">Cormorant Garamond</p>
+                    <p
+                        class="text-4xl md:text-5xl lg:text-6xl font-heading font-light text-bark leading-none break-all md:break-normal">
+                        ABCDEFGHIJKLM<br>1234567890</p>
                 </div>
-                <div>
-                    <p class="text-sm text-slate-500 mb-1 font-medium">Corps - Inter</p>
-                    <p class="text-lg font-body text-slate-700 leading-relaxed">
-                        Le futur de la mode est intelligent. SmartDress analyse votre garde-robe et les conditions météorologiques pour vous proposer la tenue parfaite, chaque matin.
+                <div class="bg-offwhite/50 p-10 rounded-[32px] border border-tan/10 overflow-hidden">
+                    <p class="text-[10px] tracking-[0.3em] font-medium text-moss uppercase mb-6">Body — Corps de texte
+                    </p>
+                    <p class="text-2xl font-body font-normal text-bark mb-4">DM Sans</p>
+                    <p class="text-base md:text-lg font-body text-bark/70 leading-relaxed">
+                        Le futur de la mode est intelligent. SmartDress analyse votre garde-robe et les conditions
+                        météorologiques pour vous proposer la tenue parfaite, chaque matin.
                     </p>
                 </div>
             </div>
         </section>
 
-        <!-- Atomic Preview -->
-        <section class="space-y-6 border-t pt-8">
-            <h2 class="text-2xl font-heading font-semibold text-slate-900">3. États & Composants</h2>
-            <div class="flex flex-wrap gap-4">
-                <button class="px-6 py-3 bg-primary-500 text-white font-heading font-semibold rounded-xl hover:bg-primary-700 transition-colors shadow-lg shadow-primary-500/20">
-                    Bouton Primaire
-                </button>
-                <button class="px-6 py-3 border-2 border-primary-500 text-primary-500 font-heading font-semibold rounded-xl hover:bg-primary-500 hover:text-white transition-all">
-                    Bouton Secondaire
-                </button>
-                <span class="px-4 py-1.5 bg-accent-100 text-accent-500 text-sm font-bold rounded-full">
-                    Badge Accent
-                </span>
+        <!-- 3. Composants & États -->
+        <section class="space-y-8 border-t border-tan/20 pt-16 text-center">
+            <div class="flex items-center justify-center gap-4">
+                <div class="w-12 h-[1px] bg-moss"></div>
+                <h2 class="text-3xl font-heading font-light italic text-center">3. Composants & États</h2>
+                <div class="w-12 h-[1px] bg-moss"></div>
+            </div>
+            <div class="space-y-12">
+                <!-- Buttons -->
+                <div class="flex flex-col items-center">
+                    <p class="text-[10px] tracking-[0.2em] font-medium text-bark/40 uppercase mb-6">Boutons (Radius:
+                        20px)</p>
+                    <div class="flex flex-wrap justify-center gap-6 items-center">
+                        <button
+                            class="px-8 py-3.5 bg-moss text-offwhite font-medium rounded-[20px] uppercase tracking-widest text-xs hover:bg-bark transition-all shadow-md active:scale-95">
+                            Bouton Primaire
+                        </button>
+                        <button
+                            class="px-8 py-3.5 border border-bark/30 text-bark font-medium rounded-[20px] uppercase tracking-widest text-xs hover:bg-bark hover:text-offwhite transition-all active:scale-95">
+                            Bouton Ghost
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Badges & Tags -->
+                <div class="flex flex-col items-center">
+                    <p class="text-[10px] tracking-[0.2em] font-medium text-bark/40 uppercase mb-6">Badges & Tags</p>
+                    <div class="flex flex-wrap justify-center gap-3">
+                        <span
+                            class="px-3 py-1 bg-moss text-offwhite text-[10px] font-bold uppercase tracking-widest rounded-full">✓
+                            Succès</span>
+                        <span
+                            class="px-3 py-1 bg-tan text-bark text-[10px] font-bold uppercase tracking-widest rounded-full">☁
+                            Info Météo</span>
+                        <span
+                            class="px-3 py-1 bg-bark text-cream text-[10px] font-bold uppercase tracking-widest rounded-full italic">Style
+                            Automne</span>
+                    </div>
+                </div>
             </div>
         </section>
 
+        <!-- Footer Footer -->
+        <footer
+            class="pt-8 border-t border-tan/20 flex flex-col md:flex-row justify-between items-center gap-4 italic text-xs text-bark/50">
+            <p>Conforme aux standards SmartDress v2.0</p>
+            <p>© 2025–2026 Edition Luxe</p>
+        </footer>
+
     </div>
 </body>
+
 </html>

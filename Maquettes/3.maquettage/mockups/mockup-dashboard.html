@@ -94,40 +94,43 @@
                 </div>
 
                 <div class="flex flex-col gap-4">
-                    <button
-                        class="w-full py-5 bg-primary-500 text-white font-heading font-bold rounded-2xl shadow-xl shadow-primary-500/20 hover:bg-primary-700 hover:translate-y-[-2px] active:translate-y-0 transition-all">
-                        Valider cette tenue
-                    </button>
-                    <button
-                        class="w-full py-5 text-slate-500 font-heading font-bold rounded-2xl hover:bg-slate-50 transition-colors">
-                        Autre idée ?
-                    </button>
+                    <div class="flex flex-col gap-4">
+                        <button
+                            class="w-full py-5 bg-primary-500 text-white font-heading font-bold rounded-2xl shadow-xl shadow-primary-500/20 hover:bg-primary-700 hover:translate-y-[-2px] active:translate-y-0 transition-all">
+                            Valider cette tenue
+                        </button>
+                        <button id="refresh-outfit"
+                            class="w-full py-5 text-slate-500 font-heading font-bold rounded-2xl hover:bg-slate-50 transition-colors">
+                            Autre idée ?
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Section Navigation Rapide -->
-        <div class="grid grid-cols-2 gap-4">
-            <button onclick="location.href='./mockup-garde-robe.html'"
-                class="p-6 bg-white rounded-3xl border border-slate-100 flex flex-col items-center gap-3 hover:bg-slate-50 transition-colors">
-                <div
-                    class="w-12 h-12 bg-indigo-50 text-indigo-500 rounded-xl flex items-center justify-center text-2xl">
-                    🧥</div>
-                <span class="text-sm font-bold text-slate-700">Dressing</span>
-            </button>
-            <button
-                class="p-6 bg-white rounded-3xl border border-slate-100 flex flex-col items-center gap-3 hover:bg-slate-50 transition-colors">
-                <div class="w-12 h-12 bg-coral-50 text-coral-500 rounded-xl flex items-center justify-center text-2xl">⭐
-                </div>
-                <span class="text-sm font-bold text-slate-700">Favoris</span>
-            </button>
-        </div>
+            <!-- Section Navigation Rapide -->
+            <div class="grid grid-cols-2 gap-4">
+                <button onclick="location.href='./mockup-garde-robe.html'"
+                    class="p-6 bg-white rounded-3xl border border-slate-100 flex flex-col items-center gap-3 hover:bg-slate-50 transition-colors">
+                    <div
+                        class="w-12 h-12 bg-indigo-50 text-indigo-500 rounded-xl flex items-center justify-center text-2xl">
+                        🧥</div>
+                    <span class="text-sm font-bold text-slate-700">Dressing</span>
+                </button>
+                <button
+                    class="p-6 bg-white rounded-3xl border border-slate-100 flex flex-col items-center gap-3 hover:bg-slate-50 transition-colors">
+                    <div
+                        class="w-12 h-12 bg-coral-50 text-coral-500 rounded-xl flex items-center justify-center text-2xl">
+                        ⭐
+                    </div>
+                    <span class="text-sm font-bold text-slate-700">Favoris</span>
+                </button>
+            </div>
     </main>
 
     <!-- Bottom Navigation Bar (Mobile Style) -->
     <nav
         class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-xl border-t border-slate-100 px-8 py-4 flex justify-between items-center z-50 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
-        <button class="flex flex-col items-center gap-1 text-primary-500">
+        <button class="active-nav flex flex-col items-center gap-1 text-primary-500">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
             </svg>
@@ -141,7 +144,7 @@
             </svg>
         </button>
         <button
-            class="w-14 h-14 bg-primary-500 rounded-full flex items-center justify-center text-white shadow-xl shadow-primary-500/40 relative -top-8 border-4 border-white">
+            class="w-14 h-14 bg-primary-500 rounded-full flex items-center justify-center text-white shadow-xl shadow-primary-500/40 relative -top-8 border-4 border-white active:scale-95 transition-all">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4" />
@@ -162,6 +165,50 @@
             </svg>
         </button>
     </nav>
+
+    <script>
+        const outfits = [
+            { title: "Casual Moderne", top: "👕", topName: "T-Shirt Blanc", topBg: "bg-indigo-50", bottom: "👖", bottomName: "Jean Slim Bleu", bottomBg: "bg-slate-50" },
+            { title: "Look Hivernal", top: "🧥", topName: "Manteau Gris", topBg: "bg-slate-200", bottom: "👖", bottomName: "Chino Noir", bottomBg: "bg-slate-100" },
+            { title: "Sortie Soirée", top: "👔", topName: "Chemise Noire", topBg: "bg-slate-800 text-white", topLabel: "text-slate-400", bottom: "👖", bottomName: "Pantalon Costume", bottomBg: "bg-slate-300" }
+        ];
+
+        let currentIndex = 0;
+        const refreshBtn = document.getElementById('refresh-outfit');
+        const cardTitle = document.querySelector('h2');
+        const topIcon = document.querySelectorAll('.text-4xl')[0];
+        const topName = document.querySelectorAll('.uppercase.tracking-widest')[1];
+        const topBox = topIcon.parentElement;
+        const bottomIcon = document.querySelectorAll('.text-4xl')[1];
+        const bottomName = document.querySelectorAll('.uppercase.tracking-widest')[2];
+        const bottomBox = bottomIcon.parentElement;
+
+        refreshBtn.addEventListener('click', () => {
+            refreshBtn.classList.add('animate-pulse', 'pointer-events-none');
+
+            setTimeout(() => {
+                currentIndex = (currentIndex + 1) % outfits.length;
+                const outfit = outfits[currentIndex];
+
+                // Update content with staggered animation (CSS transition)
+                cardTitle.textContent = outfit.title;
+
+                // Top update
+                topIcon.textContent = outfit.top;
+                topName.textContent = outfit.topName;
+                topBox.className = `w-40 h-40 ${outfit.topBg.split(' ')[0]} rounded-[2rem] border-4 border-white shadow-sm flex items-center justify-center flex-col transition-transform hover:scale-105`;
+                if (outfit.topBg.includes('text-white')) topIcon.classList.add('text-white');
+                else topIcon.classList.remove('text-white');
+
+                // Bottom update
+                bottomIcon.textContent = outfit.bottom;
+                bottomName.textContent = outfit.bottomName;
+                bottomBox.className = `w-44 h-52 ${outfit.bottomBg} rounded-[2rem] border-4 border-white shadow-sm flex items-center justify-center flex-col transition-transform hover:scale-105`;
+
+                refreshBtn.classList.remove('animate-pulse', 'pointer-events-none');
+            }, 600);
+        });
+    </script>
 
 </body>
 

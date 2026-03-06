@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SmartDress – Votre garde-robe intelligente</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Preline UI -->
+  <script src="https://cdn.jsdelivr.net/npm/preline@2.4.1/dist/preline.js" defer></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Tailwind config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            tan:      '#CFBB99',
+            bone:     '#E5D7C4',
+            moss:     '#889063',
+            deeptan:  '#B8A07E',
+            cream:    '#F5EEE4',
+            bark:     '#5C4A35',
+            offwhite: '#FDFAF6',
+          },
+          fontFamily: {
+            display: ['"Cormorant Garamond"', 'serif'],
+            body:    ['"DM Sans"', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="font-body bg-offwhite text-bark overflow-x-hidden">
+
+  <!-- NAVBAR -->
+  <header id="navbar" class="sd-navbar">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-12 flex items-center justify-between h-full">
+      <a href="#" class="sd-logo">Smart<span>Dress</span></a>
+
+      <nav class="hidden lg:flex items-center gap-8">
+        <a href="#features"  class="sd-navlink">Fonctionnalités</a>
+        <a href="#how"       class="sd-navlink">Comment ça marche</a>
+        <a href="#trust"     class="sd-navlink">Témoignages</a>
+        <a href="#contact"   class="sd-navlink">Contact</a>
+      </nav>
+
+      <div class="hidden lg:flex items-center gap-3">
+        <a href="#" class="sd-btn-ghost">Se connecter</a>
+        <a href="#" class="sd-btn-primary">Commencer</a>
+      </div>
+
+      <!-- Mobile hamburger -->
+      <button type="button" class="lg:hidden sd-hamburger"
+        aria-expanded="false" aria-controls="mobile-menu"
+        data-hs-collapse="#mobile-menu">
+        <span class="sr-only">Menu</span>
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12h18M3 6h18M3 18h18"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hs-collapse hidden overflow-hidden transition-all duration-300 lg:hidden bg-offwhite border-t border-tan/30">
+      <div class="px-6 py-4 flex flex-col gap-3">
+        <a href="#features" class="sd-navlink">Fonctionnalités</a>
+        <a href="#how"      class="sd-navlink">Comment ça marche</a>
+        <a href="#trust"    class="sd-navlink">Témoignages</a>
+        <a href="#contact"  class="sd-navlink">Contact</a>
+        <hr class="border-tan/30 my-1" />
+        <a href="#" class="sd-btn-ghost text-center">Se connecter</a>
+        <a href="#" class="sd-btn-primary text-center">Commencer gratuitement</a>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- HERO -->
+  <section class="sd-hero">
+    <div class="sd-hero-left">
+      <span class="sd-eyebrow">Votre stylist personnel · IA &amp; Météo</span>
+
+      <h1 class="sd-hero-title">
+        S'habiller<br>avec <em>intelligence</em><br>chaque matin.
+      </h1>
+
+      <p class="sd-hero-subtitle">
+        SmartDress organise votre garde-robe digitale et vous suggère des tenues
+        adaptées à la météo et à vos préférences — pour ne plus jamais perdre de
+        temps devant votre armoire.
+      </p>
+
+      <div class="flex flex-wrap gap-3 mb-8 sd-anim" style="animation-delay:.55s">
+        <a href="#" class="sd-btn-primary sd-btn-lg">Essayer gratuitement</a>
+        <a href="#how" class="sd-btn-ghost sd-btn-lg">Comment ça marche</a>
+      </div>
+
+      <div class="sd-trust-bar sd-anim" style="animation-delay:.62s;margin-bottom:2rem;">
+        <span class="sd-trust-item">Gratuit pour commencer</span>
+        <span class="sd-trust-item">Sans carte bancaire</span>
+        <span class="sd-trust-item">IA incluse</span>
+      </div>
+
+      <div class="sd-stats-row sd-anim" style="animation-delay:.7s">
+        <div class="sd-stat">
+          <span class="sd-stat-num">2 min</span>
+          <span class="sd-stat-label">Gagnées / matin</span>
+        </div>
+        <div class="sd-divider"></div>
+        <div class="sd-stat">
+          <span class="sd-stat-num">100%</span>
+          <span class="sd-stat-label">Adapté météo</span>
+        </div>
+        <div class="sd-divider"></div>
+        <div class="sd-stat">
+          <span class="sd-stat-num">∞</span>
+          <span class="sd-stat-label">Combinaisons</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sd-hero-right">
+      <div class="sd-wardrobe sd-illustration-wrap">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 620" class="sd-hero-svg" aria-label="SmartDress App illustration">
+          <defs>
+            <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#F5EEE4;stop-opacity:0" />
+              <stop offset="100%" style="stop-color:#E5D7C4;stop-opacity:0" />
+            </linearGradient>
+            <linearGradient id="screenGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:#FDFAF6;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#F0E8DB;stop-opacity:1" />
+            </linearGradient>
+            <linearGradient id="phoneGrad" x1="0%" y1="0%" x2="10%" y2="100%">
+              <stop offset="0%" style="stop-color:#3a3028;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#1e1a15;stop-opacity:1" />
+            </linearGradient>
+            <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="16" stdDeviation="22" flood-color="#5C4A35" flood-opacity="0.22"/>
+            </filter>
+            <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
+              <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#5C4A35" flood-opacity="0.12"/>
+            </filter>
+            <filter id="cardShadow">
+              <feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#5C4A35" flood-opacity="0.10"/>
+            </filter>
+          </defs>
+
+          <!-- Background circles -->
+          <circle cx="260" cy="310" r="230" fill="#E5D7C4" opacity="0.3"/>
+          <circle cx="260" cy="310" r="175" fill="#CFBB99" opacity="0.12"/>
+
+          <!-- SHIRT — top left, floating -->
+          <g filter="url(#softShadow)">
+            <animateTransform attributeName="transform" type="translate" values="0,0; 0,-9; 0,0" dur="4s" repeatCount="indefinite" calcMode="spline" keySplines="0.45 0 0.55 1; 0.45 0 0.55 1"/>
+            <rect x="30" y="96" width="68" height="70" rx="5" fill="#B8A07E" opacity="0.92"/>
+            <polygon points="64,96 76,96 70,114" fill="#CFBB99"/>
+            <polygon points="64,96 52,96 58,114" fill="#CFBB99"/>
+            <rect x="17" y="96" width="15" height="24" rx="4" fill="#A08060" opacity="0.8"/>
+            <rect x="96" y="96" width="15" height="24" rx="4" fill="#A08060" opacity="0.8"/>
+            <circle cx="64" cy="122" r="2.2" fill="#8a6d4f"/>
+            <circle cx="64" cy="133" r="2.2" fill="#8a6d4f"/>
+            <circle cx="64" cy="144" r="2.2" fill="#8a6d4f"/>
+            <rect x="26" y="174" width="76" height="20" rx="10" fill="#5C4A35" opacity="0.82"/>
+            <text x="64" y="188" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#F5EEE4" letter-spacing="0.5">Chemise</text>
+          </g>
+
+          <!-- PANTS — bottom left, floating -->
+          <g filter="url(#softShadow)">
+            <animateTransform attributeName="transform" type="translate" values="0,0; 0,7; 0,0" dur="5s" repeatCount="indefinite" calcMode="spline" keySplines="0.45 0 0.55 1; 0.45 0 0.55 1"/>
+            <rect x="20" y="372" width="82" height="14" rx="6" fill="#889063" opacity="0.92"/>
+            <rect x="20" y="384" width="35" height="86" rx="5" fill="#889063" opacity="0.87"/>
+            <rect x="67" y="384" width="35" height="86" rx="5" fill="#7a8058" opacity="0.87"/>
+            <rect x="30" y="370" width="8" height="6" rx="2" fill="#6b7348"/>
+            <rect x="84" y="370" width="8" height="6" rx="2" fill="#6b7348"/>
+            <rect x="16" y="478" width="90" height="20" rx="10" fill="#5C4A35" opacity="0.82"/>
+            <text x="61" y="492" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#F5EEE4" letter-spacing="0.5">Pantalon</text>
+          </g>
+
+          <!-- SHOES — bottom right, floating -->
+          <g filter="url(#softShadow)">
+            <animateTransform attributeName="transform" type="translate" values="0,0; 0,-6; 0,0" dur="3.6s" repeatCount="indefinite" calcMode="spline" keySplines="0.45 0 0.55 1; 0.45 0 0.55 1"/>
+            <ellipse cx="406" cy="476" rx="52" ry="20" fill="#5C4A35" opacity="0.85"/>
+            <rect x="358" y="452" width="72" height="26" rx="13" fill="#6e5840"/>
+            <ellipse cx="428" cy="470" rx="18" ry="11" fill="#5C4A35"/>
+            <line x1="374" y1="455" x2="384" y2="461" stroke="#CFBB99" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="374" y1="462" x2="384" y2="468" stroke="#CFBB99" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="385" y1="455" x2="375" y2="461" stroke="#CFBB99" stroke-width="1.5" stroke-linecap="round"/>
+            <rect x="358" y="504" width="98" height="20" rx="10" fill="#5C4A35" opacity="0.82"/>
+            <text x="407" y="518" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#F5EEE4" letter-spacing="0.5">Chaussures</text>
+          </g>
+
+          <!-- SUN — top right, floating -->
+          <g>
+            <animateTransform attributeName="transform" type="translate" values="0,0; 0,-7; 0,0" dur="3.2s" repeatCount="indefinite" calcMode="spline" keySplines="0.45 0 0.55 1; 0.45 0 0.55 1"/>
+            <circle cx="432" cy="122" r="22" fill="#E8C97A" opacity="0.92"/>
+            <line x1="432" y1="90" x2="432" y2="80" stroke="#E8C97A" stroke-width="3" stroke-linecap="round"/>
+            <line x1="432" y1="154" x2="432" y2="164" stroke="#E8C97A" stroke-width="3" stroke-linecap="round"/>
+            <line x1="400" y1="122" x2="390" y2="122" stroke="#E8C97A" stroke-width="3" stroke-linecap="round"/>
+            <line x1="464" y1="122" x2="474" y2="122" stroke="#E8C97A" stroke-width="3" stroke-linecap="round"/>
+            <line x1="409" y1="99" x2="402" y2="92" stroke="#E8C97A" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="455" y1="145" x2="462" y2="152" stroke="#E8C97A" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="455" y1="99" x2="462" y2="92" stroke="#E8C97A" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="409" y1="145" x2="402" y2="152" stroke="#E8C97A" stroke-width="2.5" stroke-linecap="round"/>
+          </g>
+
+          <!-- RAIN CLOUD — left middle, floating -->
+          <g>
+            <animateTransform attributeName="transform" type="translate" values="0,0; 4,0; 0,0" dur="6s" repeatCount="indefinite" calcMode="spline" keySplines="0.45 0 0.55 1; 0.45 0 0.55 1"/>
+            <ellipse cx="84" cy="248" rx="28" ry="17" fill="#B8C4D0" opacity="0.82"/>
+            <ellipse cx="66" cy="256" rx="18" ry="13" fill="#C8D4E0" opacity="0.82"/>
+            <ellipse cx="102" cy="256" rx="18" ry="13" fill="#B8C4D0" opacity="0.82"/>
+            <rect x="58" y="268" width="52" height="13" rx="6.5" fill="#C8D4E0" opacity="0.82"/>
+            <line x1="66" y1="282" x2="62" y2="295" stroke="#7090B0" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+            <line x1="78" y1="282" x2="74" y2="295" stroke="#7090B0" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+            <line x1="90" y1="282" x2="86" y2="295" stroke="#7090B0" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+            <line x1="102" y1="282" x2="98" y2="295" stroke="#7090B0" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+          </g>
+
+          <!-- ══ PHONE ══ -->
+          <!-- Phone body -->
+          <rect x="150" y="52" width="220" height="496" rx="36" fill="url(#phoneGrad)" filter="url(#shadow)"/>
+          <rect x="155" y="57" width="210" height="486" rx="33" fill="#2a2218"/>
+          <!-- Screen -->
+          <rect x="160" y="80" width="200" height="420" rx="16" fill="url(#screenGrad)"/>
+          <!-- Notch -->
+          <rect x="218" y="60" width="84" height="22" rx="11" fill="#1a160f"/>
+          <circle cx="280" cy="71" r="5" fill="#0a0806"/>
+          <circle cx="280" cy="71" r="3" fill="#1a1a2e" opacity="0.5"/>
+
+          <!-- Status bar -->
+          <text x="174" y="99" font-family="'DM Sans',sans-serif" font-size="9" fill="#5C4A35" opacity="0.55">9:41</text>
+          <text x="346" y="99" text-anchor="end" font-family="'DM Sans',sans-serif" font-size="9" fill="#5C4A35" opacity="0.55">📶 🔋</text>
+
+          <!-- App title -->
+          <text x="260" y="124" text-anchor="middle" font-family="'Cormorant Garamond',Georgia,serif" font-size="17" font-weight="600" fill="#3a2e1e" letter-spacing="0.5">Smart</text>
+          <text x="300" y="124" font-family="'Cormorant Garamond',Georgia,serif" font-size="17" font-style="italic" fill="#889063" letter-spacing="0.5">Dress</text>
+
+          <!-- Weather card -->
+          <rect x="170" y="134" width="180" height="50" rx="12" fill="#CFBB99" opacity="0.42"/>
+          <text x="184" y="153" font-family="'DM Sans',sans-serif" font-size="9" font-weight="600" fill="#5C4A35" letter-spacing="0.3">Météo du jour</text>
+          <text x="184" y="170" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#6e5840">Ensoleillé · 22°C · Casablanca</text>
+          <circle cx="334" cy="156" r="10" fill="#E8C97A" opacity="0.92"/>
+          <line x1="334" y1="141" x2="334" y2="137" stroke="#E8C97A" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="334" y1="171" x2="334" y2="175" stroke="#E8C97A" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="319" y1="156" x2="315" y2="156" stroke="#E8C97A" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="349" y1="156" x2="353" y2="156" stroke="#E8C97A" stroke-width="1.5" stroke-linecap="round"/>
+
+          <!-- Suggestion label -->
+          <text x="170" y="204" font-family="'DM Sans',sans-serif" font-size="8.5" font-weight="500" fill="#889063" letter-spacing="1">✨ SUGGESTION DU JOUR</text>
+          <text x="170" y="220" font-family="'Cormorant Garamond',Georgia,serif" font-size="14" font-weight="600" fill="#3a2e1e">Casual Chic · Automne</text>
+
+          <!-- Item card 1 — shirt -->
+          <rect x="170" y="230" width="82" height="80" rx="10" fill="#FDFAF6" filter="url(#cardShadow)"/>
+          <rect x="196" y="246" width="30" height="32" rx="3" fill="#B8A07E" opacity="0.88"/>
+          <polygon points="211,246 217,246 214,256" fill="#CFBB99"/>
+          <polygon points="211,246 205,246 208,256" fill="#CFBB99"/>
+          <rect x="187" y="246" width="11" height="19" rx="3" fill="#A08060" opacity="0.8"/>
+          <rect x="223" y="246" width="11" height="19" rx="3" fill="#A08060" opacity="0.8"/>
+          <text x="211" y="298" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="7.5" fill="#8a6d4f">Chemise</text>
+
+          <!-- Item card 2 — pants -->
+          <rect x="260" y="230" width="82" height="80" rx="10" fill="#FDFAF6" filter="url(#cardShadow)"/>
+          <rect x="278" y="246" width="46" height="9" rx="4" fill="#889063" opacity="0.92"/>
+          <rect x="278" y="253" width="19" height="40" rx="4" fill="#889063" opacity="0.88"/>
+          <rect x="301" y="253" width="19" height="40" rx="4" fill="#7a8058" opacity="0.88"/>
+          <text x="301" y="298" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="7.5" fill="#6b7348">Pantalon</text>
+
+          <!-- Item card 3 — jacket -->
+          <rect x="170" y="318" width="82" height="80" rx="10" fill="#FDFAF6" filter="url(#cardShadow)"/>
+          <rect x="194" y="334" width="34" height="42" rx="4" fill="#5C4A35" opacity="0.75"/>
+          <polygon points="211,334 217,334 217,356 211,352" fill="#4a3828" opacity="0.9"/>
+          <polygon points="211,334 205,334 205,356 211,352" fill="#4a3828" opacity="0.9"/>
+          <rect x="183" y="334" width="13" height="26" rx="4" fill="#4a3828" opacity="0.7"/>
+          <rect x="226" y="334" width="13" height="26" rx="4" fill="#4a3828" opacity="0.7"/>
+          <text x="211" y="386" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="7.5" fill="#5C4A35">Veste</text>
+
+          <!-- Item card 4 — shoes -->
+          <rect x="260" y="318" width="82" height="80" rx="10" fill="#FDFAF6" filter="url(#cardShadow)"/>
+          <ellipse cx="301" cy="370" rx="26" ry="10" fill="#5C4A35" opacity="0.87"/>
+          <rect x="277" y="357" width="34" height="15" rx="7" fill="#6e5840"/>
+          <ellipse cx="311" cy="365" rx="9" ry="6" fill="#5C4A35"/>
+          <line x1="284" y1="359" x2="291" y2="364" stroke="#CFBB99" stroke-width="1" stroke-linecap="round"/>
+          <line x1="284" y1="364" x2="291" y2="369" stroke="#CFBB99" stroke-width="1" stroke-linecap="round"/>
+          <text x="301" y="386" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="7.5" fill="#5C4A35">Bottines</text>
+
+          <!-- Bottom nav -->
+          <rect x="160" y="446" width="200" height="54" rx="0" fill="#FDFAF6" opacity="0.97"/>
+          <rect x="160" y="446" width="200" height="1" fill="#E5D7C4"/>
+          <text x="184" y="464" text-anchor="middle" font-size="13">👗</text>
+          <text x="184" y="478" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="7" fill="#889063" font-weight="600">Garde-robe</text>
+          <text x="225" y="464" text-anchor="middle" font-size="13">⛅</text>
+          <text x="225" y="478" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="7" fill="#B8A07E">Météo</text>
+          <text x="295" y="464" text-anchor="middle" font-size="13">✨</text>
+          <text x="295" y="478" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="7" fill="#B8A07E">Suggest</text>
+          <text x="336" y="464" text-anchor="middle" font-size="13">📊</text>
+          <text x="336" y="478" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="7" fill="#B8A07E">Stats</text>
+          <circle cx="184" cy="489" r="2.5" fill="#889063"/>
+          <rect x="222" y="493" width="76" height="3" rx="1.5" fill="#5C4A35" opacity="0.2"/>
+
+          <!-- Decorative dots -->
+          <circle cx="138" cy="142" r="5" fill="#CFBB99" opacity="0.55"/>
+          <circle cx="122" cy="318" r="3.5" fill="#889063" opacity="0.4"/>
+          <circle cx="394" cy="224" r="4" fill="#B8A07E" opacity="0.5"/>
+          <circle cx="408" cy="352" r="6" fill="#CFBB99" opacity="0.38"/>
+          <circle cx="140" cy="448" r="4" fill="#E8C97A" opacity="0.45"/>
+
+          <!-- Sparkles -->
+          <text x="398" y="264" font-size="14" fill="#E8C97A" opacity="0.65">✦</text>
+          <text x="110" y="188" font-size="10" fill="#CFBB99" opacity="0.75">✦</text>
+          <text x="120" y="514" font-size="12" fill="#889063" opacity="0.55">✦</text>
+          <text x="414" y="418" font-size="10" fill="#B8A07E" opacity="0.65">✦</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- FEATURES -->
+  <section id="features" class="sd-section">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-12">
+      <div class="sd-section-head">
+        <div>
+          <span class="sd-tag">Fonctionnalités</span>
+          <h2 class="sd-section-title mt-3">Tout ce dont vous avez <em>besoin</em></h2>
+        </div>
+        <p class="sd-section-desc">Une application pensée pour simplifier votre quotidien vestimentaire, de A à Z.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px" style="background:rgba(207,187,153,.2)">
+        <div class="sd-feat-card">
+          <span class="sd-feat-num">01</span>
+          <div class="sd-feat-icon">👗</div>
+          <h3 class="sd-feat-title">Garde-robe digitale</h3>
+          <p class="sd-feat-desc">Numérisez et organisez tous vos vêtements par catégorie, couleur et saison. Visualisez ce que vous possédez vraiment.</p>
+        </div>
+        <div class="sd-feat-card sd-feat-card--alt">
+          <span class="sd-feat-num">02</span>
+          <div class="sd-feat-icon">🌤️</div>
+          <h3 class="sd-feat-title">Suggestions météo</h3>
+          <p class="sd-feat-desc">L'application analyse la météo en temps réel et vous suggère les tenues les plus adaptées à la température du jour.</p>
+        </div>
+        <div class="sd-feat-card">
+          <span class="sd-feat-num">03</span>
+          <div class="sd-feat-icon">✨</div>
+          <h3 class="sd-feat-title">IA de style</h3>
+          <p class="sd-feat-desc">Notre algorithme apprend vos préférences et crée des combinaisons harmonieuses que vous n'auriez pas imaginées.</p>
+        </div>
+        <div class="sd-feat-card sd-feat-card--alt">
+          <span class="sd-feat-num">04</span>
+          <div class="sd-feat-icon">🔔</div>
+          <h3 class="sd-feat-title">Notifications quotidiennes</h3>
+          <p class="sd-feat-desc">Recevez chaque matin votre suggestion de tenue avant même de vous lever. Gagnez du temps dès le réveil.</p>
+        </div>
+        <div class="sd-feat-card">
+          <span class="sd-feat-num">05</span>
+          <div class="sd-feat-icon">📊</div>
+          <h3 class="sd-feat-title">Statistiques d'usage</h3>
+          <p class="sd-feat-desc">Découvrez quels vêtements vous portez le plus, et optimisez vos achats futurs grâce à des données concrètes.</p>
+        </div>
+        <div class="sd-feat-card sd-feat-card--alt">
+          <span class="sd-feat-num">06</span>
+          <div class="sd-feat-icon">🔒</div>
+          <h3 class="sd-feat-title">Confidentialité totale</h3>
+          <p class="sd-feat-desc">Vos données et votre garde-robe vous appartiennent. Sécurité et confidentialité garanties à chaque étape.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- HOW IT WORKS -->
+  <section id="how" class="sd-section" style="background:#5C4A35;color:#F5EEE4">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-12">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+        <div>
+          <span class="sd-tag sd-tag--light">Comment ça marche</span>
+          <h2 class="sd-section-title mt-3" style="color:#F5EEE4">Simple, <em>rapide</em><br>et intelligent.</h2>
+          <p class="mt-4 mb-10 text-sm leading-relaxed" style="color:rgba(245,238,228,.5)">
+            En quelques étapes, SmartDress devient votre assistant vestimentaire personnel.
+          </p>
+
+          <!-- Preline Accordion -->
+          <div class="hs-accordion-group" data-hs-accordion-always-open>
+            <div class="hs-accordion sd-step active" id="acc-1">
+              <button class="hs-accordion-toggle sd-step-btn" aria-controls="acc-1-body">
+                <span class="sd-step-num">1</span>
+                <span class="sd-step-title">Créez votre compte</span>
+                <svg class="hs-accordion-active:rotate-180 ml-auto w-4 h-4 transition-transform flex-shrink-0" style="color:#CFBB99" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                </svg>
+              </button>
+              <div id="acc-1-body" class="hs-accordion-content overflow-hidden transition-[height] duration-300">
+                <p class="sd-step-desc">Inscription rapide et sécurisée. Votre profil de style est configuré en 2 minutes.</p>
+              </div>
+            </div>
+            <div class="hs-accordion sd-step" id="acc-2">
+              <button class="hs-accordion-toggle sd-step-btn" aria-controls="acc-2-body">
+                <span class="sd-step-num">2</span>
+                <span class="sd-step-title">Ajoutez vos vêtements</span>
+                <svg class="hs-accordion-active:rotate-180 ml-auto w-4 h-4 transition-transform flex-shrink-0" style="color:#CFBB99" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                </svg>
+              </button>
+              <div id="acc-2-body" class="hs-accordion-content hidden overflow-hidden transition-[height] duration-300">
+                <p class="sd-step-desc">Photographiez ou catégorisez chaque pièce de votre garde-robe facilement.</p>
+              </div>
+            </div>
+            <div class="hs-accordion sd-step" id="acc-3">
+              <button class="hs-accordion-toggle sd-step-btn" aria-controls="acc-3-body">
+                <span class="sd-step-num">3</span>
+                <span class="sd-step-title">Recevez vos suggestions</span>
+                <svg class="hs-accordion-active:rotate-180 ml-auto w-4 h-4 transition-transform flex-shrink-0" style="color:#CFBB99" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                </svg>
+              </button>
+              <div id="acc-3-body" class="hs-accordion-content hidden overflow-hidden transition-[height] duration-300">
+                <p class="sd-step-desc">Chaque matin, une tenue adaptée à la météo et à vos goûts vous attend.</p>
+              </div>
+            </div>
+            <div class="hs-accordion sd-step" id="acc-4">
+              <button class="hs-accordion-toggle sd-step-btn" aria-controls="acc-4-body">
+                <span class="sd-step-num">4</span>
+                <span class="sd-step-title">Affinez votre style</span>
+                <svg class="hs-accordion-active:rotate-180 ml-auto w-4 h-4 transition-transform flex-shrink-0" style="color:#CFBB99" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                </svg>
+              </button>
+              <div id="acc-4-body" class="hs-accordion-content hidden overflow-hidden transition-[height] duration-300">
+                <p class="sd-step-desc">Notez les suggestions, l'IA apprend et s'améliore à chaque interaction.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phone mockup -->
+        <div class="hidden lg:flex justify-end">
+          <div class="sd-phone">
+            <div class="sd-phone-bar"><span>9:41</span><span>📶 🔋</span></div>
+            <div class="sd-phone-header">
+              <p class="sd-phone-greeting">Bonjour Yasmine 👋</p>
+              <p class="sd-phone-date">Mardi 3 Mars · Casablanca</p>
+            </div>
+            <div class="sd-phone-weather">
+              <div>
+                <p class="sd-phone-temp">18°C</p>
+                <p class="sd-phone-weather-label">Partiellement nuageux</p>
+              </div>
+              <span class="text-2xl">⛅</span>
+            </div>
+            <div class="sd-phone-outfit">
+              <p class="sd-phone-outfit-tag">✨ Tenue suggérée</p>
+              <p class="sd-phone-outfit-name">Casual Chic — Automne</p>
+            </div>
+            <div class="sd-phone-swatches">
+              <div class="sd-swatch" style="background:#889063;opacity:.85"></div>
+              <div class="sd-swatch" style="background:#5C4A35;opacity:.65"></div>
+              <div class="sd-swatch" style="background:#CFBB99"></div>
+            </div>
+            <div class="sd-phone-grid">
+              <div class="sd-phone-stat">
+                <span class="sd-phone-num">24</span>Hauts
+              </div>
+              <div class="sd-phone-stat sd-phone-stat--alt">
+                <span class="sd-phone-num">12</span>Pantalons
+              </div>
+              <div class="sd-phone-stat sd-phone-stat--alt">
+                <span class="sd-phone-num">8</span>Robes
+              </div>
+              <div class="sd-phone-stat">
+                <span class="sd-phone-num">15</span>Chaussures
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- TESTIMONIALS -->
+  <section id="trust" class="sd-section" style="background:#F5EEE4">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-12 text-center">
+      <span class="sd-tag">Témoignages</span>
+      <h2 class="sd-section-title mt-3">Ce que disent nos <em>utilisateurs</em></h2>
+    </div>
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-12 mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="sd-testimonial">
+        <p class="sd-testi-quote">"Je ne pensais pas qu'une app pourrait changer mon rapport aux vêtements. Maintenant je gagne facilement 15 min chaque matin."</p>
+        <div class="sd-testi-author">
+          <div class="sd-testi-avatar">S</div>
+          <div><p class="sd-testi-name">Sara M.</p><p class="sd-testi-role">Étudiante en design</p></div>
+        </div>
+      </div>
+      <div class="sd-testimonial sd-testimonial--featured">
+        <p class="sd-testi-quote">"Les suggestions météo sont bluffantes. Plus jamais je ne sors avec le mauvais manteau. L'interface est belle et fluide."</p>
+        <div class="sd-testi-author">
+          <div class="sd-testi-avatar">K</div>
+          <div><p class="sd-testi-name">Karim B.</p><p class="sd-testi-role">Développeur web</p></div>
+        </div>
+      </div>
+      <div class="sd-testimonial">
+        <p class="sd-testi-quote">"Enfin une application qui comprend vraiment les besoins de quelqu'un qui a trop de vêtements et pas assez de temps !"</p>
+        <div class="sd-testi-author">
+          <div class="sd-testi-avatar">L</div>
+          <div><p class="sd-testi-name">Leila R.</p><p class="sd-testi-role">Manager RH</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- CTA SECTION -->
+  <section id="contact" class="sd-cta">
+    <div class="sd-cta-deco">"</div>
+    <div class="max-w-screen-md mx-auto px-6 text-center relative z-10">
+      <span class="sd-tag sd-tag--moss">Rejoignez SmartDress</span>
+      <h2 class="sd-cta-title">
+        Fini le stress du matin.<br>
+        Habillez-vous avec <em>intelligence</em>.
+      </h2>
+      <p class="sd-cta-desc">Rejoignez des milliers d'utilisateurs qui ont transformé leur routine matinale grâce à SmartDress.</p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="#" class="sd-btn-primary sd-btn-lg">Créer un compte gratuit</a>
+        <a href="#features" class="sd-btn-ghost sd-btn-lg">En savoir plus</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer class="sd-footer">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-12 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+      <div>
+        <a href="#" class="sd-logo sd-logo--light">Smart<span>Dress</span></a>
+        <p class="sd-footer-tag">Votre garde-robe digitale intelligente. Suggestions de tenues basées sur la météo et vos préférences.</p>
+      </div>
+      <div>
+        <h4 class="sd-footer-heading">Application</h4>
+        <ul class="sd-footer-links">
+          <li><a href="#">Fonctionnalités</a></li>
+          <li><a href="#">Garde-robe</a></li>
+          <li><a href="#">Suggestions</a></li>
+          <li><a href="#">Notifications</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="sd-footer-heading">Compte</h4>
+        <ul class="sd-footer-links">
+          <li><a href="#">S'inscrire</a></li>
+          <li><a href="#">Se connecter</a></li>
+          <li><a href="#">Mon profil</a></li>
+          <li><a href="#">Paramètres</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="sd-footer-heading">Projet</h4>
+        <ul class="sd-footer-links">
+          <li><a href="#">À propos</a></li>
+          <li><a href="#">Rapport PFF</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Mentions légales</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="sd-footer-bottom">
+      <span>© 2025–2026 SmartDress · Yasmine Haddad</span>
+      <span>Formation Développement Mobile · Mode Bootcamp</span>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

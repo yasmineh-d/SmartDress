@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr text-slate-900">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartDress - Authentification</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { 500: 'hsl(230, 60%, 50%)', 700: 'hsl(230, 60%, 35%)' },
+                        slate: { 50: 'hsl(220, 15%, 98%)', 100: 'hsl(220, 15%, 95%)', 200: 'hsl(220, 15%, 90%)', 500: 'hsl(220, 15%, 50%)', 900: 'hsl(220, 15%, 10%)' }
+                    },
+                    fontFamily: {
+                        heading: ['Outfit', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="../charte-graphique/style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700&display=swap');
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+
+<body class="bg-slate-900 font-body text-slate-900 overflow-x-hidden">
+
+    <section id="auth"
+        class="min-h-screen bg-slate-50 flex items-center justify-center p-6 bg-[url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80')] bg-cover bg-center">
+        <div class="absolute inset-0 bg-bark/60 backdrop-blur-sm"></div>
+
+        <div class="w-full max-w-md space-y-8 relative z-10">
+
+            <!-- Form -->
+            <div
+                class="bg-white p-10 rounded-[2.5rem] shadow-2xl shadow-bark/50 border border-white space-y-8 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-tan to-moss"></div>
+
+                <div class="space-y-3">
+                    <div class="flex items-center gap-2 mb-4">
+                        <a href="./mockup-accueil.html" class="p-2 hover:bg-slate-50 rounded-full transition-colors">
+                            <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                            </svg>
+                        </a>
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-tan">SmartDress</span>
+                    </div>
+                    <h2 class="text-3xl font-heading font-bold text-slate-900">Bienvenue</h2>
+                    <p class="text-slate-500">Connectez-vous pour accéder à votre garde-robe.</p>
+                </div>
+
+                <div class="flex gap-4 p-1.5 bg-slate-50 rounded-2xl" id="auth-tabs">
+                    <button data-target="login"
+                        class="tab-btn flex-1 py-3 text-sm font-bold bg-white text-slate-900 rounded-xl shadow-sm border border-slate-100 transition-all">Connexion</button>
+                    <button data-target="register"
+                        class="tab-btn flex-1 py-3 text-sm font-bold text-slate-500 hover:text-slate-900 transition-all">Inscription</button>
+                </div>
+
+                <!-- Login Form -->
+                <form id="login-form" class="auth-form space-y-5">
+                    <div class="space-y-1.5">
+                        <label class="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Email</label>
+                        <input type="email" placeholder="nom@exemple.com" required
+                            class="w-full px-5 py-4 bg-slate-50 border-2 border-transparent rounded-2xl focus:border-moss focus:bg-white outline-none transition-all placeholder:text-slate-300">
+                    </div>
+                    <div class="space-y-1.5">
+                        <div class="flex justify-between items-center ml-1">
+                            <label class="text-xs font-bold text-slate-400 uppercase tracking-widest">Mot de
+                                passe</label>
+                            <a href="#" class="text-xs font-bold text-moss hover:underline">Oublié ?</a>
+                        </div>
+                        <input type="password" placeholder="••••••••" required
+                            class="w-full px-5 py-4 bg-slate-50 border-2 border-transparent rounded-2xl focus:border-moss focus:bg-white outline-none transition-all placeholder:text-slate-300">
+                    </div>
+
+                    <button type="submit"
+                        class="w-full py-5 bg-bark text-white font-heading font-bold rounded-2xl shadow-lg shadow-bark/20 hover:bg-moss hover:translate-y-[-2px] active:translate-y-0 transition-all mt-4">
+                        Se connecter
+                    </button>
+                </form>
+
+                <!-- Register Form -->
+                <form id="register-form" class="auth-form space-y-5 hidden">
+                    <div class="space-y-1.5">
+                        <label class="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Nom
+                            complet</label>
+                        <input type="text" placeholder="Jean Dupont"
+                            class="w-full px-5 py-4 bg-slate-50 border-2 border-transparent rounded-2xl focus:border-moss focus:bg-white outline-none transition-all placeholder:text-slate-300">
+                    </div>
+                    <div class="space-y-1.5">
+                        <label class="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Email</label>
+                        <input type="email" placeholder="nom@exemple.com"
+                            class="w-full px-5 py-4 bg-slate-50 border-2 border-transparent rounded-2xl focus:border-moss focus:bg-white outline-none transition-all placeholder:text-slate-300">
+                    </div>
+                    <div class="space-y-1.5">
+                        <label class="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Mot de
+                            passe</label>
+                        <input type="password" placeholder="••••••••"
+                            class="w-full px-5 py-4 bg-slate-50 border-2 border-transparent rounded-2xl focus:border-moss focus:bg-white outline-none transition-all placeholder:text-slate-300">
+                    </div>
+
+                    <button type="submit"
+                        class="w-full py-5 bg-moss text-white font-heading font-bold rounded-2xl shadow-lg shadow-moss/20 hover:bg-bark hover:translate-y-[-2px] active:translate-y-0 transition-all mt-4">
+                        Créer mon compte
+                    </button>
+                </form>
+
+                <div class="relative py-2">
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-slate-100"></div>
+                    </div>
+                    <div class="relative flex justify-center text-xs font-bold uppercase tracking-widest"><span
+                            class="bg-white px-4 text-slate-300">Ou continuer avec</span></div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <button
+                        class="flex items-center justify-center py-4 border-2 border-slate-50 rounded-2xl hover:bg-slate-50 transition-colors group">
+                        <span class="font-bold text-slate-700 group-hover:text-slate-900">Google</span>
+                    </button>
+                    <button
+                        class="flex items-center justify-center py-4 border-2 border-slate-50 rounded-2xl hover:bg-slate-50 transition-colors group">
+                        <span class="font-bold text-slate-700 group-hover:text-slate-900">Apple</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const tabs = document.querySelectorAll('.tab-btn');
+        const forms = document.querySelectorAll('.auth-form');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const target = tab.dataset.target;
+                tabs.forEach(t => {
+                    t.classList.remove('bg-white', 'text-slate-900', 'shadow-sm', 'border-slate-100');
+                    t.classList.add('text-slate-500');
+                });
+                tab.classList.add('bg-white', 'text-slate-900', 'shadow-sm', 'border-slate-100');
+                tab.classList.remove('text-slate-500');
+                forms.forEach(f => f.classList.add('hidden'));
+                document.getElementById(`${target}-form`).classList.remove('hidden');
+            });
+        });
+
+        document.getElementById('login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button[type="submit"]');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="flex items-center justify-center gap-2">Chargement...</span>';
+            setTimeout(() => {
+                window.location.href = './mockup-dashboard.html';
+            }, 800);
+        });
+    </script>
+</body>
+
+</html>

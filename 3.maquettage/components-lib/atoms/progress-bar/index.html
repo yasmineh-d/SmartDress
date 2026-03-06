@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atom: Progress Bar</title>
+    <link rel="stylesheet" href="../../../charte-graphique/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { theme: { extend: { colors: { primary: { 500: 'var(--color-primary-500)', 100: 'var(--color-primary-100)' } } } } };
+    </script>
+</head>
+
+<body class="bg-white p-10 font-sans space-y-8 max-w-sm w-full">
+
+    <div>
+        <h2 class="text-xs text-slate-400 font-mono uppercase mb-3">Progress Bar (Base)</h2>
+        <!-- Atom : Progress Bar -->
+        <div class="flex w-full h-1.5 bg-slate-100 rounded-full overflow-hidden" role="progressbar" aria-valuenow="75"
+            aria-valuemin="0" aria-valuemax="100">
+            <div class="flex flex-col justify-center rounded-full overflow-hidden bg-primary-500 text-xs text-white text-center whitespace-nowrap transition-all duration-500"
+                style="width: 75%"></div>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -15,16 +15,11 @@
 
         .bg-chess-pattern {
             background-color: #f1f5f9;
-            background-image:
-                linear-gradient(45deg, #e2e8f0 25%, transparent 25%),
-                linear-gradient(-45deg, #e2e8f0 25%, transparent 25%),
-                linear-gradient(45deg, transparent 75%, #e2e8f0 75%),
-                linear-gradient(-45deg, transparent 75%, #e2e8f0 75%);
+            background-image: linear-gradient(45deg, #e2e8f0 25%, transparent 25%), linear-gradient(-45deg, #e2e8f0 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #e2e8f0 75%), linear-gradient(-45deg, transparent 75%, #e2e8f0 75%);
             background-size: 20px 20px;
             background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
         }
     </style>
-    <script>tailwind.config = { darkMode: 'class' }</script>
 </head>
 
 <body class="bg-gray-50 flex h-full overflow-hidden">
@@ -33,74 +28,64 @@
         <div class="p-6 border-b border-gray-100 bg-slate-50">
             <div class="flex items-center gap-3 mb-2">
                 <img src="./charte-graphique/smartdress_logo.png" alt="Logo" class="w-8 h-8">
-                <h1 class="text-xl font-bold text-gray-900 tracking-tight">SmartDress <span class="text-indigo-600">UI
-                        Hub</span></h1>
+                <h1 class="text-xl font-bold text-gray-900 tracking-tight">SmartDress UI Hub</h1>
             </div>
-            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em]">Galerie Maquettage v1.0</p>
+            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em]">Galerie Maquettage v1.1</p>
         </div>
 
         <nav id="sidebar-nav" class="flex-1 overflow-y-auto p-4 space-y-4">
 
-            <!-- Section Charte -->
             <div>
                 <h3 class="px-4 text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Identité</h3>
                 <button onclick="loadComponent('./charte-graphique/index.html', 'Charte Graphique')"
-                    class="w-full flex items-center gap-3 px-4 py-2.5 text-sm font-semibold text-gray-600 rounded-xl hover:bg-indigo-50 hover:text-indigo-600 transition-all">
+                    class="w-full flex items-center gap-3 px-4 py-2.5 text-sm font-semibold text-gray-600 rounded-xl hover:bg-indigo-50 transition-all">
                     🎨 Charte Graphique
                 </button>
             </div>
 
-            <!-- Section Mockups -->
             <div>
-                <h3 class="px-4 text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Maquettes HP</h3>
+                <h3 class="px-4 text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Public & Marketing
+                </h3>
                 <div class="space-y-1">
-                    <button onclick="loadComponent('./mockups/mockup-accueil.html', 'Mockup - Accueil')"
-                        class="w-full flex items-center gap-3 px-4 py-2 text-sm font-medium text-gray-600 rounded-lg hover:bg-slate-50 transition-all">🏠
-                        Accueil & Auth</button>
-                    <button onclick="loadComponent('./mockups/mockup-dashboard.html', 'Mockup - Dashboard')"
-                        class="w-full flex items-center gap-3 px-4 py-2 text-sm font-medium text-gray-600 rounded-lg hover:bg-slate-50 transition-all">📊
+                    <button onclick="loadComponent('./mockups/mockup-accueil.html', 'Landing Page')"
+                        class="w-full flex items-center gap-3 px-4 py-2 border-r-4 border-transparent text-slate-500 hover:text-indigo-600 hover:bg-slate-50 transition-all text-left">
+                        <span class="text-lg">✨</span>
+                        <span class="font-medium">Landing Page (Accueil)</span>
+                    </button>
+                    <button onclick="loadComponent('./mockups/mockup-auth.html', 'Authentification')"
+                        class="w-full flex items-center gap-3 px-4 py-2 border-r-4 border-transparent text-slate-500 hover:text-indigo-600 hover:bg-slate-50 transition-all text-left">
+                        <span class="text-lg">🔒</span>
+                        <span class="font-medium">Page d'Authentification</span>
+                    </button>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="px-4 text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Espace Utilisateur
+                </h3>
+                <div class="space-y-1">
+                    <button onclick="loadComponent('./mockups/mockup-dashboard.html', 'Dashboard')"
+                        class="w-full text-left px-4 py-2 text-sm font-medium text-gray-600 rounded-lg hover:bg-slate-50 transition-all">📊
                         Tableau de Bord</button>
-                    <button onclick="loadComponent('./mockups/mockup-garde-robe.html', 'Mockup - Garde-Robe')"
-                        class="w-full flex items-center gap-3 px-4 py-2 text-sm font-medium text-gray-600 rounded-lg hover:bg-slate-50 transition-all">🧥
+                    <button onclick="loadComponent('./mockups/mockup-garde-robe.html', 'Garde-Robe')"
+                        class="w-full text-left px-4 py-2 text-sm font-medium text-gray-600 rounded-lg hover:bg-slate-50 transition-all">🧥
                         Ma Garde-Robe</button>
+                    <button onclick="loadComponent('./mockups/mockup-stats.html', 'Statistiques')"
+                        class="w-full text-left px-4 py-2 text-sm font-medium text-gray-600 rounded-lg hover:bg-slate-50 transition-all">📈
+                        Statistiques Détaillées</button>
+                    <button onclick="loadComponent('./mockups/mockup-profile.html', 'Profil')"
+                        class="w-full text-left px-4 py-2 text-sm font-medium text-gray-600 rounded-lg hover:bg-slate-50 transition-all">👤
+                        Mon Profil</button>
                 </div>
             </div>
 
-            <!-- Section Molécules -->
             <div>
-                <h3 class="px-4 text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Molécules</h3>
+                <h3 class="px-4 text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Composants</h3>
                 <div class="space-y-1">
                     <button
-                        onclick="loadComponent('./components-lib/molecules/m-hero-splash/index.html', 'Molecule - Hero Splash')"
-                        class="w-full flex items-center gap-3 px-4 py-2 text-xs font-medium text-gray-500 rounded-lg hover:bg-slate-50 transition-all">✨
-                        Hero Splash</button>
-                    <button
-                        onclick="loadComponent('./components-lib/molecules/m-form-login/index.html', 'Molecule - Form Login')"
-                        class="w-full flex items-center gap-3 px-4 py-2 text-xs font-medium text-gray-500 rounded-lg hover:bg-slate-50 transition-all">📝
-                        Formulaire Login</button>
-                    <button
-                        onclick="loadComponent('./components-lib/molecules/m-card-suggestion/index.html', 'Molecule - Card Suggestion')"
-                        class="w-full flex items-center gap-3 px-4 py-2 text-xs font-medium text-gray-500 rounded-lg hover:bg-slate-50 transition-all">🎴
-                        Carte Suggestion</button>
-                    <button
-                        onclick="loadComponent('./components-lib/molecules/m-widget-weather/index.html', 'Molecule - Widget Weather')"
-                        class="w-full flex items-center gap-3 px-4 py-2 text-xs font-medium text-gray-500 rounded-lg hover:bg-slate-50 transition-all">☀️
-                        Widget Météo</button>
-                </div>
-            </div>
-
-            <!-- Section Atoms -->
-            <div>
-                <h3 class="px-4 text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Atoms</h3>
-                <div class="grid grid-cols-2 gap-2 px-2">
-                    <button onclick="loadComponent('./components-lib/atoms/a-btn-primary/index.html', 'Atom - Button')"
-                        class="p-2 text-[10px] font-bold text-center border border-slate-100 rounded-lg hover:border-indigo-200 hover:bg-indigo-50 transition-all">BTN</button>
-                    <button onclick="loadComponent('./components-lib/atoms/a-input-text/index.html', 'Atom - Input')"
-                        class="p-2 text-[10px] font-bold text-center border border-slate-100 rounded-lg hover:border-indigo-200 hover:bg-indigo-50 transition-all">INPUT</button>
-                    <button onclick="loadComponent('./components-lib/atoms/a-logo/index.html', 'Atom - Logo')"
-                        class="p-2 text-[10px] font-bold text-center border border-slate-100 rounded-lg hover:border-indigo-200 hover:bg-indigo-50 transition-all">LOGO</button>
-                    <button onclick="loadComponent('./components-lib/atoms/a-title-h1/index.html', 'Atom - Title')"
-                        class="p-2 text-[10px] font-bold text-center border border-slate-100 rounded-lg hover:border-indigo-200 hover:bg-indigo-50 transition-all">H1</button>
+                        onclick="loadComponent('./components-lib/molecules/molecules-manifest.md', 'Manifeste Molécules')"
+                        class="w-full text-left px-4 py-2 text-xs font-bold text-indigo-500 rounded-lg hover:bg-indigo-50 transition-all">📋
+                        Voir Manifeste</button>
                 </div>
             </div>
 
@@ -111,30 +96,19 @@
 
     <!-- Main Content -->
     <main class="flex-1 flex flex-col h-full bg-slate-100">
-        <div class="bg-white border-b border-slate-200 px-6 py-3 flex justify-between items-center shadow-sm z-10">
+        <div class="bg-white border-b border-slate-200 px-6 py-3 flex justify-between items-center z-10">
             <h2 id="component-title" class="text-sm font-bold text-slate-800 uppercase tracking-wide">Sélectionnez un
                 composant</h2>
             <div class="flex gap-4 items-center">
-                <a id="open-new-tab" href="#" target="_blank"
-                    class="text-xs font-bold px-4 py-2 border-2 border-slate-100 rounded-xl hover:bg-slate-50 text-slate-600 flex items-center gap-2 transition-all hidden">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                    Plein Écran
-                </a>
-                <div class="flex bg-slate-100 rounded-xl p-1 gap-1">
+                <div class="flex bg-slate-100 rounded-xl p-1">
                     <button onclick="resizeIframe('100%')"
-                        class="px-4 py-1.5 text-[10px] font-bold rounded-lg hover:bg-white hover:shadow-sm transition-all uppercase tracking-wider">Desktop</button>
-                    <button onclick="resizeIframe('768px')"
-                        class="px-4 py-1.5 text-[10px] font-bold rounded-lg hover:bg-white hover:shadow-sm transition-all uppercase tracking-wider">Tablet</button>
+                        class="px-4 py-1.5 text-[10px] font-bold rounded-lg hover:bg-white transition-all uppercase">Desktop</button>
                     <button onclick="resizeIframe('375px')"
-                        class="px-4 py-1.5 text-[10px] font-bold rounded-lg hover:bg-white hover:shadow-sm transition-all uppercase tracking-wider">Mobile</button>
+                        class="px-4 py-1.5 text-[10px] font-bold rounded-lg hover:bg-white transition-all uppercase">Mobile</button>
                 </div>
             </div>
         </div>
-        <div class="flex-1 overflow-hidden flex justify-center bg-chess-pattern relative p-4 md:p-8">
+        <div class="flex-1 flex justify-center bg-chess-pattern relative p-4 md:p-8">
             <iframe id="preview-frame" src=""
                 class="w-full h-full border-0 bg-white shadow-2xl rounded-2xl transition-all duration-300"></iframe>
         </div>
@@ -144,26 +118,14 @@
         function loadComponent(path, title) {
             const frame = document.getElementById('preview-frame');
             const titleEl = document.getElementById('component-title');
-            const openLink = document.getElementById('open-new-tab');
             frame.classList.add('opacity-0');
-            frame.classList.add('scale-95');
             setTimeout(() => {
                 frame.src = path;
                 titleEl.textContent = title;
-                openLink.href = path;
-                openLink.classList.remove('hidden');
-                frame.onload = () => {
-                    frame.classList.remove('opacity-0');
-                    frame.classList.remove('scale-95');
-                }
+                frame.onload = () => frame.classList.remove('opacity-0');
             }, 200);
         }
-        function resizeIframe(width) {
-            const frame = document.getElementById('preview-frame');
-            frame.style.width = width;
-        }
-
-        // Auto-load Charte on start
+        function resizeIframe(width) { document.getElementById('preview-frame').style.width = width; }
         window.onload = () => loadComponent('./charte-graphique/index.html', 'Charte Graphique');
     </script>
 </body>
