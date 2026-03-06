@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartDress - Tableau de Bord</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { 500: 'hsl(230, 60%, 50%)', 700: 'hsl(230, 60%, 35%)' },
+                        accent: { 500: 'hsl(15, 80%, 65%)' },
+                        slate: { 50: 'hsl(220, 15%, 98%)', 100: 'hsl(220, 15%, 95%)', 200: 'hsl(220, 15%, 90%)', 500: 'hsl(220, 15%, 50%)', 600: 'hsl(220, 15%, 40%)', 900: 'hsl(220, 15%, 10%)' }
+                    },
+                    fontFamily: {
+                        heading: ['Outfit', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="../assets/css/charte.css">
+</head>
+
+<body class="bg-slate-100 font-body text-slate-900 min-h-screen pb-24">
+
+    <!-- Header / Top Bar -->
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-slate-100 px-6 py-4">
+        <div class="max-w-md mx-auto flex items-center justify-between">
+            <button class="w-10 h-10 flex items-center justify-center bg-slate-50 rounded-xl">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-slate-600" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+            <h1 class="text-xl font-heading font-bold text-slate-900">Tableau de Bord</h1>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-500 to-coral-500 p-[2px]">
+                <div class="w-full h-full bg-white rounded-[10px] flex items-center justify-center overflow-hidden">
+                    <img src="https://ui-avatars.com/api/?name=User&background=3b4cc0&color=fff" alt="Avatar">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-md mx-auto p-6 space-y-8">
+
+        <!-- Molecule : m-widget-weather -->
+        <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 flex items-center gap-5">
+            <div class="w-14 h-14 bg-orange-100 flex items-center justify-center rounded-2xl text-3xl">
+                ☀️
+            </div>
+            <div>
+                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em]">Météo / Casablanca</p>
+                <p class="text-2xl font-heading font-bold text-slate-900">24°C <span
+                        class="text-slate-400 font-medium text-lg ml-1">Ensoleillé</span></p>
+            </div>
+        </div>
+
+        <!-- Molecule : m-card-suggestion -->
+        <div class="bg-white rounded-[2.5rem] shadow-xl shadow-indigo-100/50 overflow-hidden border border-white">
+            <div class="relative h-96 bg-slate-50 flex items-center justify-center p-12">
+                <div class="absolute top-6 left-6">
+                    <span
+                        class="px-4 py-1.5 bg-primary-500 text-white text-[10px] font-bold rounded-full shadow-lg shadow-primary-500/20 tracking-wider">TENUE
+                        DU JOUR</span>
+                </div>
+
+                <!-- Tenue Visuelle -->
+                <div class="flex flex-col items-center gap-6">
+                    <div
+                        class="w-40 h-40 bg-indigo-50 rounded-[2rem] border-4 border-white shadow-sm flex items-center justify-center flex-col transition-transform hover:scale-105">
+                        <span class="text-4xl mb-2">👕</span>
+                        <span class="text-[10px] font-bold text-indigo-400 uppercase tracking-widest">T-Shirt
+                            Blanc</span>
+                    </div>
+                    <div
+                        class="w-44 h-52 bg-slate-50 rounded-[2rem] border-4 border-white shadow-sm flex items-center justify-center flex-col transition-transform hover:scale-105">
+                        <span class="text-4xl mb-2">👖</span>
+                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Jean Slim
+                            Bleu</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-10 space-y-8">
+                <div class="space-y-3">
+                    <h2 class="text-3xl font-heading font-bold text-slate-900 leading-tight">Casual Moderne</h2>
+                    <p class="text-slate-500 leading-relaxed">Cette tenue est parfaite pour votre planning
+                        d'aujourd'hui. Légère et stylée.</p>
+                </div>
+
+                <div class="flex flex-col gap-4">
+                    <div class="flex flex-col gap-4">
+                        <button
+                            class="w-full py-5 bg-primary-500 text-white font-heading font-bold rounded-2xl shadow-xl shadow-primary-500/20 hover:bg-primary-700 hover:translate-y-[-2px] active:translate-y-0 transition-all">
+                            Valider cette tenue
+                        </button>
+                        <button id="refresh-outfit"
+                            class="w-full py-5 text-slate-500 font-heading font-bold rounded-2xl hover:bg-slate-50 transition-colors">
+                            Autre idée ?
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section Navigation Rapide -->
+            <div class="grid grid-cols-2 gap-4">
+                <button onclick="location.href='garde-robe.html'"
+                    class="p-6 bg-white rounded-3xl border border-slate-100 flex flex-col items-center gap-3 hover:bg-slate-50 transition-colors">
+                    <div
+                        class="w-12 h-12 bg-indigo-50 text-indigo-500 rounded-xl flex items-center justify-center text-2xl">
+                        🧥</div>
+                    <span class="text-sm font-bold text-slate-700">Dressing</span>
+                </button>
+                <button
+                    class="p-6 bg-white rounded-3xl border border-slate-100 flex flex-col items-center gap-3 hover:bg-slate-50 transition-colors">
+                    <div
+                        class="w-12 h-12 bg-coral-50 text-coral-500 rounded-xl flex items-center justify-center text-2xl">
+                        ⭐
+                    </div>
+                    <span class="text-sm font-bold text-slate-700">Favoris</span>
+                </button>
+            </div>
+    </main>
+
+    <!-- Bottom Navigation Bar (Mobile Style) -->
+    <nav
+        class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-xl border-t border-slate-100 px-8 py-4 flex justify-between items-center z-50 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
+        <button class="active-nav flex flex-col items-center gap-1 text-primary-500">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+            </svg>
+        </button>
+        <button onclick="location.href='garde-robe.html'"
+            class="flex flex-col items-center gap-1 text-slate-400 hover:text-slate-600">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+        </button>
+        <button
+            class="w-14 h-14 bg-primary-500 rounded-full flex items-center justify-center text-white shadow-xl shadow-primary-500/40 relative -top-8 border-4 border-white active:scale-95 transition-all">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4" />
+            </svg>
+        </button>
+        <button class="flex flex-col items-center gap-1 text-slate-400 hover:text-slate-600">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m12 4a2 2 0 100-4m0 4a2 2 0 110-4m-6 0a2 2 0 100 4m0-4a2 2 0 110 4" />
+            </svg>
+        </button>
+        <button class="flex flex-col items-center gap-1 text-slate-400 hover:text-slate-600">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+            </svg>
+        </button>
+    </nav>
+
+    <script>
+        const outfits = [
+            { title: "Casual Moderne", top: "👕", topName: "T-Shirt Blanc", topBg: "bg-indigo-50", bottom: "👖", bottomName: "Jean Slim Bleu", bottomBg: "bg-slate-50" },
+            { title: "Look Hivernal", top: "🧥", topName: "Manteau Gris", topBg: "bg-slate-200", bottom: "👖", bottomName: "Chino Noir", bottomBg: "bg-slate-100" },
+            { title: "Sortie Soirée", top: "👔", topName: "Chemise Noire", topBg: "bg-slate-800 text-white", topLabel: "text-slate-400", bottom: "👖", bottomName: "Pantalon Costume", bottomBg: "bg-slate-300" }
+        ];
+
+        let currentIndex = 0;
+        const refreshBtn = document.getElementById('refresh-outfit');
+        const cardTitle = document.querySelector('h2');
+        const topIcon = document.querySelectorAll('.text-4xl')[0];
+        const topName = document.querySelectorAll('.uppercase.tracking-widest')[1];
+        const topBox = topIcon.parentElement;
+        const bottomIcon = document.querySelectorAll('.text-4xl')[1];
+        const bottomName = document.querySelectorAll('.uppercase.tracking-widest')[2];
+        const bottomBox = bottomIcon.parentElement;
+
+        refreshBtn.addEventListener('click', () => {
+            refreshBtn.classList.add('animate-pulse', 'pointer-events-none');
+
+            setTimeout(() => {
+                currentIndex = (currentIndex + 1) % outfits.length;
+                const outfit = outfits[currentIndex];
+
+                // Update content with staggered animation (CSS transition)
+                cardTitle.textContent = outfit.title;
+
+                // Top update
+                topIcon.textContent = outfit.top;
+                topName.textContent = outfit.topName;
+                topBox.className = `w-40 h-40 ${outfit.topBg.split(' ')[0]} rounded-[2rem] border-4 border-white shadow-sm flex items-center justify-center flex-col transition-transform hover:scale-105`;
+                if (outfit.topBg.includes('text-white')) topIcon.classList.add('text-white');
+                else topIcon.classList.remove('text-white');
+
+                // Bottom update
+                bottomIcon.textContent = outfit.bottom;
+                bottomName.textContent = outfit.bottomName;
+                bottomBox.className = `w-44 h-52 ${outfit.bottomBg} rounded-[2rem] border-4 border-white shadow-sm flex items-center justify-center flex-col transition-transform hover:scale-105`;
+
+                refreshBtn.classList.remove('animate-pulse', 'pointer-events-none');
+            }, 600);
+        });
+    </script>
+
+</body>
+
+</html>

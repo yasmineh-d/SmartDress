@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        slate: { 900: 'hsl(220, 15%, 10%)' }
+                    },
+                    fontFamily: {
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="p-10 bg-slate-50">
+
+    <!-- Prototype de l'Atome : a-title-h1 -->
+    <h1 class="text-4xl md:text-5xl font-heading font-bold text-slate-900 tracking-tight leading-tight">
+        Ceci est un Titre H1
+    </h1>
+
+</body>
+
+</html>

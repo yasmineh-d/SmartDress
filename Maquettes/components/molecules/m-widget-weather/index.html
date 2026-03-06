@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        slate: { 100: 'hsl(220, 15%, 95%)', 500: 'hsl(220, 15%, 50%)', 900: 'hsl(220, 15%, 10%)' }
+                    },
+                    fontFamily: {
+                        heading: ['Outfit', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-slate-100 min-h-screen flex items-center justify-center p-6 font-body">
+
+    <!-- Molécule : m-widget-weather -->
+    <div
+        class="flex items-center gap-4 bg-white/50 backdrop-blur-md px-6 py-4 rounded-3xl border border-white shadow-sm ring-1 ring-slate-900/5">
+        <div class="w-12 h-12 bg-orange-100 flex items-center justify-center rounded-2xl">
+            <span class="text-2xl">☀️</span>
+        </div>
+        <div>
+            <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Météo / Casablanca</p>
+            <p class="text-xl font-heading font-bold text-slate-900">24°C <span
+                    class="text-slate-400 font-medium ml-1">Ensoleillé</span></p>
+        </div>
+    </div>
+
+</body>
+
+</html>
