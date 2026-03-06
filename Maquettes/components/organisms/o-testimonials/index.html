@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Component</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../assets/css/style-landing.css" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        tan: '#CFBB99', bone: '#E5D7C4', moss: '#889063', deeptan: '#B8A07E', cream: '#F5EEE4', bark: '#5C4A35', offwhite: '#FDFAF6',
+                    },
+                    fontFamily: {
+                        display: ['"Cormorant Garamond"', 'serif'], body: ['"DM Sans"', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-body bg-offwhite text-bark overflow-x-hidden" x-data="{ mobileMenuOpen: false, scrolled: false }" @scroll.window="scrolled = (window.pageYOffset > 20)">
+<!-- TESTIMONIALS -->
+    <section id="trust" class="sd-section" style="background:#F5EEE4">
+        <div class="max-w-screen-xl mx-auto px-6 lg:px-12 text-center">
+            <span class="sd-tag">Témoignages</span>
+            <h2 class="sd-section-title mt-3">Ce que disent nos <em>utilisateurs</em></h2>
+        </div>
+        <div class="max-w-screen-xl mx-auto px-6 lg:px-12 mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="sd-testimonial observe-me">
+                <p class="sd-testi-quote">"Je ne pensais pas qu'une app pourrait changer mon rapport aux vêtements.
+                    Maintenant je gagne facilement 15 min chaque matin."</p>
+                <div class="sd-testi-author">
+                    <div class="sd-testi-avatar">S</div>
+                    <div>
+                        <p class="sd-testi-name">Sara M.</p>
+                        <p class="sd-testi-role">Étudiante en design</p>
+                    </div>
+                </div>
+            </div>
+            <div class="sd-testimonial sd-testimonial--featured observe-me" style="transition-delay: 60ms">
+                <p class="sd-testi-quote">"Les suggestions météo sont bluffantes. Plus jamais je ne sors avec le mauvais
+                    manteau. L'interface est belle et fluide."</p>
+                <div class="sd-testi-author">
+                    <div class="sd-testi-avatar">K</div>
+                    <div>
+                        <p class="sd-testi-name">Karim B.</p>
+                        <p class="sd-testi-role">Développeur web</p>
+                    </div>
+                </div>
+            </div>
+            <div class="sd-testimonial observe-me" style="transition-delay: 120ms">
+                <p class="sd-testi-quote">"Enfin une application qui comprend vraiment les besoins de quelqu'un qui a
+                    trop de vêtements et pas assez de temps !"</p>
+                <div class="sd-testi-author">
+                    <div class="sd-testi-avatar">L</div>
+                    <div>
+                        <p class="sd-testi-name">Leila R.</p>
+                        <p class="sd-testi-role">Manager RH</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    
+    <script>
+        document.addEventListener('alpine:init', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            document.querySelectorAll('.observe-me').forEach(el => observer.observe(el));
+
+            const heroTitle = document.querySelector('.sd-hero-title');
+            if (heroTitle) heroTitle.style.animationPlayState = 'running';
+        });
+
+        document.querySelectorAll('.sd-btn-primary').forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                const rect = this.getBoundingClientRect();
+                const ripple = document.createElement('span');
+                const size = Math.max(rect.width, rect.height);
+                ripple.style.cssText = "position: absolute; width: " + size + "px; height: " + size + "px; top: " + (e.clientY - rect.top - size / 2) + "px; left: " + (e.clientX - rect.left - size / 2) + "px; background: rgba(255,255,255,0.2); border-radius: 50%; transform: scale(0); animation: ripple 0.5s ease-out; pointer-events: none;";
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 500);
+            });
+        });
+    </script>
+</body>
+</html>

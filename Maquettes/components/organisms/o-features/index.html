@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Component</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../assets/css/style-landing.css" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        tan: '#CFBB99', bone: '#E5D7C4', moss: '#889063', deeptan: '#B8A07E', cream: '#F5EEE4', bark: '#5C4A35', offwhite: '#FDFAF6',
+                    },
+                    fontFamily: {
+                        display: ['"Cormorant Garamond"', 'serif'], body: ['"DM Sans"', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-body bg-offwhite text-bark overflow-x-hidden" x-data="{ mobileMenuOpen: false, scrolled: false }" @scroll.window="scrolled = (window.pageYOffset > 20)">
+<!-- FEATURES -->
+    <section id="features" class="sd-section">
+        <div class="max-w-screen-xl mx-auto px-6 lg:px-12">
+            <div class="sd-section-head">
+                <div>
+                    <span class="sd-tag">Fonctionnalités</span>
+                    <h2 class="sd-section-title mt-3">Tout ce dont vous avez <em>besoin</em></h2>
+                </div>
+                <p class="sd-section-desc">Une application pensée pour simplifier votre quotidien vestimentaire, de A à
+                    Z.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px" style="background:rgba(207,187,153,.2)">
+                <div class="sd-feat-card observe-me">
+                    <span class="sd-feat-num">01</span>
+                    <div class="sd-feat-icon">👗</div>
+                    <h3 class="sd-feat-title">Garde-robe digitale</h3>
+                    <p class="sd-feat-desc">Numérisez et organisez tous vos vêtements par catégorie, couleur et saison.
+                        Visualisez ce que vous possédez vraiment.</p>
+                </div>
+                <div class="sd-feat-card sd-feat-card--alt observe-me" style="transition-delay: 60ms">
+                    <span class="sd-feat-num">02</span>
+                    <div class="sd-feat-icon">🌤️</div>
+                    <h3 class="sd-feat-title">Suggestions météo</h3>
+                    <p class="sd-feat-desc">L'application analyse la météo en temps réel et vous suggère les tenues les
+                        plus adaptées à la température du jour.</p>
+                </div>
+                <div class="sd-feat-card observe-me" style="transition-delay: 120ms">
+                    <span class="sd-feat-num">03</span>
+                    <div class="sd-feat-icon">✨</div>
+                    <h3 class="sd-feat-title">IA de style</h3>
+                    <p class="sd-feat-desc">Notre algorithme apprend vos préférences et crée des combinaisons
+                        harmonieuses que vous n'auriez pas imaginées.</p>
+                </div>
+                <div class="sd-feat-card sd-feat-card--alt observe-me" style="transition-delay: 180ms">
+                    <span class="sd-feat-num">04</span>
+                    <div class="sd-feat-icon">🔔</div>
+                    <h3 class="sd-feat-title">Notifications quotidiennes</h3>
+                    <p class="sd-feat-desc">Recevez chaque matin votre suggestion de tenue avant même de vous lever.
+                        Gagnez du temps dès le réveil.</p>
+                </div>
+                <div class="sd-feat-card observe-me" style="transition-delay: 240ms">
+                    <span class="sd-feat-num">05</span>
+                    <div class="sd-feat-icon">📊</div>
+                    <h3 class="sd-feat-title">Statistiques d'usage</h3>
+                    <p class="sd-feat-desc">Découvrez quels vêtements vous portez le plus, et optimisez vos achats
+                        futurs grâce à des données concrètes.</p>
+                </div>
+                <div class="sd-feat-card sd-feat-card--alt observe-me" style="transition-delay: 300ms">
+                    <span class="sd-feat-num">06</span>
+                    <div class="sd-feat-icon">🔒</div>
+                    <h3 class="sd-feat-title">Confidentialité totale</h3>
+                    <p class="sd-feat-desc">Vos données et votre garde-robe vous appartiennent. Sécurité et
+                        confidentialité garanties à chaque étape.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    
+    <script>
+        document.addEventListener('alpine:init', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            document.querySelectorAll('.observe-me').forEach(el => observer.observe(el));
+
+            const heroTitle = document.querySelector('.sd-hero-title');
+            if (heroTitle) heroTitle.style.animationPlayState = 'running';
+        });
+
+        document.querySelectorAll('.sd-btn-primary').forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                const rect = this.getBoundingClientRect();
+                const ripple = document.createElement('span');
+                const size = Math.max(rect.width, rect.height);
+                ripple.style.cssText = "position: absolute; width: " + size + "px; height: " + size + "px; top: " + (e.clientY - rect.top - size / 2) + "px; left: " + (e.clientX - rect.left - size / 2) + "px; background: rgba(255,255,255,0.2); border-radius: 50%; transform: scale(0); animation: ripple 0.5s ease-out; pointer-events: none;";
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 500);
+            });
+        });
+    </script>
+</body>
+</html>

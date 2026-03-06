@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Component</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../assets/css/style-landing.css" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        tan: '#CFBB99', bone: '#E5D7C4', moss: '#889063', deeptan: '#B8A07E', cream: '#F5EEE4', bark: '#5C4A35', offwhite: '#FDFAF6',
+                    },
+                    fontFamily: {
+                        display: ['"Cormorant Garamond"', 'serif'], body: ['"DM Sans"', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-body bg-offwhite text-bark overflow-x-hidden" x-data="{ mobileMenuOpen: false, scrolled: false }" @scroll.window="scrolled = (window.pageYOffset > 20)">
+<!-- HOW IT WORKS -->
+    <section id="how" class="sd-section" style="background:#5C4A35;color:#F5EEE4">
+        <div class="max-w-screen-xl mx-auto px-6 lg:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+                <div>
+                    <span class="sd-tag sd-tag--light">Comment ça marche</span>
+                    <h2 class="sd-section-title mt-3" style="color:#F5EEE4">Simple, <em>rapide</em><br>et intelligent.
+                    </h2>
+                    <p class="mt-4 mb-10 text-sm leading-relaxed" style="color:rgba(245,238,228,.5)">
+                        En quelques étapes, SmartDress devient votre assistant vestimentaire personnel.
+                    </p>
+
+                    <!-- Alpine Accordion -->
+                    <div class="space-y-4" x-data="{ activeStep: 1 }">
+                        <div class="sd-step">
+                            <button class="sd-step-btn" @click="activeStep = activeStep === 1 ? 0 : 1">
+                                <span class="sd-step-num">1</span>
+                                <span class="sd-step-title">Créez votre compte</span>
+                                <svg class="ml-auto w-4 h-4 transition-transform text-tan"
+                                    :class="{ 'rotate-180': activeStep === 1 }" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <div x-show="activeStep === 1" x-collapse>
+                                <p class="sd-step-desc">Inscription rapide et sécurisée. Votre profil de style est
+                                    configuré en 2 minutes.</p>
+                            </div>
+                        </div>
+
+                        <div class="sd-step">
+                            <button class="sd-step-btn" @click="activeStep = activeStep === 2 ? 0 : 2">
+                                <span class="sd-step-num">2</span>
+                                <span class="sd-step-title">Ajoutez vos vêtements</span>
+                                <svg class="ml-auto w-4 h-4 transition-transform text-tan"
+                                    :class="{ 'rotate-180': activeStep === 2 }" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <div x-show="activeStep === 2" x-collapse style="display: none;">
+                                <p class="sd-step-desc">Photographiez ou catégorisez chaque pièce de votre garde-robe
+                                    facilement.</p>
+                            </div>
+                        </div>
+
+                        <div class="sd-step">
+                            <button class="sd-step-btn" @click="activeStep = activeStep === 3 ? 0 : 3">
+                                <span class="sd-step-num">3</span>
+                                <span class="sd-step-title">Recevez vos suggestions</span>
+                                <svg class="ml-auto w-4 h-4 transition-transform text-tan"
+                                    :class="{ 'rotate-180': activeStep === 3 }" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <div x-show="activeStep === 3" x-collapse style="display: none;">
+                                <p class="sd-step-desc">Chaque matin, une tenue adaptée à la météo et à vos goûts vous
+                                    attend.</p>
+                            </div>
+                        </div>
+
+                        <div class="sd-step">
+                            <button class="sd-step-btn" @click="activeStep = activeStep === 4 ? 0 : 4">
+                                <span class="sd-step-num">4</span>
+                                <span class="sd-step-title">Affinez votre style</span>
+                                <svg class="ml-auto w-4 h-4 transition-transform text-tan"
+                                    :class="{ 'rotate-180': activeStep === 4 }" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <div x-show="activeStep === 4" x-collapse style="display: none;">
+                                <p class="sd-step-desc">Notez les suggestions, l'IA apprend et s'améliore à chaque
+                                    interaction.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phone mockup -->
+                <div class="hidden lg:flex justify-end">
+                    <div class="sd-phone">
+                        <div class="sd-phone-bar"><span>9:41</span><span>📶 🔋</span></div>
+                        <div class="sd-phone-header">
+                            <p class="sd-phone-greeting">Bonjour Yasmine 👋</p>
+                            <p class="sd-phone-date">Mardi 3 Mars · Casablanca</p>
+                        </div>
+                        <div class="sd-phone-weather">
+                            <div>
+                                <p class="sd-phone-temp">18°C</p>
+                                <p class="sd-phone-weather-label">Partiellement nuageux</p>
+                            </div>
+                            <span class="text-2xl">⛅</span>
+                        </div>
+                        <div class="sd-phone-outfit">
+                            <p class="sd-phone-outfit-tag">✨ Tenue suggérée</p>
+                            <p class="sd-phone-outfit-name">Casual Chic — Automne</p>
+                        </div>
+                        <div class="sd-phone-swatches">
+                            <div class="sd-swatch" style="background:#889063;opacity:.85"></div>
+                            <div class="sd-swatch" style="background:#5C4A35;opacity:.65"></div>
+                            <div class="sd-swatch" style="background:#CFBB99"></div>
+                        </div>
+                        <div class="sd-phone-grid">
+                            <div class="sd-phone-stat">
+                                <span class="sd-phone-num">24</span>Hauts
+                            </div>
+                            <div class="sd-phone-stat sd-phone-stat--alt">
+                                <span class="sd-phone-num">12</span>Pantalons
+                            </div>
+                            <div class="sd-phone-stat sd-phone-stat--alt">
+                                <span class="sd-phone-num">8</span>Robes
+                            </div>
+                            <div class="sd-phone-stat">
+                                <span class="sd-phone-num">15</span>Chaussures
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    
+    <script>
+        document.addEventListener('alpine:init', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            document.querySelectorAll('.observe-me').forEach(el => observer.observe(el));
+
+            const heroTitle = document.querySelector('.sd-hero-title');
+            if (heroTitle) heroTitle.style.animationPlayState = 'running';
+        });
+
+        document.querySelectorAll('.sd-btn-primary').forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                const rect = this.getBoundingClientRect();
+                const ripple = document.createElement('span');
+                const size = Math.max(rect.width, rect.height);
+                ripple.style.cssText = "position: absolute; width: " + size + "px; height: " + size + "px; top: " + (e.clientY - rect.top - size / 2) + "px; left: " + (e.clientX - rect.left - size / 2) + "px; background: rgba(255,255,255,0.2); border-radius: 50%; transform: scale(0); animation: ripple 0.5s ease-out; pointer-events: none;";
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 500);
+            });
+        });
+    </script>
+</body>
+</html>
