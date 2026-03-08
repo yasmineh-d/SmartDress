@@ -31,16 +31,16 @@
     <link rel="stylesheet" href="../assets/css/charte.css">
 </head>
 
-<body class="bg-bark font-body text-bark min-h-screen relative overflow-x-hidden flex justify-center">
+<body class="bg-bark font-body text-bark min-h-screen flex items-center justify-center p-6 relative overflow-x-hidden">
 
     <!-- Background Flow Effect -->
     <div class="fixed inset-0 z-0 pointer-events-none">
-        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80')] bg-cover bg-center blur-md scale-110 opacity-40"></div>
-        <div class="absolute inset-0 bg-bark/20 mix-blend-multiply"></div>
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80')] bg-cover bg-center blur-md scale-110 opacity-60"></div>
+        <div class="absolute inset-0 bg-bark/30 mix-blend-multiply"></div>
     </div>
 
     <!-- Mobile Mockup Container -->
-    <div class="w-full max-w-sm bg-offwhite min-h-screen shadow-2xl relative z-10 flex flex-col">
+    <div class="w-full max-w-[360px] my-8 bg-offwhite min-h-[90vh] rounded-[3.5rem] shadow-2xl relative z-10 flex flex-col overflow-hidden border-[8px] border-white/20">
 
     <!-- Header / Top Bar -->
     <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-tan/10 px-6 py-4">
@@ -81,7 +81,7 @@
         <div class="bg-white rounded-[2.5rem] shadow-2xl shadow-bark/5 overflow-hidden border border-tan/10">
             <div class="relative h-96 bg-cream/50 flex items-center justify-center p-12">
                 <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(207,187,153,0.1)_0%,transparent_70%)]"></div>
-                <div class="absolute top-6 left-6">
+                <div class="absolute top-6 left-6 z-20">
                     <span
                         class="px-4 py-1.5 bg-moss text-white text-[10px] font-bold rounded-full shadow-lg shadow-moss/20 tracking-wider uppercase">Tenue du jour</span>
                 </div>

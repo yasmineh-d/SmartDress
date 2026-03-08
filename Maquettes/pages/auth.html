@@ -30,110 +30,110 @@
     <link rel="stylesheet" href="../assets/css/charte.css">
 </head>
 
-<body class="bg-offwhite font-body text-bark overflow-x-hidden">
+<body class="bg-bark font-body text-bark min-h-screen flex items-center justify-center p-6 relative overflow-x-hidden">
 
-    <section id="auth"
-        class="min-h-screen flex items-center justify-center p-6 bg-[url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80')] bg-cover bg-center">
-        <!-- Full transparency: removed overly dark overlays -->
+    <!-- Background Flow Effect -->
+    <div class="fixed inset-0 z-0 pointer-events-none">
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80')] bg-cover bg-center blur-md scale-110 opacity-60"></div>
+        <div class="absolute inset-0 bg-bark/20 mix-blend-multiply"></div>
+    </div>
 
-        <div class="w-full max-w-sm space-y-6 relative z-10">
-
-            <!-- Form -->
-            <div class="bg-white p-8 rounded-[2.5rem] shadow-2xl shadow-bark/20 space-y-6 relative overflow-hidden">
+    <div class="w-full max-w-[320px] my-8 relative z-10">
+        <!-- Form Container -->
+        <div class="bg-white p-6 rounded-[2.5rem] shadow-2xl shadow-bark/40 space-y-5 relative overflow-hidden">
+            
+            <div class="space-y-4">
+                <div class="flex items-center gap-2">
+                    <a href="../index.html" class="p-1 hover:bg-cream/50 rounded-full transition-colors text-tan">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                        </svg>
+                    </a>
+                    <div style="font-family: 'DM Sans', sans-serif;" class="text-[9px] font-bold tracking-[0.3em] uppercase text-tan py-1">
+                        SmartDress
+                    </div>
+                </div>
                 
-                <div class="space-y-4">
-                    <div class="flex items-center gap-3">
-                        <a href="../index.html" class="p-1 hover:bg-cream/50 rounded-full transition-colors text-tan">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                            </svg>
-                        </a>
-                        <div style="font-family: 'DM Sans', sans-serif;" class="text-[10px] font-bold tracking-[0.3em] uppercase text-tan py-1">
-                            SmartDress
-                        </div>
-                    </div>
-                    
-                    <div class="space-y-1">
-                        <h2 class="text-4xl font-display font-medium text-bark italic leading-tight">Bienvenue</h2>
-                        <p class="text-tan text-xs font-light">Connectez-vous pour accéder à votre garde-robe.</p>
-                    </div>
-                </div>
-
-                <div class="flex p-1.5 bg-[#FAF9F6] rounded-2xl" id="auth-tabs">
-                    <button data-target="login"
-                        class="tab-btn flex-1 py-3 text-[10px] font-bold uppercase tracking-widest bg-white text-bark rounded-xl shadow-md transition-all">Connexion</button>
-                    <button data-target="register"
-                        class="tab-btn flex-1 py-3 text-[10px] font-bold uppercase tracking-widest text-tan hover:text-bark transition-all">Inscription</button>
-                </div>
-
-                <!-- Login Form -->
-                <form id="login-form" class="auth-form space-y-6">
-                    <div class="space-y-2">
-                        <label class="text-[10px] font-bold text-tan uppercase tracking-[0.2em] ml-1">Email</label>
-                        <input type="email" placeholder="nom@exemple.com" required
-                            class="w-full px-6 py-4 bg-white border border-tan/10 rounded-2xl focus:border-bark outline-none transition-all placeholder:text-tan/50 text-bark text-sm">
-                    </div>
-                    <div class="space-y-2">
-                        <div class="flex justify-between items-center ml-1">
-                            <label class="text-[10px] font-bold text-tan uppercase tracking-[0.2em]">Mot de passe</label>
-                            <a href="#" class="text-[10px] font-bold text-bark hover:text-moss uppercase tracking-widest transition-colors">Oublié ?</a>
-                        </div>
-                        <input type="password" placeholder="••••••••" required
-                            class="w-full px-6 py-4 bg-white border border-tan/10 rounded-2xl focus:border-bark outline-none transition-all placeholder:text-tan/50 text-bark text-sm">
-                    </div>
-
-                    <button type="submit"
-                        class="w-full py-5 bg-bark text-white font-body font-bold text-xs tracking-[0.2em] uppercase rounded-full shadow-xl shadow-bark/30 hover:bg-[#4A3B2A] transform hover:scale-[1.02] transition-all mt-4">
-                        Se connecter
-                    </button>
-                </form>
-
-                <!-- Register Form -->
-                <form id="register-form" class="auth-form space-y-6 hidden">
-                    <div class="space-y-2">
-                        <label class="text-[10px] font-bold text-tan uppercase tracking-[0.2em] ml-1">Nom complet</label>
-                        <input type="text" placeholder="Jean Dupont"
-                            class="w-full px-6 py-4 bg-white border border-tan/10 rounded-2xl focus:border-bark outline-none transition-all placeholder:text-tan/50 text-bark text-sm">
-                    </div>
-                    <div class="space-y-2">
-                        <label class="text-[10px] font-bold text-tan uppercase tracking-[0.2em] ml-1">Email</label>
-                        <input type="email" placeholder="nom@exemple.com"
-                            class="w-full px-6 py-4 bg-white border border-tan/10 rounded-2xl focus:border-bark outline-none transition-all placeholder:text-tan/50 text-bark text-sm">
-                    </div>
-                    <div class="space-y-2">
-                        <label class="text-[10px] font-bold text-tan uppercase tracking-[0.2em] ml-1">Mot de passe</label>
-                        <input type="password" placeholder="••••••••"
-                            class="w-full px-6 py-4 bg-white border border-tan/10 rounded-2xl focus:border-bark outline-none transition-all placeholder:text-tan/50 text-bark text-sm">
-                    </div>
-
-                    <button type="submit"
-                        class="w-full py-5 bg-bark text-white font-body font-bold text-xs tracking-[0.2em] uppercase rounded-full shadow-xl shadow-bark/30 hover:bg-[#4A3B2A] transform hover:scale-[1.02] transition-all mt-4">
-                        Créer mon compte
-                    </button>
-                </form>
-
-                <div class="relative py-2">
-                    <div class="absolute inset-0 flex items-center">
-                        <div class="w-full border-t border-tan/10"></div>
-                    </div>
-                    <div class="relative flex justify-center text-[10px] font-bold uppercase tracking-[0.2em]">
-                        <span class="bg-white px-4 text-tan/60">Ou continuer avec</span>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-2 gap-4">
-                    <button
-                        class="flex items-center justify-center py-4 bg-white border border-tan/20 rounded-2xl hover:bg-cream/20 transition-all group">
-                        <span class="text-[10px] font-bold text-tan uppercase tracking-widest group-hover:text-bark">Google</span>
-                    </button>
-                    <button
-                        class="flex items-center justify-center py-4 bg-white border border-tan/20 rounded-2xl hover:bg-cream/20 transition-all group">
-                        <span class="text-[10px] font-bold text-tan uppercase tracking-widest group-hover:text-bark">Apple</span>
-                    </button>
+                <div class="space-y-1">
+                    <h2 class="text-3xl font-display font-medium text-bark italic leading-tight">Bienvenue</h2>
+                    <p class="text-tan text-[10px] font-light">Connectez-vous pour votre garde-robe.</p>
                 </div>
             </div>
+
+            <div class="flex p-1 bg-[#FAF9F6] rounded-xl" id="auth-tabs">
+                <button data-target="login"
+                    class="tab-btn flex-1 py-2.5 text-[9px] font-bold uppercase tracking-widest bg-white text-bark rounded-lg shadow-sm transition-all">Connexion</button>
+                <button data-target="register"
+                    class="tab-btn flex-1 py-2.5 text-[9px] font-bold uppercase tracking-widest text-tan hover:text-bark transition-all">Inscription</button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="login-form" class="auth-form space-y-5">
+                <div class="space-y-1.5">
+                    <label class="text-[9px] font-bold text-tan uppercase tracking-[0.2em] ml-1">Email</label>
+                    <input type="email" placeholder="nom@exemple.com" required
+                        class="w-full px-5 py-3.5 bg-white border border-tan/10 rounded-xl focus:border-bark outline-none transition-all placeholder:text-tan/50 text-bark text-xs">
+                </div>
+                <div class="space-y-1.5">
+                    <div class="flex justify-between items-center ml-1">
+                        <label class="text-[9px] font-bold text-tan uppercase tracking-[0.2em]">Mot de passe</label>
+                        <a href="#" class="text-[9px] font-bold text-bark hover:text-moss uppercase tracking-widest transition-colors">Oublié ?</a>
+                    </div>
+                    <input type="password" placeholder="••••••••" required
+                        class="w-full px-5 py-3.5 bg-white border border-tan/10 rounded-xl focus:border-bark outline-none transition-all placeholder:text-tan/50 text-bark text-xs">
+                </div>
+
+                <button type="submit"
+                    class="w-full py-4 bg-bark text-white font-body font-bold text-[10px] tracking-[0.2em] uppercase rounded-full shadow-lg shadow-bark/30 hover:bg-[#4A3B2A] transform hover:scale-[1.02] transition-all mt-2">
+                    Se connecter
+                </button>
+            </form>
+
+            <!-- Register Form -->
+            <form id="register-form" class="auth-form space-y-5 hidden">
+                <div class="space-y-1.5">
+                    <label class="text-[9px] font-bold text-tan uppercase tracking-[0.2em] ml-1">Nom complet</label>
+                    <input type="text" placeholder="Jean Dupont"
+                        class="w-full px-5 py-3.5 bg-white border border-tan/10 rounded-xl focus:border-bark outline-none transition-all placeholder:text-tan/50 text-bark text-xs">
+                </div>
+                <div class="space-y-1.5">
+                    <label class="text-[9px] font-bold text-tan uppercase tracking-[0.2em] ml-1">Email</label>
+                    <input type="email" placeholder="nom@exemple.com"
+                        class="w-full px-5 py-3.5 bg-white border border-tan/10 rounded-xl focus:border-bark outline-none transition-all placeholder:text-tan/50 text-bark text-xs">
+                </div>
+                <div class="space-y-1.5">
+                    <label class="text-[9px] font-bold text-tan uppercase tracking-[0.2em] ml-1">Mot de passe</label>
+                    <input type="password" placeholder="••••••••"
+                        class="w-full px-5 py-3.5 bg-white border border-tan/10 rounded-xl focus:border-bark outline-none transition-all placeholder:text-tan/50 text-bark text-xs">
+                </div>
+
+                <button type="submit"
+                    class="w-full py-4 bg-bark text-white font-body font-bold text-[10px] tracking-[0.2em] uppercase rounded-full shadow-lg shadow-bark/30 hover:bg-[#4A3B2A] transform hover:scale-[1.02] transition-all mt-2">
+                    Créer mon compte
+                </button>
+            </form>
+
+            <div class="relative py-1">
+                <div class="absolute inset-0 flex items-center">
+                    <div class="w-full border-t border-tan/10"></div>
+                </div>
+                <div class="relative flex justify-center text-[9px] font-bold uppercase tracking-[0.2em]">
+                    <span class="bg-white px-3 text-tan/60">Ou continuer avec</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+                <button
+                    class="flex items-center justify-center py-3.5 bg-white border border-tan/20 rounded-xl hover:bg-cream/20 transition-all group">
+                    <span class="text-[9px] font-bold text-tan uppercase tracking-widest group-hover:text-bark">Google</span>
+                </button>
+                <button
+                    class="flex items-center justify-center py-3.5 bg-white border border-tan/20 rounded-xl hover:bg-cream/20 transition-all group">
+                    <span class="text-[9px] font-bold text-tan uppercase tracking-widest group-hover:text-bark">Apple</span>
+                </button>
+            </div>
         </div>
-    </section>
+    </div>
 
     <script>
         const tabs = document.querySelectorAll('.tab-btn');
