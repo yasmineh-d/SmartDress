@@ -7,7 +7,7 @@
     <title>UI Kit Gallery - SmartDress</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
     <script src="https://cdn.jsdelivr.net/npm/preline/dist/preline.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -27,25 +27,93 @@
     <aside class="w-72 bg-white border-r border-gray-200 flex flex-col h-full flex-shrink-0 shadow-xl z-20">
         <div class="p-6 border-b border-gray-100 bg-slate-50">
             <div class="flex items-center gap-3 mb-2">
-                <img src="./assets/images/smartdress_logo.png" alt="Logo" class="w-8 h-8">
-                <h1 class="text-xl font-bold text-gray-900 tracking-tight">SmartDress UI Hub</h1>
+                <div style="font-family: 'Cormorant Garamond', serif;" class="text-2xl tracking-tight select-none flex items-baseline">
+                    <span style="font-weight: 400; color: #5C4A35;">Smart</span>
+                    <span style="font-weight: 600; font-style: italic; color: #889063; margin-left: -0.02em;">Dress</span>
+                </div>
             </div>
-            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em]">Galerie Maquettage</p>
         </div>
 
         <nav id="sidebar-nav" class="flex-1 overflow-y-auto p-4 space-y-4">
             <div>
                 <h3 class="px-4 text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Sections du Site</h3>
                 <div class="space-y-1">
+                    <div>
+                        <button onclick="loadComponent(this, './charte graphique/index.html', 'Charte Graphique')"
+                            class="nav-btn hs-collapse-toggle w-full text-left px-4 py-2 text-sm font-bold text-gray-800 rounded-lg hover:bg-slate-50 transition-all flex items-center justify-between"
+                            id="hs-basic-collapse-charte" data-hs-collapse="#hs-basic-collapse-heading-charte" aria-controls="hs-basic-collapse-heading-charte">
+                            <span>🎨 Charte Graphique</span>
+                            <svg class="hs-collapse-open:rotate-180 w-3 h-3 text-gray-400 transition" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                        <div id="hs-basic-collapse-heading-charte" class="hs-collapse hidden w-full overflow-hidden transition-[height] duration-300" aria-labelledby="hs-basic-collapse-charte">
+                            <div class="pl-8 pr-4 py-1 space-y-1 border-l-2 border-slate-100 ml-6 my-1">
+                                <button onclick="loadComponent(this, './charte graphique/index.html#palette', 'Palette de couleurs', true)"
+                                    class="nav-sub-btn w-full text-left py-1.5 text-xs font-medium text-gray-500 rounded hover:text-indigo-600 transition-all">
+                                    Palette de couleurs</button>
+                                <button onclick="loadComponent(this, './charte graphique/index.html#typographie', 'Typographie', true)"
+                                    class="nav-sub-btn w-full text-left py-1.5 text-xs font-medium text-gray-500 rounded hover:text-indigo-600 transition-all">
+                                    Typographie</button>
+                                <button onclick="loadComponent(this, './charte graphique/index.html#iconographie', 'Iconographie', true)"
+                                    class="nav-sub-btn w-full text-left py-1.5 text-xs font-medium text-gray-500 rounded hover:text-indigo-600 transition-all">
+                                    Iconographie</button>
+                                <button onclick="loadComponent(this, './charte graphique/index.html#composants', 'Composants UI', true)"
+                                    class="nav-sub-btn w-full text-left py-1.5 text-xs font-medium text-gray-500 rounded hover:text-indigo-600 transition-all">
+                                    Composants UI</button>
+                                <button onclick="loadComponent(this, './charte graphique/index.html#espacements', 'Espacements & Mise en page', true)"
+                                    class="nav-sub-btn w-full text-left py-1.5 text-xs font-medium text-gray-500 rounded hover:text-indigo-600 transition-all">
+                                    Espacements</button>
+                                <button onclick="loadComponent(this, './charte graphique/index.html#logo', 'Logo & Usage', true)"
+                                    class="nav-sub-btn w-full text-left py-1.5 text-xs font-medium text-gray-500 rounded hover:text-indigo-600 transition-all">
+                                    Logo & Usage</button>
+                                <button onclick="loadComponent(this, './charte graphique/index.html#regles', 'Règles générales', true)"
+                                    class="nav-sub-btn w-full text-left py-1.5 text-xs font-medium text-gray-500 rounded hover:text-indigo-600 transition-all">
+                                    Règles générales</button>
+                            </div>
+                        </div>
+                    </div>
                     <button onclick="loadComponent(this, './components/organisms/o-navbar/index.html', 'Navbar')"
                         class="nav-btn w-full text-left px-4 py-2 text-sm font-medium text-gray-600 rounded-lg hover:bg-slate-50 transition-all">
                         🧭 Navigation</button>
-                    <button onclick="loadComponent(this, './components/organisms/o-dashboard-user/index.html', 'Tableau de Bord User')"
-                        class="nav-btn w-full text-left px-4 py-2 text-sm font-medium text-gray-600 rounded-lg hover:bg-slate-50 transition-all">
-                        👤 Dashboard Utilisateur</button>
-                    <button onclick="loadComponent(this, './components/organisms/o-dashboard-admin/index.html', 'Tableau de Bord Admin')"
-                        class="nav-btn w-full text-left px-4 py-2 text-sm font-medium text-gray-600 rounded-lg hover:bg-slate-50 transition-all">
-                        🔑 Dashboard Admin</button>
+                    <!-- Admin Section -->
+                    <div>
+                        <button class="nav-btn hs-collapse-toggle w-full text-left px-4 py-2 text-sm font-medium text-gray-600 rounded-lg hover:bg-slate-50 transition-all flex items-center justify-between"
+                            id="hs-basic-collapse-admin" data-hs-collapse="#hs-basic-collapse-heading-admin" aria-controls="hs-basic-collapse-heading-admin">
+                            <span>🔑 Dashboard Admin</span>
+                            <svg class="hs-collapse-open:rotate-180 w-3 h-3 text-gray-400 transition" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                        <div id="hs-basic-collapse-heading-admin" class="hs-collapse hidden w-full overflow-hidden transition-[height] duration-300" aria-labelledby="hs-basic-collapse-admin">
+                            <div class="pl-8 pr-4 py-1 space-y-1 border-l-2 border-slate-100 ml-6 my-1">
+                                <button onclick="loadComponent(this, './components/organisms/o-dashboard-admin/index.html', 'Dashboard Vue Globale', true)"
+                                    class="nav-sub-btn w-full text-left py-1.5 text-xs font-medium text-gray-500 rounded hover:text-indigo-600 transition-all">
+                                    Vue Globale</button>
+                                <button onclick="loadComponent(this, './components/organisms/o-dashboard-admin/index.html', 'Gestion des Utilisateurs', true)"
+                                    class="nav-sub-btn w-full text-left py-1.5 text-xs font-medium text-gray-500 rounded hover:text-indigo-600 transition-all">
+                                    Utilisateurs</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- User Section -->
+                    <div>
+                        <button class="nav-btn hs-collapse-toggle w-full text-left px-4 py-2 text-sm font-medium text-gray-600 rounded-lg hover:bg-slate-50 transition-all flex items-center justify-between"
+                            id="hs-basic-collapse-user" data-hs-collapse="#hs-basic-collapse-heading-user" aria-controls="hs-basic-collapse-heading-user">
+                            <span>👤 Dashboard Utilisateur</span>
+                            <svg class="hs-collapse-open:rotate-180 w-3 h-3 text-gray-400 transition" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                        <div id="hs-basic-collapse-heading-user" class="hs-collapse hidden w-full overflow-hidden transition-[height] duration-300" aria-labelledby="hs-basic-collapse-user">
+                            <div class="pl-8 pr-4 py-1 space-y-1 border-l-2 border-slate-100 ml-6 my-1">
+                                <button onclick="loadComponent(this, './components/organisms/o-dashboard-user/index.html', 'Ma Garde-Robe', true)"
+                                    class="nav-sub-btn w-full text-left py-1.5 text-xs font-medium text-gray-500 rounded hover:text-indigo-600 transition-all">
+                                    Ma Garde-Robe</button>
+                            </div>
+                        </div>
+                    </div>
                     <button onclick="loadComponent(this, './components/organisms/o-hero/index.html', 'Hero Section')"
                         class="nav-btn w-full text-left px-4 py-2 text-sm font-medium text-gray-600 rounded-lg hover:bg-slate-50 transition-all">
                         🚀 Hero Header</button>
@@ -98,18 +166,48 @@
     </main>
 
     <script>
-        function loadComponent(btn, path, title) {
+        function loadComponent(btn, path, title, isSubBtn = false) {
             const frame = document.getElementById('preview-frame');
             const titleEl = document.getElementById('component-title');
             
-            // Update Active State
-            document.querySelectorAll('.nav-btn').forEach(el => {
-                el.classList.remove('bg-indigo-50', 'text-indigo-600', 'font-bold');
-                el.classList.add('text-gray-600');
-            });
-            if (btn && btn.classList) {
-                btn.classList.add('bg-indigo-50', 'text-indigo-600', 'font-bold');
-                btn.classList.remove('text-gray-600');
+            // Check if we are just navigating to an anchor within the already loaded Charte Graphique
+            const isCharteNav = path.includes('charte graphique') && path.includes('#');
+            const currentSrc = frame.src;
+            const currentIsCharte = currentSrc.includes('charte%20graphique');
+
+            if (!isSubBtn) {
+                // Update Active State for main buttons
+                document.querySelectorAll('.nav-btn').forEach(el => {
+                    el.classList.remove('bg-indigo-50', 'text-indigo-600', 'font-bold');
+                    el.classList.add('text-gray-600');
+                });
+                if (btn && btn.classList) {
+                    btn.classList.add('bg-indigo-50', 'text-indigo-600', 'font-bold');
+                    btn.classList.remove('text-gray-600');
+                }
+                
+                // Reset sub-buttons
+                document.querySelectorAll('.nav-sub-btn').forEach(el => {
+                    el.classList.remove('text-indigo-600', 'font-bold');
+                    el.classList.add('text-gray-500');
+                });
+            } else {
+                // Update Active State for sub-buttons
+                document.querySelectorAll('.nav-sub-btn').forEach(el => {
+                    el.classList.remove('text-indigo-600', 'font-bold');
+                    el.classList.add('text-gray-500');
+                });
+                if (btn && btn.classList) {
+                    btn.classList.add('text-indigo-600', 'font-bold');
+                    btn.classList.remove('text-gray-500');
+                }
+            }
+
+            if (isCharteNav && currentIsCharte) {
+                // Just update the hash to scroll to the section
+                frame.src = path;
+                titleEl.textContent = title;
+                return;
             }
 
             frame.classList.add('opacity-0');
@@ -124,7 +222,7 @@
         function resizeIframe(width) { document.getElementById('preview-frame').style.width = width; }
         window.onload = () => {
             const firstBtn = document.querySelector('.nav-btn');
-            loadComponent(firstBtn, './components/organisms/o-navbar/index.html', 'Navbar');
+            loadComponent(firstBtn, './charte graphique/index.html', 'Charte Graphique');
         };
     </script>
 </body>

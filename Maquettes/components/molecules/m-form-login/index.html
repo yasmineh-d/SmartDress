@@ -4,17 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: { 500: 'hsl(230, 60%, 50%)', 700: 'hsl(230, 60%, 35%)' },
-                        slate: { 100: 'hsl(220, 15%, 95%)', 500: 'hsl(220, 15%, 50%)', 900: 'hsl(220, 15%, 10%)' }
+                        bark: '#5C4A35',
+                        moss: '#889063',
+                        tan: '#CFBB99',
+                        bone: '#E5D7C4',
+                        cream: '#F5EEE4',
+                        offwhite: '#FDFAF6',
                     },
                     fontFamily: {
-                        heading: ['Outfit', 'sans-serif'],
-                        body: ['Inter', 'sans-serif'],
+                        display: ['"Cormorant Garamond"', 'serif'],
+                        body: ['"DM Sans"', 'sans-serif'],
                     }
                 }
             }
@@ -22,55 +27,54 @@
     </script>
 </head>
 
-<body class="bg-slate-100 min-h-screen flex items-center justify-center p-6 font-body">
+<body class="bg-offwhite min-h-screen flex items-center justify-center p-6 font-body text-bark">
 
     <!-- Molécule : m-form-login -->
-    <div class="w-full max-w-md bg-white p-8 rounded-3xl shadow-sm border border-slate-200 space-y-6">
+    <div class="w-full max-w-md bg-white p-10 rounded-[2.5rem] shadow-2xl shadow-bark/5 border border-tan/10 space-y-8">
 
-        <div class="space-y-2">
-            <h2 class="text-2xl font-heading font-bold text-slate-900">Bon retour !</h2>
-            <p class="text-slate-500">Connectez-vous pour voir votre tenue du jour.</p>
+        <div class="space-y-3 text-center">
+            <h2 class="text-4xl font-display font-medium text-bark italic leading-tight">Bon retour <em>parmi nous</em></h2>
+            <p class="text-bark/50 text-sm font-light">Connectez-vous pour voir votre tenue du jour.</p>
         </div>
 
-        <form class="space-y-4">
+        <form class="space-y-5">
             <!-- atoms : a-input-text (x2) -->
-            <div class="space-y-1">
-                <label class="text-sm font-semibold text-slate-500">Email</label>
+            <div class="space-y-2">
+                <label class="text-[10px] font-bold text-tan uppercase tracking-[0.2em] ml-1">Email</label>
                 <input type="email" placeholder="nom@exemple.com"
-                    class="w-full px-4 py-3 bg-slate-50 border-2 border-transparent rounded-xl focus:border-primary-500 focus:bg-white outline-none transition-all">
+                    class="w-full px-5 py-4 bg-cream/30 border border-tan/20 rounded-2xl focus:border-moss focus:bg-white outline-none transition-all placeholder:text-bark/20 text-sm">
             </div>
-            <div class="space-y-1">
-                <div class="flex justify-between">
-                    <label class="text-sm font-semibold text-slate-500">Mot de passe</label>
-                    <a href="#" class="text-sm font-semibold text-primary-500 hover:text-primary-700">Oublié ?</a>
+            <div class="space-y-2">
+                <div class="flex justify-between items-center">
+                    <label class="text-[10px] font-bold text-tan uppercase tracking-[0.2em] ml-1">Mot de passe</label>
+                    <a href="#" class="text-[10px] font-bold text-moss hover:text-bark uppercase tracking-widest transition-colors">Oublié ?</a>
                 </div>
                 <input type="password" placeholder="••••••••"
-                    class="w-full px-4 py-3 bg-slate-50 border-2 border-transparent rounded-xl focus:border-primary-500 focus:bg-white outline-none transition-all">
+                    class="w-full px-5 py-4 bg-cream/30 border border-tan/20 rounded-2xl focus:border-moss focus:bg-white outline-none transition-all placeholder:text-bark/20 text-sm">
             </div>
 
             <!-- atom : a-btn-primary -->
             <button
-                class="w-full py-4 bg-primary-500 text-white font-heading font-bold rounded-2xl shadow-lg shadow-primary-500/20 hover:bg-primary-700 transition-all mt-2">
+                class="w-full py-4 bg-moss text-white font-body font-medium text-xs tracking-[0.15em] uppercase rounded-full shadow-lg shadow-moss/20 hover:bg-bark transition-all transform hover:-translate-y-1 mt-4">
                 Se connecter
             </button>
         </form>
 
         <div class="relative py-2">
             <div class="absolute inset-0 flex items-center">
-                <div class="w-full border-t border-slate-200"></div>
+                <div class="w-full border-t border-tan/10"></div>
             </div>
-            <div class="relative flex justify-center text-xs uppercase"><span class="bg-white px-2 text-slate-400">Ou
-                    continuer avec</span></div>
+            <div class="relative flex justify-center text-[10px] uppercase font-bold tracking-[0.2em]"><span class="bg-white px-4 text-tan/60">Ou continuer avec</span></div>
         </div>
 
         <div class="grid grid-cols-2 gap-4">
             <button
-                class="flex items-center justify-center py-3 border-2 border-slate-100 rounded-xl hover:bg-slate-50 transition-colors">
-                <span class="font-bold text-slate-700">Google</span>
+                class="flex items-center justify-center py-4 border border-tan/20 rounded-2xl hover:bg-cream/20 transition-all group">
+                <span class="text-[10px] font-bold text-bark/60 uppercase tracking-widest group-hover:text-bark">Google</span>
             </button>
             <button
-                class="flex items-center justify-center py-3 border-2 border-slate-100 rounded-xl hover:bg-slate-50 transition-colors">
-                <span class="font-bold text-slate-700">Apple</span>
+                class="flex items-center justify-center py-4 border border-tan/20 rounded-2xl hover:bg-cream/20 transition-all group">
+                <span class="text-[10px] font-bold text-bark/60 uppercase tracking-widest group-hover:text-bark">Apple</span>
             </button>
         </div>
     </div>

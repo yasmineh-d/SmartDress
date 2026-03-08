@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charte Graphique — SmartDress</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400;1,9..40,500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --moss-green: #889063;
+            --bark-brown: #5C4A35;
+            --tan: #CFBB99;
+            --bone: #E5D7C4;
+            --cream: #F5EEE4;
+            --deep-tan: #B8A07E;
+            --off-white: #FDFAF6;
+        }
+        body {
+            font-family: 'DM Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--bark-brown);
+            background-color: var(--off-white);
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--bark-brown);
+        }
+        h1 { font-size: 2.5rem; border-bottom: 2px solid var(--moss-green); padding-bottom: 10px; font-weight: 400; }
+        h2 { font-size: 2rem; margin-top: 40px; border-bottom: 1px solid var(--bone); padding-bottom: 8px; font-weight: 400; }
+        h3 { font-size: 1.5rem; margin-top: 30px; font-weight: 600; }
+        a { color: var(--moss-green); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; margin-bottom: 20px; }
+        th, td { border: 1px solid var(--bone); padding: 12px; text-align: left; }
+        th { background-color: var(--cream); font-weight: 500; }
+        code { background-color: var(--cream); padding: 4px 8px; border-radius: 4px; font-family: monospace; font-size: 0.9em; }
+        pre { background-color: var(--cream); padding: 16px; border-radius: 8px; overflow-x: auto; font-family: monospace; }
+        pre code { background-color: transparent; padding: 0; }
+        .color-box { display: inline-block; width: 20px; height: 20px; margin-right: 8px; vertical-align: middle; border: 1px solid var(--bone); border-radius: 4px; }
+        blockquote { border-left: 4px solid var(--moss-green); margin: 0; padding-left: 16px; color: var(--bark-brown); font-style: italic; background-color: var(--cream); padding: 16px; border-radius: 0 8px 8px 0; }
+        ul, ol { padding-left: 20px; }
+        li { margin-bottom: 8px; }
+    </style>
+</head>
+<body>
+    <h1>Charte Graphique — SmartDress</h1>
+    
+    <blockquote>
+        <strong>Projet :</strong> SmartDress – Solution intelligente pour la recommandation et la gestion de garde-robe digitale<br>
+        <strong>Réalisée par :</strong> Yasmine Haddad<br>
+        <strong>Encadré par :</strong> Mr. Essarraj Fouad<br>
+        <strong>Année :</strong> 2025 / 2026
+    </blockquote>
+
+    <h2>Table des matières</h2>
+    <ol>
+        <li><a href="#palette">Palette de couleurs</a></li>
+        <li><a href="#typographie">Typographie</a></li>
+        <li><a href="#iconographie">Iconographie</a></li>
+        <li><a href="#composants">Composants UI</a></li>
+        <li><a href="#espacements">Espacements & Mise en page</a></li>
+        <li><a href="#logo">Logo & Usage</a></li>
+        <li><a href="#regles">Règles générales</a></li>
+    </ol>
+
+    <h2 id="palette">1. Palette de couleurs</h2>
+    <p>La palette SmartDress est inspirée des matières naturelles et organiques. Elle transmet une identité <strong>chaleureuse, professionnelle et raffinée</strong>, adaptée à une application de mode.</p>
+    
+    <h3>Couleurs primaires</h3>
+    <table>
+        <tr><th>Rôle</th><th>Nom</th><th>Code HEX</th><th>Usage principal</th></tr>
+        <tr><td><span class="color-box" style="background-color: var(--moss-green);"></span>🟢 Primaire</td><td><strong>Moss Green</strong></td><td><code>#889063</code></td><td>Boutons CTA, tags, accents, icônes actives</td></tr>
+        <tr><td><span class="color-box" style="background-color: var(--bark-brown);"></span>🟫 Contraste</td><td><strong>Bark Brown</strong></td><td><code>#5C4A35</code></td><td>Textes principaux, header sombre, footer</td></tr>
+        <tr><td><span class="color-box" style="background-color: var(--tan);"></span>🟡 Secondaire</td><td><strong>Tan</strong></td><td><code>#CFBB99</code></td><td>Hover states, badges, éléments décoratifs</td></tr>
+    </table>
+
+    <h3>Couleurs secondaires</h3>
+    <table>
+        <tr><th>Rôle</th><th>Nom</th><th>Code HEX</th><th>Usage</th></tr>
+        <tr><td><span class="color-box" style="background-color: var(--bone);"></span>Fond alterné</td><td><strong>Bone</strong></td><td><code>#E5D7C4</code></td><td>Sections alternées, fonds de cartes</td></tr>
+        <tr><td><span class="color-box" style="background-color: var(--cream);"></span>Fond principal</td><td><strong>Cream</strong></td><td><code>#F5EEE4</code></td><td>Cartes, inputs, zones claires</td></tr>
+        <tr><td><span class="color-box" style="background-color: var(--deep-tan);"></span>Accent doux</td><td><strong>Deep Tan</strong></td><td><code>#B8A07E</code></td><td>Cintres décoratifs, détails graphiques</td></tr>
+        <tr><td><span class="color-box" style="background-color: var(--off-white);"></span>Background</td><td><strong>Off-White</strong></td><td><code>#FDFAF6</code></td><td>Fond de page principale</td></tr>
+    </table>
+
+    <h3>Règles d'utilisation des couleurs</h3>
+    <ul>
+        <li><strong>Moss Green</strong> est réservé aux éléments interactifs et aux mises en avant (CTA, liens actifs, tags de section).</li>
+        <li><strong>Bark Brown</strong> assure le contraste texte/fond. Il est utilisé sur fond clair uniquement.</li>
+        <li><strong>Tan</strong> et <strong>Bone</strong> servent de fonds secondaires, jamais comme couleur de texte principal.</li>
+        <li><strong>Off-White</strong> est le fond de base de toutes les pages.</li>
+        <li>Ne jamais utiliser deux couleurs de fond proches sans séparateur visuel.</li>
+        <li>Le ratio de contraste texte/fond doit respecter les normes WCAG AA minimum.</li>
+    </ul>
+
+    <h2 id="typographie">2. Typographie</h2>
+    <p>SmartDress utilise un système de deux polices complémentaires : une <strong>police d'affichage</strong> élégante pour les titres, et une <strong>police de corps</strong> lisible pour le contenu.</p>
+
+    <h3>Polices</h3>
+    <h4>Police d'affichage — Cormorant Garamond</h4>
+    <pre><code>Famille  : Cormorant Garamond
+Type     : Serif · Display
+Source   : Google Fonts
+Graisses : Light 300 · Regular 400 · SemiBold 600
+Styles   : Normal · Italic
+Usage    : Titres Hero, H1, H2 de section, noms de fonctionnalités, citations</code></pre>
+
+    <h4>Police de corps — DM Sans</h4>
+    <pre><code>Famille  : DM Sans
+Type     : Sans-Serif · Humanist
+Source   : Google Fonts
+Graisses : Light 300 · Regular 400 · Medium 500
+Usage    : Navigation, boutons, corps de texte, labels, captions</code></pre>
+
+    <h3>Échelle typographique</h3>
+    <table>
+        <tr><th>Niveau</th><th>Taille</th><th>Police</th><th>Graisse</th><th>Transformation</th><th>Usage</th></tr>
+        <tr><td><strong>Hero Title</strong></td><td>5.5rem / 88px</td><td>Cormorant Garamond</td><td>Light 300</td><td>Normal</td><td>Titre principal de la page d'accueil</td></tr>
+        <tr><td><strong>H1 Section</strong></td><td>3.3rem / 53px</td><td>Cormorant Garamond</td><td>Light 300</td><td>Normal</td><td>Titres de sections principales</td></tr>
+        <tr><td><strong>H2 Card</strong></td><td>1.4rem / 22px</td><td>Cormorant Garamond</td><td>SemiBold 600</td><td>Normal</td><td>Titres de cartes et composants</td></tr>
+        <tr><td><strong>Body</strong></td><td>0.9rem / 14px</td><td>DM Sans</td><td>Regular 400</td><td>Normal</td><td>Texte courant, descriptions</td></tr>
+        <tr><td><strong>Label / Tag</strong></td><td>0.7rem / 11px</td><td>DM Sans</td><td>Medium 500</td><td>UPPERCASE</td><td>Tags, étiquettes, navigation</td></tr>
+        <tr><td><strong>Caption</strong></td><td>0.65rem / 10px</td><td>DM Sans</td><td>Regular 400</td><td>Normal</td><td>Métadonnées, notes, sous-titres</td></tr>
+    </table>
+
+    <h3>Règles typographiques</h3>
+    <ul>
+        <li>Les titres en <strong>Cormorant Garamond</strong> peuvent utiliser l'italique pour les mots clés (<code>&lt;em&gt;</code>).</li>
+        <li>L'interligne standard est <code>1.8</code> pour le corps de texte, <code>1.05</code> pour les grands titres.</li>
+        <li>L'espacement entre lettres (letter-spacing) des labels est <code>0.25em</code> minimum.</li>
+        <li>Ne jamais utiliser <code>Arial</code>, <code>Roboto</code> ou <code>Inter</code> dans l'interface SmartDress.</li>
+        <li>Les titres en italique utilisent la couleur <strong>Moss Green</strong> pour l'emphase.</li>
+    </ul>
+
+    <h2 id="iconographie">3. Iconographie</h2>
+    <h3>Style d'icônes</h3>
+    <p>SmartDress utilise des <strong>icônes émoji natives</strong> pour garantir la lisibilité universelle et la légèreté visuelle. Ce choix favorise la cohérence multiplateforme sans dépendance à une bibliothèque externe.</p>
+
+    <h3>Icônes principales de l'application</h3>
+    <table>
+        <tr><th>Icône</th><th>Contexte d'utilisation</th></tr>
+        <tr><td>👗</td><td>Garde-robe / Vêtements</td></tr>
+        <tr><td>🌤️</td><td>Météo / Conditions climatiques</td></tr>
+        <tr><td>✨</td><td>Suggestion IA / Mise en avant</td></tr>
+        <tr><td>🔔</td><td>Notification / Alerte</td></tr>
+        <tr><td>📊</td><td>Statistiques / Tableau de bord</td></tr>
+        <tr><td>🔒</td><td>Sécurité / Confidentialité</td></tr>
+        <tr><td>👋</td><td>Accueil / Salutation utilisateur</td></tr>
+        <tr><td>⛅</td><td>Météo partiellement nuageux</td></tr>
+    </table>
+
+    <h3>Règles d'usage des icônes</h3>
+    <ul>
+        <li><strong>Taille recommandée :</strong> <code>1.25rem</code> à <code>1.75rem</code> (20–28px)</li>
+        <li><strong>Conteneur :</strong> Carré arrondi avec <code>border-radius: 10–12px</code>, fond <strong>Moss Green</strong> ou <strong>Cream</strong></li>
+        <li><strong>Alignement :</strong> Toujours centré horizontalement et verticalement dans son conteneur</li>
+        <li>Ne jamais placer une icône sans label textuel accessible (<code>aria-label</code> ou texte visible)</li>
+        <li>Les icônes dans les boutons sont positionnées à gauche du texte, séparées de <code>8px</code></li>
+    </ul>
+
+    <h2 id="composants">4. Composants UI</h2>
+    
+    <h3>Boutons</h3>
+    <h4>Bouton Primaire — <code>sd-btn-primary</code></h4>
+    <pre><code>background    : #889063  (Moss Green)
+color         : #FDFAF6  (Off-White)
+padding       : 11px 26px  (standard)  |  14px 34px  (large)
+border-radius : 3px
+font-size     : 0.8rem  |  0.85rem (large)
+font-weight   : 500
+letter-spacing: 0.12em
+text-transform: uppercase
+hover         : background → #5C4A35 (Bark)  +  translateY(-2px)</code></pre>
+
+    <h4>Bouton Ghost — <code>sd-btn-ghost</code></h4>
+    <pre><code>background    : transparent
+color         : #5C4A35  (Bark Brown)
+border        : 1px solid rgba(92, 74, 53, 0.3)
+padding       : 11px 22px
+border-radius : 3px
+hover         : border-color → #5C4A35  +  background → rgba(92,74,53,0.05)</code></pre>
+
+    <h4>Bouton Sombre — Navbar CTA</h4>
+    <pre><code>background    : #5C4A35  (Bark Brown)
+color         : #F5EEE4  (Cream)
+hover         : background → #889063  (Moss Green)</code></pre>
+
+    <h3>Tags & Labels</h3>
+    <pre><code>/* Tag standard (fond Moss) */
+display       : inline-flex
+align-items   : center
+gap           : 12px
+font-size     : 0.7rem
+letter-spacing: 0.26em
+text-transform: uppercase
+color         : #889063
+
+/* Ligne décorative avant le tag */
+::before  width : 28px
+          height: 1px
+          background: #889063
+
+/* Variante claire (sections sombres) */
+color         : #CFBB99
+::before background: #CFBB99</code></pre>
+
+    <h3>Cartes de fonctionnalités</h3>
+    <pre><code>background        : #FDFAF6  (Off-White)  |  #F5EEE4 (Cream — variante)
+padding           : 48px 40px
+transition        : background 0.3s
+hover background  : #E5D7C4  (Bone)
+
+/* Numéro décoratif */
+position    : absolute top-right
+font-size   : 3.2rem
+color       : rgba(207, 187, 153, 0.55)  (Tan transparent)
+
+/* Titre de carte */
+font-family : Cormorant Garamond
+font-size   : 1.4rem
+font-weight : 600</code></pre>
+
+    <h3>Champs de formulaire (Inputs)</h3>
+    <pre><code>/* État par défaut */
+background    : #F5EEE4  (Cream)
+border        : 1px solid #E5D7C4  (Bone)
+border-radius : 3px
+padding       : 11px 16px
+font-size     : 0.88rem
+color         : rgba(92, 74, 53, 0.35)  (placeholder)
+
+/* État focus */
+border        : 1.5px solid #889063  (Moss Green)
+outline       : none</code></pre>
+
+    <h3>Badges & Notifications</h3>
+    <table>
+        <tr><th>Type</th><th>Fond</th><th>Texte</th><th>Exemple</th></tr>
+        <tr><td>Succès</td><td>Moss Green <code>#889063</code></td><td>Off-White</td><td>✓ Tenue enregistrée</td></tr>
+        <tr><td>Info</td><td>Tan <code>#CFBB99</code></td><td>Bark <code>#5C4A35</code></td><td>☁ Météo : 18°C Casablanca</td></tr>
+        <tr><td>Neutre</td><td>Bark <code>#5C4A35</code></td><td>Cream <code>#F5EEE4</code></td><td>🔔 Nouvelle suggestion disponible</td></tr>
+    </table>
+    <pre><code>border-radius : 4px
+padding       : 6px 12px
+font-size     : 0.75rem
+font-weight   : 500</code></pre>
+
+    <h3>Cartes témoignages</h3>
+    <pre><code>/* Standard */
+background    : #FDFAF6
+border        : 1px solid rgba(207, 187, 153, 0.3)
+border-radius : 12px
+padding       : 32px
+hover box-shadow: 0 8px 32px rgba(92, 74, 53, 0.1)
+
+/* Featured (mise en avant) */
+background    : #5C4A35  (Bark)
+color texte   : #F5EEE4  (Cream)
+color citation: #F5EEE4
+color nom     : #F5EEE4
+color rôle    : #CFBB99  (Tan)
+
+/* Avatar */
+width / height  : 40px
+border-radius   : 50%
+background      : #CFBB99  (Tan)
+font-weight     : 600</code></pre>
+
+    <h2 id="espacements">5. Espacements & Mise en page</h2>
+    <h3>Système d'espacement (base 4px)</h3>
+    <table>
+        <tr><th>Token</th><th>Valeur</th><th>Usage</th></tr>
+        <tr><td><code>xs</code></td><td>4px</td><td>Espacement minimal, gap icône–texte</td></tr>
+        <tr><td><code>sm</code></td><td>8px</td><td>Interligne compact, padding badge</td></tr>
+        <tr><td><code>md</code></td><td>16px</td><td>Gap standard, padding input</td></tr>
+        <tr><td><code>lg</code></td><td>24px</td><td>Marge interne carte, espacement entre éléments</td></tr>
+        <tr><td><code>xl</code></td><td>48px</td><td>Stats row gap, espacements de section interne</td></tr>
+        <tr><td><code>2xl</code></td><td>80px</td><td>Padding principal des sections</td></tr>
+        <tr><td><code>3xl</code></td><td>120px</td><td>Padding des grandes sections (hero, CTA)</td></tr>
+    </table>
+
+    <h3>Largeurs de contenu</h3>
+    <pre><code>Max width principal  : 1280px  (max-w-screen-xl)
+Padding horizontal   : 24px (mobile)  |  48–80px (desktop)
+Navbar height        : 72px</code></pre>
+
+    <h3>Grille de sections</h3>
+    <pre><code>Features grid   : 3 colonnes (desktop)  →  1 colonne (mobile)
+How it works    : 2 colonnes (desktop)  →  1 colonne (mobile)
+Testimonials    : 3 colonnes (desktop)  →  1 colonne (mobile)
+Footer          : 4 colonnes (desktop)  →  2 colonnes (tablette)  →  1 (mobile)</code></pre>
+
+    <h3>Breakpoints</h3>
+    <table>
+        <tr><th>Nom</th><th>Valeur</th><th>Comportement</th></tr>
+        <tr><td>Mobile</td><td><code>&lt; 768px</code></td><td>Colonne unique, padding réduit</td></tr>
+        <tr><td>Tablette</td><td><code>768px – 1024px</code></td><td>Grille 2 colonnes</td></tr>
+        <tr><td>Desktop</td><td><code>&gt; 1024px</code></td><td>Grille complète, menu desktop visible</td></tr>
+    </table>
+
+    <h3>Border Radius</h3>
+    <table>
+        <tr><th>Valeur</th><th>Usage</th></tr>
+        <tr><td><code>2px</code></td><td>Boutons, inputs, éléments de formulaire</td></tr>
+        <tr><td><code>4px</code></td><td>Badges, petits tags</td></tr>
+        <tr><td><code>6px</code></td><td>Petites cartes, tuiles secondaires</td></tr>
+        <tr><td><code>10px</code></td><td>Cartes météo dans le téléphone mockup</td></tr>
+        <tr><td><code>12px</code></td><td>Cartes témoignages, suggestion card</td></tr>
+        <tr><td><code>14px</code></td><td>Carte suggestion flottante (hero)</td></tr>
+        <tr><td><code>38px</code></td><td>Frame téléphone mockup</td></tr>
+    </table>
+
+    <h3>Ombres (Box Shadow)</h3>
+    <pre><code>/* Légère — cards hover */
+box-shadow: 0 8px 32px rgba(92, 74, 53, 0.10)
+
+/* Moyenne — suggest card */
+box-shadow: 0 20px 64px rgba(92, 74, 53, 0.18)
+
+/* Forte — phone mockup */
+box-shadow: 0 40px 100px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(229, 215, 196, 0.25)
+
+/* Navbar scrolled */
+box-shadow: 0 4px 24px rgba(92, 74, 53, 0.08)</code></pre>
+
+    <h2 id="logo">6. Logo & Usage</h2>
+    <h3>Construction du logo</h3>
+    <p>Le logo SmartDress est un <strong>logotype typographique</strong> composé de deux mots aux styles contrastés :</p>
+    <pre><code>Smart     →  Cormorant Garamond  |  Regular 400  |  couleur Bark #5C4A35
+Dress     →  Cormorant Garamond  |  SemiBold 600 Italic  |  couleur Moss #889063</code></pre>
+
+    <h3>Variantes</h3>
+    <table>
+        <tr><th>Variante</th><th>Fond</th><th>Couleur "Smart"</th><th>Couleur "Dress"</th></tr>
+        <tr><td><strong>Principale</strong></td><td>Off-White / Clair</td><td>Bark <code>#5C4A35</code></td><td>Moss <code>#889063</code></td></tr>
+        <tr><td><strong>Fond sombre</strong></td><td>Bark <code>#5C4A35</code></td><td>Cream <code>#F5EEE4</code></td><td>Tan <code>#CFBB99</code></td></tr>
+    </table>
+
+    <h3>Zone de protection</h3>
+    <p>La zone de protection autour du logo est égale à <strong>0.5x la hauteur totale du logo</strong> sur chaque côté. Aucun élément graphique ne doit pénétrer dans cette zone.</p>
+
+    <h3>Taille minimale</h3>
+    <table>
+        <tr><th>Contexte</th><th>Taille minimale</th></tr>
+        <tr><td>Écran digital</td><td>24px de hauteur</td></tr>
+        <tr><td>Impression</td><td>12mm de hauteur</td></tr>
+        <tr><td>Favicon / icône app</td><td>16×16px (version monogramme <code>SD</code>)</td></tr>
+    </table>
+
+    <h3>✅ Usages autorisés</h3>
+    <ul>
+        <li>Utiliser <code>Smart</code> (regular) + <code>Dress</code> (bold italic) — toujours ensemble</li>
+        <li>Conserver le rapport de tailles entre les deux mots</li>
+        <li>Utiliser exclusivement les couleurs de la charte</li>
+        <li>Respecter la zone de protection à chaque usage</li>
+        <li>Le monogramme <code>SD</code> peut être utilisé en version réduite (favicon, badge)</li>
+    </ul>
+
+    <h3>❌ Usages interdits</h3>
+    <ul>
+        <li>Étirer, déformer ou pivoter le logo</li>
+        <li>Changer les couleurs hors palette officielle</li>
+        <li>Placer le logo sur un fond qui ne garantit pas un contraste suffisant</li>
+        <li>Séparer <code>Smart</code> de <code>Dress</code> dans deux espaces ou lignes différentes</li>
+        <li>Ajouter des effets (ombre portée, contour, dégradé) au logotype</li>
+        <li>Modifier l'espacement entre les lettres ou entre les deux mots</li>
+    </ul>
+
+    <h2 id="regles">7. Règles générales</h2>
+    <h3>Cohérence visuelle</h3>
+    <ul>
+        <li>Toujours utiliser les <strong>variables CSS</strong> (<code>:root</code>) pour référencer les couleurs — jamais de valeurs hardcodées dans les composants.</li>
+        <li>Les <strong>animations</strong> doivent rester subtiles : durée entre <code>0.25s</code> et <code>0.7s</code>, easing <code>ease</code> ou <code>ease-out</code>.</li>
+        <li>Les <strong>micro-interactions</strong> (hover, focus) doivent donner un retour visuel immédiat.</li>
+        <li>Privilégier les <strong>transitions CSS</strong> aux animations JavaScript quand possible.</li>
+    </ul>
+
+    <h3>Accessibilité</h3>
+    <ul>
+        <li>Contraste minimum texte/fond : <strong>4.5:1</strong> (WCAG AA) pour le corps de texte, <strong>3:1</strong> pour les grands titres.</li>
+        <li>Tous les éléments interactifs doivent avoir un état <code>:focus</code> visible.</li>
+        <li>Les icônes seules doivent avoir un attribut <code>aria-label</code>.</li>
+        <li>Les couleurs ne doivent jamais être le seul moyen de transmettre une information.</li>
+    </ul>
+
+    <h3>Responsive</h3>
+    <ul>
+        <li>L'interface est conçue en <strong>mobile-first</strong> : les styles de base ciblent les petits écrans.</li>
+        <li>Les grilles passent progressivement de 1 colonne (mobile) à 3 colonnes (desktop).</li>
+        <li>La navigation mobile utilise le composant <strong>Preline Collapse</strong> pour le menu hamburger.</li>
+        <li>Les éléments décoratifs complexes (ex: phone mockup) peuvent être masqués sur mobile.</li>
+    </ul>
+
+    <h3>Ton & Voix</h3>
+    <ul>
+        <li>L'interface parle en <strong>français, tutoiement ou vouvoiement selon le contexte</strong> (vouvoiement recommandé pour l'interface principale).</li>
+        <li>Le ton est <strong>élégant, chaleureux et rassurant</strong> — jamais technique ou froid.</li>
+        <li>Les labels de boutons sont en <strong>MAJUSCULES, courts et actifs</strong> : <code>COMMENCER</code>, <code>ESSAYER</code>, <code>VOIR LA DÉMO</code>.</li>
+        <li>Les descriptions sont fluides, à la 3ème personne du singulier : "SmartDress organise...", "L'application suggère...".</li>
+    </ul>
+
+    <hr style="margin-top: 40px; border: 0; border-top: 1px solid var(--bone);">
+    <p style="text-align: center; color: var(--moss-green); font-style: italic; font-size: 0.9em; margin-bottom: 40px;">Charte Graphique SmartDress · Yasmine Haddad · Formation Développement Mobile · Mode Bootcamp · 2025–2026</p>
+
+</body>
+</html>
