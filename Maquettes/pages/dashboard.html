@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SmartDress - Tableau de Bord</title>
     <script src="https://cdn.tailwindcss.com"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartDress - Tableau de Bord</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
@@ -18,6 +23,7 @@
                         bone: '#E5D7C4',
                         cream: '#F5EEE4',
                         offwhite: '#FDFAF6',
+                        deeptan: '#B8A07E',
                     },
                     fontFamily: {
                         display: ['"Cormorant Garamond"', 'serif'],
@@ -27,6 +33,7 @@
             }
         }
     </script>
+    <link rel="stylesheet" href="../assets/css/charte.css">
 </head>
 
 <body class="bg-offwhite font-body text-bark min-h-screen pb-24">
@@ -34,8 +41,8 @@
     <!-- Header / Top Bar -->
     <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-tan/10 px-6 py-4">
         <div class="max-w-md mx-auto flex items-center justify-between">
-            <button class="w-10 h-10 flex items-center justify-center bg-cream rounded-xl hover:bg-bone/50 transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-bark/60" fill="none" viewBox="0 0 24 24"
+            <button class="w-10 h-10 flex items-center justify-center bg-cream/50 rounded-xl">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-tan" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
                 </svg>
@@ -55,38 +62,38 @@
     <main class="max-w-md mx-auto p-6 space-y-8">
 
         <!-- Molecule : m-widget-weather -->
-        <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-tan/10 flex items-center gap-5">
-            <div class="w-14 h-14 bg-cream flex items-center justify-center rounded-2xl text-2xl shadow-inner border border-tan/10">
+        <div class="bg-white/70 backdrop-blur-xl p-6 rounded-[2rem] shadow-sm border border-tan/10 flex items-center gap-5">
+            <div class="w-14 h-14 bg-cream flex items-center justify-center rounded-2xl shadow-inner border border-tan/10 text-3xl">
                 ⛅
             </div>
             <div>
                 <p class="text-[10px] font-bold text-tan uppercase tracking-[0.2em]">Météo / Casablanca</p>
-                <p class="text-2xl font-display font-semibold text-bark tracking-tight">24°C <span
+                <p class="text-2xl font-display font-semibold text-bark">24°C <span
                         class="text-moss italic font-medium ml-2">Ensoleillé</span></p>
             </div>
         </div>
 
         <!-- Molecule : m-card-suggestion -->
         <div class="bg-white rounded-[2.5rem] shadow-2xl shadow-bark/5 overflow-hidden border border-tan/10">
-            <div class="relative h-96 bg-cream/50 flex items-center justify-center p-12 overflow-hidden">
-                <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(136,144,99,0.05)_0%,transparent_70%)]"></div>
+            <div class="relative h-96 bg-cream/50 flex items-center justify-center p-12">
+                <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(207,187,153,0.1)_0%,transparent_70%)]"></div>
                 <div class="absolute top-6 left-6">
                     <span
-                        class="px-4 py-1.5 bg-moss text-white text-[10px] font-bold rounded-full shadow-lg shadow-moss/20 tracking-widest uppercase">Tenue du jour</span>
+                        class="px-4 py-1.5 bg-moss text-white text-[10px] font-bold rounded-full shadow-lg shadow-moss/20 tracking-wider uppercase">Tenue du jour</span>
                 </div>
 
                 <!-- Tenue Visuelle -->
                 <div class="relative flex flex-col items-center gap-6">
                     <div
-                        class="w-40 h-40 bg-white rounded-[2rem] border-4 border-white shadow-md flex items-center justify-center flex-col transition-transform hover:scale-105">
+                        class="w-40 h-40 bg-white rounded-[2rem] border-4 border-white shadow-sm flex items-center justify-center flex-col transition-transform hover:scale-105">
                         <span class="text-4xl mb-2">👕</span>
                         <span class="text-[10px] font-bold text-tan uppercase tracking-widest">T-Shirt
                             Blanc</span>
                     </div>
                     <div
-                        class="w-44 h-52 bg-bone/30 rounded-[2rem] border-4 border-white shadow-md flex items-center justify-center flex-col transition-transform hover:scale-105">
+                        class="w-44 h-52 bg-bone/30 rounded-[2rem] border-4 border-white shadow-sm flex items-center justify-center flex-col transition-transform hover:scale-105">
                         <span class="text-4xl mb-2">👖</span>
-                        <span class="text-[10px] font-bold text-bark/40 uppercase tracking-widest">Jean Slim
+                        <span class="text-[10px] font-bold text-deeptan uppercase tracking-widest">Jean Slim
                             Bleu</span>
                     </div>
                 </div>
@@ -94,53 +101,55 @@
 
             <div class="p-10 space-y-8">
                 <div class="space-y-3">
-                    <h2 class="text-3xl font-display font-medium text-bark italic leading-tight">Look Casual <em>Moderne</em></h2>
-                    <p class="text-bark/50 font-light leading-relaxed">Cette tenue est parfaite pour votre planning
+                    <h2 class="text-3xl font-display font-medium text-bark leading-tight italic">Casual Moderne</h2>
+                    <p class="text-bark/60 leading-relaxed font-light">Cette tenue est parfaite pour votre planning
                         d'aujourd'hui. Légère et stylée.</p>
                 </div>
 
                 <div class="flex flex-col gap-4">
-                    <button
-                        class="w-full py-5 bg-moss text-white font-body font-medium text-xs tracking-[0.2em] uppercase rounded-full shadow-xl shadow-moss/20 hover:bg-bark hover:translate-y-[-2px] active:translate-y-0 transition-all">
-                        Valider cette tenue
-                    </button>
-                    <button id="refresh-outfit"
-                        class="w-full py-5 text-bark/40 font-body font-medium text-xs tracking-[0.2em] uppercase rounded-full hover:bg-cream transition-colors">
-                        Autre idée ?
-                    </button>
+                    <div class="flex flex-col gap-4">
+                        <button
+                            class="w-full py-5 bg-moss text-white font-body font-medium text-xs tracking-[0.2em] uppercase rounded-full shadow-xl shadow-moss/20 hover:bg-bark hover:translate-y-[-2px] active:translate-y-0 transition-all">
+                            Valider cette tenue
+                        </button>
+                        <button id="refresh-outfit"
+                            class="w-full py-5 text-tan font-body font-bold uppercase tracking-widest rounded-2xl hover:bg-cream/50 transition-colors">
+                            Autre idée ?
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Section Navigation Rapide -->
-        <div class="grid grid-cols-2 gap-4">
-            <button onclick="location.href='garde-robe.html'"
-                class="p-6 bg-white rounded-3xl border border-tan/10 flex flex-col items-center gap-3 hover:bg-cream/30 transition-all group">
-                <div
-                    class="w-14 h-14 bg-cream text-tan rounded-2xl flex items-center justify-center text-3xl group-hover:bg-moss group-hover:text-white transition-colors">
-                    🧥</div>
-                <span class="text-[10px] font-bold text-bark uppercase tracking-widest">Dressing</span>
-            </button>
-            <button
-                class="p-6 bg-white rounded-3xl border border-tan/10 flex flex-col items-center gap-3 hover:bg-cream/30 transition-all group">
-                <div
-                    class="w-14 h-14 bg-cream text-tan rounded-2xl flex items-center justify-center text-3xl group-hover:bg-moss group-hover:text-white transition-colors">
-                    ⭐</div>
-                <span class="text-[10px] font-bold text-bark uppercase tracking-widest">Favoris</span>
-            </button>
-        </div>
+            <!-- Section Navigation Rapide -->
+            <div class="grid grid-cols-2 gap-4">
+                <button onclick="location.href='garde-robe.html'"
+                    class="p-6 bg-white rounded-[2rem] border border-tan/10 flex flex-col items-center gap-3 hover:bg-cream/30 transition-all group">
+                    <div
+                        class="w-12 h-12 bg-cream text-tan rounded-xl flex items-center justify-center text-2xl shadow-inner border border-tan/5 group-hover:bg-white transition-colors">
+                        🧥</div>
+                    <span class="text-[10px] font-bold text-tan uppercase tracking-widest group-hover:text-bark transition-colors">Dressing</span>
+                </button>
+                <button
+                    class="p-6 bg-white rounded-[2rem] border border-tan/10 flex flex-col items-center gap-3 hover:bg-cream/30 transition-all group">
+                    <div
+                        class="w-12 h-12 bg-cream text-moss rounded-xl flex items-center justify-center text-2xl shadow-inner border border-tan/5 group-hover:bg-white transition-colors">
+                        ⭐
+                    </div>
+                    <span class="text-[10px] font-bold text-tan uppercase tracking-widest group-hover:text-bark transition-colors">Favoris</span>
+                </button>
+            </div>
     </main>
 
     <!-- Bottom Navigation Bar (Mobile Style) -->
     <nav
-        class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-xl border-t border-tan/10 px-8 py-4 flex justify-between items-center z-50 shadow-[0_-10px_40px_rgba(8C,74,53,0.05)]">
+        class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-xl border-t border-tan/10 px-8 py-4 flex justify-between items-center z-50 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
         <button class="active-nav flex flex-col items-center gap-1 text-moss">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
             </svg>
         </button>
         <button onclick="location.href='garde-robe.html'"
-            class="flex flex-col items-center gap-1 text-tan hover:text-moss transition-colors">
+            class="flex flex-col items-center gap-1 text-tan hover:text-bark">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -148,20 +157,20 @@
             </svg>
         </button>
         <button
-            class="w-14 h-14 bg-moss rounded-full flex items-center justify-center text-white shadow-xl shadow-moss/30 relative -top-8 border-4 border-offwhite active:scale-95 transition-all">
+            class="w-14 h-14 bg-moss rounded-full flex items-center justify-center text-white shadow-xl shadow-moss/30 relative -top-8 border-4 border-white active:scale-95 transition-all">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4" />
             </svg>
         </button>
-        <button class="flex flex-col items-center gap-1 text-tan hover:text-moss transition-colors">
+        <button onclick="location.href='stats.html'" class="flex flex-col items-center gap-1 text-tan hover:text-bark">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m12 4a2 2 0 100-4m0 4a2 2 0 110-4m-6 0a2 2 0 100 4m0-4a2 2 0 110 4" />
             </svg>
         </button>
-        <button class="flex flex-col items-center gap-1 text-tan hover:text-moss transition-colors">
+        <button onclick="location.href='profile.html'" class="flex flex-col items-center gap-1 text-tan hover:text-bark">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

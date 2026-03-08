@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SmartDress - Authentification</title>
     <script src="https://cdn.tailwindcss.com"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartDress - Authentification</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
@@ -27,12 +32,13 @@
             }
         }
     </script>
+    <link rel="stylesheet" href="../assets/css/charte.css">
 </head>
 
 <body class="bg-offwhite font-body text-bark overflow-x-hidden">
 
     <section id="auth"
-        class="min-h-screen flex items-center justify-center p-6 bg-[url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80')] bg-cover bg-center relative">
+        class="min-h-screen flex items-center justify-center p-6 bg-[url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80')] bg-cover bg-center">
         <div class="absolute inset-0 bg-bark/60 backdrop-blur-sm"></div>
 
         <div class="w-full max-w-md space-y-8 relative z-10">
@@ -42,20 +48,17 @@
                 class="bg-white p-10 rounded-[2.5rem] shadow-2xl shadow-bark/50 border border-tan/10 space-y-8 relative overflow-hidden">
                 <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-tan to-moss"></div>
 
-                <div class="space-y-4 text-center">
-                    <div class="flex flex-col items-center gap-4 mb-6">
-                        <a href="../index.html" class="p-2 hover:bg-cream rounded-full transition-colors">
+                <div class="space-y-3">
+                    <div class="flex items-center gap-2 mb-4">
+                        <a href="../index.html" class="p-2 hover:bg-cream/50 rounded-full transition-colors">
                             <svg class="w-5 h-5 text-tan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                             </svg>
                         </a>
-                        <div style="font-family: 'Cormorant Garamond', serif;" class="text-4xl tracking-tight select-none flex items-baseline">
-                            <span style="font-weight: 400; color: #5C4A35;">Smart</span>
-                            <span style="font-weight: 600; font-style: italic; color: #889063; margin-left: -0.02em;">Dress</span>
-                        </div>
+                        <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-tan">SmartDress</span>
                     </div>
-                    <h2 class="text-3xl font-display font-medium text-bark italic leading-tight">Bienvenue <em>parmi nous</em></h2>
+                    <h2 class="text-4xl font-display font-medium text-bark italic leading-tight">Bienvenue</h2>
                     <p class="text-bark/50 text-sm font-light">Connectez-vous pour accéder à votre garde-robe.</p>
                 </div>
 
@@ -71,7 +74,7 @@
                     <div class="space-y-2">
                         <label class="text-[10px] font-bold text-tan uppercase tracking-[0.2em] ml-1">Email</label>
                         <input type="email" placeholder="nom@exemple.com" required
-                            class="w-full px-5 py-4 bg-cream/30 border border-tan/10 rounded-2xl focus:border-moss focus:bg-white outline-none transition-all placeholder:text-bark/20 text-sm">
+                            class="w-full px-5 py-4 bg-cream/20 border border-tan/10 rounded-2xl focus:border-moss focus:bg-white outline-none transition-all placeholder:text-bark/20 text-sm">
                     </div>
                     <div class="space-y-2">
                         <div class="flex justify-between items-center ml-1">
@@ -79,11 +82,11 @@
                             <a href="#" class="text-[10px] font-bold text-moss hover:text-bark uppercase tracking-widest transition-colors">Oublié ?</a>
                         </div>
                         <input type="password" placeholder="••••••••" required
-                            class="w-full px-5 py-4 bg-cream/30 border border-tan/10 rounded-2xl focus:border-moss focus:bg-white outline-none transition-all placeholder:text-bark/20 text-sm">
+                            class="w-full px-5 py-4 bg-cream/20 border border-tan/10 rounded-2xl focus:border-moss focus:bg-white outline-none transition-all placeholder:text-bark/20 text-sm">
                     </div>
 
                     <button type="submit"
-                        class="w-full py-5 bg-bark text-white font-body font-medium text-xs tracking-[0.15em] uppercase rounded-full shadow-lg shadow-bark/20 hover:bg-moss hover:translate-y-[-2px] active:translate-y-0 transition-all mt-4">
+                        class="w-full py-5 bg-bark text-white font-body font-medium text-xs tracking-[0.2em] uppercase rounded-full shadow-xl shadow-bark/20 hover:bg-moss hover:translate-y-[-2px] active:translate-y-0 transition-all mt-4">
                         Se connecter
                     </button>
                 </form>
@@ -93,21 +96,21 @@
                     <div class="space-y-2">
                         <label class="text-[10px] font-bold text-tan uppercase tracking-[0.2em] ml-1">Nom complet</label>
                         <input type="text" placeholder="Jean Dupont"
-                            class="w-full px-5 py-4 bg-cream/30 border border-tan/10 rounded-2xl focus:border-moss focus:bg-white outline-none transition-all placeholder:text-bark/20 text-sm">
+                            class="w-full px-5 py-4 bg-cream/20 border border-tan/10 rounded-2xl focus:border-moss focus:bg-white outline-none transition-all placeholder:text-bark/20 text-sm">
                     </div>
                     <div class="space-y-2">
                         <label class="text-[10px] font-bold text-tan uppercase tracking-[0.2em] ml-1">Email</label>
                         <input type="email" placeholder="nom@exemple.com"
-                            class="w-full px-5 py-4 bg-cream/30 border border-tan/10 rounded-2xl focus:border-moss focus:bg-white outline-none transition-all placeholder:text-bark/20 text-sm">
+                            class="w-full px-5 py-4 bg-cream/20 border border-tan/10 rounded-2xl focus:border-moss focus:bg-white outline-none transition-all placeholder:text-bark/20 text-sm">
                     </div>
                     <div class="space-y-2">
                         <label class="text-[10px] font-bold text-tan uppercase tracking-[0.2em] ml-1">Mot de passe</label>
                         <input type="password" placeholder="••••••••"
-                            class="w-full px-5 py-4 bg-cream/30 border border-tan/10 rounded-2xl focus:border-moss focus:bg-white outline-none transition-all placeholder:text-bark/20 text-sm">
+                            class="w-full px-5 py-4 bg-cream/20 border border-tan/10 rounded-2xl focus:border-moss focus:bg-white outline-none transition-all placeholder:text-bark/20 text-sm">
                     </div>
 
                     <button type="submit"
-                        class="w-full py-5 bg-moss text-white font-body font-medium text-xs tracking-[0.15em] uppercase rounded-full shadow-lg shadow-moss/20 hover:bg-bark hover:translate-y-[-2px] active:translate-y-0 transition-all mt-4">
+                        class="w-full py-5 bg-moss text-white font-body font-medium text-xs tracking-[0.2em] uppercase rounded-full shadow-xl shadow-moss/20 hover:bg-bark hover:translate-y-[-2px] active:translate-y-0 transition-all mt-4">
                         Créer mon compte
                     </button>
                 </form>
@@ -122,12 +125,12 @@
 
                 <div class="grid grid-cols-2 gap-4">
                     <button
-                        class="flex items-center justify-center py-4 border border-tan/20 rounded-2xl hover:bg-cream/20 transition-all group">
-                        <span class="text-[10px] font-bold text-bark/60 uppercase tracking-widest group-hover:text-bark">Google</span>
+                        class="flex items-center justify-center py-4 border border-tan/10 rounded-2xl hover:bg-cream/30 transition-all group">
+                        <span class="text-[10px] font-bold text-tan uppercase tracking-widest group-hover:text-bark">Google</span>
                     </button>
                     <button
-                        class="flex items-center justify-center py-4 border border-tan/20 rounded-2xl hover:bg-cream/20 transition-all group">
-                        <span class="text-[10px] font-bold text-bark/60 uppercase tracking-widest group-hover:text-bark">Apple</span>
+                        class="flex items-center justify-center py-4 border border-tan/10 rounded-2xl hover:bg-cream/30 transition-all group">
+                        <span class="text-[10px] font-bold text-tan uppercase tracking-widest group-hover:text-bark">Apple</span>
                     </button>
                 </div>
             </div>
