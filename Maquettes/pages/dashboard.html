@@ -1,11 +1,6 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr text-slate-900">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartDress - Tableau de Bord</title>
-    <script src="https://cdn.tailwindcss.com"></script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,7 +31,16 @@
     <link rel="stylesheet" href="../assets/css/charte.css">
 </head>
 
-<body class="bg-offwhite font-body text-bark min-h-screen pb-24">
+<body class="bg-bark font-body text-bark min-h-screen relative overflow-x-hidden flex justify-center">
+
+    <!-- Background Flow Effect -->
+    <div class="fixed inset-0 z-0 pointer-events-none">
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80')] bg-cover bg-center blur-md scale-110 opacity-40"></div>
+        <div class="absolute inset-0 bg-bark/20 mix-blend-multiply"></div>
+    </div>
+
+    <!-- Mobile Mockup Container -->
+    <div class="w-full max-w-sm bg-offwhite min-h-screen shadow-2xl relative z-10 flex flex-col">
 
     <!-- Header / Top Bar -->
     <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-tan/10 px-6 py-4">
@@ -142,7 +146,7 @@
 
     <!-- Bottom Navigation Bar (Mobile Style) -->
     <nav
-        class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-xl border-t border-tan/10 px-8 py-4 flex justify-between items-center z-50 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
+        class="sticky bottom-0 left-0 right-0 bg-white/95 backdrop-blur-xl border-t border-tan/10 px-8 py-4 flex justify-between items-center z-50 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
         <button class="active-nav flex flex-col items-center gap-1 text-moss">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
@@ -178,6 +182,7 @@
             </svg>
         </button>
     </nav>
+    </div> <!-- End Mobile Mockup Container -->
 
     <script>
         const outfits = [
