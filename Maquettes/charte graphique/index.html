@@ -369,38 +369,139 @@ Dress     →  Cormorant Garamond  |  SemiBold 600 Italic  |  couleur Moss #8890
         <li>Modifier l'espacement entre les lettres ou entre les deux mots</li>
     </ul>
 
+    <h2 id="atoms">Atomes (Composants de base)</h2>
+    <p>Les atomes sont les briques de base de l'interface SmartDress. Ils sont conçus pour être réutilisables, cohérents et accessibles.</p>
+
+    <div style="background: white; border: 1px solid var(--bone); border-radius: 12px; padding: 2rem; margin-top: 1rem;">
+        <table style="width: 100%; border-collapse: separate; border-spacing: 0 1rem;">
+            <thead>
+                <tr style="text-align: left; color: var(--bark-brown); font-weight: 600;">
+                    <th style="padding: 10px; border-bottom: 2px solid var(--moss-green);">Type</th>
+                    <th style="padding: 10px; border-bottom: 2px solid var(--moss-green);">Démonstration Visuelle</th>
+                    <th style="padding: 10px; border-bottom: 2px solid var(--moss-green);">Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Logo -->
+                <tr>
+                    <td style="padding: 10px; font-weight: 500;">Logo</td>
+                    <td style="padding: 10px;">
+                        <div style="font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; letter-spacing: -0.01em; display: flex; align-items: baseline;">
+                            <span style="font-weight: 400; color: #5C4A35;">Smart</span>
+                            <span style="font-weight: 600; font-style: italic; color: #889063; margin-left: -0.02em;">Dress</span>
+                        </div>
+                    </td>
+                    <td style="padding: 10px; font-size: 0.85rem;">Logotype typographique officiel.</td>
+                </tr>
+                <!-- Titre -->
+                <tr>
+                    <td style="padding: 10px; font-weight: 500;">Title</td>
+                    <td style="padding: 10px;">
+                        <h3 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 1.5rem;">Ceci est un Titre</h3>
+                    </td>
+                    <td style="padding: 10px; font-size: 0.85rem;">Utilise Cormorant Garamond.</td>
+                </tr>
+                <!-- Text -->
+                <tr>
+                    <td style="padding: 10px; font-weight: 500;">Text</td>
+                    <td style="padding: 10px;">
+                        <p style="margin: 0; font-size: 0.9rem;">Corps de texte principal en DM Sans.</p>
+                    </td>
+                    <td style="padding: 10px; font-size: 0.85rem;">Lisibilité optimale.</td>
+                </tr>
+                <!-- Link -->
+                <tr>
+                    <td style="padding: 10px; font-weight: 500;">Link</td>
+                    <td style="padding: 10px;">
+                        <a href="#" style="font-size: 0.9rem; font-weight: 500;">Lien Interactif</a>
+                    </td>
+                    <td style="padding: 10px; font-size: 0.85rem;">Soulignement au survol.</td>
+                </tr>
+                <!-- Buttons -->
+                <tr>
+                    <td style="padding: 10px; font-weight: 500;">Buttons</td>
+                    <td style="padding: 10px;">
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <button style="background: var(--moss-green); color: white; border: none; padding: 10px 20px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; cursor: pointer;">Primaire</button>
+                            <button style="background: transparent; color: var(--bark-brown); border: 1px solid var(--bark-brown); padding: 10px 20px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; cursor: pointer;">Ghost</button>
+                            <button style="background: transparent; color: var(--bark-brown); border: none; padding: 10px 20px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; cursor: pointer; opacity: 0.7;">Transparent</button>
+                        </div>
+                    </td>
+                    <td style="padding: 10px; font-size: 0.85rem;">Différentes hiérarchies d'actions.</td>
+                </tr>
+                <!-- Inputs -->
+                <tr>
+                    <td style="padding: 10px; font-weight: 500;">Input / UI</td>
+                    <td style="padding: 10px;">
+                        <div style="display: flex; flex-direction: column; gap: 10px; width: 200px;">
+                            <input type="text" placeholder="Input text" style="padding: 8px 12px; border: 1px solid var(--bone); border-radius: 4px; background: var(--cream); font-size: 0.85rem;">
+                            <textarea placeholder="Textarea" style="padding: 8px 12px; border: 1px solid var(--bone); border-radius: 4px; background: var(--cream); font-size: 0.85rem; height: 60px;"></textarea>
+                            <select style="padding: 8px 12px; border: 1px solid var(--bone); border-radius: 4px; background: var(--cream); font-size: 0.85rem;">
+                                <option>Option 1</option>
+                                <option>Option 2</option>
+                            </select>
+                            <label style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem;">
+                                <input type="checkbox" checked style="accent-color: var(--moss-green);"> Checkbox
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem;">
+                                <div style="width: 34px; height: 20px; background: var(--moss-green); border-radius: 10px; position: relative; cursor: pointer;">
+                                    <div style="width: 14px; height: 14px; background: white; border-radius: 50%; position: absolute; right: 3px; top: 3px;"></div>
+                                </div> Toggle (Switch)
+                            </label>
+                        </div>
+                    </td>
+                    <td style="padding: 10px; font-size: 0.85rem;">Éléments de saisie et sélection.</td>
+                </tr>
+                <!-- Feedback -->
+                <tr>
+                    <td style="padding: 10px; font-weight: 500;">Feedback & Stats</td>
+                    <td style="padding: 10px;">
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <span style="background: var(--moss-green); color: white; padding: 4px 10px; border-radius: 10px; font-size: 0.7rem; font-weight: 600; width: fit-content;">Badge Succès</span>
+                            <div style="width: 150px; height: 6px; background: var(--bone); border-radius: 3px;">
+                                <div style="width: 70%; height: 100%; background: var(--moss-green); border-radius: 3px;"></div>
+                            </div>
+                            <div style="font-size: 1.2rem; font-weight: 700; color: var(--bark-brown);">75% <span style="font-size: 0.7rem; font-weight: 500; color: var(--moss-green);">📈 Stat</span></div>
+                        </div>
+                    </td>
+                    <td style="padding: 10px; font-size: 0.85rem;">Badges, barres de progression et stats.</td>
+                </tr>
+                <!-- Media -->
+                <tr>
+                    <td style="padding: 10px; font-weight: 500;">Media & Avatar</td>
+                    <td style="padding: 10px;">
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--tan); color: white; display: flex; align-items: center; justify-content: center; font-weight: 600;">YH</div>
+                            <div style="width: 60px; height: 40px; border-radius: 8px; background: #eee; background-image: url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&q=80&w=100'); background-size: cover;"></div>
+                            <span style="font-size: 1.2rem;">👗</span>
+                        </div>
+                    </td>
+                    <td style="padding: 10px; font-size: 0.85rem;">Avatars, images et icônes émojis.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
     <h2 id="regles">7. Règles générales</h2>
-    <h3>Cohérence visuelle</h3>
-    <ul>
-        <li>Toujours utiliser les <strong>variables CSS</strong> (<code>:root</code>) pour référencer les couleurs — jamais de valeurs hardcodées dans les composants.</li>
-        <li>Les <strong>animations</strong> doivent rester subtiles : durée entre <code>0.25s</code> et <code>0.7s</code>, easing <code>ease</code> ou <code>ease-out</code>.</li>
-        <li>Les <strong>micro-interactions</strong> (hover, focus) doivent donner un retour visuel immédiat.</li>
-        <li>Privilégier les <strong>transitions CSS</strong> aux animations JavaScript quand possible.</li>
-    </ul>
-
-    <h3>Accessibilité</h3>
-    <ul>
-        <li>Contraste minimum texte/fond : <strong>4.5:1</strong> (WCAG AA) pour le corps de texte, <strong>3:1</strong> pour les grands titres.</li>
-        <li>Tous les éléments interactifs doivent avoir un état <code>:focus</code> visible.</li>
-        <li>Les icônes seules doivent avoir un attribut <code>aria-label</code>.</li>
-        <li>Les couleurs ne doivent jamais être le seul moyen de transmettre une information.</li>
-    </ul>
-
-    <h3>Responsive</h3>
-    <ul>
-        <li>L'interface est conçue en <strong>mobile-first</strong> : les styles de base ciblent les petits écrans.</li>
-        <li>Les grilles passent progressivement de 1 colonne (mobile) à 3 colonnes (desktop).</li>
-        <li>La navigation mobile utilise le composant <strong>Preline Collapse</strong> pour le menu hamburger.</li>
-        <li>Les éléments décoratifs complexes (ex: phone mockup) peuvent être masqués sur mobile.</li>
-    </ul>
-
-    <h3>Ton & Voix</h3>
-    <ul>
-        <li>L'interface parle en <strong>français, tutoiement ou vouvoiement selon le contexte</strong> (vouvoiement recommandé pour l'interface principale).</li>
-        <li>Le ton est <strong>élégant, chaleureux et rassurant</strong> — jamais technique ou froid.</li>
-        <li>Les labels de boutons sont en <strong>MAJUSCULES, courts et actifs</strong> : <code>COMMENCER</code>, <code>ESSAYER</code>, <code>VOIR LA DÉMO</code>.</li>
-        <li>Les descriptions sont fluides, à la 3ème personne du singulier : "SmartDress organise...", "L'application suggère...".</li>
-    </ul>
+    <h3>Visualisation de l'architecture</h3>
+    <table style="margin-top: 10px;">
+        <tr>
+            <th style="width: 30%;">Aspect</th>
+            <th>Règle / Logique Graphique</th>
+        </tr>
+        <tr>
+            <td style="font-weight: 600;">Cohérence</td>
+            <td>Tous les composants utilisent les variables CSS <code>--moss-green</code>, <code>--bark-brown</code>, etc.</td>
+        </tr>
+        <tr>
+            <td style="font-weight: 600;">Contrastes</td>
+            <td>Respect strict des normes WCAG AA pour garantir une accessibilité optimale.</td>
+        </tr>
+        <tr>
+            <td style="font-weight: 600;">Micro-animations</td>
+            <td>Transitions douces (0.3s) sur les hovers et les boutons pour une sensation premium.</td>
+        </tr>
+    </table>
 
     <hr style="margin-top: 40px; border: 0; border-top: 1px solid var(--bone);">
     <p style="text-align: center; color: var(--moss-green); font-style: italic; font-size: 0.9em; margin-bottom: 40px;">Charte Graphique SmartDress · Yasmine Haddad · Formation Développement Mobile · Mode Bootcamp · 2025–2026</p>
