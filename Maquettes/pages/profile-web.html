@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SmartDress - Mon Profil (Web)</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
@@ -37,7 +39,7 @@
     <header id="navbar" class="sd-navbar scrolled !fixed !bg-white/90">
         <div class="max-w-screen-xl mx-auto px-6 lg:px-12 flex items-center h-full gap-12">
             <a href="../index.html" class="sd-logo">Smart<span>Dress</span></a>
-            
+
             <nav class="hidden lg:flex items-center gap-8">
                 <a href="dashboard-web.html" class="sd-navlink">Dashboard</a>
                 <a href="garde-robe-web.html" class="sd-navlink">Garde-Robe</a>
@@ -54,25 +56,36 @@
 
     <main class="flex-1 max-w-5xl w-full mx-auto p-12">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            
+
             <!-- Left: Profile Summary -->
             <aside class="space-y-8">
-                <div class="bg-white p-10 rounded-[3rem] shadow-xl shadow-bark/5 border border-tan/10 text-center space-y-6">
+                <div
+                    class="bg-white p-10 rounded-[3rem] shadow-xl shadow-bark/5 border border-tan/10 text-center space-y-6">
                     <div class="relative w-32 h-32 mx-auto">
                         <div class="w-full h-full rounded-[2.5rem] bg-gradient-to-tr from-bark to-tan p-1">
-                            <div class="w-full h-full bg-white rounded-[2.2rem] overflow-hidden flex items-center justify-center">
-                                <img src="https://ui-avatars.com/api/?name=User&background=5C4A35&color=fff&size=256" alt="Avatar Large" class="w-full h-full object-cover">
+                            <div
+                                class="w-full h-full bg-white rounded-[2.2rem] overflow-hidden flex items-center justify-center">
+                                <img src="https://ui-avatars.com/api/?name=User&background=5C4A35&color=fff&size=256"
+                                    alt="Avatar Large" class="w-full h-full object-cover">
                             </div>
                         </div>
-                        <button class="absolute bottom-0 right-0 w-10 h-10 bg-moss text-white rounded-full shadow-lg border-4 border-white flex items-center justify-center hover:scale-110 transition-transform">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                        <button
+                            class="absolute bottom-0 right-0 w-10 h-10 bg-moss text-white rounded-full shadow-lg border-4 border-white flex items-center justify-center hover:scale-110 transition-transform">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                    d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
                         </button>
                     </div>
                     <div>
                         <h2 class="text-3xl font-display font-medium text-bark italic leading-tight">Yasmine Haddad</h2>
-                        <p class="text-tan text-[10px] font-bold uppercase tracking-widest mt-1">Membre depuis Mars 2026</p>
+                        <p class="text-tan text-[10px] font-bold uppercase tracking-widest mt-1">Membre depuis Mars 2026
+                        </p>
                     </div>
-                    <button class="w-full py-4 bg-bark text-white rounded-full text-[10px] font-bold uppercase tracking-[0.2em] shadow-lg shadow-bark/20 hover:bg-moss transition-all">
+                    <button
+                        class="w-full py-4 bg-bark text-white rounded-full text-[10px] font-bold uppercase tracking-[0.2em] shadow-lg shadow-bark/20 hover:bg-moss transition-all">
                         Modifier le profil
                     </button>
                 </div>
@@ -94,30 +107,55 @@
             <section class="lg:col-span-2 space-y-10">
                 <!-- Preferences -->
                 <div class="space-y-4">
-                    <h3 class="px-2 text-[11px] font-bold text-tan uppercase tracking-widest">Vos Préférences de Style</h3>
+                    <h3 class="px-2 text-[11px] font-bold text-tan uppercase tracking-widest">Vos Préférences de Style
+                    </h3>
                     <div class="bg-white rounded-[2.5rem] border border-tan/10 overflow-hidden shadow-xl shadow-bark/5">
                         <div class="divide-y divide-tan/5">
                             <div class="p-8 flex items-center justify-between hover:bg-cream/20 transition-colors">
                                 <div class="flex items-center gap-6">
-                                    <div class="w-14 h-14 bg-cream rounded-2xl flex items-center justify-center text-2xl">👗</div>
+                                    <div
+                                        class="w-14 h-14 bg-cream rounded-2xl flex items-center justify-center text-2xl">
+                                        👗</div>
                                     <div>
                                         <p class="text-base font-bold text-bark">Style de prédilection</p>
-                                        <p class="text-xs text-tan font-light">L'algorithme suggère des tenues basées sur ce choix.</p>
+                                        <p class="text-xs text-tan font-light">L'algorithme suggère des tenues basées
+                                            sur ce choix.</p>
                                     </div>
                                 </div>
-                                <select class="bg-offwhite border border-tan/20 rounded-xl px-4 py-2 text-xs font-bold text-moss outline-none focus:border-moss transition-all">
-                                    <option>Casual Chic</option>
-                                    <option>Bohème</option>
-                                    <option>Minimaliste</option>
-                                    <option>Business</option>
-                                </select>
+                                <div class="relative min-w-[200px]">
+                                    <select data-hs-select='{
+                                        "placeholder": "Choisir le style...",
+                                        "toggleTag": "<button type=\"button\" aria-expanded=\"false\"></button>",
+                                        "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-3 ps-5 pe-10 flex gap-x-2 text-nowrap w-full cursor-pointer bg-offwhite border border-tan/20 rounded-[18px] text-start text-xs font-bold text-moss focus:outline-none focus:ring-2 focus:ring-moss/20 focus:border-moss transition-all",
+                                        "dropdownClasses": "mt-2 z-50 w-full max-h-72 p-2 space-y-1 bg-white border border-tan/10 rounded-[20px] overflow-hidden overflow-y-auto shadow-2xl",
+                                        "optionClasses": "py-2 px-4 w-full text-xs text-bark font-medium cursor-pointer hover:bg-cream/50 rounded-[12px] focus:outline-none focus:bg-cream transition-colors",
+                                        "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"hidden hs-selected:block\"><svg class=\"shrink-0 size-3 text-moss\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg></span></div>"
+                                      }'>
+                                        <option value="">Style</option>
+                                        <option>Casual Chic</option>
+                                        <option>Bohème</option>
+                                        <option>Minimaliste</option>
+                                        <option>Business</option>
+                                    </select>
+                                    <div class="absolute top-1/2 end-4 -translate-y-1/2 pointer-events-none text-tan">
+                                        <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24"
+                                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="m7 15 5 5 5-5"></path>
+                                            <path d="m7 9 5-5 5 5"></path>
+                                        </svg>
+                                    </div>
+                                </div>
                             </div>
                             <div class="p-8 flex items-center justify-between hover:bg-cream/20 transition-colors">
                                 <div class="flex items-center gap-6">
-                                    <div class="w-14 h-14 bg-cream rounded-2xl flex items-center justify-center text-2xl">🔔</div>
+                                    <div
+                                        class="w-14 h-14 bg-cream rounded-2xl flex items-center justify-center text-2xl">
+                                        🔔</div>
                                     <div>
                                         <p class="text-base font-bold text-bark">Notifications quotidienne</p>
-                                        <p class="text-xs text-tan font-light">Recevez votre tenue suggérée chaque matin.</p>
+                                        <p class="text-xs text-tan font-light">Recevez votre tenue suggérée chaque
+                                            matin.</p>
                                     </div>
                                 </div>
                                 <button class="w-14 h-8 bg-moss rounded-full relative p-1 transition-all">
@@ -126,10 +164,13 @@
                             </div>
                             <div class="p-8 flex items-center justify-between hover:bg-cream/20 transition-colors">
                                 <div class="flex items-center gap-6">
-                                    <div class="w-14 h-14 bg-cream rounded-2xl flex items-center justify-center text-2xl">📍</div>
+                                    <div
+                                        class="w-14 h-14 bg-cream rounded-2xl flex items-center justify-center text-2xl">
+                                        📍</div>
                                     <div>
                                         <p class="text-base font-bold text-bark">Localisation</p>
-                                        <p class="text-xs text-tan font-light">Utilisé pour les prévisions météo locales.</p>
+                                        <p class="text-xs text-tan font-light">Utilisé pour les prévisions météo
+                                            locales.</p>
                                     </div>
                                 </div>
                                 <span class="text-sm font-bold text-bark">Casablanca, Maroc</span>
@@ -141,26 +182,41 @@
                 <!-- Privacy & Security -->
                 <div class="space-y-4">
                     <h3 class="px-2 text-[11px] font-bold text-tan uppercase tracking-widest">Sécurité du Compte</h3>
-                    <div class="bg-white rounded-[2.5rem] border border-tan/10 overflow-hidden shadow-xl shadow-bark/5 divide-y divide-tan/5">
-                        <button class="w-full p-8 flex items-center justify-between hover:bg-cream/20 transition-colors text-left">
+                    <div
+                        class="bg-white rounded-[2.5rem] border border-tan/10 overflow-hidden shadow-xl shadow-bark/5 divide-y divide-tan/5">
+                        <button
+                            class="w-full p-8 flex items-center justify-between hover:bg-cream/20 transition-colors text-left">
                             <div class="flex items-center gap-6">
-                                <div class="w-14 h-14 bg-cream/50 rounded-2xl flex items-center justify-center text-2xl">🔒</div>
+                                <div
+                                    class="w-14 h-14 bg-cream/50 rounded-2xl flex items-center justify-center text-2xl">
+                                    🔒</div>
                                 <div>
                                     <p class="text-base font-bold text-bark">Mot de passe</p>
                                     <p class="text-xs text-tan font-light">Dernière modification : il y a 3 mois</p>
                                 </div>
                             </div>
-                            <svg class="w-6 h-6 text-tan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                            <svg class="w-6 h-6 text-tan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 5l7 7-7 7" />
+                            </svg>
                         </button>
-                        <button class="w-full p-8 flex items-center justify-between hover:bg-red-50/30 transition-colors text-left group">
+                        <button
+                            class="w-full p-8 flex items-center justify-between hover:bg-red-50/30 transition-colors text-left group">
                             <div class="flex items-center gap-6">
-                                <div class="w-14 h-14 bg-red-50 text-red-400 rounded-2xl flex items-center justify-center text-2xl group-hover:bg-red-100 transition-colors">🗑️</div>
+                                <div
+                                    class="w-14 h-14 bg-red-50 text-red-400 rounded-2xl flex items-center justify-center text-2xl group-hover:bg-red-100 transition-colors">
+                                    🗑️</div>
                                 <div>
                                     <p class="text-base font-bold text-red-500">Supprimer le compte</p>
-                                    <p class="text-xs text-red-400 font-light">Toutes vos données seront effacées définitivement.</p>
+                                    <p class="text-xs text-red-400 font-light">Toutes vos données seront effacées
+                                        définitivement.</p>
                                 </div>
                             </div>
-                            <svg class="w-6 h-6 text-red-300 group-hover:text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                            <svg class="w-6 h-6 text-red-300 group-hover:text-red-500" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 5l7 7-7 7" />
+                            </svg>
                         </button>
                     </div>
                 </div>
@@ -173,7 +229,8 @@
         <div class="max-w-screen-xl mx-auto px-6 lg:px-12 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
             <div>
                 <a href="../index.html" class="sd-logo sd-logo--light">Smart<span>Dress</span></a>
-                <p class="sd-footer-tag">Votre garde-robe digitale intelligente. Suggestions de tenues basées sur la météo et vos préférences.</p>
+                <p class="sd-footer-tag">Votre garde-robe digitale intelligente. Suggestions de tenues basées sur la
+                    météo et vos préférences.</p>
             </div>
             <div>
                 <h4 class="sd-footer-heading">Application</h4>
@@ -207,6 +264,8 @@
         </div>
     </footer>
 
+    <!-- Preline JS -->
+    <script src="https://cdn.jsdelivr.net/npm/preline/dist/preline.js"></script>
 </body>
 
 </html>

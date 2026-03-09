@@ -325,28 +325,64 @@
                                     class="w-full pl-10 pr-4 py-3 bg-cream/30 border border-tan/10 rounded-2xl focus:border-moss outline-none text-xs transition-all placeholder:text-tan/50">
                             </div>
                             <div x-show="tab === 'dashboard'" class="relative w-full sm:w-48">
-                                <select x-model="filter"
-                                    class="w-full px-4 py-3 bg-cream/30 border border-tan/10 rounded-2xl focus:border-moss outline-none text-xs transition-all text-bark font-medium appearance-none cursor-pointer">
+                                <select data-hs-select='{
+                                    "placeholder": "Tous les Statuts",
+                                    "toggleTag": "<button type=\"button\" aria-expanded=\"false\"></button>",
+                                    "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-3 ps-4 pe-10 flex gap-x-2 text-nowrap w-full cursor-pointer bg-cream/30 border border-tan/10 rounded-2xl text-start text-xs font-medium text-bark focus:outline-none focus:ring-2 focus:ring-moss/20 focus:border-moss transition-all",
+                                    "dropdownClasses": "mt-2 z-50 w-full max-h-72 p-2 space-y-1 bg-white border border-tan/10 rounded-[20px] overflow-hidden overflow-y-auto shadow-2xl",
+                                    "optionClasses": "py-2 px-4 w-full text-xs text-bark font-medium cursor-pointer hover:bg-cream/50 rounded-[12px] focus:outline-none focus:bg-cream transition-colors",
+                                    "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"hidden hs-selected:block\"><svg class=\"shrink-0 size-3 text-moss\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg></span></div>"
+                                  }' x-model="filter">
                                     <option value="all">Tous les Statuts</option>
                                     <option value="génération">Génération de tenue</option>
                                     <option value="ajout">Ajout vêtement</option>
                                 </select>
+                                <div class="absolute top-1/2 end-4 -translate-y-1/2 pointer-events-none text-tan">
+                                    <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="m7 15 5 5 5-5"></path>
+                                        <path d="m7 9 5-5 5 5"></path>
+                                    </svg>
+                                </div>
                             </div>
                             <div x-show="tab === 'users'" class="relative w-full sm:w-40">
-                                <select x-model="roleFilter"
-                                    class="w-full px-4 py-3 bg-cream/30 border border-tan/10 rounded-2xl focus:border-moss outline-none text-xs transition-all text-bark font-medium appearance-none cursor-pointer">
+                                <select data-hs-select='{
+                                    "placeholder": "Tous les Rôles",
+                                    "toggleTag": "<button type=\"button\" aria-expanded=\"false\"></button>",
+                                    "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-3 ps-4 pe-10 flex gap-x-2 text-nowrap w-full cursor-pointer bg-cream/30 border border-tan/10 rounded-2xl text-start text-xs font-medium text-bark focus:outline-none focus:ring-2 focus:ring-moss/20 focus:border-moss transition-all",
+                                    "dropdownClasses": "mt-2 z-50 w-full max-h-72 p-2 space-y-1 bg-white border border-tan/10 rounded-[20px] overflow-hidden overflow-y-auto shadow-2xl",
+                                    "optionClasses": "py-2 px-4 w-full text-xs text-bark font-medium cursor-pointer hover:bg-cream/50 rounded-[12px] focus:outline-none focus:bg-cream transition-colors",
+                                    "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"hidden hs-selected:block\"><svg class=\"shrink-0 size-3 text-moss\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg></span></div>"
+                                  }' x-model="roleFilter">
                                     <option value="all">Tous les Rôles</option>
                                     <option value="admin">Admin</option>
                                     <option value="user">User</option>
                                 </select>
+                                <div class="absolute top-1/2 end-3.5 -translate-y-1/2 pointer-events-none text-tan">
+                                    <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="m7 15 5 5 5-5"></path>
+                                        <path d="m7 9 5-5 5 5"></path>
+                                    </svg>
+                                </div>
                             </div>
                             <div x-show="tab === 'users'" class="relative w-full sm:w-40">
-                                <select x-model="statusFilter"
-                                    class="w-full px-4 py-3 bg-cream/30 border border-tan/10 rounded-2xl focus:border-moss outline-none text-xs transition-all text-bark font-medium appearance-none cursor-pointer">
+                                <select data-hs-select='{
+                                    "placeholder": "Tous les Statuts",
+                                    "toggleTag": "<button type=\"button\" aria-expanded=\"false\"></button>",
+                                    "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-3 ps-4 pe-10 flex gap-x-2 text-nowrap w-full cursor-pointer bg-cream/30 border border-tan/10 rounded-2xl text-start text-xs font-medium text-bark focus:outline-none focus:ring-2 focus:ring-moss/20 focus:border-moss transition-all",
+                                    "dropdownClasses": "mt-2 z-50 w-full max-h-72 p-2 space-y-1 bg-white border border-tan/10 rounded-[20px] overflow-hidden overflow-y-auto shadow-2xl",
+                                    "optionClasses": "py-2 px-4 w-full text-xs text-bark font-medium cursor-pointer hover:bg-cream/50 rounded-[12px] focus:outline-none focus:bg-cream transition-colors",
+                                    "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"hidden hs-selected:block\"><svg class=\"shrink-0 size-3 text-moss\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg></span></div>"
+                                  }' x-model="statusFilter">
                                     <option value="all">Tous les Statuts</option>
                                     <option value="actif">Actif</option>
                                     <option value="inactif">Inactif</option>
                                 </select>
+                                <div class="absolute top-1/2 end-3.5 -translate-y-1/2 pointer-events-none text-tan">
+                                    <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="m7 15 5 5 5-5"></path>
+                                        <path d="m7 9 5-5 5 5"></path>
+                                    </svg>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -529,11 +565,25 @@
                         <div>
                             <label
                                 class="text-[10px] font-bold text-tan uppercase tracking-widest mb-2 block">Action</label>
-                            <select x-model="currentActivity.action"
-                                class="w-full px-6 py-4 bg-cream/30 border border-tan/10 rounded-2xl focus:border-moss outline-none text-sm appearance-none">
-                                <option value="Génération de tenue">Génération de tenue</option>
-                                <option value="Ajout vêtement">Ajout vêtement</option>
-                            </select>
+                            <div class="relative">
+                                <select data-hs-select='{
+                                    "placeholder": "Choisir une action...",
+                                    "toggleTag": "<button type=\"button\" aria-expanded=\"false\"></button>",
+                                    "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-4 ps-6 pe-12 flex gap-x-2 text-nowrap w-full cursor-pointer bg-cream/30 border border-tan/10 rounded-2xl text-start text-sm font-medium text-bark focus:outline-none focus:ring-2 focus:ring-moss/20 focus:border-moss transition-all",
+                                    "dropdownClasses": "mt-2 z-50 w-full max-h-72 p-2 space-y-1 bg-white border border-tan/10 rounded-[20px] overflow-hidden overflow-y-auto shadow-2xl",
+                                    "optionClasses": "py-3 px-4 w-full text-sm text-bark cursor-pointer hover:bg-cream/50 rounded-[15px] focus:outline-none focus:bg-cream transition-colors",
+                                    "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"hidden hs-selected:block\"><svg class=\"shrink-0 size-3.5 text-moss\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg></span></div>"
+                                  }' x-model="currentActivity.action">
+                                    <option value="Génération de tenue">Génération de tenue</option>
+                                    <option value="Ajout vêtement">Ajout vêtement</option>
+                                </select>
+                                <div class="absolute top-1/2 end-5 -translate-y-1/2 pointer-events-none text-tan">
+                                    <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="m7 15 5 5 5-5"></path>
+                                        <path d="m7 9 5-5 5 5"></path>
+                                    </svg>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </template>
@@ -557,20 +607,48 @@
                             <div>
                                 <label
                                     class="text-[10px] font-bold text-tan uppercase tracking-widest mb-2 block">Rôle</label>
-                                <select x-model="currentUser.role"
-                                    class="w-full px-6 py-4 bg-cream/30 border border-tan/10 rounded-2xl text-sm appearance-none">
-                                    <option value="User">User</option>
-                                    <option value="Admin">Admin</option>
-                                </select>
+                                <div class="relative">
+                                    <select data-hs-select='{
+                                        "placeholder": "Choisir",
+                                        "toggleTag": "<button type=\"button\" aria-expanded=\"false\"></button>",
+                                        "toggleClasses": "relative py-4 ps-6 pe-12 flex gap-x-2 text-nowrap w-full cursor-pointer bg-cream/30 border border-tan/10 rounded-2xl text-start text-sm font-medium text-bark focus:outline-none focus:ring-2 focus:ring-moss/20 focus:border-moss transition-all",
+                                        "dropdownClasses": "mt-2 z-50 w-full max-h-72 p-2 space-y-1 bg-white border border-tan/10 rounded-[20px] overflow-hidden overflow-y-auto shadow-2xl",
+                                        "optionClasses": "py-3 px-4 w-full text-sm text-bark cursor-pointer hover:bg-cream/50 rounded-[15px] focus:outline-none focus:bg-cream transition-colors",
+                                        "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"hidden hs-selected:block\"><svg class=\"shrink-0 size-3.5 text-moss\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg></span></div>"
+                                      }' x-model="currentUser.role">
+                                        <option value="User">User</option>
+                                        <option value="Admin">Admin</option>
+                                    </select>
+                                    <div class="absolute top-1/2 end-5 -translate-y-1/2 pointer-events-none text-tan">
+                                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="m7 15 5 5 5-5"></path>
+                                            <path d="m7 9 5-5 5 5"></path>
+                                        </svg>
+                                    </div>
+                                </div>
                             </div>
                             <div>
                                 <label
                                     class="text-[10px] font-bold text-tan uppercase tracking-widest mb-2 block">Statut</label>
-                                <select x-model="currentUser.status"
-                                    class="w-full px-6 py-4 bg-cream/30 border border-tan/10 rounded-2xl text-sm appearance-none">
-                                    <option value="Actif">Actif</option>
-                                    <option value="Inactif">Inactif</option>
-                                </select>
+                                <div class="relative">
+                                    <select data-hs-select='{
+                                        "placeholder": "Choisir",
+                                        "toggleTag": "<button type=\"button\" aria-expanded=\"false\"></button>",
+                                        "toggleClasses": "relative py-4 ps-6 pe-12 flex gap-x-2 text-nowrap w-full cursor-pointer bg-cream/30 border border-tan/10 rounded-2xl text-start text-sm font-medium text-bark focus:outline-none focus:ring-2 focus:ring-moss/20 focus:border-moss transition-all",
+                                        "dropdownClasses": "mt-2 z-50 w-full max-h-72 p-2 space-y-1 bg-white border border-tan/10 rounded-[20px] overflow-hidden overflow-y-auto shadow-2xl",
+                                        "optionClasses": "py-3 px-4 w-full text-sm text-bark cursor-pointer hover:bg-cream/50 rounded-[15px] focus:outline-none focus:bg-cream transition-colors",
+                                        "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"hidden hs-selected:block\"><svg class=\"shrink-0 size-3.5 text-moss\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg></span></div>"
+                                      }' x-model="currentUser.status">
+                                        <option value="Actif">Actif</option>
+                                        <option value="Inactif">Inactif</option>
+                                    </select>
+                                    <div class="absolute top-1/2 end-5 -translate-y-1/2 pointer-events-none text-tan">
+                                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="m7 15 5 5 5-5"></path>
+                                            <path d="m7 9 5-5 5 5"></path>
+                                        </svg>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -650,6 +728,8 @@
             });
         });
     </script>
+    <!-- Preline JS -->
+    <script src="https://cdn.jsdelivr.net/npm/preline/dist/preline.js"></script>
 </body>
 
 </html>

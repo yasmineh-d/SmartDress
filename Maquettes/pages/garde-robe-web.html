@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SmartDress - Ma Garde-Robe (Web)</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
@@ -29,7 +31,9 @@
     <link rel="stylesheet" href="../assets/css/charte.css">
     <link rel="stylesheet" href="../assets/css/style-landing.css">
     <style>
-        .clothing-card:hover .zoom-img { transform: scale(1.1); }
+        .clothing-card:hover .zoom-img {
+            transform: scale(1.1);
+        }
     </style>
 </head>
 
@@ -39,10 +43,11 @@
     <header id="navbar" class="sd-navbar scrolled !fixed !bg-white/90">
         <div class="max-w-screen-xl mx-auto px-6 lg:px-12 flex items-center h-full gap-12">
             <a href="../index.html" class="sd-logo">Smart<span>Dress</span></a>
-            
+
             <nav class="hidden lg:flex items-center gap-8">
                 <a href="dashboard-web.html" class="sd-navlink">Dashboard</a>
-                <a href="#" class="sd-navlink !opacity-100 !text-moss font-bold border-b-2 border-moss pb-1">Garde-Robe</a>
+                <a href="#"
+                    class="sd-navlink !opacity-100 !text-moss font-bold border-b-2 border-moss pb-1">Garde-Robe</a>
                 <a href="profile-web.html" class="sd-navlink">Profil</a>
             </nav>
 
@@ -56,27 +61,33 @@
 
     <div class="flex-1 flex flex-col lg:flex-row min-h-screen">
         <!-- Sidebar Filters -->
-        <aside class="w-full lg:w-72 bg-white border-r border-tan/10 flex flex-col p-8 space-y-10 lg:sticky lg:top-20 lg:h-[calc(100vh-80px)] overflow-y-auto">
+        <aside
+            class="w-full lg:w-72 bg-white border-r border-tan/10 flex flex-col p-8 space-y-10 lg:sticky lg:top-20 lg:h-[calc(100vh-80px)] overflow-y-auto">
             <div class="space-y-4">
                 <h3 class="text-[10px] font-bold text-tan uppercase tracking-widest">Catégories</h3>
                 <div class="flex flex-col gap-1">
-                    <button class="flex items-center justify-between px-4 py-3 bg-moss text-white rounded-xl shadow-md text-sm font-bold">
+                    <button
+                        class="flex items-center justify-between px-4 py-3 bg-moss text-white rounded-xl shadow-md text-sm font-bold">
                         <span>Tout</span>
                         <span class="opacity-60 font-medium">42</span>
                     </button>
-                    <button class="flex items-center justify-between px-4 py-3 text-bark hover:bg-cream/30 rounded-xl text-sm font-medium transition-colors">
+                    <button
+                        class="flex items-center justify-between px-4 py-3 text-bark hover:bg-cream/30 rounded-xl text-sm font-medium transition-colors">
                         <span>Hauts</span>
                         <span class="text-tan">18</span>
                     </button>
-                    <button class="flex items-center justify-between px-4 py-3 text-bark hover:bg-cream/30 rounded-xl text-sm font-medium transition-colors">
+                    <button
+                        class="flex items-center justify-between px-4 py-3 text-bark hover:bg-cream/30 rounded-xl text-sm font-medium transition-colors">
                         <span>Bas</span>
                         <span class="text-tan">12</span>
                     </button>
-                    <button class="flex items-center justify-between px-4 py-3 text-bark hover:bg-cream/30 rounded-xl text-sm font-medium transition-colors">
+                    <button
+                        class="flex items-center justify-between px-4 py-3 text-bark hover:bg-cream/30 rounded-xl text-sm font-medium transition-colors">
                         <span>Chaussures</span>
                         <span class="text-tan">8</span>
                     </button>
-                    <button class="flex items-center justify-between px-4 py-3 text-bark hover:bg-cream/30 rounded-xl text-sm font-medium transition-colors">
+                    <button
+                        class="flex items-center justify-between px-4 py-3 text-bark hover:bg-cream/30 rounded-xl text-sm font-medium transition-colors">
                         <span>Accessoires</span>
                         <span class="text-tan">4</span>
                     </button>
@@ -86,10 +97,14 @@
             <div class="space-y-4">
                 <h3 class="text-[10px] font-bold text-tan uppercase tracking-widest">Saisons</h3>
                 <div class="flex flex-wrap gap-2">
-                    <button class="px-4 py-2 border border-tan/20 rounded-lg text-xs font-bold text-tan hover:border-moss hover:bg-moss hover:text-white transition-all">Hiver</button>
-                    <button class="px-4 py-2 border border-tan/20 rounded-lg text-xs font-bold text-tan hover:border-moss hover:bg-moss hover:text-white transition-all">Printemps</button>
-                    <button class="px-4 py-2 border border-tan/20 rounded-lg text-xs font-bold text-tan hover:border-moss hover:bg-moss hover:text-white transition-all">Été</button>
-                    <button class="px-4 py-2 border border-tan/20 rounded-lg text-xs font-bold text-tan hover:border-moss hover:bg-moss hover:text-white transition-all">Automne</button>
+                    <button
+                        class="px-4 py-2 border border-tan/20 rounded-lg text-xs font-bold text-tan hover:border-moss hover:bg-moss hover:text-white transition-all">Hiver</button>
+                    <button
+                        class="px-4 py-2 border border-tan/20 rounded-lg text-xs font-bold text-tan hover:border-moss hover:bg-moss hover:text-white transition-all">Printemps</button>
+                    <button
+                        class="px-4 py-2 border border-tan/20 rounded-lg text-xs font-bold text-tan hover:border-moss hover:bg-moss hover:text-white transition-all">Été</button>
+                    <button
+                        class="px-4 py-2 border border-tan/20 rounded-lg text-xs font-bold text-tan hover:border-moss hover:bg-moss hover:text-white transition-all">Automne</button>
                 </div>
             </div>
 
@@ -97,7 +112,8 @@
                 <div class="p-6 bg-bark rounded-[2rem] text-center space-y-3">
                     <p class="text-[10px] font-bold text-tan uppercase tracking-widest">Nettoyage IA</p>
                     <p class="text-xs text-bone font-light">3 articles n'ont pas été portés depuis longtemps.</p>
-                    <button class="text-[9px] font-bold text-white underline tracking-widest uppercase">Voir le rapport</button>
+                    <button class="text-[9px] font-bold text-white underline tracking-widest uppercase">Voir le
+                        rapport</button>
                 </div>
             </div>
         </aside>
@@ -106,19 +122,34 @@
         <main class="flex-1 p-10 bg-offwhite/50">
             <div class="max-w-6xl mx-auto space-y-8">
                 <div class="flex items-baseline justify-between">
-                    <h2 class="text-4xl font-display font-medium text-bark italic">Collection <span class="text-moss">Automne 2026</span></h2>
+                    <h2 class="text-4xl font-display font-medium text-bark italic">Collection <span
+                            class="text-moss">Automne 2026</span></h2>
                     <p class="text-tan text-sm">Affichage de 42 articles</p>
                 </div>
 
-                <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     <!-- Cards using the mobile data structure but desktop layout -->
                     <!-- Card 1 -->
-                    <div class="group relative bg-white rounded-[2.5rem] border border-tan/10 p-3 shadow-xl shadow-bark/5 hover:-translate-y-2 transition-all duration-300">
-                        <div class="aspect-square bg-cream/30 rounded-[2rem] flex items-center justify-center text-6xl relative overflow-hidden transition-colors group-hover:bg-cream/50">
+                    <div
+                        class="group relative bg-white rounded-[2.5rem] border border-tan/10 p-3 shadow-xl shadow-bark/5 hover:-translate-y-2 transition-all duration-300">
+                        <div
+                            class="aspect-square bg-cream/30 rounded-[2rem] flex items-center justify-center text-6xl relative overflow-hidden transition-colors group-hover:bg-cream/50">
                             <span class="zoom-img transition-transform duration-500">👕</span>
-                            <div class="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <button class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan hover:text-moss shadow-sm"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></button>
-                                <button class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan hover:text-bark shadow-sm"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></button>
+                            <div
+                                class="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button
+                                    class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan hover:text-moss shadow-sm"><svg
+                                        class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                                    </svg></button>
+                                <button
+                                    class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan hover:text-bark shadow-sm"><svg
+                                        class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        <path
+                                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                    </svg></button>
                             </div>
                         </div>
                         <div class="p-4 space-y-1">
@@ -128,12 +159,26 @@
                     </div>
 
                     <!-- Card 2 -->
-                    <div class="group relative bg-white rounded-[2.5rem] border border-tan/10 p-3 shadow-xl shadow-bark/5 hover:-translate-y-2 transition-all duration-300">
-                        <div class="aspect-square bg-bone/20 rounded-[2rem] flex items-center justify-center text-6xl relative overflow-hidden transition-colors group-hover:bg-bone/40">
+                    <div
+                        class="group relative bg-white rounded-[2.5rem] border border-tan/10 p-3 shadow-xl shadow-bark/5 hover:-translate-y-2 transition-all duration-300">
+                        <div
+                            class="aspect-square bg-bone/20 rounded-[2rem] flex items-center justify-center text-6xl relative overflow-hidden transition-colors group-hover:bg-bone/40">
                             <span class="zoom-img transition-transform duration-500">🧥</span>
-                            <div class="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <button class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-moss shadow-sm"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></button>
-                                <button class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan hover:text-bark shadow-sm"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></button>
+                            <div
+                                class="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button
+                                    class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-moss shadow-sm"><svg
+                                        class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                                    </svg></button>
+                                <button
+                                    class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan hover:text-bark shadow-sm"><svg
+                                        class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        <path
+                                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                    </svg></button>
                             </div>
                         </div>
                         <div class="p-4 space-y-1">
@@ -142,13 +187,27 @@
                         </div>
                     </div>
 
-                     <!-- Card 3 -->
-                     <div class="group relative bg-white rounded-[2.5rem] border border-tan/10 p-3 shadow-xl shadow-bark/5 hover:-translate-y-2 transition-all duration-300">
-                        <div class="aspect-square bg-cream/30 rounded-[2rem] flex items-center justify-center text-6xl relative overflow-hidden transition-colors group-hover:bg-cream/50">
+                    <!-- Card 3 -->
+                    <div
+                        class="group relative bg-white rounded-[2.5rem] border border-tan/10 p-3 shadow-xl shadow-bark/5 hover:-translate-y-2 transition-all duration-300">
+                        <div
+                            class="aspect-square bg-cream/30 rounded-[2rem] flex items-center justify-center text-6xl relative overflow-hidden transition-colors group-hover:bg-cream/50">
                             <span class="zoom-img transition-transform duration-500">👖</span>
-                            <div class="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <button class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan hover:text-moss shadow-sm"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></button>
-                                <button class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan hover:text-bark shadow-sm"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></button>
+                            <div
+                                class="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button
+                                    class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan hover:text-moss shadow-sm"><svg
+                                        class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                                    </svg></button>
+                                <button
+                                    class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan hover:text-bark shadow-sm"><svg
+                                        class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        <path
+                                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                    </svg></button>
                             </div>
                         </div>
                         <div class="p-4 space-y-1">
@@ -158,12 +217,26 @@
                     </div>
 
                     <!-- Card 4 -->
-                    <div class="group relative bg-white rounded-[2.5rem] border border-tan/10 p-3 shadow-xl shadow-bark/5 hover:-translate-y-2 transition-all duration-300">
-                        <div class="aspect-square bg-bone/20 rounded-[2rem] flex items-center justify-center text-6xl relative overflow-hidden transition-colors group-hover:bg-bone/40">
+                    <div
+                        class="group relative bg-white rounded-[2.5rem] border border-tan/10 p-3 shadow-xl shadow-bark/5 hover:-translate-y-2 transition-all duration-300">
+                        <div
+                            class="aspect-square bg-bone/20 rounded-[2rem] flex items-center justify-center text-6xl relative overflow-hidden transition-colors group-hover:bg-bone/40">
                             <span class="zoom-img transition-transform duration-500">👟</span>
-                            <div class="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <button class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan hover:text-moss shadow-sm"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></button>
-                                <button class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan hover:text-bark shadow-sm"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></button>
+                            <div
+                                class="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button
+                                    class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan hover:text-moss shadow-sm"><svg
+                                        class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                                    </svg></button>
+                                <button
+                                    class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan hover:text-bark shadow-sm"><svg
+                                        class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        <path
+                                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                    </svg></button>
                             </div>
                         </div>
                         <div class="p-4 space-y-1">
@@ -181,7 +254,8 @@
         <div class="max-w-screen-xl mx-auto px-6 lg:px-12 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
             <div>
                 <a href="../index.html" class="sd-logo sd-logo--light">Smart<span>Dress</span></a>
-                <p class="sd-footer-tag">Votre garde-robe digitale intelligente. Suggestions de tenues basées sur la météo et vos préférences.</p>
+                <p class="sd-footer-tag">Votre garde-robe digitale intelligente. Suggestions de tenues basées sur la
+                    météo et vos préférences.</p>
             </div>
             <div>
                 <h4 class="sd-footer-heading">Application</h4>
