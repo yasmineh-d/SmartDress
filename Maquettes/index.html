@@ -46,7 +46,8 @@
     </script>
 </head>
 
-<body class="font-body bg-offwhite text-bark overflow-x-hidden" x-data="{ mobileMenuOpen: false, scrolled: false }"
+<body class="font-body bg-offwhite text-bark overflow-x-hidden" 
+    x-data="{ mobileMenuOpen: false, scrolled: false, isLoggedIn: false }"
     @scroll.window="scrolled = (window.pageYOffset > 20)">
 
     <!-- NAVBAR -->
@@ -62,8 +63,21 @@
             </nav>
 
             <div class="hidden lg:flex items-center gap-3">
-                <a href="./pages/auth.html" class="sd-btn-ghost">Se connecter</a>
-                <a href="./pages/auth.html" class="sd-btn-primary">Commencer</a>
+                <template x-if="!isLoggedIn">
+                    <div class="flex items-center gap-3">
+                        <a href="./pages/auth.html?mode=login" class="sd-btn-ghost">Se connecter</a>
+                        <a href="./pages/auth.html?mode=register" class="sd-btn-primary">Commencer</a>
+                    </div>
+                </template>
+                <template x-if="isLoggedIn">
+                    <div class="flex items-center gap-3">
+                        <a href="./pages/profile.html" class="flex items-center gap-2 px-4 py-2 bg-cream/50 rounded-full text-xs font-bold text-bark hover:bg-cream transition-all border border-tan/10">
+                            <div class="w-6 h-6 bg-tan rounded-full flex items-center justify-center text-[10px] text-white">YH</div>
+                            Mon Profil
+                        </a>
+                        <button @click="isLoggedIn = false" class="text-xs font-bold text-tan hover:text-bark uppercase tracking-widest px-2 transition-all">Déconnexion</button>
+                    </div>
+                </template>
             </div>
 
             <!-- Mobile hamburger -->
@@ -89,10 +103,18 @@
                 <a href="#trust" class="sd-navlink" @click="mobileMenuOpen = false">Témoignages</a>
                 <a href="#contact" class="sd-navlink" @click="mobileMenuOpen = false">Contact</a>
                 <hr class="border-tan/30 my-1" />
-                <a href="./pages/auth.html" class="sd-btn-ghost text-center" @click="mobileMenuOpen = false">Se
-                    connecter</a>
-                <a href="./pages/auth.html" class="sd-btn-primary text-center"
-                    @click="mobileMenuOpen = false">Commencer gratuitement</a>
+                <template x-if="!isLoggedIn">
+                    <div class="flex flex-col gap-3">
+                        <a href="./pages/auth.html?mode=login" class="sd-btn-ghost text-center" @click="mobileMenuOpen = false">Se connecter</a>
+                        <a href="./pages/auth.html?mode=register" class="sd-btn-primary text-center" @click="mobileMenuOpen = false">Commencer gratuitement</a>
+                    </div>
+                </template>
+                <template x-if="isLoggedIn">
+                    <div class="flex flex-col gap-3">
+                        <a href="./pages/profile.html" class="sd-btn-ghost text-center" @click="mobileMenuOpen = false">Mon Profil</a>
+                        <button @click="isLoggedIn = false; mobileMenuOpen = false" class="sd-btn-primary text-center">Déconnexion</button>
+                    </div>
+                </template>
             </div>
         </div>
     </header>
@@ -703,16 +725,16 @@
                 const ripple = document.createElement('span');
                 const size = Math.max(rect.width, rect.height);
                 ripple.style.cssText = `
-          position: absolute;
-          width: ${size}px; height: ${size}px;
-          top: ${e.clientY - rect.top - size / 2}px;
-          left: ${e.clientX - rect.left - size / 2}px;
-          background: rgba(255,255,255,0.2);
-          border-radius: 50%;
-          transform: scale(0);
-          animation: ripple 0.5s ease-out;
-          pointer-events: none;
-        `;
+                    position: absolute;
+                    width: ${size}px; height: ${size}px;
+                    top: ${e.clientY - rect.top - size / 2}px;
+                    left: ${e.clientX - rect.left - size / 2}px;
+                    background: rgba(255,255,255,0.2);
+                    border-radius: 50%;
+                    transform: scale(0);
+                    animation: ripple 0.5s ease-out;
+                    pointer-events: none;
+                `;
                 this.style.position = 'relative';
                 this.style.overflow = 'hidden';
                 this.appendChild(ripple);
@@ -720,6 +742,7 @@
             });
         });
     </script>
+
 </body>
 
 </html>

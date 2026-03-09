@@ -28,6 +28,7 @@
         }
     </script>
     <link rel="stylesheet" href="../assets/css/charte.css">
+    <link rel="stylesheet" href="../assets/css/style-landing.css">
 </head>
 
 <body class="bg-bark font-body text-bark min-h-screen flex items-center justify-center p-6 relative overflow-x-hidden">
@@ -43,15 +44,13 @@
         <div class="bg-white p-6 rounded-[2.5rem] shadow-2xl shadow-bark/40 space-y-5 relative overflow-hidden">
             
             <div class="space-y-4">
-                <div class="flex items-center gap-2">
-                    <a href="../index.html" class="p-1 hover:bg-cream/50 rounded-full transition-colors text-tan">
+                <div class="flex items-center gap-3">
+                    <a href="../index.html" class="p-1 hover:bg-cream/50 rounded-full transition-colors text-tan flex-shrink-0">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                         </svg>
                     </a>
-                    <div style="font-family: 'DM Sans', sans-serif;" class="text-[9px] font-bold tracking-[0.3em] uppercase text-tan py-1">
-                        SmartDress
-                    </div>
+                    <a href="../index.html" class="sd-logo">Smart<span>Dress</span></a>
                 </div>
                 
                 <div class="space-y-1">
@@ -93,17 +92,17 @@
             <form id="register-form" class="auth-form space-y-5 hidden">
                 <div class="space-y-1.5">
                     <label class="text-[9px] font-bold text-tan uppercase tracking-[0.2em] ml-1">Nom complet</label>
-                    <input type="text" placeholder="Jean Dupont"
+                    <input type="text" placeholder="Jean Dupont" required
                         class="w-full px-5 py-3.5 bg-white border border-tan/10 rounded-xl focus:border-bark outline-none transition-all placeholder:text-tan/50 text-bark text-xs">
                 </div>
                 <div class="space-y-1.5">
                     <label class="text-[9px] font-bold text-tan uppercase tracking-[0.2em] ml-1">Email</label>
-                    <input type="email" placeholder="nom@exemple.com"
+                    <input type="email" placeholder="nom@exemple.com" required
                         class="w-full px-5 py-3.5 bg-white border border-tan/10 rounded-xl focus:border-bark outline-none transition-all placeholder:text-tan/50 text-bark text-xs">
                 </div>
                 <div class="space-y-1.5">
                     <label class="text-[9px] font-bold text-tan uppercase tracking-[0.2em] ml-1">Mot de passe</label>
-                    <input type="password" placeholder="••••••••"
+                    <input type="password" placeholder="••••••••" required
                         class="w-full px-5 py-3.5 bg-white border border-tan/10 rounded-xl focus:border-bark outline-none transition-all placeholder:text-tan/50 text-bark text-xs">
                 </div>
 
@@ -139,18 +138,38 @@
         const tabs = document.querySelectorAll('.tab-btn');
         const forms = document.querySelectorAll('.auth-form');
 
+        function switchTab(target) {
+            tabs.forEach(t => {
+                t.classList.remove('bg-white', 'text-bark', 'shadow-sm');
+                t.classList.add('text-tan');
+                if (t.dataset.target === target) {
+                    t.classList.add('bg-white', 'text-bark', 'shadow-sm');
+                    t.classList.remove('text-tan');
+                }
+            });
+            forms.forEach(f => {
+                f.classList.add('hidden');
+                if (f.id === `${target}-form`) {
+                    f.classList.remove('hidden');
+                }
+            });
+        }
+
         tabs.forEach(tab => {
             tab.addEventListener('click', () => {
-                const target = tab.dataset.target;
-                tabs.forEach(t => {
-                    t.classList.remove('bg-white', 'text-bark', 'shadow-md');
-                    t.classList.add('text-tan');
-                });
-                tab.classList.add('bg-white', 'text-bark', 'shadow-md');
-                tab.classList.remove('text-tan');
-                forms.forEach(f => f.classList.add('hidden'));
-                document.getElementById(`${target}-form`).classList.remove('hidden');
+                switchTab(tab.dataset.target);
             });
+        });
+
+        // Handle URL parameters for Login vs Register
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const mode = urlParams.get('mode');
+            if (mode === 'register') {
+                switchTab('register');
+            } else if (mode === 'login') {
+                switchTab('login');
+            }
         });
 
         document.getElementById('login-form').addEventListener('submit', (e) => {
@@ -158,6 +177,16 @@
             const btn = e.target.querySelector('button[type="submit"]');
             btn.disabled = true;
             btn.innerHTML = '<span class="flex items-center justify-center gap-2">Chargement...</span>';
+            setTimeout(() => {
+                window.location.href = 'dashboard.html';
+            }, 800);
+        });
+
+        document.getElementById('register-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button[type="submit"]');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="flex items-center justify-center gap-2">Création en cours...</span>';
             setTimeout(() => {
                 window.location.href = 'dashboard.html';
             }, 800);
