@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="fr text-slate-900">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartDress - Mon Profil (Web)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bark: '#5C4A35',
+                        moss: '#889063',
+                        tan: '#CFBB99',
+                        bone: '#E5D7C4',
+                        cream: '#F5EEE4',
+                        offwhite: '#FDFAF6',
+                    },
+                    fontFamily: {
+                        display: ['"Cormorant Garamond"', 'serif'],
+                        body: ['"DM Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="../assets/css/charte.css">
+    <link rel="stylesheet" href="../assets/css/style-landing.css">
+</head>
+
+<body class="bg-offwhite font-body text-bark min-h-screen flex flex-col">
+
+    <!-- Header (Style Home) -->
+    <header id="navbar" class="sd-navbar scrolled !fixed !bg-white/90">
+        <div class="max-w-screen-xl mx-auto px-6 lg:px-12 flex items-center h-full gap-12">
+            <a href="../index.html" class="sd-logo">Smart<span>Dress</span></a>
+            
+            <nav class="hidden lg:flex items-center gap-8">
+                <a href="dashboard-web.html" class="sd-navlink">Dashboard</a>
+                <a href="garde-robe-web.html" class="sd-navlink">Garde-Robe</a>
+                <a href="#" class="sd-navlink !opacity-100 !text-moss font-bold border-b-2 border-moss pb-1">Profil</a>
+            </nav>
+
+            <div class="ml-auto hidden lg:flex items-center gap-3">
+                <a href="../index.html" class="sd-btn-ghost !py-2 !px-4 !text-[10px]">Déconnexion</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="h-20"></div> <!-- Spacer for fixed navbar -->
+
+    <main class="flex-1 max-w-5xl w-full mx-auto p-12">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            
+            <!-- Left: Profile Summary -->
+            <aside class="space-y-8">
+                <div class="bg-white p-10 rounded-[3rem] shadow-xl shadow-bark/5 border border-tan/10 text-center space-y-6">
+                    <div class="relative w-32 h-32 mx-auto">
+                        <div class="w-full h-full rounded-[2.5rem] bg-gradient-to-tr from-bark to-tan p-1">
+                            <div class="w-full h-full bg-white rounded-[2.2rem] overflow-hidden flex items-center justify-center">
+                                <img src="https://ui-avatars.com/api/?name=User&background=5C4A35&color=fff&size=256" alt="Avatar Large" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <button class="absolute bottom-0 right-0 w-10 h-10 bg-moss text-white rounded-full shadow-lg border-4 border-white flex items-center justify-center hover:scale-110 transition-transform">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                        </button>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl font-display font-medium text-bark italic leading-tight">Yasmine Haddad</h2>
+                        <p class="text-tan text-[10px] font-bold uppercase tracking-widest mt-1">Membre depuis Mars 2026</p>
+                    </div>
+                    <button class="w-full py-4 bg-bark text-white rounded-full text-[10px] font-bold uppercase tracking-[0.2em] shadow-lg shadow-bark/20 hover:bg-moss transition-all">
+                        Modifier le profil
+                    </button>
+                </div>
+
+                <div class="bg-cream/30 p-8 rounded-[2.5rem] border border-tan/10">
+                    <h3 class="text-[10px] font-bold text-tan uppercase tracking-widest mb-4">Abonnement</h3>
+                    <div class="flex items-center justify-between">
+                        <span class="text-bark font-bold">Plan Premium</span>
+                        <span class="text-moss font-bold text-xs">Actif</span>
+                    </div>
+                    <div class="mt-4 h-1.5 w-full bg-tan/20 rounded-full overflow-hidden">
+                        <div class="h-full w-2/3 bg-moss"></div>
+                    </div>
+                    <p class="mt-4 text-[10px] text-tan font-medium">Prochaine facture : 15 Avril 2026</p>
+                </div>
+            </aside>
+
+            <!-- Right: Settings & Preferences -->
+            <section class="lg:col-span-2 space-y-10">
+                <!-- Preferences -->
+                <div class="space-y-4">
+                    <h3 class="px-2 text-[11px] font-bold text-tan uppercase tracking-widest">Vos Préférences de Style</h3>
+                    <div class="bg-white rounded-[2.5rem] border border-tan/10 overflow-hidden shadow-xl shadow-bark/5">
+                        <div class="divide-y divide-tan/5">
+                            <div class="p-8 flex items-center justify-between hover:bg-cream/20 transition-colors">
+                                <div class="flex items-center gap-6">
+                                    <div class="w-14 h-14 bg-cream rounded-2xl flex items-center justify-center text-2xl">👗</div>
+                                    <div>
+                                        <p class="text-base font-bold text-bark">Style de prédilection</p>
+                                        <p class="text-xs text-tan font-light">L'algorithme suggère des tenues basées sur ce choix.</p>
+                                    </div>
+                                </div>
+                                <select class="bg-offwhite border border-tan/20 rounded-xl px-4 py-2 text-xs font-bold text-moss outline-none focus:border-moss transition-all">
+                                    <option>Casual Chic</option>
+                                    <option>Bohème</option>
+                                    <option>Minimaliste</option>
+                                    <option>Business</option>
+                                </select>
+                            </div>
+                            <div class="p-8 flex items-center justify-between hover:bg-cream/20 transition-colors">
+                                <div class="flex items-center gap-6">
+                                    <div class="w-14 h-14 bg-cream rounded-2xl flex items-center justify-center text-2xl">🔔</div>
+                                    <div>
+                                        <p class="text-base font-bold text-bark">Notifications quotidienne</p>
+                                        <p class="text-xs text-tan font-light">Recevez votre tenue suggérée chaque matin.</p>
+                                    </div>
+                                </div>
+                                <button class="w-14 h-8 bg-moss rounded-full relative p-1 transition-all">
+                                    <div class="absolute right-1 top-1 w-6 h-6 bg-white rounded-full shadow-sm"></div>
+                                </button>
+                            </div>
+                            <div class="p-8 flex items-center justify-between hover:bg-cream/20 transition-colors">
+                                <div class="flex items-center gap-6">
+                                    <div class="w-14 h-14 bg-cream rounded-2xl flex items-center justify-center text-2xl">📍</div>
+                                    <div>
+                                        <p class="text-base font-bold text-bark">Localisation</p>
+                                        <p class="text-xs text-tan font-light">Utilisé pour les prévisions météo locales.</p>
+                                    </div>
+                                </div>
+                                <span class="text-sm font-bold text-bark">Casablanca, Maroc</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Privacy & Security -->
+                <div class="space-y-4">
+                    <h3 class="px-2 text-[11px] font-bold text-tan uppercase tracking-widest">Sécurité du Compte</h3>
+                    <div class="bg-white rounded-[2.5rem] border border-tan/10 overflow-hidden shadow-xl shadow-bark/5 divide-y divide-tan/5">
+                        <button class="w-full p-8 flex items-center justify-between hover:bg-cream/20 transition-colors text-left">
+                            <div class="flex items-center gap-6">
+                                <div class="w-14 h-14 bg-cream/50 rounded-2xl flex items-center justify-center text-2xl">🔒</div>
+                                <div>
+                                    <p class="text-base font-bold text-bark">Mot de passe</p>
+                                    <p class="text-xs text-tan font-light">Dernière modification : il y a 3 mois</p>
+                                </div>
+                            </div>
+                            <svg class="w-6 h-6 text-tan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                        </button>
+                        <button class="w-full p-8 flex items-center justify-between hover:bg-red-50/30 transition-colors text-left group">
+                            <div class="flex items-center gap-6">
+                                <div class="w-14 h-14 bg-red-50 text-red-400 rounded-2xl flex items-center justify-center text-2xl group-hover:bg-red-100 transition-colors">🗑️</div>
+                                <div>
+                                    <p class="text-base font-bold text-red-500">Supprimer le compte</p>
+                                    <p class="text-xs text-red-400 font-light">Toutes vos données seront effacées définitivement.</p>
+                                </div>
+                            </div>
+                            <svg class="w-6 h-6 text-red-300 group-hover:text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- FOOTER (Style Home) -->
+    <footer class="sd-footer !mt-20">
+        <div class="max-w-screen-xl mx-auto px-6 lg:px-12 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+            <div>
+                <a href="../index.html" class="sd-logo sd-logo--light">Smart<span>Dress</span></a>
+                <p class="sd-footer-tag">Votre garde-robe digitale intelligente. Suggestions de tenues basées sur la météo et vos préférences.</p>
+            </div>
+            <div>
+                <h4 class="sd-footer-heading">Application</h4>
+                <ul class="sd-footer-links">
+                    <li><a href="dashboard-web.html">Dashboard</a></li>
+                    <li><a href="garde-robe-web.html">Garde-robe</a></li>
+                    <li><a href="#">Suggestions</a></li>
+                    <li><a href="#">Notifications</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="sd-footer-heading">Compte</h4>
+                <ul class="sd-footer-links">
+                    <li><a href="profile-web.html">Mon profil</a></li>
+                    <li><a href="#">Paramètres</a></li>
+                    <li><a href="../index.html">Déconnexion</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="sd-footer-heading">Projet</h4>
+                <ul class="sd-footer-links">
+                    <li><a href="#">À propos</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Mentions légales</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="sd-footer-bottom">
+            <span>© 2025–2026 SmartDress · Yasmine Haddad</span>
+            <span>Formation Développement Mobile · Mode Bootcamp</span>
+        </div>
+    </footer>
+
+</body>
+
+</html>

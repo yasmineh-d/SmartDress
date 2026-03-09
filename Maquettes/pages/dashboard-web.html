@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="fr text-slate-900">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartDress - Tableau de Bord (Web)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bark: '#5C4A35',
+                        moss: '#889063',
+                        tan: '#CFBB99',
+                        bone: '#E5D7C4',
+                        cream: '#F5EEE4',
+                        offwhite: '#FDFAF6',
+                        deeptan: '#B8A07E',
+                    },
+                    fontFamily: {
+                        display: ['"Cormorant Garamond"', 'serif'],
+                        body: ['"DM Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="../assets/css/charte.css">
+    <link rel="stylesheet" href="../assets/css/style-landing.css">
+    <style>
+        .clothing-card:hover .zoom-effect { transform: scale(1.1); }
+    </style>
+</head>
+
+<body class="bg-offwhite font-body text-bark min-h-screen flex flex-col">
+
+    <!-- Header (Style Home) -->
+    <header id="navbar" class="sd-navbar scrolled !fixed !bg-white/90">
+        <div class="max-w-screen-xl mx-auto px-6 lg:px-12 flex items-center h-full gap-12">
+            <a href="../index.html" class="sd-logo">Smart<span>Dress</span></a>
+            
+            <nav class="hidden lg:flex items-center gap-8">
+                <a href="#" class="sd-navlink !opacity-100 !text-moss font-bold border-b-2 border-moss pb-1">Dashboard</a>
+                <a href="garde-robe-web.html" class="sd-navlink">Garde-Robe</a>
+                <a href="profile-web.html" class="sd-navlink">Profil</a>
+            </nav>
+
+            <div class="ml-auto hidden lg:flex items-center gap-3">
+                <a href="../index.html" class="sd-btn-ghost !py-2 !px-4 !text-[10px]">Déconnexion</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="h-20"></div> <!-- Spacer for fixed navbar -->
+
+    <main class="flex-1 max-w-7xl w-full mx-auto p-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- Left Column: Metrics & Quick Actions (Col-4) -->
+        <aside class="lg:col-span-4 space-y-8">
+            <!-- Weather Widget -->
+            <div class="bg-white p-8 rounded-[2.5rem] shadow-xl shadow-bark/5 border border-tan/10 space-y-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-[10px] font-bold text-tan uppercase tracking-[0.2em]">Météo locale</p>
+                        <p class="text-sm font-medium text-bark">Casablanca, MA</p>
+                    </div>
+                    <div class="w-16 h-16 bg-cream flex items-center justify-center rounded-2xl shadow-inner border border-tan/10 text-4xl">
+                        ⛅
+                    </div>
+                </div>
+                <div class="flex items-baseline gap-2">
+                    <span class="text-5xl font-display font-semibold text-bark">24°</span>
+                    <span class="text-xl text-moss italic font-medium">Ensoleillé</span>
+                </div>
+                <p class="text-xs text-bark/60 leading-relaxed font-light">
+                    Conditions idéales pour une tenue légère et respirante aujourd'hui.
+                </p>
+            </div>
+
+            <!-- Stats / Info -->
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-bark p-6 rounded-[2rem] text-white space-y-2">
+                    <p class="text-[9px] font-bold opacity-60 uppercase tracking-widest">Articles</p>
+                    <p class="text-3xl font-display italic">42</p>
+                </div>
+                <div class="bg-moss p-6 rounded-[2rem] text-white space-y-2">
+                    <p class="text-[9px] font-bold opacity-60 uppercase tracking-widest">Favoris</p>
+                    <p class="text-3xl font-display italic">12</p>
+                </div>
+            </div>
+
+            <!-- Quick Access -->
+            <div class="space-y-4">
+                <h3 class="px-4 text-[10px] font-bold text-tan uppercase tracking-widest">Navigation Rapide</h3>
+                <div class="grid grid-cols-1 gap-2">
+                    <a href="garde-robe-web.html" class="flex items-center justify-between p-4 bg-white rounded-2xl border border-tan/10 hover:border-moss transition-all group">
+                        <div class="flex items-center gap-4">
+                            <span class="text-xl">🧥</span>
+                            <span class="text-sm font-medium text-bark">Gérer mon dressing</span>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-tan group-hover:text-moss" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                    <a href="#" class="flex items-center justify-between p-4 bg-white rounded-2xl border border-tan/10 hover:border-moss transition-all group">
+                        <div class="flex items-center gap-4">
+                            <span class="text-xl">📅</span>
+                            <span class="text-sm font-medium text-bark">Planning de la semaine</span>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-tan group-hover:text-moss" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Right Column: Suggestion (Col-8) -->
+        <section class="lg:col-span-8">
+            <div class="bg-white rounded-[3rem] shadow-2xl shadow-bark/5 overflow-hidden border border-tan/10 flex flex-col md:flex-row h-full">
+                <!-- Visual Part -->
+                <div class="md:w-1/2 bg-cream/30 relative flex items-center justify-center p-12 min-h-[400px]">
+                    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(207,187,153,0.15)_0%,transparent_70%)]"></div>
+                    
+                    <div class="relative flex flex-col items-center gap-8 scale-110">
+                        <div class="w-48 h-48 bg-white rounded-[2.5rem] border-4 border-white shadow-xl flex items-center justify-center flex-col transform -rotate-3 transition-all hover:rotate-0 hover:scale-105" id="top-box">
+                            <span class="text-6xl mb-3" id="top-icon">👕</span>
+                            <span class="text-[11px] font-bold text-tan uppercase tracking-widest" id="top-name">T-Shirt Blanc</span>
+                        </div>
+                        <div class="w-52 h-60 bg-bone/20 rounded-[2.5rem] border-4 border-white shadow-xl flex items-center justify-center flex-col transform rotate-2 transition-all hover:rotate-0 hover:scale-105" id="bottom-box">
+                            <span class="text-6xl mb-3" id="bottom-icon">👖</span>
+                            <span class="text-[11px] font-bold text-deeptan uppercase tracking-widest" id="bottom-name">Jean Slim Bleu</span>
+                        </div>
+                    </div>
+
+                    <div class="absolute top-8 left-8">
+                        <span class="px-6 py-2 bg-moss text-white text-[11px] font-bold rounded-full shadow-lg shadow-moss/20 tracking-[0.2em] uppercase">Suggestion IA</span>
+                    </div>
+                </div>
+
+                <!-- Info Part -->
+                <div class="md:w-1/2 p-12 flex flex-col justify-center space-y-10">
+                    <div class="space-y-4">
+                        <h2 class="text-5xl font-display font-medium text-bark leading-tight italic" id="outfit-title">Casual Moderne</h2>
+                        <p class="text-bark/60 text-lg leading-relaxed font-light">
+                            Un look épuré et intemporel. Le blanc apporte du frais tandis que le denim assure le confort. Parfait pour une journée de travail créative ou une sortie en ville.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4 pt-4">
+                        <button class="w-full py-6 bg-moss text-white font-body font-bold text-xs tracking-[0.25em] uppercase rounded-full shadow-2xl shadow-moss/30 hover:bg-bark hover:translate-y-[-4px] transition-all transform duration-300">
+                            Porter cet ensemble
+                        </button>
+                        <button id="refresh-outfit" class="w-full py-5 text-tan hover:text-bark font-body font-bold uppercase tracking-[0.2em] rounded-2xl hover:bg-cream/50 transition-all flex items-center justify-center gap-3 group">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 group-hover:rotate-180 transition-transform duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                            </svg>
+                            Générer un autre look
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER (Style Home) -->
+    <footer class="sd-footer !mt-20">
+        <div class="max-w-screen-xl mx-auto px-6 lg:px-12 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+            <div>
+                <a href="../index.html" class="sd-logo sd-logo--light">Smart<span>Dress</span></a>
+                <p class="sd-footer-tag">Votre garde-robe digitale intelligente. Suggestions de tenues basées sur la météo et vos préférences.</p>
+            </div>
+            <div>
+                <h4 class="sd-footer-heading">Application</h4>
+                <ul class="sd-footer-links">
+                    <li><a href="dashboard-web.html">Dashboard</a></li>
+                    <li><a href="garde-robe-web.html">Garde-robe</a></li>
+                    <li><a href="#">Suggestions</a></li>
+                    <li><a href="#">Notifications</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="sd-footer-heading">Compte</h4>
+                <ul class="sd-footer-links">
+                    <li><a href="profile-web.html">Mon profil</a></li>
+                    <li><a href="#">Paramètres</a></li>
+                    <li><a href="../index.html">Déconnexion</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="sd-footer-heading">Projet</h4>
+                <ul class="sd-footer-links">
+                    <li><a href="#">À propos</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Mentions légales</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="sd-footer-bottom">
+            <span>© 2025–2026 SmartDress · Yasmine Haddad</span>
+            <span>Formation Développement Mobile · Mode Bootcamp</span>
+        </div>
+    </footer>
+
+    <script>
+        const outfits = [
+            { title: "Casual Moderne", top: "👕", topName: "T-Shirt Blanc", topBg: "bg-white", bottom: "👖", bottomName: "Jean Slim Bleu", bottomBg: "bg-bone/20" },
+            { title: "Élégance Soirée", top: "👔", topName: "Chemise Noire", topBg: "bg-slate-800 text-white", bottom: "👖", bottomName: "Pantalon Costume", bottomBg: "bg-slate-300" },
+            { title: "Weekend Chill", top: "🧥", topName: "Hoodie Moss", topBg: "bg-moss text-white", bottom: "🩳", bottomName: "Short Cargo", bottomBg: "bg-tan/20" }
+        ];
+
+        let currentIndex = 0;
+        const refreshBtn = document.getElementById('refresh-outfit');
+        const titleEl = document.getElementById('outfit-title');
+        const topIcon = document.getElementById('top-icon');
+        const topName = document.getElementById('top-name');
+        const topBox = document.getElementById('top-box');
+        const bottomIcon = document.getElementById('bottom-icon');
+        const bottomName = document.getElementById('bottom-name');
+        const bottomBox = document.getElementById('bottom-box');
+
+        refreshBtn.addEventListener('click', () => {
+            refreshBtn.classList.add('opacity-50', 'pointer-events-none');
+            
+            setTimeout(() => {
+                currentIndex = (currentIndex + 1) % outfits.length;
+                const o = outfits[currentIndex];
+                
+                titleEl.textContent = o.title;
+                topIcon.textContent = o.top;
+                topName.textContent = o.topName;
+                topBox.className = `w-48 h-48 ${o.topBg.split(' ')[0]} rounded-[2.5rem] border-4 border-white shadow-xl flex items-center justify-center flex-col transform -rotate-3 transition-all hover:rotate-0 hover:scale-105`;
+                
+                bottomIcon.textContent = o.bottom;
+                bottomName.textContent = o.bottomName;
+                bottomBox.className = `w-52 h-60 ${o.bottomBg} rounded-[2.5rem] border-4 border-white shadow-xl flex items-center justify-center flex-col transform rotate-2 transition-all hover:rotate-0 hover:scale-105`;
+
+                refreshBtn.classList.remove('opacity-50', 'pointer-events-none');
+            }, 600);
+        });
+    </script>
+</body>
+
+</html>
