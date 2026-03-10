@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartDress - Ma Garde-Robe (Web)</title>
+    <title>SmartDress - Mes Favoris (Web)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;700&display=swap"
@@ -30,8 +30,8 @@
             }
         }
     </script>
-    <link rel="stylesheet" href="../assets/css/charte.css">
-    <link rel="stylesheet" href="../assets/css/style-landing.css">
+    <link rel="stylesheet" href="../../assets/css/charte.css">
+    <link rel="stylesheet" href="../../assets/css/style-landing.css">
     <style>
         .clothing-card:hover .zoom-img {
             transform: scale(1.1);
@@ -44,18 +44,17 @@
     <!-- Header (Style Home) -->
     <header id="navbar" class="sd-navbar scrolled !fixed !bg-white/90">
         <div class="max-w-screen-xl mx-auto px-6 lg:px-12 flex items-center h-full gap-12">
-            <a href="../index.html" class="sd-logo">Smart<span>Dress</span></a>
+            <a href="../../index.html" class="sd-logo">Smart<span>Dress</span></a>
 
             <nav class="hidden lg:flex items-center gap-8">
                 <a href="dashboard-web.html" class="sd-navlink">Dashboard</a>
-                <a href="#"
-                    class="sd-navlink !opacity-100 !text-moss font-bold border-b-2 border-moss pb-1">Garde-Robe</a>
-                <a href="favoris-web.html" class="sd-navlink">Favoris</a>
+                <a href="garde-robe-web.html" class="sd-navlink">Garde-Robe</a>
+                <a href="#" class="sd-navlink !opacity-100 !text-moss font-bold border-b-2 border-moss pb-1">Favoris</a>
                 <a href="profile-web.html" class="sd-navlink">Profil</a>
             </nav>
 
             <div class="ml-auto hidden lg:flex items-center gap-3">
-                <a href="../index.html" class="sd-btn-ghost !py-2 !px-4 !text-[10px]">Déconnexion</a>
+                <a href="../../index.html" class="sd-btn-ghost !py-2 !px-4 !text-[10px]">Déconnexion</a>
             </div>
         </div>
     </header>
@@ -72,7 +71,7 @@
                     <button id="btn-cat-all" onclick="setSidebarCategory('all')"
                         class="sidebar-cat-btn flex items-center justify-between px-4 py-3 bg-moss text-white rounded-xl shadow-md text-sm font-bold transition-all">
                         <span>Tout</span>
-                        <span class="opacity-60 font-medium tracking-wider">5</span>
+                        <span class="opacity-60 font-medium tracking-wider">6</span>
                     </button>
                     <button id="btn-cat-hauts" onclick="setSidebarCategory('hauts')"
                         class="sidebar-cat-btn flex items-center justify-between px-4 py-3 text-bark hover:bg-cream/30 rounded-xl text-sm font-medium transition-colors">
@@ -82,7 +81,7 @@
                     <button id="btn-cat-bas" onclick="setSidebarCategory('bas')"
                         class="sidebar-cat-btn flex items-center justify-between px-4 py-3 text-bark hover:bg-cream/30 rounded-xl text-sm font-medium transition-colors">
                         <span>Bas</span>
-                        <span class="text-tan tracking-wider">1</span>
+                        <span class="text-tan tracking-wider">2</span>
                     </button>
                     <button id="btn-cat-chaussures" onclick="setSidebarCategory('chaussures')"
                         class="sidebar-cat-btn flex items-center justify-between px-4 py-3 text-bark hover:bg-cream/30 rounded-xl text-sm font-medium transition-colors">
@@ -126,9 +125,10 @@
             <div class="max-w-6xl mx-auto space-y-8">
                 <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
                     <div class="space-y-1">
-                        <h2 class="text-4xl font-display font-medium text-bark italic">Ma <span
-                                class="text-moss">Garde-Robe</span></h2>
-                        <p class="text-tan text-xs font-medium tracking-wide">Affichage de <span id="item-count">42</span> articles</p>
+                        <h2 class="text-4xl font-display font-medium text-bark italic">Mes <span
+                                class="text-moss">Favoris</span></h2>
+                        <p class="text-tan text-xs font-medium tracking-wide">Affichage de <span
+                                id="item-count">6</span> articles</p>
                     </div>
 
                     <div class="flex flex-col sm:flex-row items-center gap-4 w-full md:w-auto">
@@ -163,7 +163,9 @@
                             </select>
 
                             <div class="absolute top-1/2 end-3 -translate-y-1/2 pointer-events-none">
-                                <svg class="shrink-0 size-3.5 text-tan" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <svg class="shrink-0 size-3.5 text-tan" xmlns="http://www.w3.org/2000/svg" width="24"
+                                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
                                     <path d="m7 15 5 5 5-5"></path>
                                     <path d="m7 9 5-5 5 5"></path>
                                 </svg>
@@ -182,10 +184,11 @@
                             <span class="zoom-img transition-transform duration-500">👕</span>
                             <div
                                 class="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <button onclick="toggleFavorite(event, this)"
-                                    class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan shadow-sm transition-colors"><svg
-                                        class="w-4 h-4 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                <button
+                                    class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan hover:text-moss shadow-sm"><svg
+                                        class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
                                     </svg></button>
                                 <button
                                     class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan hover:text-bark shadow-sm"><svg
@@ -211,9 +214,11 @@
                             <div
                                 class="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <button onclick="toggleFavorite(event, this)"
-                                    class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan shadow-sm transition-colors"><svg
-                                        class="w-4 h-4 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                    class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-red-500 shadow-sm transition-colors"><svg
+                                        class="w-4 h-4 transition-colors text-red-500" fill="currentColor"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                                     </svg></button>
                                 <button
                                     class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan hover:text-bark shadow-sm"><svg
@@ -238,10 +243,11 @@
                             <span class="zoom-img transition-transform duration-500">👖</span>
                             <div
                                 class="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <button onclick="toggleFavorite(event, this)"
-                                    class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan shadow-sm transition-colors"><svg
-                                        class="w-4 h-4 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                <button
+                                    class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan hover:text-moss shadow-sm"><svg
+                                        class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
                                     </svg></button>
                                 <button
                                     class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan hover:text-bark shadow-sm"><svg
@@ -267,16 +273,10 @@
                             <div
                                 class="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <button onclick="toggleFavorite(event, this)"
-                                    class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan shadow-sm transition-colors"><svg
-                                        class="w-4 h-4 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                    </svg></button>
-                                <button
-                                    class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan hover:text-bark shadow-sm"><svg
-                                        class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-red-500 shadow-sm transition-colors"><svg
+                                        class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                                         <path
-                                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
                                     </svg></button>
                             </div>
                         </div>
@@ -290,20 +290,43 @@
                     <div data-category="accessoires"
                         class="clothing-card group relative bg-white rounded-[2.5rem] border border-tan/10 p-3 shadow-xl shadow-bark/5 hover:-translate-y-2 transition-all duration-300">
                         <div
-                            class="aspect-square bg-cream/40 rounded-[1.5rem] flex items-center justify-center text-6xl relative overflow-hidden transition-colors group-hover:bg-cream/50">
+                            class="aspect-square bg-cream/30 rounded-[2rem] flex items-center justify-center text-6xl relative overflow-hidden transition-colors group-hover:bg-cream/50">
                             <span class="zoom-img transition-transform duration-500">👜</span>
                             <div
                                 class="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <button onclick="toggleFavorite(event, this)"
-                                    class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan hover:text-red-500 shadow-sm transition-colors"><svg
-                                        class="w-4 h-4 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                    class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-red-500 shadow-sm transition-colors"><svg
+                                        class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
                                     </svg></button>
                             </div>
                         </div>
                         <div class="p-4 space-y-1">
                             <p class="text-[10px] font-bold text-tan uppercase tracking-widest">Accessoire / Cuir</p>
                             <h4 class="text-lg font-display font-medium text-bark italic">Sac à Main Tan</h4>
+                        </div>
+                    </div>
+
+                    <!-- Card 6 -->
+                    <div data-category="bas"
+                        class="clothing-card group relative bg-white rounded-[2.5rem] border border-tan/10 p-3 shadow-xl shadow-bark/5 hover:-translate-y-2 transition-all duration-300">
+                        <div
+                            class="aspect-square bg-bone/20 rounded-[2rem] flex items-center justify-center text-6xl relative overflow-hidden transition-colors group-hover:bg-bone/40">
+                            <span class="zoom-img transition-transform duration-500">👖</span>
+                            <div
+                                class="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button onclick="toggleFavorite(event, this)"
+                                    class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-red-500 shadow-sm transition-colors"><svg
+                                        class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                                    </svg></button>
+                            </div>
+                        </div>
+                        <div class="p-4 space-y-1">
+                            <p class="text-[10px] font-bold text-tan uppercase tracking-widest">Bas / Chino</p>
+                            <h4 class="text-lg font-display font-medium text-bark italic">Pantalon Beige</h4>
                         </div>
                     </div>
                 </div>
@@ -315,8 +338,9 @@
     <footer class="sd-footer !mt-20">
         <div class="max-w-screen-xl mx-auto px-6 lg:px-12 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
             <div>
-                <a href="../index.html" class="sd-logo sd-logo--light">Smart<span>Dress</span></a>
-                <p class="sd-footer-tag">Votre garde-robe digitale intelligente. Suggestions de tenues basées sur la météo et vos préférences.</p>
+                <a href="../../index.html" class="sd-logo sd-logo--light">Smart<span>Dress</span></a>
+                <p class="sd-footer-tag">Votre garde-robe digitale intelligente. Suggestions de tenues basées sur la
+                    météo et vos préférences.</p>
             </div>
             <div>
                 <h4 class="sd-footer-heading">Application</h4>
@@ -324,7 +348,7 @@
                     <li><a href="dashboard-web.html">Dashboard</a></li>
                     <li><a href="garde-robe-web.html">Garde-Robe</a></li>
                     <li><a href="favoris-web.html">Favoris</a></li>
-                    <li><a href="#">Suggestions</a></li>
+                    <li><a href="dashboard-web.html">Suggestions</a></li>
                     <li><a href="#">Notifications</a></li>
                 </ul>
             </div>
@@ -333,7 +357,7 @@
                 <ul class="sd-footer-links">
                     <li><a href="profile-web.html">Mon profil</a></li>
                     <li><a href="#">Paramètres</a></li>
-                    <li><a href="../index.html">Déconnexion</a></li>
+                    <li><a href="../../index.html">Déconnexion</a></li>
                 </ul>
             </div>
             <div>
@@ -351,27 +375,32 @@
         </div>
     </footer>
 
-    </footer>
-
     <!-- Floating Action Button (+) -->
-    <button id="add-item-btn" class="fixed bottom-8 right-8 w-16 h-16 bg-moss text-white rounded-full shadow-2xl flex items-center justify-center hover:bg-bark hover:scale-110 active:scale-95 transition-all z-40 group">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 transition-transform group-hover:rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <button id="add-item-btn"
+        class="fixed bottom-8 right-8 w-16 h-16 bg-moss text-white rounded-full shadow-2xl flex items-center justify-center hover:bg-bark hover:scale-110 active:scale-95 transition-all z-40 group">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 transition-transform group-hover:rotate-90" fill="none"
+            viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4" />
         </svg>
     </button>
 
     <!-- Overlay / Backdrop -->
-    <div id="modal-overlay" class="fixed inset-0 bg-bark/60 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-300"></div>
+    <div id="modal-overlay"
+        class="fixed inset-0 bg-bark/60 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-300"></div>
 
     <!-- Modal : Ajouter un vêtement -->
-    <div id="modal-add" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-[3rem] shadow-2xl z-[60] hidden opacity-0 scale-95 transition-all duration-300 w-full max-w-xl p-12">
+    <div id="modal-add"
+        class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-[3rem] shadow-2xl z-[60] hidden opacity-0 scale-95 transition-all duration-300 w-full max-w-xl p-12">
         <div class="flex items-center justify-between mb-10">
             <div class="space-y-1">
-                <h2 class="text-3xl font-display font-medium text-bark italic">Ajouter au <span class="text-moss">Dressing</span></h2>
+                <h2 class="text-3xl font-display font-medium text-bark italic">Ajouter au <span
+                        class="text-moss">Dressing</span></h2>
                 <p class="text-tan text-xs font-medium uppercase tracking-widest">Nouvel article</p>
             </div>
-            <button onclick="closeModal('modal-add')" class="w-12 h-12 flex items-center justify-center bg-cream/50 rounded-2xl text-tan hover:text-bark hover:bg-cream transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <button onclick="closeModal('modal-add')"
+                class="w-12 h-12 flex items-center justify-center bg-cream/50 rounded-2xl text-tan hover:text-bark hover:bg-cream transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </button>
@@ -381,19 +410,25 @@
             <!-- Upload Zone -->
             <div class="space-y-4">
                 <input type="file" id="item-photo-input" class="hidden" accept="image/*">
-                <div id="upload-zone" onclick="document.getElementById('item-photo-input').click()" 
+                <div id="upload-zone" onclick="document.getElementById('item-photo-input').click()"
                     class="aspect-square bg-cream/20 border-2 border-dashed border-tan/20 rounded-[2.5rem] flex flex-col items-center justify-center text-tan hover:bg-cream/40 transition-all cursor-pointer group overflow-hidden relative">
                     <div id="upload-placeholder" class="flex flex-col items-center justify-center">
-                        <div class="w-20 h-20 bg-white rounded-3xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-moss" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <div
+                            class="w-20 h-20 bg-white rounded-3xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-moss" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
                             </svg>
                         </div>
                         <span class="text-xs font-bold uppercase tracking-widest">Prendre une photo</span>
-                        <p class="text-[9px] text-tan/60 mt-2 px-6 text-center">Glissez une image ou cliquez pour parcourir</p>
+                        <p class="text-[9px] text-tan/60 mt-2 px-6 text-center">Glissez une image ou cliquez pour
+                            parcourir</p>
                     </div>
-                    <img id="item-photo-preview" class="absolute inset-0 w-full h-full object-cover hidden" alt="Preview">
+                    <img id="item-photo-preview" class="absolute inset-0 w-full h-full object-cover hidden"
+                        alt="Preview">
                 </div>
             </div>
 
@@ -401,8 +436,10 @@
             <div class="flex flex-col justify-between py-2">
                 <div class="space-y-6">
                     <div class="space-y-1.5">
-                        <label class="px-2 text-[10px] font-bold text-tan uppercase tracking-widest">Nom de l'article</label>
-                        <input type="text" placeholder="Ex: Veste en cuir vintage" class="w-full px-5 py-4 bg-white border border-tan/10 rounded-2xl focus:border-moss outline-none transition-all font-medium placeholder:text-tan/30 text-sm">
+                        <label class="px-2 text-[10px] font-bold text-tan uppercase tracking-widest">Nom de
+                            l'article</label>
+                        <input type="text" placeholder="Ex: Veste en cuir vintage"
+                            class="w-full px-5 py-4 bg-white border border-tan/10 rounded-2xl focus:border-moss outline-none transition-all font-medium placeholder:text-tan/30 text-sm">
                     </div>
 
                     <div class="space-y-1.5 relative">
@@ -422,12 +459,18 @@
                             <option value="accessoires">Accessoires</option>
                         </select>
                         <div class="absolute top-[2.4rem] end-4 pointer-events-none">
-                            <svg class="shrink-0 size-4 text-tan/60" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m7 15 5 5 5-5"></path><path d="m7 9 5-5 5 5"></path></svg>
+                            <svg class="shrink-0 size-4 text-tan/60" xmlns="http://www.w3.org/2000/svg" width="24"
+                                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m7 15 5 5 5-5"></path>
+                                <path d="m7 9 5-5 5 5"></path>
+                            </svg>
                         </div>
                     </div>
                 </div>
 
-                <button id="save-item-btn" type="button" onclick="addItemToGrid()" class="w-full py-5 bg-moss text-white rounded-full text-[10px] font-bold uppercase tracking-[0.2em] shadow-xl shadow-moss/20 hover:bg-bark transition-all mt-8">
+                <button id="save-item-btn" type="button" onclick="addItemToGrid()"
+                    class="w-full py-5 bg-moss text-white rounded-full text-[10px] font-bold uppercase tracking-[0.2em] shadow-xl shadow-moss/20 hover:bg-bark transition-all mt-8">
                     Ajouter au dressing
                 </button>
             </div>
@@ -442,6 +485,8 @@
         const itemCount = document.getElementById('item-count');
         const categoryButtons = document.querySelectorAll('aside .flex.flex-col button');
 
+        searchInput.addEventListener('input', filterItems);
+
         function setSidebarCategory(cat) {
             // Update UI
             const buttons = document.querySelectorAll('.sidebar-cat-btn');
@@ -453,10 +498,7 @@
                 } else {
                     btn.classList.remove('bg-moss', 'text-white', 'shadow-md', 'font-bold');
                     btn.classList.add('text-bark', 'hover:bg-cream/30', 'font-medium');
-                    const spanCount = btn.querySelector('span:last-child');
-                    if (spanCount.classList.contains('opacity-60')) {
-                        spanCount.classList.replace('opacity-60', 'text-tan');
-                    }
+                    btn.querySelector('span:last-child').classList.replace('opacity-60', 'text-tan');
                 }
             });
 
@@ -466,23 +508,23 @@
                 selectEl.element.setValue(cat);
             } else {
                 filterSelect.value = cat;
-                filterItems();
             }
+            filterItems();
         }
 
         function filterItems() {
             const query = searchInput.value.toLowerCase();
             const selectVal = filterSelect.value.toLowerCase();
-            
+
             let visibleCount = 0;
             cards.forEach(card => {
                 const title = card.querySelector('h4').textContent.toLowerCase();
                 const desc = card.querySelector('p').textContent.toLowerCase();
                 const category = card.dataset.category || '';
-                
+
                 const matchSearch = title.includes(query) || desc.includes(query);
                 const matchSelect = selectVal === 'all' || category === selectVal;
-                
+
                 const isVisible = matchSearch && matchSelect;
                 card.classList.toggle('hidden', !isVisible);
                 if (isVisible) visibleCount++;
@@ -490,6 +532,16 @@
             itemCount.textContent = visibleCount;
         }
 
+        filterSelect.addEventListener('change', filterItems);
+
+        // Preline custom event for select change
+        document.addEventListener('change', (e) => {
+            if (e.target.id === 'filter-select') {
+                filterItems();
+            }
+        });
+
+        // Initialize display count
         window.addEventListener('load', () => {
             itemCount.textContent = cards.length;
         });
@@ -498,11 +550,23 @@
             e.stopPropagation(); // Prevent opening things underneath
             const svg = btn.querySelector('svg');
             const isFavorited = svg.getAttribute('fill') === 'currentColor';
-            
+
             if (isFavorited) {
                 // Remove from favorites
                 svg.setAttribute('fill', 'none');
                 svg.classList.remove('text-red-500');
+
+                // Masquer la carte immédiatement sur la page des favoris
+                const card = btn.closest('.clothing-card') || btn.closest('[data-category]');
+                if (card) {
+                    card.style.transition = 'all 0.5s ease';
+                    card.style.opacity = '0';
+                    card.style.transform = 'scale(0.9)';
+                    setTimeout(() => {
+                        card.classList.add('hidden');
+                        filterItems(); // Update item count
+                    }, 500);
+                }
             } else {
                 // Add to favorites
                 svg.setAttribute('fill', 'currentColor');
@@ -545,11 +609,11 @@
         const uploadPlaceholder = document.getElementById('upload-placeholder');
 
         if (photoInput) {
-            photoInput.addEventListener('change', function(e) {
+            photoInput.addEventListener('change', function (e) {
                 const file = e.target.files[0];
                 if (file) {
                     const reader = new FileReader();
-                    reader.onload = function(e) {
+                    reader.onload = function (e) {
                         photoPreview.src = e.target.result;
                         photoPreview.classList.remove('hidden');
                         uploadPlaceholder.classList.add('hidden');
@@ -574,18 +638,17 @@
             const name = nameInput.value;
             const category = categorySelect.value;
             const imgSrc = photoPreview.src || 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80';
-            const icon = category === 'hauts' ? '👕' : category === 'bas' ? '👖' : category === 'chaussures' ? '👟' : '🛍️';
 
             const newCard = document.createElement('div');
             newCard.className = 'clothing-card group bg-white p-3 rounded-[2.5rem] border border-tan/10 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500 cursor-pointer relative overflow-hidden';
             newCard.dataset.category = category;
-            
+
             newCard.innerHTML = `
-                <div class="aspect-[4/5] bg-cream/40 rounded-[2rem] overflow-hidden relative mb-4">
+                <div class="aspect-[4/5] bg-cream/30 rounded-[2rem] overflow-hidden relative mb-4">
                     <img src="${imgSrc}" alt="${name}" class="w-full h-full object-cover zoom-img transition-transform duration-700">
                     <div class="absolute inset-0 bg-bark/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    <button onclick="toggleFavorite(event, this)" class="absolute top-4 right-4 w-10 h-10 bg-white/80 backdrop-blur-md rounded-2xl flex items-center justify-center text-tan hover:text-red-500 transition-all shadow-sm z-10">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <button onclick="toggleFavorite(event, this)" class="absolute top-4 right-4 w-10 h-10 bg-white/80 backdrop-blur-md rounded-2xl flex items-center justify-center text-red-500 transition-all shadow-sm z-10">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                         </svg>
                     </button>
@@ -594,15 +657,15 @@
                     </div>
                 </div>
                 <div class="px-2 space-y-1">
-                    <p class="text-[9px] font-bold text-tan uppercase tracking-[0.15em]">Nouvel article</p>
+                    <p class="text-[9px] font-bold text-tan uppercase tracking-[0.15em]">Favori ajouté</p>
                     <h4 class="text-lg font-display font-medium text-bark italic leading-tight">${name}</h4>
                 </div>
             `;
 
-            // Simulation addition to grid
+            // Prepend new card to grid
             clothingGrid.prepend(newCard);
-            
-            // Animation
+
+            // Simulation addition with animation
             newCard.style.opacity = '0';
             newCard.style.transform = 'translateY(20px)';
             setTimeout(() => {
@@ -610,18 +673,18 @@
                 newCard.style.transform = 'translateY(0)';
             }, 50);
 
-            // Update count
+            // Update visible item count
             const currentCount = parseInt(itemCount.textContent);
             itemCount.textContent = currentCount + 1;
 
-            // Reset and close
+            // Reset modal fields and close modal
             nameInput.value = '';
             HSSelect.getInstance('#modal-add select', true).element.setValue('');
             photoPreview.src = '';
             photoPreview.classList.add('hidden');
             document.getElementById('upload-placeholder').classList.remove('hidden');
             closeModal('modal-add');
-            
+
             // Re-apply filters if any
             filterItems();
         }

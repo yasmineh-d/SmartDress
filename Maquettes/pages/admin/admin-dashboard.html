@@ -27,8 +27,8 @@
             }
         }
     </script>
-    <link rel="stylesheet" href="../assets/css/charte.css">
-    <link rel="stylesheet" href="../assets/css/style-landing.css">
+    <link rel="stylesheet" href="../../assets/css/charte.css">
+    <link rel="stylesheet" href="../../assets/css/style-landing.css">
 </head>
 
 <body class="bg-offwhite font-body text-bark min-h-screen" x-data="{
@@ -136,25 +136,25 @@
     <header id="navbar" class="sd-navbar !fixed" :class="{ 'scrolled': scrolled }"
         @scroll.window="scrolled = (window.pageYOffset > 20)">
         <div class="max-w-screen-xl mx-auto px-6 lg:px-12 flex items-center justify-between h-full">
-            <a href="../index.html" class="sd-logo">Smart<span>Dress</span></a>
+            <a href="../../index.html" class="sd-logo">Smart<span>Dress</span></a>
 
             <nav class="hidden lg:flex items-center gap-8">
-                <a href="../index.html#features" class="sd-navlink">Fonctionnalités</a>
-                <a href="../index.html#how" class="sd-navlink">Comment ça marche</a>
-                <a href="../index.html#trust" class="sd-navlink">Témoignages</a>
-                <a href="../index.html#contact" class="sd-navlink">Contact</a>
+                <a href="../../index.html#features" class="sd-navlink">Fonctionnalités</a>
+                <a href="../../index.html#how" class="sd-navlink">Comment ça marche</a>
+                <a href="../../index.html#trust" class="sd-navlink">Témoignages</a>
+                <a href="../../index.html#contact" class="sd-navlink">Contact</a>
             </nav>
 
             <div class="hidden lg:flex items-center gap-3">
                 <div class="flex items-center gap-3">
-                    <a href="profile-web.html"
+                    <a href="../public/profile-web.html"
                         class="flex items-center gap-2 px-4 py-2 bg-cream/50 rounded-full text-xs font-bold text-bark hover:bg-cream transition-all border border-tan/10">
                         <div
                             class="w-6 h-6 bg-tan rounded-full flex items-center justify-center text-[10px] text-white">
                             YH</div>
                         Mon Profil
                     </a>
-                    <a href="../index.html"
+                    <a href="../../index.html"
                         class="text-xs font-bold text-tan hover:text-bark uppercase tracking-widest px-2 transition-all">Déconnexion</a>
                 </div>
             </div>
@@ -177,15 +177,15 @@
             x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
             class="lg:hidden bg-offwhite border-t border-tan/30 shadow-xl" style="display: none;">
             <div class="px-6 py-4 flex flex-col gap-3">
-                <a href="../index.html#features" class="sd-navlink" @click="mobileMenuOpen = false">Fonctionnalités</a>
-                <a href="../index.html#how" class="sd-navlink" @click="mobileMenuOpen = false">Comment ça marche</a>
-                <a href="../index.html#trust" class="sd-navlink" @click="mobileMenuOpen = false">Témoignages</a>
-                <a href="../index.html#contact" class="sd-navlink" @click="mobileMenuOpen = false">Contact</a>
+                <a href="../../index.html#features" class="sd-navlink" @click="mobileMenuOpen = false">Fonctionnalités</a>
+                <a href="../../index.html#how" class="sd-navlink" @click="mobileMenuOpen = false">Comment ça marche</a>
+                <a href="../../index.html#trust" class="sd-navlink" @click="mobileMenuOpen = false">Témoignages</a>
+                <a href="../../index.html#contact" class="sd-navlink" @click="mobileMenuOpen = false">Contact</a>
                 <hr class="border-tan/30 my-1" />
                 <div class="flex flex-col gap-3">
-                    <a href="profile-web.html" class="sd-btn-ghost text-center" @click="mobileMenuOpen = false">Mon
+                    <a href="../public/profile-web.html" class="sd-btn-ghost text-center" @click="mobileMenuOpen = false">Mon
                         Profil</a>
-                    <a href="../index.html" class="sd-btn-primary text-center">Déconnexion</a>
+                    <a href="../../index.html" class="sd-btn-primary text-center">Déconnexion</a>
                 </div>
             </div>
         </div>
@@ -195,7 +195,7 @@
         <!-- Sidebar -->
         <aside class="hidden lg:flex flex-col w-64 bg-white border-r border-tan/10 min-h-[calc(100vh-80px)]">
             <div class="p-8 border-b border-tan/5">
-                <a href="../index.html" class="sd-logo">Smart<span>Dress</span></a>
+                <a href="../../index.html" class="sd-logo">Smart<span>Dress</span></a>
                 <p class="text-[10px] font-bold text-tan uppercase tracking-widest mt-1">Console Admin</p>
             </div>
             <nav class="flex-1 p-6 space-y-2">
@@ -219,7 +219,7 @@
                     </svg>
                     Utilisateurs
                 </button>
-                <a href="garde-robe.html"
+                <a href="../public/garde-robe-web.html"
                     class="flex items-center gap-3 px-4 py-3 text-tan hover:bg-cream/30 rounded-xl text-xs font-bold uppercase tracking-widest transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
@@ -235,7 +235,7 @@
             <!-- Mobile Header -->
             <header
                 class="lg:hidden bg-white border-b border-tan/10 px-6 py-4 flex items-center justify-between sticky top-0 z-50">
-                <a href="../index.html" class="sd-logo">Smart<span>Dress</span></a>
+                <a href="../../index.html" class="sd-logo">Smart<span>Dress</span></a>
                 <button class="text-bark">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
@@ -506,25 +506,25 @@
     <footer class="sd-footer">
         <div class="max-w-screen-xl mx-auto px-6 lg:px-12 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
             <div>
-                <a href="../index.html" class="sd-logo sd-logo--light">Smart<span>Dress</span></a>
+                <a href="../../index.html" class="sd-logo sd-logo--light">Smart<span>Dress</span></a>
                 <p class="sd-footer-tag">Votre garde-robe digitale intelligente. Suggestions de tenues basées sur la
                     météo et vos préférences.</p>
             </div>
             <div>
                 <h4 class="sd-footer-heading">Application</h4>
                 <ul class="sd-footer-links">
-                    <li><a href="../index.html#features">Fonctionnalités</a></li>
-                    <li><a href="garde-robe.html">Garde-robe</a></li>
-                    <li><a href="dashboard.html">Suggestions</a></li>
+                    <li><a href="../../index.html#features">Fonctionnalités</a></li>
+                    <li><a href="../public/garde-robe-web.html">Garde-robe</a></li>
+                    <li><a href="../public/dashboard-web.html">Suggestions</a></li>
                     <li><a href="#">Notifications</a></li>
                 </ul>
             </div>
             <div>
                 <h4 class="sd-footer-heading">Compte</h4>
                 <ul class="sd-footer-links">
-                    <li><a href="auth.html?mode=register">S'inscrire</a></li>
-                    <li><a href="auth.html?mode=login">Se connecter</a></li>
-                    <li><a href="profile-web.html">Mon profil</a></li>
+                    <li><a href="../public/auth.html?mode=register">S'inscrire</a></li>
+                    <li><a href="../public/auth.html?mode=login">Se connecter</a></li>
+                    <li><a href="../public/profile-web.html">Mon profil</a></li>
                     <li><a href="#">Paramètres</a></li>
                 </ul>
             </div>
@@ -533,7 +533,7 @@
                 <ul class="sd-footer-links">
                     <li><a href="#">À propos</a></li>
                     <li><a href="#">Rapport PFF</a></li>
-                    <li><a href="../index.html#contact">Contact</a></li>
+                    <li><a href="../../index.html#contact">Contact</a></li>
                     <li><a href="#">Mentions légales</a></li>
                 </ul>
             </div>
