@@ -69,30 +69,30 @@
             <div class="space-y-4">
                 <h3 class="text-[10px] font-bold text-tan uppercase tracking-widest">Catégories</h3>
                 <div class="flex flex-col gap-1">
-                    <button
-                        class="flex items-center justify-between px-4 py-3 bg-moss text-white rounded-xl shadow-md text-sm font-bold">
+                    <button id="btn-cat-all" onclick="setSidebarCategory('all')"
+                        class="sidebar-cat-btn flex items-center justify-between px-4 py-3 bg-moss text-white rounded-xl shadow-md text-sm font-bold transition-all">
                         <span>Tout</span>
-                        <span class="opacity-60 font-medium">42</span>
+                        <span class="opacity-60 font-medium tracking-wider">42</span>
                     </button>
-                    <button
-                        class="flex items-center justify-between px-4 py-3 text-bark hover:bg-cream/30 rounded-xl text-sm font-medium transition-colors">
+                    <button id="btn-cat-hauts" onclick="setSidebarCategory('hauts')"
+                        class="sidebar-cat-btn flex items-center justify-between px-4 py-3 text-bark hover:bg-cream/30 rounded-xl text-sm font-medium transition-colors">
                         <span>Hauts</span>
-                        <span class="text-tan">18</span>
+                        <span class="text-tan tracking-wider">18</span>
                     </button>
-                    <button
-                        class="flex items-center justify-between px-4 py-3 text-bark hover:bg-cream/30 rounded-xl text-sm font-medium transition-colors">
+                    <button id="btn-cat-bas" onclick="setSidebarCategory('bas')"
+                        class="sidebar-cat-btn flex items-center justify-between px-4 py-3 text-bark hover:bg-cream/30 rounded-xl text-sm font-medium transition-colors">
                         <span>Bas</span>
-                        <span class="text-tan">12</span>
+                        <span class="text-tan tracking-wider">12</span>
                     </button>
-                    <button
-                        class="flex items-center justify-between px-4 py-3 text-bark hover:bg-cream/30 rounded-xl text-sm font-medium transition-colors">
+                    <button id="btn-cat-chaussures" onclick="setSidebarCategory('chaussures')"
+                        class="sidebar-cat-btn flex items-center justify-between px-4 py-3 text-bark hover:bg-cream/30 rounded-xl text-sm font-medium transition-colors">
                         <span>Chaussures</span>
-                        <span class="text-tan">8</span>
+                        <span class="text-tan tracking-wider">8</span>
                     </button>
-                    <button
-                        class="flex items-center justify-between px-4 py-3 text-bark hover:bg-cream/30 rounded-xl text-sm font-medium transition-colors">
+                    <button id="btn-cat-accessoires" onclick="setSidebarCategory('accessoires')"
+                        class="sidebar-cat-btn flex items-center justify-between px-4 py-3 text-bark hover:bg-cream/30 rounded-xl text-sm font-medium transition-colors">
                         <span>Accessoires</span>
-                        <span class="text-tan">4</span>
+                        <span class="text-tan tracking-wider">4</span>
                     </button>
                 </div>
             </div>
@@ -291,18 +291,18 @@
     </div>
 
     <!-- FOOTER (Style Home) -->
-    <footer class="sd-footer">
+    <footer class="sd-footer !mt-20">
         <div class="max-w-screen-xl mx-auto px-6 lg:px-12 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
             <div>
                 <a href="../index.html" class="sd-logo sd-logo--light">Smart<span>Dress</span></a>
-                <p class="sd-footer-tag">Votre garde-robe digitale intelligente. Suggestions de tenues basées sur la
-                    météo et vos préférences.</p>
+                <p class="sd-footer-tag">Votre garde-robe digitale intelligente. Suggestions de tenues basées sur la météo et vos préférences.</p>
             </div>
             <div>
                 <h4 class="sd-footer-heading">Application</h4>
                 <ul class="sd-footer-links">
                     <li><a href="dashboard-web.html">Dashboard</a></li>
-                    <li><a href="garde-robe-web.html">Garde-robe</a></li>
+                    <li><a href="garde-robe-web.html">Garde-Robe</a></li>
+                    <li><a href="favoris-web.html">Favoris</a></li>
                     <li><a href="#">Suggestions</a></li>
                     <li><a href="#">Notifications</a></li>
                 </ul>
@@ -318,8 +318,8 @@
             <div>
                 <h4 class="sd-footer-heading">Projet</h4>
                 <ul class="sd-footer-links">
-                    <li><a href="#">À propos</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="about-web.html">À propos</a></li>
+                    <li><a href="contact-web.html">Contact</a></li>
                     <li><a href="#">Mentions légales</a></li>
                 </ul>
             </div>
@@ -406,7 +406,7 @@
                     </div>
                 </div>
 
-                <button onclick="closeModal('modal-add')" class="w-full py-5 bg-moss text-white rounded-full text-[10px] font-bold uppercase tracking-[0.2em] shadow-xl shadow-moss/20 hover:bg-bark transition-all mt-8">
+                <button id="save-item-btn" type="button" onclick="addItemToGrid()" class="w-full py-5 bg-moss text-white rounded-full text-[10px] font-bold uppercase tracking-[0.2em] shadow-xl shadow-moss/20 hover:bg-bark transition-all mt-8">
                     Ajouter au dressing
                 </button>
             </div>
@@ -421,29 +421,38 @@
         const itemCount = document.getElementById('item-count');
         const categoryButtons = document.querySelectorAll('aside .flex.flex-col button');
 
+        function setSidebarCategory(cat) {
+            // Update UI
+            const buttons = document.querySelectorAll('.sidebar-cat-btn');
+            buttons.forEach(btn => {
+                if (btn.id === `btn-cat-${cat}`) {
+                    btn.classList.add('bg-moss', 'text-white', 'shadow-md', 'font-bold');
+                    btn.classList.remove('text-bark', 'hover:bg-cream/30', 'font-medium');
+                    btn.querySelector('span:last-child').classList.replace('text-tan', 'opacity-60');
+                } else {
+                    btn.classList.remove('bg-moss', 'text-white', 'shadow-md', 'font-bold');
+                    btn.classList.add('text-bark', 'hover:bg-cream/30', 'font-medium');
+                    const spanCount = btn.querySelector('span:last-child');
+                    if (spanCount.classList.contains('opacity-60')) {
+                        spanCount.classList.replace('opacity-60', 'text-tan');
+                    }
+                }
+            });
+
+            // Sync with Preline Select
+            const selectEl = HSSelect.getInstance('#filter-select', true);
+            if (selectEl) {
+                selectEl.element.setValue(cat);
+            } else {
+                filterSelect.value = cat;
+                filterItems();
+            }
+        }
+
         function filterItems() {
             const query = searchInput.value.toLowerCase();
             const selectVal = filterSelect.value.toLowerCase();
             
-            // Sidebar Category Logic
-            let activeCategory = 'all';
-            categoryButtons.forEach(btn => {
-                if (btn.classList.contains('bg-moss')) {
-                    activeCategory = btn.querySelector('span:first-child').textContent.toLowerCase();
-                }
-            });
-
-            // Mapping simple pour la démo
-            const sidebarMap = {
-                'tout': 'all',
-                'hauts': 'hauts',
-                'bas': 'bas',
-                'chaussures': 'chaussures',
-                'accessoires': 'accessoires'
-            };
-
-            const targetCategory = sidebarMap[activeCategory] || 'all';
-
             let visibleCount = 0;
             cards.forEach(card => {
                 const title = card.querySelector('h4').textContent.toLowerCase();
@@ -452,37 +461,13 @@
                 
                 const matchSearch = title.includes(query) || desc.includes(query);
                 const matchSelect = selectVal === 'all' || category === selectVal;
-                const matchSidebar = targetCategory === 'all' || category === targetCategory;
                 
-                // On privilégie le select pour le filtrage actif dans cette vue
-                const isVisible = matchSearch && matchSelect && matchSidebar;
+                const isVisible = matchSearch && matchSelect;
                 card.classList.toggle('hidden', !isVisible);
                 if (isVisible) visibleCount++;
             });
             itemCount.textContent = visibleCount;
         }
-
-        searchInput.addEventListener('input', filterItems);
-        
-        // Preline custom event
-        document.addEventListener('change', (e) => {
-            if (e.target.id === 'filter-select') {
-                filterItems();
-            }
-        });
-
-        // Sidebar click handling
-        categoryButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                categoryButtons.forEach(b => {
-                    b.classList.remove('bg-moss', 'text-white', 'shadow-md');
-                    b.classList.add('text-bark', 'hover:bg-cream/30');
-                });
-                btn.classList.add('bg-moss', 'text-white', 'shadow-md');
-                btn.classList.remove('text-bark', 'hover:bg-cream/30');
-                filterItems();
-            });
-        });
 
         window.addEventListener('load', () => {
             itemCount.textContent = cards.length;
@@ -551,6 +536,73 @@
                     reader.readAsDataURL(file);
                 }
             });
+        }
+
+        // ── Dynamic Add Item Logic ──
+        function addItemToGrid() {
+            const nameInput = document.querySelector('#modal-add input[type="text"]');
+            const categorySelect = document.querySelector('#modal-add select');
+            const photoPreview = document.getElementById('item-photo-preview');
+            const clothingGrid = document.getElementById('clothing-grid');
+
+            if (!nameInput.value || !categorySelect.value) {
+                alert("Veuillez remplir le nom et la catégorie.");
+                return;
+            }
+
+            const name = nameInput.value;
+            const category = categorySelect.value;
+            const imgSrc = photoPreview.src || 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80';
+            const icon = category === 'hauts' ? '👕' : category === 'bas' ? '👖' : category === 'chaussures' ? '👟' : '🛍️';
+
+            const newCard = document.createElement('div');
+            newCard.className = 'clothing-card group bg-white p-3 rounded-[2.5rem] border border-tan/10 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500 cursor-pointer relative overflow-hidden';
+            newCard.dataset.category = category;
+            
+            newCard.innerHTML = `
+                <div class="aspect-[4/5] bg-cream/40 rounded-[2rem] overflow-hidden relative mb-4">
+                    <img src="${imgSrc}" alt="${name}" class="w-full h-full object-cover zoom-img transition-transform duration-700">
+                    <div class="absolute inset-0 bg-bark/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <button onclick="toggleFavorite(event, this)" class="absolute top-4 right-4 w-10 h-10 bg-white/80 backdrop-blur-md rounded-2xl flex items-center justify-center text-tan hover:text-red-500 transition-all shadow-sm z-10">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                        </svg>
+                    </button>
+                    <div class="absolute bottom-4 left-4">
+                        <span class="px-3 py-1 bg-white/90 backdrop-blur-md text-moss text-[9px] font-bold rounded-full uppercase tracking-widest shadow-sm border border-tan/10">${category}</span>
+                    </div>
+                </div>
+                <div class="px-2 space-y-1">
+                    <p class="text-[9px] font-bold text-tan uppercase tracking-[0.15em]">Nouvel article</p>
+                    <h4 class="text-lg font-display font-medium text-bark italic leading-tight">${name}</h4>
+                </div>
+            `;
+
+            // Simulation addition to grid
+            clothingGrid.prepend(newCard);
+            
+            // Animation
+            newCard.style.opacity = '0';
+            newCard.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+                newCard.style.opacity = '1';
+                newCard.style.transform = 'translateY(0)';
+            }, 50);
+
+            // Update count
+            const currentCount = parseInt(itemCount.textContent);
+            itemCount.textContent = currentCount + 1;
+
+            // Reset and close
+            nameInput.value = '';
+            HSSelect.getInstance('#modal-add select', true).element.setValue('');
+            photoPreview.src = '';
+            photoPreview.classList.add('hidden');
+            document.getElementById('upload-placeholder').classList.remove('hidden');
+            closeModal('modal-add');
+            
+            // Re-apply filters if any
+            filterItems();
         }
     </script>
 

@@ -68,11 +68,12 @@
                         <div class="w-full h-full rounded-[2.5rem] bg-gradient-to-tr from-bark to-tan p-1">
                             <div
                                 class="w-full h-full bg-white rounded-[2.2rem] overflow-hidden flex items-center justify-center">
-                                <img src="https://ui-avatars.com/api/?name=User&background=5C4A35&color=fff&size=256"
+                                <img id="profile-avatar" src="https://ui-avatars.com/api/?name=User&background=5C4A35&color=fff&size=256"
                                     alt="Avatar Large" class="w-full h-full object-cover">
                             </div>
                         </div>
-                        <button
+                        <input type="file" id="profile-photo-input" class="hidden" accept="image/*">
+                        <button onclick="document.getElementById('profile-photo-input').click()"
                             class="absolute bottom-0 right-0 w-10 h-10 bg-moss text-white rounded-full shadow-lg border-4 border-white flex items-center justify-center hover:scale-110 transition-transform">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
@@ -247,6 +248,44 @@
         </div>
     </main>
 
+    <!-- FOOTER (Style Home) -->
+    <footer class="sd-footer !mt-20">
+        <div class="max-w-screen-xl mx-auto px-6 lg:px-12 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+            <div>
+                <a href="../index.html" class="sd-logo sd-logo--light">Smart<span>Dress</span></a>
+                <p class="sd-footer-tag">Votre garde-robe digitale intelligente. Suggestions de tenues basées sur la météo et vos préférences.</p>
+            </div>
+            <div>
+                <h4 class="sd-footer-heading">Application</h4>
+                <ul class="sd-footer-links">
+                    <li><a href="dashboard-web.html">Dashboard</a></li>
+                    <li><a href="garde-robe-web.html">Garde-robe</a></li>
+                    <li><a href="favoris-web.html">Favoris</a></li>
+                    <li><a href="#">Suggestions</a></li>
+                    <li><a href="#">Notifications</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="sd-footer-heading">Compte</h4>
+                <ul class="sd-footer-links">
+                    <li><a href="profile-web.html">Mon profil</a></li>
+                    <li><a href="#">Paramètres</a></li>
+                    <li><a href="../index.html">Déconnexion</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="sd-footer-heading">Projet</h4>
+                <ul class="sd-footer-links">
+                    <li><a href="about-web.html">À propos</a></li>
+                    <li><a href="contact-web.html">Contact</a></li>
+                    <li><a href="#">Mentions légales</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="sd-footer-bottom">
+            <span>© 2025–2026 SmartDress · Yasmine Haddad</span>
+            <span>Formation Développement Mobile · Mode Bootcamp</span>
+        </div>
     </footer>
 
     <!-- Floating Action Button (+) -->
@@ -432,7 +471,7 @@
         if (addItemBtn) addItemBtn.addEventListener('click', () => openModal('modal-add'));
         if (modalOverlay) modalOverlay.addEventListener('click', () => closeModal('modal-add'));
 
-        // ── Photo Upload Preview Logic ──
+        // ── Photo Upload Preview Logic (Add Item) ──
         const photoInput = document.getElementById('item-photo-input');
         const photoPreview = document.getElementById('item-photo-preview');
         const uploadPlaceholder = document.getElementById('upload-placeholder');
@@ -446,6 +485,23 @@
                         photoPreview.src = e.target.result;
                         photoPreview.classList.remove('hidden');
                         uploadPlaceholder.classList.add('hidden');
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+
+        // ── Profile Photo Upload logic ──
+        const profilePhotoInput = document.getElementById('profile-photo-input');
+        const profileAvatar = document.getElementById('profile-avatar');
+
+        if (profilePhotoInput) {
+            profilePhotoInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        profileAvatar.src = e.target.result;
                     }
                     reader.readAsDataURL(file);
                 }

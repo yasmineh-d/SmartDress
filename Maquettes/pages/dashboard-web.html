@@ -206,8 +206,8 @@
             <div>
                 <h4 class="sd-footer-heading">Projet</h4>
                 <ul class="sd-footer-links">
-                    <li><a href="#">À propos</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="about-web.html">À propos</a></li>
+                    <li><a href="contact-web.html">Contact</a></li>
                     <li><a href="#">Mentions légales</a></li>
                 </ul>
             </div>
@@ -292,7 +292,7 @@
                     </div>
                 </div>
 
-                <button onclick="closeModal('modal-add')" class="w-full py-5 bg-moss text-white rounded-full text-[10px] font-bold uppercase tracking-[0.2em] shadow-xl shadow-moss/20 hover:bg-bark transition-all mt-8">
+                <button id="save-item-btn" type="button" onclick="addItemToGrid()" class="w-full py-5 bg-moss text-white rounded-full text-[10px] font-bold uppercase tracking-[0.2em] shadow-xl shadow-moss/20 hover:bg-bark transition-all mt-8">
                     Ajouter au dressing
                 </button>
             </div>
@@ -387,6 +387,32 @@
                     reader.readAsDataURL(file);
                 }
             });
+        }
+
+        // ── Dynamic Add Item Logic ──
+        function addItemToGrid() {
+            const nameInput = document.querySelector('#modal-add input[type="text"]');
+            const categorySelect = document.querySelector('#modal-add select');
+            const photoPreview = document.getElementById('item-photo-preview');
+
+            if (!nameInput.value || !categorySelect.value) {
+                alert("Veuillez remplir le nom et la catégorie.");
+                return;
+            }
+
+            // Since dashboard-web doesn't have a grid of items (it has outfits),
+            // we will simulate the "success" and maybe show a toast or a visual hint.
+            // For now, let's just show an alert and follow the same reset logic for consistency.
+            
+            alert(`Article "${nameInput.value}" ajouté avec succès à la catégorie ${categorySelect.value} !`);
+
+            // Reset and close
+            nameInput.value = '';
+            HSSelect.getInstance('#modal-add select', true).element.setValue('');
+            photoPreview.src = '';
+            photoPreview.classList.add('hidden');
+            document.getElementById('upload-placeholder').classList.remove('hidden');
+            closeModal('modal-add');
         }
     </script>
 </body>

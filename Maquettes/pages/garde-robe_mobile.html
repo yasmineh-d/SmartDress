@@ -402,13 +402,39 @@
                 const cardCat      = card.dataset.category || '';
                 
                 const matchSearch  = title.includes(query) || desc.includes(query);
-                const matchCatBtn  = activeCategory === 'all' || cardCat === activeCategory;
-                const matchSelect  = selectVal === 'all' || cardCat === selectVal;
+                
+                // On synchronise : on utilise la catégorie active (soit du bouton, soit du select)
+                const targetCat = activeCategory !== 'all' ? activeCategory : selectVal;
+                const matchCat  = targetCat === 'all' || cardCat === targetCat;
 
-                // On combine les filtres : la recherche + la catégorie choisie (soit par bouton, soit par select)
-                const isVisible = matchSearch && (activeCategory !== 'all' ? matchCatBtn : matchSelect);
+                const isVisible = matchSearch && matchCat;
                 card.classList.toggle('hidden', !isVisible);
             });
+        }
+
+        function setCategory(cat, source) {
+            // Synchronize Slider
+            filterBtns.forEach(btn => {
+                if (btn.dataset.category === cat) {
+                    btn.classList.add('active', 'bg-moss', 'text-white', 'shadow-lg', 'shadow-moss/20');
+                    btn.classList.remove('bg-white', 'text-tan', 'border-tan/10');
+                } else {
+                    btn.classList.remove('active', 'bg-moss', 'text-white', 'shadow-lg', 'shadow-moss/20');
+                    btn.classList.add('bg-white', 'text-tan', 'border-tan/10');
+                }
+            });
+
+            // Synchronize Select (if source is not select)
+            if (source !== 'select') {
+                const selectEl = HSSelect.getInstance('#filter-select', true);
+                if (selectEl) {
+                    selectEl.element.setValue(cat);
+                } else {
+                    filterSelect.value = cat;
+                }
+            }
+
+            filterItems();
         }
 
         searchInput.addEventListener('input', filterItems);
@@ -416,18 +442,12 @@
         // Preline custom event
         document.addEventListener('change', (e) => {
             if (e.target.id === 'filter-select') {
-                filterItems();
+                setCategory(e.target.value, 'select');
             }
         });
 
         filterBtns.forEach(btn => btn.addEventListener('click', () => {
-            filterBtns.forEach(b => {
-                b.classList.remove('active', 'bg-moss', 'text-white', 'shadow-lg', 'shadow-moss/20');
-                b.classList.add('bg-white', 'text-tan', 'border-tan/10');
-            });
-            btn.classList.add('active', 'bg-moss', 'text-white', 'shadow-lg', 'shadow-moss/20');
-            btn.classList.remove('bg-white', 'text-tan', 'border-tan/10');
-            filterItems();
+            setCategory(btn.dataset.category, 'button');
         }));
 
         // ── Card click → details modal ──
