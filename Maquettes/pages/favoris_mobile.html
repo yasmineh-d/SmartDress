@@ -460,6 +460,18 @@
                 // Retirer des favoris
                 svg.setAttribute('fill', 'none');
                 svg.classList.remove('text-red-500');
+
+                // Masquer la carte immédiatement sur la page des favoris
+                const card = btn.closest('.clothing-card');
+                if (card) {
+                    card.style.transition = 'all 0.3s ease';
+                    card.style.opacity = '0';
+                    card.style.transform = 'scale(0.9)';
+                    setTimeout(() => {
+                        card.classList.add('hidden');
+                        filterItems();
+                    }, 300);
+                }
             } else {
                 // Ajouter aux favoris
                 svg.setAttribute('fill', 'currentColor');
