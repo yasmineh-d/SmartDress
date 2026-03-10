@@ -1,0 +1,49 @@
+@startuml
+skinparam actorStyle awesome
+left to right direction
+
+' STYLE CUSTOMIZATION
+skinparam package {
+    BackgroundColor White
+    BorderColor #5C4A35
+}
+skinparam usecase {
+    BackgroundColor #F5EEE4
+    BorderColor #889063
+    ArrowColor #889063
+}
+
+' ACTORS
+actor "Utilisateur" as U
+actor "Serveur Web / IA" as W
+
+' SYSTEM = MOBILE APP
+package "SmartDress App (Mobile)" {
+
+    usecase "S'authentifier via API" as UC_LOGIN_MOBILE
+
+    package "Espace Utilisateur" {
+        usecase "Gérer sa garde-robe\n(Dressing & Tenues)" as UC_USER_MOBILE
+        usecase "Consulter les suggestions\nIA & Météo" as UC_SUGGESTIONS_MOBILE
+    }
+
+    ' API part
+    usecase "Interagir avec les services\n(Météo, IA, Stockage)" as UC_API_MOBILE
+}
+
+' ASSOCIATIONS
+U -- UC_LOGIN_MOBILE
+U -- UC_USER_MOBILE
+U -- UC_SUGGESTIONS_MOBILE
+
+' Web server provides the API
+UC_API_MOBILE -- W
+
+' INCLUDES
+UC_USER_MOBILE ..> UC_LOGIN_MOBILE : <<include>>
+UC_SUGGESTIONS_MOBILE ..> UC_LOGIN_MOBILE : <<include>>
+
+UC_USER_MOBILE ..> UC_API_MOBILE : <<include>>
+UC_SUGGESTIONS_MOBILE ..> UC_API_MOBILE : <<include>>
+
+@enduml

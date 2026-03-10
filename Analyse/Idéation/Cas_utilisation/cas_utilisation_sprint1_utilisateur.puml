@@ -1,0 +1,40 @@
+@startuml
+skinparam actorStyle awesome
+left to right direction
+skinparam package {
+    BackgroundColor White
+    BorderColor #5C4A35
+}
+skinparam usecase {
+    BackgroundColor #F5EEE4
+    BorderColor #889063
+    ArrowColor #889063
+}
+
+actor "Utilisateur" as U
+
+package "Sprint 1 – Espace Utilisateur (Web)" {
+
+    package "Fonctionnalités" {
+        usecase "Gérer vêtement\n(Ajouter / Modifier /\nSupprimer / Consulter)" as UC1
+        usecase "Catégoriser vêtement" as UC2
+        usecase "Ajouter photo du vêtement" as UC3
+        usecase "Générer suggestion de tenue" as UC4
+        usecase "Planifier une tenue" as UC5
+        usecase "Enregistrer tenue favorite" as UC6
+        usecase "Modifier profil" as UC7
+        usecase "Gérer préférences" as UC8
+    }
+
+    U -- UC1
+    U -- UC4
+    U -- UC5
+    U -- UC7
+    U -- UC8
+
+    UC1 ..> UC2 : <<extend>>
+    UC1 ..> UC3 : <<extend>>
+    UC4 ..> UC6 : <<extend>>
+    UC5 ..> UC4 : <<include>>
+}
+@enduml

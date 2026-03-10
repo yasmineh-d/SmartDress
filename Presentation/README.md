@@ -323,8 +323,8 @@ style: |
 
  <h3>Modélisation des données (MLD)</h3>
 <div class="img-container">
- 
-  
+  <!-- TODO: Insérez ici votre capture d'écran du fichier Analyse/modelisation/diagramme-classes.mmd -->
+  <p style="text-align: center; color: #889063; font-style: italic;">[Insérez le diagramme de classes ici]</p>
 </div>
 
 ---

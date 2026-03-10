@@ -1,0 +1,38 @@
+@startuml
+skinparam actorStyle awesome
+left to right direction
+skinparam package {
+    BackgroundColor White
+    BorderColor #5C4A35
+}
+skinparam usecase {
+    BackgroundColor #F5EEE4
+    BorderColor #889063
+    ArrowColor #889063
+}
+
+actor "Administrateur" as Admin
+
+package "Sprint 1 – MVP (Administrateur)" {
+
+    package "Authentification" #FDEBD0 {
+        usecase "Se connecter" as UC_AUTH
+    }
+
+    Admin -- UC_AUTH
+
+    package "Console d'Administration" {
+        usecase "Gérer utilisateurs\n(CRUD)" as UC9
+        usecase "Modérer le contenu" as UC10
+        usecase "Consulter statistiques" as UC11
+    }
+
+    Admin -- UC9
+    Admin -- UC10
+    Admin -- UC11
+
+    UC9 ..> UC_AUTH : <<include>>
+    UC10 ..> UC_AUTH : <<include>>
+    UC11 ..> UC_AUTH : <<include>>
+}
+@enduml

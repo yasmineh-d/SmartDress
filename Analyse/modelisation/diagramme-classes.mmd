@@ -1,0 +1,68 @@
+classDiagram
+    direction LR
+
+    class Utilisateur {
+        +int id
+        +string nom
+        +string email
+        +string motDePasse
+        +Role role
+        +StatutUtilisateur statut
+        +string initiales
+        +creerCompte()
+        +seConnecter()
+        +gererPreferences()
+    }
+
+    class Role {
+        ADMIN
+        USER
+    }
+
+    class StatutUtilisateur {
+        ACTIF
+        INACTIF
+    }
+
+    class Activite {
+        +int id
+        +int utilisateurId
+        +string action
+        +datetime horodatage
+    }
+
+    class Tenue {
+        +int id
+        +string nom
+        +datetime dateCreation
+        +int utilisateurId
+        +generer()
+        +enregistrer()
+    }
+
+    class Vetement {
+        +int id
+        +string nom
+        +CategorieVetement categorie
+        +string couleur
+        +string imageUrl
+        +int proprietaireId
+        +ajouter()
+        +modifier()
+        +supprimer()
+    }
+
+    class CategorieVetement {
+        HAUT
+        BAS
+        CHAUSSURE
+        ACCESSOIRE
+    }
+
+    Utilisateur ..> Role : type
+    Utilisateur ..> StatutUtilisateur : etat
+    Utilisateur "1" --> "0..*" Activite : genere
+    Utilisateur "1" --> "0..*" Tenue : cree
+    Utilisateur "1" --> "0..*" Vetement : possede
+    Tenue "0..*" --> "1..*" Vetement : composee_de
+    Vetement ..> CategorieVetement : type
