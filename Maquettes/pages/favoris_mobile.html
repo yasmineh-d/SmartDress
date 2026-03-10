@@ -65,16 +65,42 @@
                     <div class="w-10"></div>
                 </div>
 
-                <div class="relative">
-                    <span class="absolute inset-y-0 left-4 flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-tan/40" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                <div class="space-y-3">
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-4 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-tan/40" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
-                    </span>
-                    <input type="text" id="search-input" placeholder="Rechercher..."
-                        class="w-full pl-10 pr-4 py-3 bg-cream/30 border border-tan/10 rounded-2xl focus:border-moss focus:bg-white outline-none transition-all placeholder:text-tan/40 text-sm">
+                        </span>
+                        <input type="text" id="search-input" placeholder="Rechercher..."
+                            class="w-full pl-10 pr-4 py-3 bg-cream/30 border border-tan/10 rounded-2xl focus:border-moss focus:bg-white outline-none transition-all placeholder:text-tan/40 text-sm">
+                    </div>
+
+                    <!-- Preline Select Filter -->
+                    <div class="relative">
+                        <select id="filter-select" data-hs-select='{
+                            "placeholder": "Filtrer par...",
+                            "toggleTag": "<button type=\"button\" aria-expanded=\"false\"></button>",
+                            "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-3 ps-4 pe-9 flex gap-x-2 text-nowrap w-full cursor-pointer bg-white border border-tan/10 rounded-2xl text-start text-sm text-bark font-medium focus:border-moss focus:ring-2 focus:ring-moss/10 transition-all outline-none",
+                            "dropdownClasses": "mt-2 z-50 w-full max-h-72 p-1 space-y-0.5 bg-white border border-tan/10 rounded-2xl overflow-hidden overflow-y-auto shadow-2xl",
+                            "optionClasses": "py-2 px-4 w-full text-sm text-bark cursor-pointer hover:bg-cream/50 rounded-xl focus:outline-none focus:bg-cream/50 transition-colors",
+                            "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"hidden hs-selected:block\"><svg class=\"shrink-0 size-3.5 text-moss\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg></span></div>"
+                          }'>
+                            <option value="all">Tout</option>
+                            <option value="hauts">Hauts</option>
+                            <option value="bas">Bas</option>
+                            <option value="chaussures">Chaussures</option>
+                        </select>
+
+                        <div class="absolute top-1/2 end-3 -translate-y-1/2 pointer-events-none">
+                            <svg class="shrink-0 size-3.5 text-tan" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m7 15 5 5 5-5"></path>
+                                <path d="m7 9 5-5 5 5"></path>
+                            </svg>
+                        </div>
+                    </div>
                 </div>
             </div>
         </header>
@@ -363,22 +389,39 @@
 
         // ── Search & Filter ──
         const searchInput  = document.getElementById('search-input');
+        const filterSelect = document.getElementById('filter-select');
         const filterBtns   = document.querySelectorAll('.filter-btn');
         const cards        = document.querySelectorAll('.clothing-card');
 
         function filterItems() {
             const query          = searchInput.value.toLowerCase();
             const activeCategory = document.querySelector('.filter-btn.active').dataset.category;
+            const selectVal      = filterSelect.value.toLowerCase();
+
             cards.forEach(card => {
                 const title        = card.querySelector('h3').textContent.toLowerCase();
                 const desc         = card.querySelector('p').textContent.toLowerCase();
+                const cardCat      = card.dataset.category || '';
+                
                 const matchSearch  = title.includes(query) || desc.includes(query);
-                const matchCat     = activeCategory === 'all' || card.dataset.category === activeCategory;
-                card.classList.toggle('hidden', !(matchSearch && matchCat));
+                const matchCatBtn  = activeCategory === 'all' || cardCat === activeCategory;
+                const matchSelect  = selectVal === 'all' || cardCat === selectVal;
+
+                // On combine les filtres : la recherche + la catégorie choisie (soit par bouton, soit par select)
+                const isVisible = matchSearch && (activeCategory !== 'all' ? matchCatBtn : matchSelect);
+                card.classList.toggle('hidden', !isVisible);
             });
         }
 
         searchInput.addEventListener('input', filterItems);
+        
+        // Preline custom event
+        document.addEventListener('change', (e) => {
+            if (e.target.id === 'filter-select') {
+                // Synchronize with category buttons if needed, or just filter
+                filterItems();
+            }
+        });
 
         filterBtns.forEach(btn => btn.addEventListener('click', () => {
             filterBtns.forEach(b => {
