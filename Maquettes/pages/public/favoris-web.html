@@ -121,7 +121,7 @@
         </aside>
 
         <!-- Main Grid Area -->
-        <main class="flex-1 p-10 bg-offwhite/50">
+        <main class="flex-1 p-10 pb-40 bg-offwhite/50 overflow-y-auto">
             <div class="max-w-6xl mx-auto space-y-8">
                 <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
                     <div class="space-y-1">
@@ -329,6 +329,29 @@
                             <h4 class="text-lg font-display font-medium text-bark italic">Pantalon Beige</h4>
                         </div>
                     </div>
+                </div>
+
+                <!-- Pagination -->
+                <div class="flex items-center justify-center pt-16 pb-12 mt-12 border-t border-tan/10 relative z-20">
+                    <nav class="flex items-center gap-2" aria-label="Pagination">
+                        <button type="button" class="min-w-[40px] flex justify-center items-center text-tan hover:bg-cream/50 p-2.5 text-sm rounded-xl disabled:opacity-50 disabled:pointer-events-none transition-all" disabled>
+                            <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m15 18-6-6 6-6"></path>
+                            </svg>
+                            <span class="sr-only">Précédent</span>
+                        </button>
+                        <button type="button" class="min-w-[40px] flex justify-center items-center bg-moss text-white py-2.5 text-sm font-bold rounded-xl shadow-lg shadow-moss/20" aria-current="page">1</button>
+                        <button type="button" class="min-w-[40px] flex justify-center items-center text-bark hover:bg-cream/50 py-2.5 text-sm font-medium rounded-xl transition-all">2</button>
+                        <button type="button" class="min-w-[40px] flex justify-center items-center text-bark hover:bg-cream/50 py-2.5 text-sm font-medium rounded-xl transition-all">3</button>
+                        <div class="px-2 text-tan text-xs font-bold tracking-widest">...</div>
+                        <button type="button" class="min-w-[40px] flex justify-center items-center text-bark hover:bg-cream/50 py-2.5 text-sm font-medium rounded-xl transition-all">12</button>
+                        <button type="button" class="min-w-[40px] flex justify-center items-center text-tan hover:bg-cream/50 p-2.5 text-sm rounded-xl transition-all">
+                            <span class="sr-only">Suivant</span>
+                            <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m9 18 6-6-6-6"></path>
+                            </svg>
+                        </button>
+                    </nav>
                 </div>
             </div>
         </main>
