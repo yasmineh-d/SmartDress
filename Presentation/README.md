@@ -272,20 +272,16 @@ style: |
 
 
 <div class="maquette-grid">
-  <img src="images/Dashboard web.png"  alt="Maquettes Dashboard">
-   
-  </div>
+  <img src="images/Dashboard_web.png"  alt="Maquettes Dashboard">
 </div>
 
 ---
-## Branche Fonctionnelle : Maquettage (Mobile Dashboard)
+## Branche Fonctionnelle : Maquettage (Dashboard Mobile)
 
 
 
 <div class="maquette-grid">
-  <div style="text-align: center;">
-   
-  </div>
+  <img src="images/Dashboard_Mobile.png"  alt="Maquettes Dashboard">
 </div>
 
 ---

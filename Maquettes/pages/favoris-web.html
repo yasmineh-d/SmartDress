@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartDress - Ma Garde-Robe (Web)</title>
+    <title>SmartDress - Mes Favoris (Web)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;700&display=swap"
@@ -46,8 +46,8 @@
 
             <nav class="hidden lg:flex items-center gap-8">
                 <a href="dashboard-web.html" class="sd-navlink">Dashboard</a>
-                <a href="#"
-                    class="sd-navlink !opacity-100 !text-moss font-bold border-b-2 border-moss pb-1">Garde-Robe</a>
+                <a href="garde-robe-web.html" class="sd-navlink">Garde-Robe</a>
+                <a href="#" class="sd-navlink !opacity-100 !text-moss font-bold border-b-2 border-moss pb-1">Favoris</a>
                 <a href="profile-web.html" class="sd-navlink">Profil</a>
             </nav>
 
@@ -122,9 +122,9 @@
         <main class="flex-1 p-10 bg-offwhite/50">
             <div class="max-w-6xl mx-auto space-y-8">
                 <div class="flex items-baseline justify-between">
-                    <h2 class="text-4xl font-display font-medium text-bark italic">Collection <span
-                            class="text-moss">Automne 2026</span></h2>
-                    <p class="text-tan text-sm">Affichage de 42 articles</p>
+                    <h2 class="text-4xl font-display font-medium text-bark italic">Mes <span
+                            class="text-moss">Favoris</span></h2>
+                    <p class="text-tan text-sm">Affichage de 12 articles</p>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -137,10 +137,11 @@
                             <span class="zoom-img transition-transform duration-500">👕</span>
                             <div
                                 class="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <button onclick="toggleFavorite(event, this)"
-                                    class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan shadow-sm transition-colors"><svg
-                                        class="w-4 h-4 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                <button
+                                    class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan hover:text-moss shadow-sm"><svg
+                                        class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
                                     </svg></button>
                                 <button
                                     class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan hover:text-bark shadow-sm"><svg
@@ -167,7 +168,7 @@
                                 class="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <button onclick="toggleFavorite(event, this)"
                                     class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan shadow-sm transition-colors"><svg
-                                        class="w-4 h-4 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        class="w-4 h-4 transition-colors text-red-500" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                                     </svg></button>
                                 <button
@@ -193,10 +194,11 @@
                             <span class="zoom-img transition-transform duration-500">👖</span>
                             <div
                                 class="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <button onclick="toggleFavorite(event, this)"
-                                    class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan shadow-sm transition-colors"><svg
-                                        class="w-4 h-4 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                <button
+                                    class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan hover:text-moss shadow-sm"><svg
+                                        class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
                                     </svg></button>
                                 <button
                                     class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan hover:text-bark shadow-sm"><svg
@@ -221,10 +223,11 @@
                             <span class="zoom-img transition-transform duration-500">👟</span>
                             <div
                                 class="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <button onclick="toggleFavorite(event, this)"
-                                    class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan shadow-sm transition-colors"><svg
-                                        class="w-4 h-4 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                <button
+                                    class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan hover:text-moss shadow-sm"><svg
+                                        class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
                                     </svg></button>
                                 <button
                                     class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan hover:text-bark shadow-sm"><svg
@@ -258,6 +261,7 @@
                 <ul class="sd-footer-links">
                     <li><a href="dashboard-web.html">Dashboard</a></li>
                     <li><a href="garde-robe-web.html">Garde-robe</a></li>
+                    <li><a href="#">Favoris</a></li>
                     <li><a href="#">Suggestions</a></li>
                     <li><a href="#">Notifications</a></li>
                 </ul>
