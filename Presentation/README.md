@@ -147,7 +147,7 @@ style: |
 # **Projet de Fin de Formation**
 ### **SmartDress : Développement d’une Solution intelligente pour la recommandation et la gestion de garde-robe digitale**
 
-**Réalisée par :** <span class="highlight">Yasmine Haddad</span>  
+**Réalisée par :** <span class="highlight">Haddad Yasmine</span>  
 **Encadré par :** <span class="highlight">M. ESSARRAJ Fouad</span>  
 **Filière :** Développement Mobile 
 
@@ -195,48 +195,23 @@ style: |
 
 
 ## 3. Branche Fonctionnelle : Design Thinking
-### 1. EMPATHIE
-
-<div class="img-container">
-  <div class="img-container">
-  <h3>Carte d'empathie apprenant</h3>
-  <img src="images/mind_map_apprenant.jpg" class="img-methodo" alt="Design Thinking">
-</div>
-</div>
-
----
-
-## Branche Fonctionnelle : Design Thinking
-### 1. EMPATHIE
-
-<div class="img-container">
-  <div class="img-container">
-  <h3>Carte d'empathie admin</h3>
-  <img src="images/mind_map_admin.jpg" class="img-methodo" alt="Design Thinking">
-</div>
-</div>
-
----
-
-## Branche Fonctionnelle : Design Thinking
-### 2. DÉFINITION
+### 1. DÉFINITION
 
 <div class="img-container">
   <div class="dt-card" style="border-top-color: #f39c12;">
     <h4>Cadrage du problème</h4>
-    <blockquote style="font-style: italic; background: white; padding: 15px; border-radius: 8px;">
-      <p>Comment pourrions-nous aider les utilisateurs à mieux organiser leur garde-robe ?</p>
-      <p>Comment pourrions-nous automatiser la suggestion de tenues quotidiennes ?</p>
-      <p>Comment pourrions-nous réduire le temps passé à choisir ses vêtements chaque matin ?</p>
-    </blockquote>
-    .
+    <ul>  
+      <li>Comment pourrions-nous aider les utilisateurs à mieux organiser leur garde-robe ?</li>
+      <li>Comment pourrions-nous automatiser la suggestion de tenues quotidiennes ?</li>
+      <li>Comment pourrions-nous réduire le temps passé à choisir ses vêtements chaque matin ?</li>
+    </ul>
   </div>
 </div>
 
 ---
 
 ## Branche Fonctionnelle : Design Thinking
-### 3. IDÉATION
+### 2. IDÉATION
 
 <div class="img-container">
   <div class="dt-card" style="border-top-color: #f39c12;">
@@ -252,31 +227,58 @@ style: |
 
 ---
 
-## Branche Fonctionnelle : Cas d'utilisation
+## Branche Fonctionnelle : Cas d'utilisation (Global)
 
 <div class="img-container">
   <img src="images/use_case_global.png" class="img-usecase" alt="Global Use Case">
 </div>
 
 ---
-
-## Branche Fonctionnelle : Cas d'utilisation - Sprint 1
+## Branche Fonctionnelle : Cas d'utilisation (Utilisateur)
 
 <div class="img-container">
-  <img src="images/cas_utilisation_sprint1.png" class="img-usecase" alt="Global Use Case">
+  <img src="images/use_case_global_web_utilisateur.png" class="img-usecase" alt="Use Case Utilisateur">
+</div>
+
+---
+## Branche Fonctionnelle : Cas d'utilisation (Admininistrateur)
+
+<div class="img-container">
+  <img src="images/use_case_global_web_administrateur.png" class="img-usecase" alt="Use Case Administrateur">
 </div>
 
 ---
 
-## Branche Fonctionnelle : Cas d'utilisation - Sprint 2
+## Branche Fonctionnelle : Maquettes (Public Landing)
 
-<div class="img-container">
-  <img src="images/use_case_sprint2.png" class="img-usecase" alt="Global Use Case">
+
+
+<div class="maquette-grid">
+  <img src="images/Maquettes_Public_Landing.png"  alt="Maquettes Public Landing">
 </div>
 
 ---
+## Branche Fonctionnelle : Maquettes (Dashboard Admin )
 
-## Branche Fonctionnelle : Maquettes (UI/UX)
+
+
+<div class="maquette-grid">
+  <img src="images/dashboard_admin.png"  alt="Maquettes Dashboard">
+</div>
+
+---
+## Branche Fonctionnelle : Maquettes (Dashboard web)
+
+
+
+<div class="maquette-grid">
+  <img src="images/Dashboard web.png"  alt="Maquettes Dashboard">
+   
+  </div>
+</div>
+
+---
+## Branche Fonctionnelle : Maquettage (Mobile Dashboard)
 
 
 
@@ -320,12 +322,7 @@ style: |
 
 ## 5. Conception : Diagramme de classe
 
-
- <h3>Modélisation des données (MLD)</h3>
-<div class="img-container">
-  <!-- TODO: Insérez ici votre capture d'écran du fichier Analyse/modelisation/diagramme-classes.mmd -->
-  <p style="text-align: center; color: #889063; font-style: italic;">[Insérez le diagramme de classes ici]</p>
-</div>
+![w:1800 h:650 Diagramme de classe](./images/diagramme_de_class.jpg)
 
 ---
 
