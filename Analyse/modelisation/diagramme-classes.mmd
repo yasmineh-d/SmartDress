@@ -12,6 +12,13 @@ classDiagram
         +creerCompte()
         +seConnecter()
         +gererPreferences()
+        +modifierProfil()
+    }
+
+    class Administrateur {
+        +gererUtilisateurs()
+        +consulterStatistiques()
+        +modererContenu()
     }
 
     class Role {
@@ -31,12 +38,22 @@ classDiagram
         +datetime horodatage
     }
 
+    class Preference {
+        +int id
+        +string style
+        +string couleurPreferee
+        +string saisonPreferee
+    }
+
     class Tenue {
         +int id
         +string nom
         +datetime dateCreation
+        +datetime datePlanifiee
+        +boolean favorite
         +int utilisateurId
         +generer()
+        +planifier()
         +enregistrer()
     }
 
@@ -47,9 +64,17 @@ classDiagram
         +string couleur
         +string imageUrl
         +int proprietaireId
+        +datetime dateDerniereUtilisation
         +ajouter()
         +modifier()
         +supprimer()
+        +categoriser()
+    }
+
+    class Photo {
+        +int id
+        +string url
+        +datetime dateUpload
     }
 
     class CategorieVetement {
@@ -59,10 +84,27 @@ classDiagram
         ACCESSOIRE
     }
 
+    class MeteoService {
+        +verifierMeteo()
+    }
+
+    class Statistique {
+        +genererRapport()
+    }
+
+    Utilisateur <|-- Administrateur
     Utilisateur ..> Role : type
     Utilisateur ..> StatutUtilisateur : etat
     Utilisateur "1" --> "0..*" Activite : genere
     Utilisateur "1" --> "0..*" Tenue : cree
     Utilisateur "1" --> "0..*" Vetement : possede
+    Utilisateur "1" --> "1" Preference : configure
+
     Tenue "0..*" --> "1..*" Vetement : composee_de
+    Tenue ..> MeteoService : utilise
+
+    Vetement --> Photo : contient
     Vetement ..> CategorieVetement : type
+
+    Administrateur --> Utilisateur : gere
+    Administrateur --> Statistique : consulte
