@@ -1,110 +1,148 @@
-classDiagram
-    direction LR
+@startuml
+title SmartDress - Class Diagram
 
-    class Utilisateur {
-        +int id
-        +string nom
-        +string email
-        +string motDePasse
-        +Role role
-        +StatutUtilisateur statut
-        +string initiales
-        +creerCompte()
-        +seConnecter()
-        +gererPreferences()
-        +modifierProfil()
-    }
+skinparam classAttributeIconSize 0
+left to right direction
 
-    class Administrateur {
-        +gererUtilisateurs()
-        +consulterStatistiques()
-        +modererContenu()
-    }
+' =========================
+' CORE USER SYSTEM
+' =========================
+class Utilisateur {
+  +Integer id
+  +String nom
+  +String email
+  +String motDePasse
+  +String initiales
+  +StatutUtilisateur statut
+  +DateTime created_at
+  +DateTime updated_at
 
-    class Role {
-        ADMIN
-        USER
-    }
+  +creerCompte()
+  +seConnecter()
+  +seDeconnecter()
+  +modifierProfil()
+  +gererFavoris()
+}
 
-    class StatutUtilisateur {
-        ACTIF
-        INACTIF
-    }
+class Administrateur {
+  +gererUtilisateurs()
+  +consulterStatistiques()
+  +modererContenu()
+}
 
-    class Activite {
-        +int id
-        +int utilisateurId
-        +string action
-        +datetime horodatage
-    }
+Administrateur --|> Utilisateur
 
-    class Preference {
-        +int id
-        +string style
-        +string couleurPreferee
-        +string saisonPreferee
-    }
+' =========================
+' RBAC SYSTEM
+' =========================
+class Role {
+  +Integer id
+  +String nom
+  +String guard_name
+  +DateTime created_at
+  +DateTime updated_at
+}
 
-    class Tenue {
-        +int id
-        +string nom
-        +datetime dateCreation
-        +datetime datePlanifiee
-        +boolean favorite
-        +int utilisateurId
-        +generer()
-        +planifier()
-        +enregistrer()
-    }
+class Permission {
+  +Integer id
+  +String nom
+  +String guard_name
+  +DateTime created_at
+  +DateTime updated_at
+}
 
-    class Vetement {
-        +int id
-        +string nom
-        +CategorieVetement categorie
-        +string couleur
-        +string imageUrl
-        +int proprietaireId
-        +datetime dateDerniereUtilisation
-        +ajouter()
-        +modifier()
-        +supprimer()
-        +categoriser()
-    }
+Utilisateur "1" -- "0..*" Role : possède
+Role "*" -- "*" Permission : accorde
 
-    class Photo {
-        +int id
-        +string url
-        +datetime dateUpload
-    }
+' =========================
+' ACTIVITY LOG
+' =========================
+class Activite {
+  +Integer id
+  +String action
+  +DateTime horodatage
+}
 
-    class CategorieVetement {
-        HAUT
-        BAS
-        CHAUSSURE
-        ACCESSOIRE
-    }
+Utilisateur "1" -- "0..*" Activite : génère
 
-    class MeteoService {
-        +verifierMeteo()
-    }
+' =========================
+' FAVORITES
+' =========================
+class Favoris {
+  +Integer id
+  +String style
+  +String couleurFavoris
+  +String saisonFavoris
+}
 
-    class Statistique {
-        +genererRapport()
-    }
+Utilisateur "1" -- "0..*" Favoris : configure
 
-    Utilisateur <|-- Administrateur
-    Utilisateur ..> Role : type
-    Utilisateur ..> StatutUtilisateur : etat
-    Utilisateur "1" --> "0..*" Activite : genere
-    Utilisateur "1" --> "0..*" Tenue : cree
-    Utilisateur "1" --> "0..*" Vetement : possede
-    Utilisateur "1" --> "1" Preference : configure
+' =========================
+' CLOTHING MANAGEMENT
+' =========================
+class Vetement {
+  +Integer id
+  +String nom
+  +CategorieVetement categorie
+  +String couleur
+  +String imageUrl
 
-    Tenue "0..*" --> "1..*" Vetement : composee_de
-    Tenue ..> MeteoService : utilise
+  +ajouterVetement()
+  +modifierVetement()
+  +supprimerVetement()
+  +consulterVetement()
+}
 
-    Vetement --> Photo : contient
-    Vetement ..> CategorieVetement : type
+Utilisateur "1" -- "0..*" Vetement : possède
 
-    Administrateur --> Utilisateur : gere
-    Administrateur --> Statistique : consulte
+class Photo {
+  +Integer id
+  +String url
+  +DateTime dateUpload
+}
+
+Vetement "1" -- "0..*" Photo : contient
+
+' =========================
+' OUTFIT
+' =========================
+class Tenue {
+  +Integer id
+  +String nom
+  +DateTime dateCreation
+  +DateTime datePlanifiee
+}
+
+Utilisateur "1" -- "0..*" Tenue : crée
+Tenue "1" -- "1..*" Vetement : composée_de
+
+' =========================
+' WEATHER SERVICE
+' =========================
+class MeteoService {
+  +verifierMeteo()
+}
+
+Tenue ..> MeteoService : utilise
+
+' =========================
+' SUGGESTION SERVICE (AI LOGIC)
+' =========================
+class SuggestionService {
+  +genererSuggestion()
+  +analyserFavoris()
+}
+
+SuggestionService ..> Favoris
+SuggestionService ..> MeteoService
+SuggestionService ..> Vetement
+
+' =========================
+' ADMIN STATISTICS
+' =========================
+class Statistique {
+  +genererRapport()
+}
+
+Administrateur --> Statistique : consulte
+@enduml

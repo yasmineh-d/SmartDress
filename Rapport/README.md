@@ -1,4 +1,4 @@
-﻿# Rapport de Projet de Fin de Formation  
+# Rapport de Projet de Fin de Formation  
 ## SmartDress : Développement d’une Solution intelligente pour la recommandation et la gestion de garde-robe digitale 
 ### Formation de Développement Mobile – Mode Bootcamp  
 
@@ -51,14 +51,14 @@
 
 # Remerciement
 
-.  
+Je tiens à exprimer ma profonde gratitude à Monsieur ESSARRAJ Fouad, notre formateur, pour son encadrement précieux, sa disponibilité et ses conseils pertinents tout au long de la réalisation de ce projet. Son expertise, sa rigueur et sa passion pour le développement logiciel ont grandement contribué à enrichir mes compétences techniques et professionnelles. Ce projet n'aurait pas vu le jour sans son accompagnement constant et ses remarques constructives qui m'ont permis de progresser étape par étape. Je remercie également toutes les personnes qui, de près ou de loin, ont apporté leur aide ou leur soutien durant cette aventure.
 
 ---
 
 # Introduction
 
-La recherche de stage constitue une étape essentielle dans le parcours des étudiants en formation supérieure, permettant de mettre en pratique les compétences acquises et de préparer l’insertion professionnelle. Cependant, de nombreux étudiants rencontrent des difficultés pour trouver des stages adaptés à leur profil, en raison de la dispersion des offres, d’informations souvent incomplètes et d’un suivi des candidatures complexe.
-De leur côté, les entreprises éprouvent des difficultés à gérer efficacement les candidatures et à identifier rapidement les profils correspondant à leurs besoins. Face à ce constat, le projet **StageFlow** vise à centraliser les offres de stages et à faciliter la mise en relation entre étudiants et entreprises, afin de rendre le processus de recherche et de gestion des stages plus simple, clair et efficace. 
+La gestion de la garde-robe et le choix d'une tenue constituent une activité quotidienne essentielle, impactant directement l'organisation et le bien-être de nombreuses personnes. Cependant, beaucoup rencontrent des difficultés à exploiter pleinement leurs vêtements, perdant du temps chaque matin par manque de visibilité sur leurs possessions ou par indécision face aux combinaisons possibles.
+Parallèlement, s'adapter aux conditions météorologiques variables et optimiser la rotation des articles rarement portés reste un défi constant. Face à ce constat, le projet **SmartDress** vise à numériser la garde-robe digitale et à automatiser les suggestions de tenues personnalisées, afin de rendre le processus de choix vestimentaire plus simple, fluide et intelligent. 
 
 ---
 
@@ -87,8 +87,8 @@ SmartDress est une application mobile intelligente qui permet aux utilisateurs d
 - Faciliter une consommation de mode plus responsable et organisée.
 
 ## Utilisateurs et rôles
-1. **Etudiant** : Gère sa garde-robe, consulte les suggestions, classe ses vêtements par style.
-2. **Admin** : Supervise la plateforme, gère les comptes, surveille les flux de données (météo, IA) et assure la modération du contenu.
+1. **Utilisateur** : Gère sa garde-robe, consulte les suggestions, classe ses vêtements par style et saison.
+2. **Admin** : Supervise la plateforme, gère les informations de base, surveille les flux de données et assure le bon fonctionnement du système.
 
 ## Fonctionnalités clés
 - Création de compte et authentification sécurisée.
@@ -133,38 +133,6 @@ Dans le cadre de ce projet, nous avons organisé le travail selon les principes 
 
 ---
 
-# La méthodologie 2TUP
-
-![Maquette application](images/2TUP.png)
-
-## Introduction
-La méthodologie **2TUP (Two-Tracks Unified Process)** est un processus de développement logiciel qui s’appuie sur une structure en forme de Y. Elle permet de séparer, puis de réunir, deux dimensions essentielles d’un projet :
-- **l’analyse fonctionnelle** (ce que doit faire le système)
-- **la conception technique** (comment le réaliser)
-Cette approche facilite une meilleure organisation du travail et garantit une compréhension claire des besoins avant la phase de développement. Le 2TUP est également **itératif et incrémental**, ce qui permet d’avancer progressivement avec des versions successives du produit.
-## Principes clés du 2TUP
-La méthode repose sur plusieurs fondements importants :
-- **Itératif et incrémental** : le développement se fait par cycles, en ajoutant des fonctionnalités au fur et à mesure.
-- **Piloté par les risques** : les éléments les plus critiques sont traités dès le début du projet.
-- **Séparation fonctionnel / technique** : cela évite les confusions et permet une meilleure organisation du travail.
-- **Architecture solide** : une base technique fiable est élaborée tôt dans le processus.
-- **Collaboration continue** : les utilisateurs sont impliqués régulièrement pour valider les besoins.
-## La structure en Y
-Le 2TUP est représenté par un schéma en Y, qui reflète les trois grandes étapes du processus :
-- **1- Phase initiale : Capture des besoins**
-
-Cette phase consiste à comprendre les objectifs du projet, identifier les acteurs, et préciser les exigences globales.
-- **2- Branche fonctionnelle (haut du Y)**
-
- Elle vise à analyser ce que doit faire le système : cas d’usage, processus métier, workflows, scénarios utilisateurs.
-- **3- Branche technique (bas du Y)**
-
- Elle concerne la manière dont la solution sera construite : architecture, technologies, base de données, API, composants techniques.
-- **4- Phase de convergence**
- Les deux branches se rejoignent pour lancer le développement, les tests, l’intégration et la livraison.
-
----
-
 # Design Thinking
 
 ![Maquette application](images/DesignThinking.png) 
@@ -205,10 +173,11 @@ Exemple : « Comment pourrions-nous aider l’utilisateur à… ? »
 # Branche fonctionnelle
 
 ## Carte d'empathie
-**Apprenant :**
+La carte d’empathie est un outil utilisé pour mieux comprendre les besoins, les attentes et les difficultés des différents utilisateurs du système. Dans le cadre du projet SmartDress, deux cartes d’empathie ont été réalisées pour les profils principaux de la plateforme : l’utilisateur et l’administrateur. Ces cartes permettent d’identifier ce que chaque utilisateur pense, ressent, voit et fait, afin de concevoir une solution qui répond au mieux à leurs besoins. Les figures suivantes présentent les différentes cartes.
 
-![Carte d'empathie d'apprenant](images/mind_map_apprenant.jpg) 
+**Utilisateur :**
 
+![Carte d'empathie de l'utilisateur](images/mind_map_apprenant.jpg) 
 
 **Administrateur :**
 
@@ -239,6 +208,13 @@ Perte de temps quotidienne : Le temps passé à réfléchir à une tenue peut de
 Le diagramme de cas d’utilisation de SmartDress présente les principales fonctionnalités accessibles aux deux acteurs du système : l’utilisateur et l’administrateur. L’utilisateur peut s’inscrire, se connecter, gérer ses vêtements, ajouter des photos, organiser ses articles, gérer ses préférences et recevoir des suggestions de tenues selon la météo, avec la possibilité d’enregistrer des tenues favorites. L’administrateur, quant à lui, peut gérer les utilisateurs, modérer le contenu et consulter les statistiques. Ce diagramme permet de visualiser les interactions entre les acteurs et le système avant le développement.
 
 ![Cas d'utilisation global](images/use_case_global.png)
+
+---
+# Diagramme de cas d’utilisation globale : mobile
+
+Le diagramme de cas d’utilisation de SmartDress présente les principales fonctionnalités accessibles aux deux acteurs du système : l’utilisateur et l’administrateur. L’utilisateur peut s’inscrire, se connecter, gérer ses vêtements, ajouter des photos, organiser ses articles, gérer ses préférences et recevoir des suggestions de tenues selon la météo, avec la possibilité d’enregistrer des tenues favorites. L’administrateur, quant à lui, peut gérer les utilisateurs, modérer le contenu et consulter les statistiques. Ce diagramme permet de visualiser les interactions entre les acteurs et le système avant le développement.
+
+![Cas d'utilisation global](images/)
 
 ---
 

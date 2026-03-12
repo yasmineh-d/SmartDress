@@ -1,72 +1,80 @@
 @startuml
-left to right direction
+top to bottom direction
+
+actor Utilisateur
+actor Administrateur
 
 actor Utilisateur
 actor Administrateur
 
 rectangle "SmartDress — Use Case Diagram (Mobile + Web)" {
 
-  ' =========================
-  ' AUTHENTIFICATION
-  ' =========================
-  usecase "S'inscrire" as UC1
-  usecase "Se connecter" as UC2
-  usecase "Se déconnecter" as UC3
+'=========================
+' AUTHENTIFICATION
+'=========================
+usecase "S'inscrire" as UC1
+usecase "Se connecter" as UC2
+usecase "Se déconnecter" as UC3
+usecase "Modifier profil" as UC4
 
-  Utilisateur -- UC1
-  Utilisateur -- UC2
-  Utilisateur -- UC3
-  Administrateur -- UC2
-  Administrateur -- UC3
+Utilisateur -- UC1
+Utilisateur -- UC2
+Utilisateur -- UC3
+Utilisateur -- UC4
 
-  ' =========================
-  ' GESTION DE LA GARDE-ROBE
-  ' =========================
-  usecase "Gérer vêtement\n(Ajouter, Modifier,\nSupprimer, Consulter)" as UC4
-  usecase "Catégoriser vêtement" as UC5
-  usecase "Ajouter photo" as UC6
+Administrateur -- UC2
+Administrateur -- UC3
 
-  Utilisateur -- UC4
-  UC4 ..> UC5 : <<extend>>
-  UC4 ..> UC6 : <<extend>>
+'=========================
+' GESTION VETEMENTS
+'=========================
+usecase "Gérer vêtements\n(Ajouter, Modifier,\nSupprimer, Consulter)" as UC5
+usecase "Catégoriser vêtement" as UC6
+usecase "Ajouter photo" as UC7
 
-  ' =========================
-  ' GESTION DES TENUES
-  ' =========================
-  usecase "Générer suggestion de tenue" as UC7
-  usecase "Vérifier météo" as UC8
-  usecase "Analyser préférences" as UC9
-  usecase "Planifier tenue" as UC10
-  usecase "Enregistrer tenue favorite" as UC11
+Utilisateur -- UC5
 
-  Utilisateur -- UC7
-  Utilisateur -- UC10
+UC5 ..> UC6 : <<extend>>
+UC5 ..> UC7 : <<extend>>
 
-  UC7 ..> UC8 : <<include>>
-  UC7 ..> UC9 : <<include>>
-  UC7 ..> UC11 : <<extend>>
-  UC10 ..> UC7 : <<include>>
+'=========================
+' TENUES
+'=========================
+usecase "Planifier tenue" as UC8
+usecase "Générer suggestion de tenue" as UC9
+usecase "Enregistrer tenue favorite" as UC10
 
-  ' =========================
-  ' PROFIL UTILISATEUR
-  ' =========================
-  usecase "Modifier profil" as UC12
-  usecase "Gérer préférences" as UC13
+Utilisateur -- UC8
+Utilisateur -- UC9
 
-  Utilisateur -- UC12
-  Utilisateur -- UC13
+UC8 ..> UC9 : <<include>>
 
-  ' =========================
-  ' ADMINISTRATION
-  ' =========================
-  usecase "Gérer utilisateurs\n(Créer, Modifier,\nSupprimer, Consulter)" as UC14
-  usecase "Consulter statistiques" as UC15
-  usecase "Modérer contenu" as UC16
+'=========================
+' INTELLIGENCE SYSTEM
+'=========================
+usecase "Analyser favoris" as UC11
+usecase "Vérifier météo" as UC12
 
-  Administrateur -- UC14
-  Administrateur -- UC15
-  Administrateur -- UC16
+UC9 ..> UC11 : <<include>>
+UC9 ..> UC12 : <<include>>
+UC9 ..> UC10 : <<extend>>
+
+'=========================
+' FAVORIS
+'=========================
+usecase "Gérer favoris" as UC13
+Utilisateur -- UC13
+
+'=========================
+' ADMIN
+'=========================
+usecase "Gérer utilisateurs\n(Créer, Modifier,\nSupprimer, Consulter)" as UC14
+usecase "Consulter statistiques" as UC15
+usecase "Modérer contenu" as UC16
+
+Administrateur -- UC14
+Administrateur -- UC15
+Administrateur -- UC16
 
 }
-
 @enduml
