@@ -210,11 +210,11 @@ Le diagramme de cas d’utilisation de SmartDress présente les principales fonc
 ![Cas d'utilisation global](images/use_case_global.png)
 
 ---
-# Diagramme de cas d’utilisation globale : mobile
+# Diagramme de cas d’utilisation globale
 
 Le diagramme de cas d’utilisation de SmartDress présente les principales fonctionnalités accessibles aux deux acteurs du système : l’utilisateur et l’administrateur. L’utilisateur peut s’inscrire, se connecter, gérer ses vêtements, ajouter des photos, organiser ses articles, gérer ses préférences et recevoir des suggestions de tenues selon la météo, avec la possibilité d’enregistrer des tenues favorites. L’administrateur, quant à lui, peut gérer les utilisateurs, modérer le contenu et consulter les statistiques. Ce diagramme permet de visualiser les interactions entre les acteurs et le système avant le développement.
 
-![Cas d'utilisation global](images/)
+![Cas d'utilisation global](images/diagramme_de_class.png)
 
 ---
 
@@ -237,8 +237,55 @@ Le diagramme de cas d’utilisation de SmartDress présente les principales fonc
 ---
 
 # Branche technique
+Dans ce projet, plusieurs technologies ont été choisies pour assurer **performance, maintenabilité, sécurité et rapidité de développement**.
 
-. 
+---
+
+## 🔹 Technologies Backend
+
+### PHP 8+
+Langage utilisé par Laravel, simple à apprendre, stable et largement supporté pour les applications web.
+
+### Laravel 12
+Framework backend basé sur le modèle **MVC**, qui apporte une structure claire à l’application.  
+Il facilite la gestion du **CRUD**, de l’**authentification**, des **middlewares** et améliore la **sécurité** globale du système.
+
+### Eloquent ORM
+Permet de gérer la base de données en utilisant des **modèles orientés objet** plutôt que des requêtes SQL manuelles.
+
+### Spatie Laravel Permission
+Package Laravel permettant de gérer les **rôles et permissions** (admin, éditeur, visiteur) de manière professionnelle et intégrée au système de **middleware**.
+
+---
+
+## 🔹 Technologies Frontend
+
+### Blade Templates
+Moteur de templates de Laravel permettant de créer des **pages dynamiques** avec des **layouts réutilisables**.
+
+### Tailwind CSS
+Framework CSS basé sur les **classes utilitaires** qui facilite la création d’un **design moderne, propre et rapide**.
+
+### JavaScript + jQuery
+JavaScript est utilisé pour les interactions côté client.  
+jQuery peut être utilisé en complément pour **simplifier certaines manipulations du DOM** ou les **requêtes AJAX**.
+
+### Preline
+Bibliothèque basée sur **Tailwind CSS** qui fournit des **composants UI prêts à l’emploi** (modals, menus, dropdowns, etc.) avec des interactions déjà intégrées, permettant de créer rapidement des interfaces modernes.
+
+🔗 https://preline.co/
+
+### Vite
+Vite est l’outil de **build moderne utilisé par défaut par Laravel** pour compiler les ressources frontend.
+
+Il offre :
+
+- un environnement de développement très rapide
+- le **Hot Module Replacement (HMR)** pour un rechargement instantané
+- une compilation optimisée pour la production
+- une gestion simplifiée des **assets (CSS, JavaScript, images)**
+
+Il s’intègre parfaitement avec **Blade, Tailwind CSS et les frameworks JavaScript modernes**.
 
 ---
 
@@ -274,7 +321,14 @@ Le diagramme de cas d’utilisation de SmartDress présente les principales fonc
 
 # Maquettes
 
-.
+**Maquette web**
+
+![Maquette](Images/Maquettes_Public_Landing.png)
+
+
+**Maquette mobile**
+![Maquette](Images/Dashboard_Mobile.png)
+
 
 ---
 
