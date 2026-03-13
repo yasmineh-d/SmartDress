@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('vetements', function (Blueprint $table) {
             $table->id();
+            $table->string('nom');
+            $table->string('categorie');
+            $table->string('couleur')->nullable();
+            $table->string('saison')->nullable();
+            $table->string('style')->nullable();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

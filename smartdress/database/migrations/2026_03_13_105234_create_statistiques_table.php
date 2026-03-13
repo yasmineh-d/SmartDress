@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('statistiques', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->integer('total_vetements')->default(0);
+            $table->integer('total_tenues')->default(0);
             $table->timestamps();
         });
     }

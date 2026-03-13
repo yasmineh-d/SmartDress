@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('tenues', function (Blueprint $table) {
             $table->id();
+            $table->string('nom');
+            $table->string('meteo_adaptee')->nullable();
+            $table->text('conseil_ia')->nullable();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

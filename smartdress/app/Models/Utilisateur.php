@@ -6,5 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Utilisateur extends Model
 {
-    //
+    protected $fillable = [
+        'bio',
+        'avatar',
+        'user_id',
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
