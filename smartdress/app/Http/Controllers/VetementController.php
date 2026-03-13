@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Vetement;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class VetementController extends Controller
 {
@@ -11,7 +13,8 @@ class VetementController extends Controller
      */
     public function index()
     {
-        //
+        $vetements = Auth::user()->vetements ?? Vetement::where('user_id', Auth::id())->get();
+        return view('vetements.index', compact('vetements'));
     }
 
     /**
@@ -19,7 +22,7 @@ class VetementController extends Controller
      */
     public function create()
     {
-        //
+        return view('vetements.create');
     }
 
     /**
@@ -27,38 +30,60 @@ class VetementController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'nom' => 'required|string|max:255',
+            'categorie' => 'required|string',
+            'couleur' => 'nullable|string',
+            'saison' => 'nullable|string',
+            'style' => 'nullable|string',
+        ]);
+
+        $vetement = Auth::user()->vetements()->create($validated);
+
+        return redirect()->route('vetements.index')->with('success', 'Vêtement ajouté avec succès !');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Vetement $vetement)
     {
-        //
+        return view('vetements.show', compact('vetement'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Vetement $vetement)
     {
-        //
+        return view('vetements.edit', compact('vetement'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Vetement $vetement)
     {
-        //
+        $validated = $request->validate([
+            'nom' => 'required|string|max:255',
+            'categorie' => 'required|string',
+            'couleur' => 'nullable|string',
+            'saison' => 'nullable|string',
+            'style' => 'nullable|string',
+        ]);
+
+        $vetement->update($validated);
+
+        return redirect()->route('vetements.index')->with('success', 'Vêtement mis à jour !');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Vetement $vetement)
     {
-        //
+        $vetement->delete();
+
+        return redirect()->route('vetements.index')->with('success', 'Vêtement supprimé !');
     }
 }

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Favoris;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FavorisController extends Controller
 {
@@ -11,15 +13,8 @@ class FavorisController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $favoris = Auth::user()->favoris()->with(['vetement', 'tenue'])->get();
+        return view('favoris.index', compact('favoris'));
     }
 
     /**
@@ -27,38 +22,31 @@ class FavorisController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $validated = $request->validate([
+            'vetement_id' => 'nullable|exists:vetements,id',
+            'tenue_id' => 'nullable|exists:tenues,id',
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        if (is_null($validated['vetement_id']) && is_null($validated['tenue_id'])) {
+            return back()->with('error', 'Veuillez sélectionner un vêtement ou une tenue.');
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+        Auth::user()->favoris()->create($validated);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
+        return back()->with('success', 'Ajouté aux favoris !');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Favoris $favori)
     {
-        //
+        if ($favori->user_id !== Auth::id()) {
+            abort(403);
+        }
+
+        $favori->delete();
+
+        return back()->with('success', 'Retiré des favoris.');
     }
 }
