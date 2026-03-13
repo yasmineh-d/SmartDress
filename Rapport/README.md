@@ -123,7 +123,7 @@ SmartDress est une application mobile intelligente qui permet aux utilisateurs d
 
 La méthodologie Scrum est une méthodologie agile qui permet de gérer un projet de manière flexible et collaborative, en favorisant la livraison progressive de fonctionnalités. Elle repose sur l’itération, la priorisation des tâches et la communication régulière entre les membres de l’équipe.  
 
-Dans le cadre de ce projet, nous avons organisé le travail selon les principes de Scrum, ce qui nous a permis de mieux planifier, suivre et livrer les différentes fonctionnalités du blog de manière efficace.  
+Dans le cadre de ce projet, nous avons organisé le travail selon les principes de Scrum, ce qui nous a permis de mieux planifier, suivre et livrer les différentes fonctionnalités de l'application de manière efficace.  
 
 ## Principes clés
 
@@ -177,7 +177,7 @@ La carte d’empathie est un outil utilisé pour mieux comprendre les besoins, l
 
 **Utilisateur :**
 
-![Carte d'empathie de l'utilisateur](images/mind_map_apprenant.jpg) 
+![Carte d'empathie de l'utilisateur](images/mind_map_utilisateur.jpg) 
 
 **Administrateur :**
 
@@ -308,7 +308,7 @@ Grâce à sa structure **flexible et modulaire**, Tiptap permet d’adapter l’
 
 ## Architecture du projet
 
-Le projet du blog repose sur une architecture cohérente qui combine **trois niveaux d’organisation** :
+Le projet SmartDress repose sur une architecture cohérente qui combine **trois niveaux d’organisation** :
 
 - Architecture **MVC**
 - Architecture **en couches (3-tiers / N-tiers)**
@@ -333,8 +333,8 @@ Ce modèle organise le code en trois parties :
 Représente les **données du système** :
 
 - User
-- Offre
-- Candidature
+- Vêtement
+- Tenue
 - Favori
 
 Les modèles :
@@ -353,8 +353,8 @@ Interface utilisateur construite avec :
 
 Les vues permettent d’afficher :
 
-- la liste des **offres de stage**
-- les **détails des offres**
+- la liste des **vêtements**
+- les **détails des tenues**
 - le **formulaire One-Page** (ajout / modification)
 
 ### Contrôleur (Controller)
@@ -382,8 +382,8 @@ Elle correspond à la **partie visible par l’utilisateur**.
 
 Elle comprend :
 
-- pages du blog
-- affichage des articles
+- pages de l'application
+- affichage des suggestions
 - formulaires One-Page
 - partie publique de l’application
 
@@ -405,7 +405,7 @@ Cette couche gère :
 
 - la **validation**
 - les **règles métier**
-- la gestion des **articles**
+- la gestion des **vêtements**
 - la gestion des **utilisateurs**
 - la gestion des **catégories**
 
@@ -425,7 +425,7 @@ Cette couche est responsable de la **gestion des données**.
 Elle comprend :
 
 - les **modèles Eloquent**  
-  (User, Offre, Candidature, Favori…)
+  (User, Vêtement, Tenue, Favori…)
 
 Responsabilités :
 
@@ -478,12 +478,12 @@ Cette organisation permet d’avoir une application :
 ---
 
 # Conception : Diagramme de classe
-**Le diagramme de classes représente la structure interne de l’application StageFlow et illustre les différentes entités du système ainsi que les relations entre elles. Il met en évidence les classes principales telles que Utilisateur, Étudiant, Entreprise et Administrateur, qui représentent les différents acteurs de la plateforme.**
+**Le diagramme de classes représente la structure interne de l’application SmartDress et illustre les différentes entités du système ainsi que les relations entre elles. Il met en évidence les classes principales telles que Utilisateur et Administrateur, qui représentent les différents acteurs de la plateforme.**
 ![Diagramme de Classe](Images/diagramme_de_class.png)
 
-- Le diagramme de classes présente la structure interne de l’application StageFlow et les relations entre ses différentes entités. Il met en évidence les classes principales telles que Étudiant, Entreprise et Administrateur, qui représentent les acteurs de la plateforme.
+- Le diagramme de classes présente la structure interne de l’application SmartDress et les relations entre ses différentes entités. Il met en évidence les classes principales telles que Utilisateur et Administrateur, qui représentent les acteurs de la plateforme.
 
-- Les entreprises peuvent publier des offres de stage, tandis que les étudiants peuvent consulter les offres, postuler et suivre leurs candidatures via la classe Candidature. Le système inclut également des fonctionnalités comme les commentaires, les favoris et les notifications, ainsi qu’un mécanisme de gestion des rôles et des permissions pour contrôler les accès.
+- Les utilisateurs peuvent ajouter des vêtements, tandis que le système génère des suggestions de tenues. Les utilisateurs peuvent consulter les vêtements, créer des tenues et suivre leurs préférences. Le système inclut également des fonctionnalités comme les favoris et les notifications, ainsi qu’un mécanisme de gestion des rôles et des permissions pour contrôler les accès.
 
 **Cette représentation permet de mieux comprendre la logique métier de l’application avant son implémentation.**
 
