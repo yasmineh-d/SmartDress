@@ -2,24 +2,23 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DatabaseSeeder extends Seeder
 {
     use WithoutModelEvents;
 
     /**
-     * Seed the application's database.
+     * Méthode principale qui lance tous les seeders
      */
     public function run(): void
     {
         $this->call([
-            RolePermissionSeeder::class,
-            UserSeeder::class,
-            VetementSeeder::class,
-            TenueSeeder::class,
+            RolePermissionSeeder::class, // 🔐 Crée les rôles et leurs permissions
+            UserSeeder::class,           // 👤 Crée les utilisateurs et leur attribue des rôles
+            VetementSeeder::class,       // 👕 Ajoute les vêtements pour un utilisateur
+            TenueSeeder::class,          // 👗 Crée des tenues et les lie aux vêtements
         ]);
     }
 }

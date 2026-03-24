@@ -9,31 +9,44 @@ use Illuminate\Database\Seeder;
 class RolePermissionSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Crée les rôles et leurs permissions
      */
     public function run(): void
     {
-        // Création des rôles
+        // 🔹 Création ou récupération des rôles
         $adminRole = Role::firstOrCreate(['nom' => 'admin']);
         $userRole = Role::firstOrCreate(['nom' => 'utilisateur']);
 
-        // Création des permissions de base
-        $permissions = [
+        // 🔹 Liste des permissions pour admin
+        $adminPermissions = [
             'manage_users',
             'manage_all_clothes',
+        ];
+
+        // 🔹 Liste des permissions pour utilisateur
+        $userPermissions = [
             'view_own_clothes',
             'create_clothes',
         ];
 
-        foreach ($permissions as $permName) {
+        // 🔐 Attribution des permissions au rôle admin
+        foreach ($adminPermissions as $permName) {
+            // Créer la permission si elle n'existe pas
             $permission = Permission::firstOrCreate(['nom' => $permName]);
-            
-            // Attribution des permissions (exemple simplifié)
-            if ($permName === 'manage_users' || $permName === 'manage_all_clothes') {
-                $adminRole->permissions()->syncWithoutDetaching([$permission->id]);
-            } else {
-                $userRole->permissions()->syncWithoutDetaching([$permission->id]);
-            }
+
+            // Associer la permission au rôle admin sans supprimer les existantes
+            $adminRole->permissions()->syncWithoutDetaching([
+                $permission->id
+            ]);
+        }
+
+        // 👤 Attribution des permissions au rôle utilisateur
+        foreach ($userPermissions as $permName) {
+            $permission = Permission::firstOrCreate(['nom' => $permName]);
+
+            $userRole->permissions()->syncWithoutDetaching([
+                $permission->id
+            ]);
         }
     }
 }
