@@ -318,7 +318,7 @@ style: |
 
 ## 5. Conception : Diagramme de classe
 
-![w:1800 h:650 Diagramme de classe](./images/diagramme_de_class.jpg)
+![w:1800 h:650 Diagramme de classe](./images/diagramme_de_class.png)
 
 ---
 
