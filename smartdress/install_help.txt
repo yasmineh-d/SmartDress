@@ -1,0 +1,22 @@
+Description:
+  Install all of the NativePHP resources
+
+Usage:
+  native:install [options] [--] [<platform>]
+
+Arguments:
+  platform              The platform to install (android/a, ios/i, or both)
+
+Options:
+      --no-force        Keep existing files instead of overwriting
+      --with-icu        Include ICU support for Android (adds ~30MB)
+      --skip-php        Do not download the PHP binaries
+  -F, --force           Force re-download of PHP binaries by clearing the cache
+  -h, --help            Display help for the given command. When no command is given display help for the list command
+      --silent          Do not output any message
+  -q, --quiet           Only errors are displayed. All other output is suppressed
+  -V, --version         Display this application version
+      --ansi|--no-ansi  Force (or disable --no-ansi) ANSI output
+  -n, --no-interaction  Do not ask any interactive question
+      --env[=ENV]       The environment the command should run under
+  -v|vv|vvv, --verbose  Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug

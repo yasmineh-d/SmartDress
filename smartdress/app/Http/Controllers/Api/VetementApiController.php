@@ -18,7 +18,7 @@ class VetementApiController extends Controller
     public function index(): JsonResponse
     {
         return response()->json([
-            'message' => 'Liste des vetements recuperee avec succes.',
+            'success' => true,
             'data' => $this->vetementService->getAll(),
         ]);
     }

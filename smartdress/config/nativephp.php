@@ -165,4 +165,21 @@ return [
      * Custom PHP binary path.
      */
     'binary_path' => env('NATIVEPHP_PHP_BINARY_PATH', null),
+
+    /**
+     * persistent runtime (v3.1+)
+     * Improves performance significantly (from ~200ms to ~30ms per request).
+     */
+    'runtime' => [
+        'mode' => env('NATIVEPHP_RUNTIME_MODE', 'persistent'),
+        'reset_instances' => true,
+        'gc_between_dispatches' => false,
+    ],
+
+    /**
+     * Start URL
+     * The initial path that loads when your app starts.
+     */
+    'start_url' => env('NATIVEPHP_START_URL', '/'),
 ];
+
