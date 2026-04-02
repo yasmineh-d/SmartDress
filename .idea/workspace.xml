@@ -5,13 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5e396b16-fbb1-4cb5-a8b4-e13b52b5b366" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/deviceManager.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deviceManager.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartdress/app/Http/Controllers/Api/VetementApiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/smartdress/app/Http/Controllers/Api/VetementApiController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartdress/bootstrap/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/smartdress/bootstrap/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartdress/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/smartdress/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartdress/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/smartdress/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartdress/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/smartdress/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartdress/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/smartdress/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartDress_Mobile/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/SmartDress_Mobile/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartDress_Mobile/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/SmartDress_Mobile/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartDress_Mobile/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/SmartDress_Mobile/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartDress_Mobile/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/SmartDress_Mobile/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartDress_Mobile/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartDress_Mobile/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartDress_Mobile/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/SmartDress_Mobile/resources/views/welcome.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,19 +46,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "develop",
-    "settings.editor.selected.configurable": "AndroidSdkUpdater"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;AndroidSdkUpdater&quot;
   }
-}]]></component>
+}</component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="5e396b16-fbb1-4cb5-a8b4-e13b52b5b366" name="Changes" comment="" />
