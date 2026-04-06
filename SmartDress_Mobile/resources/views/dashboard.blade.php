@@ -48,11 +48,40 @@
 
     generateSuggestion() {
         if (this.vetements.length === 0) return;
-        const tops = this.vetements.filter(v => v.categorie.toLowerCase().includes('haut'));
-        const bottoms = this.vetements.filter(v => v.categorie.toLowerCase().includes('bas'));
+
+        const temp = parseFloat(this.weather.temp) || 20;
+        const isHot = temp >= 22;
+        const isCold = temp <= 16;
+
+        // Filtrage des Hauts (Tops) selon la météo
+        let tops = this.vetements.filter(v => v.categorie.toLowerCase().includes('haut'));
+        if (isHot && tops.length > 0) {
+            // On essaie de retirer les trucs trop chauds
+            const lightTops = tops.filter(v => !v.nom.toLowerCase().match(/manteau|veste|pull|sweat|chaud|laine/));
+            if (lightTops.length > 0) tops = lightTops;
+        } else if (isCold && tops.length > 0) {
+            // On privilégie les trucs chauds
+            const warmTops = tops.filter(v => v.nom.toLowerCase().match(/manteau|veste|pull|sweat|chaud|laine/));
+            if (warmTops.length > 0) tops = warmTops;
+        }
+
+        // Filtrage des Bas (Bottoms)
+        let bottoms = this.vetements.filter(v => v.categorie.toLowerCase().includes('bas'));
+        if (isHot && bottoms.length > 0) {
+            // On privilégie shorts / jupes si dispo
+            const lightBottoms = bottoms.filter(v => v.nom.toLowerCase().match(/short|jupe|léger/));
+            if (lightBottoms.length > 0) bottoms = lightBottoms;
+        }
+
+        // Sélection aléatoire parmi les candidats filtrés
         this.suggestion.top = tops.length > 0 ? tops[Math.floor(Math.random() * tops.length)] : null;
         this.suggestion.bottom = bottoms.length > 0 ? bottoms[Math.floor(Math.random() * bottoms.length)] : null;
-        const titles = ['Casual Moderne', 'Tenue du Jour', 'Look Élégant', 'Style Minimaliste'];
+        
+        // Titre dynamique selon la météo
+        let titles = ['Casual Moderne', 'Tenue du Jour', 'Look Élégant', 'Style Minimaliste'];
+        if (isHot) titles = ['Look Estival', 'Option Légère', 'Tenue d\'Été fraîche'];
+        if (isCold) titles = ['Style Hivernal', 'Tenue Bien au Chaud', 'Look Cocooning'];
+
         this.suggestion.title = titles[Math.floor(Math.random() * titles.length)];
     }
 @endpush

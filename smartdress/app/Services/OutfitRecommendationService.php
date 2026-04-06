@@ -22,6 +22,7 @@ class OutfitRecommendationService
         // Chercher une tenue de l'utilisateur dont le nom contient le type (Été ou Hiver)
         return $user->tenues()
             ->where('nom', 'LIKE', '%' . $typeRecherche . '%')
+            ->inRandomOrder()
             ->first();
     }
 }

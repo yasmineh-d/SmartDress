@@ -1,0 +1,167 @@
+[
+  {
+    "id": 1,
+    "nom": "T-shirt blanc basique",
+    "categorie": "Haut",
+    "couleur": "Blanc",
+    "saison": "êtÇ",
+    "style": "Casual",
+    "user_id": 2,
+    "created_at": "2026-04-01T11:51:35Z",
+    "updated_at": "2026-04-01T11:51:35Z"
+  },
+  {
+    "id": 2,
+    "nom": "Jean bleu slim",
+    "categorie": "Bas",
+    "couleur": "Bleu",
+    "saison": "Toute saison",
+    "style": "Casual",
+    "user_id": 2,
+    "created_at": "2026-04-01T11:51:35Z",
+    "updated_at": "2026-04-01T11:51:35Z"
+  },
+  {
+    "id": 3,
+    "nom": "Veste en cuir noir",
+    "categorie": "Haut",
+    "couleur": "Noir",
+    "saison": "Hiver",
+    "style": "Rock",
+    "user_id": 2,
+    "created_at": "2026-04-01T11:51:35Z",
+    "updated_at": "2026-04-01T11:51:35Z"
+  },
+  {
+    "id": 4,
+    "nom": "Robe fleurie d'ÇtÇ",
+    "categorie": "Haut",
+    "couleur": "Multicolore",
+    "saison": "êtÇ",
+    "style": "Bohäme",
+    "user_id": 2,
+    "created_at": "2026-04-01T11:51:35Z",
+    "updated_at": "2026-04-01T11:51:35Z"
+  },
+  {
+    "id": 5,
+    "nom": "Baskets blanches",
+    "categorie": "Chaussures",
+    "couleur": "Blanc",
+    "saison": "Toute saison",
+    "style": "Sport",
+    "user_id": 2,
+    "created_at": "2026-04-01T11:51:35Z",
+    "updated_at": "2026-04-01T11:51:35Z"
+  },
+  {
+    "id": 6,
+    "nom": "Pull en laine beige",
+    "categorie": "Haut",
+    "couleur": "Beige",
+    "saison": "Hiver",
+    "style": "Cocooning",
+    "user_id": 2,
+    "created_at": "2026-04-01T11:51:35Z",
+    "updated_at": "2026-04-01T11:51:35Z"
+  },
+  {
+    "id": 7,
+    "nom": "Short en jean",
+    "categorie": "Bas",
+    "couleur": "Bleu clair",
+    "saison": "êtÇ",
+    "style": "Casual",
+    "user_id": 2,
+    "created_at": "2026-04-01T11:51:35Z",
+    "updated_at": "2026-04-01T11:51:35Z"
+  },
+  {
+    "id": 8,
+    "nom": "Chemise en lin bleue",
+    "categorie": "Haut",
+    "couleur": "Bleu ciel",
+    "saison": "Printemps",
+    "style": "Chic",
+    "user_id": 2,
+    "created_at": "2026-04-01T11:51:35Z",
+    "updated_at": "2026-04-01T11:51:35Z"
+  },
+  {
+    "id": 9,
+    "nom": "Pantalon chino beige",
+    "categorie": "Bas",
+    "couleur": "Beige",
+    "saison": "Automne",
+    "style": "Chic",
+    "user_id": 2,
+    "created_at": "2026-04-01T11:51:35Z",
+    "updated_at": "2026-04-01T11:51:35Z"
+  },
+  {
+    "id": 10,
+    "nom": "Bottes en cuir marron",
+    "categorie": "Chaussures",
+    "couleur": "Marron",
+    "saison": "Hiver",
+    "style": "Classique",
+    "user_id": 2,
+    "created_at": "2026-04-01T11:51:35Z",
+    "updated_at": "2026-04-01T11:51:35Z"
+  },
+  {
+    "id": 11,
+    "nom": "Cardigan gris",
+    "categorie": "Haut",
+    "couleur": "Gris",
+    "saison": "Automne",
+    "style": "Casual",
+    "user_id": 2,
+    "created_at": "2026-04-01T11:51:35Z",
+    "updated_at": "2026-04-01T11:51:35Z"
+  },
+  {
+    "id": 12,
+    "nom": "Jupe patineuse noire",
+    "categorie": "Bas",
+    "couleur": "Noir",
+    "saison": "Printemps",
+    "style": "Chic",
+    "user_id": 2,
+    "created_at": "2026-04-01T11:51:35Z",
+    "updated_at": "2026-04-01T11:51:35Z"
+  },
+  {
+    "id": 13,
+    "nom": "Sweat Ö capuche noir",
+    "categorie": "Haut",
+    "couleur": "Noir",
+    "saison": "Hiver",
+    "style": "Sport",
+    "user_id": 2,
+    "created_at": "2026-04-01T11:51:35Z",
+    "updated_at": "2026-04-01T11:51:35Z"
+  },
+  {
+    "id": 14,
+    "nom": "Sandales en cuir",
+    "categorie": "Chaussures",
+    "couleur": "Naturel",
+    "saison": "êtÇ",
+    "style": "Bohäme",
+    "user_id": 2,
+    "created_at": "2026-04-01T11:51:35Z",
+    "updated_at": "2026-04-01T11:51:35Z"
+  },
+  {
+    "id": 15,
+    "nom": "Manteau long gris",
+    "categorie": "Haut",
+    "couleur": "Gris",
+    "saison": "Hiver",
+    "style": "Classique",
+    "user_id": 2,
+    "created_at": "2026-04-01T11:51:35Z",
+    "updated_at": "2026-04-01T11:51:35Z"
+  }
+]
