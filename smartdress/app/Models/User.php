@@ -66,4 +66,24 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class, 'role_user');
     }
+
+    /**
+     * Check if the user has a specific role.
+     */
+    public function hasRole(string $roleName): bool
+    {
+        return $this->roles()->where('nom', $roleName)->exists();
+    }
+
+    /**
+     * Get user initials from name.
+     */
+    public function initials(): string
+    {
+        $words = explode(' ', trim($this->name));
+        if (count($words) >= 2) {
+            return strtoupper(substr($words[0], 0, 1) . substr(end($words), 0, 1));
+        }
+        return strtoupper(substr($this->name, 0, 2));
+    }
 }

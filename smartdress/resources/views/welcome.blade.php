@@ -65,21 +65,28 @@
             <div class="hidden lg:flex items-center gap-3">
                 <template x-if="!isLoggedIn">
                     <div class="flex items-center gap-3">
-                        <a href="./pages/public/auth.html?mode=login" class="sd-btn-ghost">Se connecter</a>
-                        <a href="./pages/public/auth.html?mode=register" class="sd-btn-primary">Commencer</a>
+                        <a href="{{ route("login", ["mode" => "login"]) }}" class="sd-btn-ghost">Se connecter</a>
+                        <a href="{{ route("login", ["mode" => "register"]) }}" class="sd-btn-primary">Commencer</a>
                     </div>
                 </template>
                 <template x-if="isLoggedIn">
                     <div class="flex items-center gap-3">
-                        <a href="./pages/public/profile-web.html"
+                        @auth
+                        <a href="{{ route("profile") }}"
                             class="flex items-center gap-2 px-4 py-2 bg-cream/50 rounded-full text-xs font-bold text-bark hover:bg-cream transition-all border border-tan/10">
                             <div
                                 class="w-6 h-6 bg-tan rounded-full flex items-center justify-center text-[10px] text-white">
-                                YH</div>
-                            Mon Profil
+                                {{ auth()->user()->initials() }}</div>
+                            {{ auth()->user()->name }}
                         </a>
-                        <button @click="isLoggedIn = false"
-                            class="text-xs font-bold text-tan hover:text-bark uppercase tracking-widest px-2 transition-all">Déconnexion</button>
+                        <form action="{{ route('logout') }}" method="POST" class="inline">
+                            @csrf
+                            <button type="submit" class="text-xs font-bold text-tan hover:text-bark uppercase tracking-widest px-2 transition-all">Déconnexion</button>
+                        </form>
+                        @else
+                        <!-- Fallback si Alpine pense être connecté mais Laravel non -->
+                        <a href="{{ route("login", ["mode" => "login"]) }}" class="sd-btn-ghost">Se connecter</a>
+                        @endauth
                     </div>
                 </template>
             </div>
@@ -109,15 +116,15 @@
                 <hr class="border-tan/30 my-1" />
                 <template x-if="!isLoggedIn">
                     <div class="flex flex-col gap-3">
-                        <a href="./pages/public/auth.html?mode=login" class="sd-btn-ghost text-center"
+                        <a href="{{ route("login", ["mode" => "login"]) }}" class="sd-btn-ghost text-center"
                             @click="mobileMenuOpen = false">Se connecter</a>
-                        <a href="./pages/public/auth.html?mode=register" class="sd-btn-primary text-center"
+                        <a href="{{ route("login", ["mode" => "register"]) }}" class="sd-btn-primary text-center"
                             @click="mobileMenuOpen = false">Commencer gratuitement</a>
                     </div>
                 </template>
                 <template x-if="isLoggedIn">
                     <div class="flex flex-col gap-3">
-                        <a href="./pages/public/profile-web.html" class="sd-btn-ghost text-center"
+                        <a href="{{ route("profile") }}" class="sd-btn-ghost text-center"
                             @click="mobileMenuOpen = false">Mon Profil</a>
                         <button @click="isLoggedIn = false; mobileMenuOpen = false"
                             class="sd-btn-primary text-center">Déconnexion</button>
@@ -144,7 +151,7 @@
             </p>
 
             <div class="flex flex-wrap gap-3 mb-8 sd-anim" style="animation-delay:.55s">
-                <a href="./pages/auth.html" class="sd-btn-primary sd-btn-lg">Essayer gratuitement</a>
+                <a href="{{ route("login") }}" class="sd-btn-primary sd-btn-lg">Essayer gratuitement</a>
                 <a href="#how" class="sd-btn-ghost sd-btn-lg">Comment ça marche</a>
             </div>
 
@@ -653,7 +660,7 @@
             <p class="sd-cta-desc">Rejoignez des milliers d'utilisateurs qui ont transformé leur routine matinale grâce
                 à SmartDress.</p>
             <div class="flex flex-wrap justify-center gap-4">
-                <a href="./pages/auth.html" class="sd-btn-primary sd-btn-lg">Créer un compte gratuit</a>
+                <a href="{{ route("login") }}" class="sd-btn-primary sd-btn-lg">Créer un compte gratuit</a>
                 <a href="#features" class="sd-btn-ghost sd-btn-lg">En savoir plus</a>
             </div>
         </div>
@@ -689,7 +696,7 @@
             <div>
                 <h4 class="sd-footer-heading">Projet</h4>
                 <ul class="sd-footer-links">
-                    <li><a href="./pages/public/about-web.html">À propos</a></li>
+                    <li><a href="{{ route("about") }}">À propos</a></li>
                     <li><a href="#">Rapport PFF</a></li>
                     <li><a href="/contact">Contact</a></li>
                     <li><a href="#">Mentions légales</a></li>

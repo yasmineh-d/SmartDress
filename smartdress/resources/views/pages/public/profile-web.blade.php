@@ -40,17 +40,36 @@
     <!-- Header (Style Home) -->
     <header id="navbar" class="sd-navbar scrolled !fixed !bg-white/90">
         <div class="max-w-screen-xl mx-auto px-6 lg:px-12 flex items-center h-full gap-12">
-            <a href="../../index.html" class="sd-logo">Smart<span>Dress</span></a>
+            <a href="{{ url("/") }}" class="sd-logo">Smart<span>Dress</span></a>
 
             <nav class="hidden lg:flex items-center gap-8">
-                <a href="dashboard-web.html" class="sd-navlink">Dashboard</a>
-                <a href="garde-robe-web.html" class="sd-navlink">Garde-Robe</a>
-                <a href="favoris-web.html" class="sd-navlink">Favoris</a>
+                <a href="{{ route("dashboard") }}" class="sd-navlink">Dashboard</a>
+                <a href="{{ route("garde-robe") }}" class="sd-navlink">Garde-Robe</a>
+                <a href="{{ route("favoris") }}" class="sd-navlink">Favoris</a>
                 <a href="#" class="sd-navlink !opacity-100 !text-moss font-bold border-b-2 border-moss pb-1">Profil</a>
             </nav>
 
             <div class="ml-auto hidden lg:flex items-center gap-3">
-                <a href="../../index.html" class="sd-btn-ghost !py-2 !px-4 !text-[10px]">Déconnexion</a>
+                @auth
+                <div class="flex items-center gap-3">
+                    <a href="{{ route('profile') }}"
+                        class="flex items-center gap-2 px-4 py-2 bg-cream/50 rounded-full text-xs font-bold text-bark hover:bg-cream transition-all border border-tan/10">
+                        <div
+                            class="w-6 h-6 bg-tan rounded-full flex items-center justify-center text-[10px] text-white">
+                            {{ auth()->user()->initials() }}</div>
+                        {{ auth()->user()->name }}
+                    </a>
+                    <form action="{{ route('logout') }}" method="POST" class="inline">
+                        @csrf
+                        <button type="submit" class="text-xs font-bold text-tan hover:text-bark uppercase tracking-widest px-2 transition-all">Déconnexion</button>
+                    </form>
+                </div>
+                @else
+                <div class="flex items-center gap-3">
+                    <a href="{{ route('login', ['mode' => 'login']) }}" class="sd-btn-ghost">Se connecter</a>
+                    <a href="{{ route('login', ['mode' => 'register']) }}" class="sd-btn-primary">Commencer</a>
+                </div>
+                @endauth
             </div>
         </div>
     </header>
@@ -88,7 +107,7 @@
                         <p class="text-tan text-[10px] font-bold uppercase tracking-widest mt-1">Membre depuis Mars 2026
                         </p>
                     </div>
-                    <button onclick="location.href='edit-profile-web.html'"
+                    <button onclick="location.href='edit-{{ route("profile") }}'"
                         class="w-full py-4 bg-bark text-white rounded-full text-[10px] font-bold uppercase tracking-[0.2em] shadow-lg shadow-bark/20 hover:bg-moss transition-all">
                         Modifier le profil
                     </button>
@@ -208,7 +227,7 @@
                     <h3 class="px-2 text-[11px] font-bold text-tan uppercase tracking-widest">Sécurité du Compte</h3>
                     <div
                         class="bg-white rounded-[2.5rem] border border-tan/10 overflow-hidden shadow-xl shadow-bark/5 divide-y divide-tan/5">
-                        <button onclick="location.href='change-password-web.html'"
+                        <button onclick="location.href='{{ route("password.change") }}'"
                             class="w-full p-8 flex items-center justify-between hover:bg-cream/20 transition-colors text-left">
                             <div class="flex items-center gap-6">
                                 <div
@@ -252,15 +271,15 @@
     <footer class="sd-footer !mt-20">
         <div class="max-w-screen-xl mx-auto px-6 lg:px-12 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
             <div>
-                <a href="../../index.html" class="sd-logo sd-logo--light">Smart<span>Dress</span></a>
+                <a href="{{ url("/") }}" class="sd-logo sd-logo--light">Smart<span>Dress</span></a>
                 <p class="sd-footer-tag">Votre garde-robe digitale intelligente. Suggestions de tenues basées sur la météo et vos préférences.</p>
             </div>
             <div>
                 <h4 class="sd-footer-heading">Application</h4>
                 <ul class="sd-footer-links">
-                    <li><a href="dashboard-web.html">Dashboard</a></li>
-                    <li><a href="garde-robe-web.html">Garde-robe</a></li>
-                    <li><a href="favoris-web.html">Favoris</a></li>
+                    <li><a href="{{ route("dashboard") }}">Dashboard</a></li>
+                    <li><a href="{{ route("garde-robe") }}">Garde-robe</a></li>
+                    <li><a href="{{ route("favoris") }}">Favoris</a></li>
                     <li><a href="#">Suggestions</a></li>
                     <li><a href="#">Notifications</a></li>
                 </ul>
@@ -268,16 +287,16 @@
             <div>
                 <h4 class="sd-footer-heading">Compte</h4>
                 <ul class="sd-footer-links">
-                    <li><a href="profile-web.html">Mon profil</a></li>
+                    <li><a href="{{ route("profile") }}">Mon profil</a></li>
                     <li><a href="#">Paramètres</a></li>
-                    <li><a href="../../index.html">Déconnexion</a></li>
+                    <li><a href="{{ url("/") }}">Déconnexion</a></li>
                 </ul>
             </div>
             <div>
                 <h4 class="sd-footer-heading">Projet</h4>
                 <ul class="sd-footer-links">
-                    <li><a href="about-web.html">À propos</a></li>
-                    <li><a href="contact-web.html">Contact</a></li>
+                    <li><a href="{{ route("about") }}">À propos</a></li>
+                    <li><a href="{{ route("contact") }}">Contact</a></li>
                     <li><a href="#">Mentions légales</a></li>
                 </ul>
             </div>

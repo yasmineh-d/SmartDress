@@ -38,17 +38,17 @@
     <!-- Header (Style Home) -->
     <header id="navbar" class="sd-navbar scrolled !fixed !bg-white/90">
         <div class="max-w-screen-xl mx-auto px-6 lg:px-12 flex items-center h-full gap-12">
-            <a href="../../index.html" class="sd-logo">Smart<span>Dress</span></a>
+            <a href="{{ url("/") }}" class="sd-logo">Smart<span>Dress</span></a>
 
             <nav class="hidden lg:flex items-center gap-8">
-                <a href="dashboard-web.html" class="sd-navlink">Dashboard</a>
-                <a href="garde-robe-web.html" class="sd-navlink">Garde-Robe</a>
-                <a href="favoris-web.html" class="sd-navlink">Favoris</a>
-                <a href="profile-web.html" class="sd-navlink">Profil</a>
+                <a href="{{ route("dashboard") }}" class="sd-navlink">Dashboard</a>
+                <a href="{{ route("garde-robe") }}" class="sd-navlink">Garde-Robe</a>
+                <a href="{{ route("favoris") }}" class="sd-navlink">Favoris</a>
+                <a href="{{ route("profile") }}" class="sd-navlink">Profil</a>
             </nav>
 
             <div class="ml-auto hidden lg:flex items-center gap-3">
-                <a href="../../index.html" class="sd-btn-ghost !py-2 !px-4 !text-[10px]">Déconnexion</a>
+                <a href="{{ url("/") }}" class="sd-btn-ghost !py-2 !px-4 !text-[10px]">Déconnexion</a>
             </div>
         </div>
     </header>
@@ -58,7 +58,7 @@
     <main class="flex-1 max-w-xl w-full mx-auto p-12">
         <div class="space-y-12">
             <div class="flex items-center gap-4">
-                <button onclick="location.href='profile-web.html'" class="w-10 h-10 flex items-center justify-center bg-white border border-tan/10 rounded-xl hover:bg-cream transition-colors">
+                <button onclick="location.href='{{ route("profile") }}'" class="w-10 h-10 flex items-center justify-center bg-white border border-tan/10 rounded-xl hover:bg-cream transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-tan" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                     </svg>
@@ -89,7 +89,7 @@
                     </div>
 
                     <div class="pt-6 flex flex-col md:flex-row gap-4">
-                        <button type="button" onclick="location.href='profile-web.html'" class="flex-1 py-4 border border-tan/20 text-tan rounded-full text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-cream/30 transition-all">
+                        <button type="button" onclick="location.href='{{ route("profile") }}'" class="flex-1 py-4 border border-tan/20 text-tan rounded-full text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-cream/30 transition-all">
                             Annuler
                         </button>
                         <button type="submit" class="flex-1 py-4 bg-moss text-white rounded-full text-[10px] font-bold uppercase tracking-[0.2em] shadow-lg shadow-moss/20 hover:bg-bark transition-all">

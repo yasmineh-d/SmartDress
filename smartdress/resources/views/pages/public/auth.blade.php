@@ -45,12 +45,12 @@
             
             <div class="space-y-4">
                 <div class="flex items-center gap-3">
-                    <a href="../../index.html" class="p-1 hover:bg-cream/50 rounded-full transition-colors text-tan flex-shrink-0">
+                    <a href="{{ url("/") }}" class="p-1 hover:bg-cream/50 rounded-full transition-colors text-tan flex-shrink-0">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                         </svg>
                     </a>
-                    <a href="../../index.html" class="sd-logo">Smart<span>Dress</span></a>
+                    <a href="{{ url("/") }}" class="sd-logo">Smart<span>Dress</span></a>
                 </div>
                 
                 <div class="space-y-1">
@@ -67,10 +67,11 @@
             </div>
 
             <!-- Login Form -->
-            <form id="login-form" class="auth-form space-y-5">
+            <form id="login-form" action="{{ route('login.post') }}" method="POST" class="auth-form space-y-5">
+                @csrf
                 <div class="space-y-1.5">
                     <label class="text-[9px] font-bold text-tan uppercase tracking-[0.2em] ml-1">Email</label>
-                    <input type="email" placeholder="nom@exemple.com" required
+                    <input type="email" name="email" placeholder="nom@exemple.com" required
                         class="w-full px-5 py-3.5 bg-white border border-tan/10 rounded-xl focus:border-bark outline-none transition-all placeholder:text-tan/50 text-bark text-xs">
                 </div>
                 <div class="space-y-1.5">
@@ -78,7 +79,7 @@
                         <label class="text-[9px] font-bold text-tan uppercase tracking-[0.2em]">Mot de passe</label>
                         <a href="#" class="text-[9px] font-bold text-bark hover:text-moss uppercase tracking-widest transition-colors">Oublié ?</a>
                     </div>
-                    <input type="password" placeholder="••••••••" required
+                    <input type="password" name="password" placeholder="••••••••" required
                         class="w-full px-5 py-3.5 bg-white border border-tan/10 rounded-xl focus:border-bark outline-none transition-all placeholder:text-tan/50 text-bark text-xs">
                 </div>
 
@@ -173,13 +174,10 @@
         });
 
         document.getElementById('login-form').addEventListener('submit', (e) => {
-            e.preventDefault();
+            // Ne pas appeler e.preventDefault() pour laisser Laravel gérer la redirection
             const btn = e.target.querySelector('button[type="submit"]');
             btn.disabled = true;
-            btn.innerHTML = '<span class="flex items-center justify-center gap-2">Chargement...</span>';
-            setTimeout(() => {
-                window.location.href = 'dashboard-web.html';
-            }, 800);
+            btn.innerHTML = '<span class="flex items-center justify-center gap-2">Connexion...</span>';
         });
 
         document.getElementById('register-form').addEventListener('submit', (e) => {
@@ -188,7 +186,7 @@
             btn.disabled = true;
             btn.innerHTML = '<span class="flex items-center justify-center gap-2">Création en cours...</span>';
             setTimeout(() => {
-                window.location.href = 'dashboard-web.html';
+                window.location.href = '{{ route("dashboard") }}';
             }, 800);
         });
     </script>

@@ -42,18 +42,37 @@
     <!-- Header (Style Home) -->
     <header id="navbar" class="sd-navbar scrolled !fixed !bg-white/90">
         <div class="max-w-screen-xl mx-auto px-6 lg:px-12 flex items-center h-full gap-12">
-            <a href="../../index.html" class="sd-logo">Smart<span>Dress</span></a>
+            <a href="{{ url("/") }}" class="sd-logo">Smart<span>Dress</span></a>
             
             <nav class="hidden lg:flex items-center gap-8">
                 <a href="#" class="sd-navlink !opacity-100 !text-moss font-bold border-b-2 border-moss pb-1">Dashboard</a>
-                <a href="garde-robe-web.html" class="sd-navlink">Garde-Robe</a>
-                <a href="favoris-web.html" class="sd-navlink">Favoris</a>
-                <a href="profile-web.html" class="sd-navlink">Profil</a>
-                <a href="contact-web.html" class="sd-navlink">Contact</a>
+                <a href="{{ route("garde-robe") }}" class="sd-navlink">Garde-Robe</a>
+                <a href="{{ route("favoris") }}" class="sd-navlink">Favoris</a>
+                <a href="{{ route("profile") }}" class="sd-navlink">Profil</a>
+                <a href="{{ route("contact") }}" class="sd-navlink">Contact</a>
             </nav>
 
             <div class="ml-auto hidden lg:flex items-center gap-3">
-                <a href="../../index.html" class="sd-btn-ghost !py-2 !px-4 !text-[10px]">Déconnexion</a>
+                @auth
+                <div class="flex items-center gap-3">
+                    <a href="{{ route('profile') }}"
+                        class="flex items-center gap-2 px-4 py-2 bg-cream/50 rounded-full text-xs font-bold text-bark hover:bg-cream transition-all border border-tan/10">
+                        <div
+                            class="w-6 h-6 bg-tan rounded-full flex items-center justify-center text-[10px] text-white">
+                            {{ auth()->user()->initials() }}</div>
+                        {{ auth()->user()->name }}
+                    </a>
+                    <form action="{{ route('logout') }}" method="POST" class="inline">
+                        @csrf
+                        <button type="submit" class="text-xs font-bold text-tan hover:text-bark uppercase tracking-widest px-2 transition-all">Déconnexion</button>
+                    </form>
+                </div>
+                @else
+                <div class="flex items-center gap-3">
+                    <a href="{{ route('login', ['mode' => 'login']) }}" class="sd-btn-ghost">Se connecter</a>
+                    <a href="{{ route('login', ['mode' => 'register']) }}" class="sd-btn-primary">Commencer</a>
+                </div>
+                @endauth
             </div>
         </div>
     </header>
@@ -100,7 +119,7 @@
             <div class="space-y-4">
                 <h3 class="px-4 text-[10px] font-bold text-tan uppercase tracking-widest">Navigation Rapide</h3>
                 <div class="grid grid-cols-1 gap-2">
-                    <a href="garde-robe-web.html" class="flex items-center justify-between p-4 bg-white rounded-2xl border border-tan/10 hover:border-moss transition-all group">
+                    <a href="{{ route("garde-robe") }}" class="flex items-center justify-between p-4 bg-white rounded-2xl border border-tan/10 hover:border-moss transition-all group">
                         <div class="flex items-center gap-4">
                             <span class="text-xl">🧥</span>
                             <span class="text-sm font-medium text-bark">Gérer mon dressing</span>
@@ -118,7 +137,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
                         </svg>
                     </a>
-                    <a href="favoris-web.html" class="flex items-center justify-between p-4 bg-white rounded-2xl border border-tan/10 hover:border-moss transition-all group">
+                    <a href="{{ route("favoris") }}" class="flex items-center justify-between p-4 bg-white rounded-2xl border border-tan/10 hover:border-moss transition-all group">
                         <div class="flex items-center gap-4">
                             <span class="text-xl">⭐</span>
                             <span class="text-sm font-medium text-bark">Mes Favoris</span>

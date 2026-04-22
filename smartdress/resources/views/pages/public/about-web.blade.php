@@ -37,17 +37,17 @@
     <!-- Header -->
     <header id="navbar" class="sd-navbar scrolled !fixed !bg-white/90">
         <div class="max-w-screen-xl mx-auto px-6 lg:px-12 flex items-center h-full gap-12">
-            <a href="../../index.html" class="sd-logo">Smart<span>Dress</span></a>
+            <a href="{{ url("/") }}" class="sd-logo">Smart<span>Dress</span></a>
             
             <nav class="hidden lg:flex items-center gap-8">
-                <a href="dashboard-web.html" class="sd-navlink">Dashboard</a>
-                <a href="garde-robe-web.html" class="sd-navlink">Garde-Robe</a>
-                <a href="favoris-web.html" class="sd-navlink">Favoris</a>
-                <a href="profile-web.html" class="sd-navlink">Profil</a>
+                <a href="{{ route("dashboard") }}" class="sd-navlink">Dashboard</a>
+                <a href="{{ route("garde-robe") }}" class="sd-navlink">Garde-Robe</a>
+                <a href="{{ route("favoris") }}" class="sd-navlink">Favoris</a>
+                <a href="{{ route("profile") }}" class="sd-navlink">Profil</a>
             </nav>
 
             <div class="ml-auto hidden lg:flex items-center gap-3">
-                <a href="../../index.html" class="sd-btn-ghost !py-2 !px-4 !text-[10px]">Déconnexion</a>
+                <a href="{{ url("/") }}" class="sd-btn-ghost !py-2 !px-4 !text-[10px]">Déconnexion</a>
             </div>
         </div>
     </header>
@@ -58,7 +58,7 @@
         
         <section class="text-center space-y-6 relative">
             <div class="flex items-center justify-center gap-6 mb-4">
-                <a href="dashboard-web.html" class="w-12 h-12 flex items-center justify-center bg-white rounded-2xl text-bark hover:bg-moss hover:text-white transition-all shadow-xl shadow-bark/5 border border-tan/10 group">
+                <a href="{{ route("dashboard") }}" class="w-12 h-12 flex items-center justify-center bg-white rounded-2xl text-bark hover:bg-moss hover:text-white transition-all shadow-xl shadow-bark/5 border border-tan/10 group">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transition-transform group-hover:-translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 19l-7-7 7-7" />
                 </svg>
@@ -98,7 +98,7 @@
             <p class="text-bone/60 max-w-xl mx-auto font-light relative z-10">
                 Plus qu'une application, une nouvelle façon de vivre la mode au quotidien. Organisez, créez, rayonnez.
             </p>
-            <a href="contact-web.html" class="inline-block px-10 py-5 bg-moss text-white rounded-full text-[10px] font-bold uppercase tracking-[0.2em] shadow-xl shadow-moss/20 hover:bg-white hover:text-bark transition-all relative z-10">
+            <a href="{{ route("contact") }}" class="inline-block px-10 py-5 bg-moss text-white rounded-full text-[10px] font-bold uppercase tracking-[0.2em] shadow-xl shadow-moss/20 hover:bg-white hover:text-bark transition-all relative z-10">
                 Nous Contacter
             </a>
         </section>
@@ -109,15 +109,15 @@
     <footer class="sd-footer !mt-20">
         <div class="max-w-screen-xl mx-auto px-6 lg:px-12 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
             <div>
-                <a href="../../index.html" class="sd-logo sd-logo--light">Smart<span>Dress</span></a>
+                <a href="{{ url("/") }}" class="sd-logo sd-logo--light">Smart<span>Dress</span></a>
                 <p class="sd-footer-tag">Votre garde-robe digitale intelligente. Suggestions de tenues basées sur la météo et vos préférences.</p>
             </div>
             <div>
                 <h4 class="sd-footer-heading">Application</h4>
                 <ul class="sd-footer-links">
-                    <li><a href="dashboard-web.html">Dashboard</a></li>
-                    <li><a href="garde-robe-web.html">Garde-Robe</a></li>
-                    <li><a href="favoris-web.html">Favoris</a></li>
+                    <li><a href="{{ route("dashboard") }}">Dashboard</a></li>
+                    <li><a href="{{ route("garde-robe") }}">Garde-Robe</a></li>
+                    <li><a href="{{ route("favoris") }}">Favoris</a></li>
                     <li><a href="#">Suggestions</a></li>
                     <li><a href="#">Notifications</a></li>
                 </ul>
@@ -125,16 +125,16 @@
             <div>
                 <h4 class="sd-footer-heading">Compte</h4>
                 <ul class="sd-footer-links">
-                    <li><a href="profile-web.html">Mon profil</a></li>
+                    <li><a href="{{ route("profile") }}">Mon profil</a></li>
                     <li><a href="#">Paramètres</a></li>
-                    <li><a href="../../index.html">Déconnexion</a></li>
+                    <li><a href="{{ url("/") }}">Déconnexion</a></li>
                 </ul>
             </div>
             <div>
                 <h4 class="sd-footer-heading">Projet</h4>
                 <ul class="sd-footer-links">
-                    <li><a href="about-web.html">À propos</a></li>
-                    <li><a href="contact-web.html">Contact</a></li>
+                    <li><a href="{{ route("about") }}">À propos</a></li>
+                    <li><a href="{{ route("contact") }}">Contact</a></li>
                     <li><a href="#">Mentions légales</a></li>
                 </ul>
             </div>

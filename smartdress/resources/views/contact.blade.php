@@ -46,8 +46,8 @@
             </nav>
 
             <div class="hidden lg:flex items-center gap-3">
-                <a href="/pages/public/auth.html?mode=login" class="sd-btn-ghost">Se connecter</a>
-                <a href="/pages/public/auth.html?mode=register" class="sd-btn-primary">Commencer</a>
+                <a href="/pages/public/{{ route("login", ["mode" => "login"]) }}" class="sd-btn-ghost">Se connecter</a>
+                <a href="/pages/public/{{ route("login", ["mode" => "register"]) }}" class="sd-btn-primary">Commencer</a>
             </div>
         </div>
     </header>
@@ -152,14 +152,14 @@
             <div>
                 <h4 class="sd-footer-heading">Compte</h4>
                 <ul class="sd-footer-links">
-                    <li><a href="/pages/public/auth.html?mode=register">S'inscrire</a></li>
-                    <li><a href="/pages/public/auth.html?mode=login">Se connecter</a></li>
+                    <li><a href="/pages/public/{{ route("login", ["mode" => "register"]) }}">S'inscrire</a></li>
+                    <li><a href="/pages/public/{{ route("login", ["mode" => "login"]) }}">Se connecter</a></li>
                 </ul>
             </div>
             <div>
                 <h4 class="sd-footer-heading">Projet</h4>
                 <ul class="sd-footer-links">
-                    <li><a href="/pages/public/about-web.html">À propos</a></li>
+                    <li><a href="/pages/public/{{ route("about") }}">À propos</a></li>
                     <li><a href="#">Rapport PFF</a></li>
                     <li><a href="/contact">Contact</a></li>
                     <li><a href="#">Mentions légales</a></li>
