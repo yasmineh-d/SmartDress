@@ -46,7 +46,7 @@
     </script>
 </head>
 
-<body class="font-body bg-offwhite text-bark overflow-x-hidden" 
+<body class="font-body bg-offwhite text-bark overflow-x-hidden"
     x-data="{ mobileMenuOpen: false, scrolled: false, isLoggedIn: false }"
     @scroll.window="scrolled = (window.pageYOffset > 20)">
 
@@ -59,7 +59,7 @@
                 <a href="#features" class="sd-navlink">Fonctionnalités</a>
                 <a href="#how" class="sd-navlink">Comment ça marche</a>
                 <a href="#trust" class="sd-navlink">Témoignages</a>
-                <a href="#contact" class="sd-navlink">Contact</a>
+                <a href="./pages/public/contact-web.html" class="sd-navlink">Contact</a>
             </nav>
 
             <div class="hidden lg:flex items-center gap-3">
@@ -71,11 +71,15 @@
                 </template>
                 <template x-if="isLoggedIn">
                     <div class="flex items-center gap-3">
-                        <a href="./pages/public/profile-web.html" class="flex items-center gap-2 px-4 py-2 bg-cream/50 rounded-full text-xs font-bold text-bark hover:bg-cream transition-all border border-tan/10">
-                            <div class="w-6 h-6 bg-tan rounded-full flex items-center justify-center text-[10px] text-white">YH</div>
+                        <a href="./pages/public/profile-web.html"
+                            class="flex items-center gap-2 px-4 py-2 bg-cream/50 rounded-full text-xs font-bold text-bark hover:bg-cream transition-all border border-tan/10">
+                            <div
+                                class="w-6 h-6 bg-tan rounded-full flex items-center justify-center text-[10px] text-white">
+                                YH</div>
                             Mon Profil
                         </a>
-                        <button @click="isLoggedIn = false" class="text-xs font-bold text-tan hover:text-bark uppercase tracking-widest px-2 transition-all">Déconnexion</button>
+                        <button @click="isLoggedIn = false"
+                            class="text-xs font-bold text-tan hover:text-bark uppercase tracking-widest px-2 transition-all">Déconnexion</button>
                     </div>
                 </template>
             </div>
@@ -101,18 +105,22 @@
                 <a href="#features" class="sd-navlink" @click="mobileMenuOpen = false">Fonctionnalités</a>
                 <a href="#how" class="sd-navlink" @click="mobileMenuOpen = false">Comment ça marche</a>
                 <a href="#trust" class="sd-navlink" @click="mobileMenuOpen = false">Témoignages</a>
-                <a href="#contact" class="sd-navlink" @click="mobileMenuOpen = false">Contact</a>
+                <a href="./pages/public/contact-web.html" class="sd-navlink" @click="mobileMenuOpen = false">Contact</a>
                 <hr class="border-tan/30 my-1" />
                 <template x-if="!isLoggedIn">
                     <div class="flex flex-col gap-3">
-                        <a href="./pages/public/auth.html?mode=login" class="sd-btn-ghost text-center" @click="mobileMenuOpen = false">Se connecter</a>
-                        <a href="./pages/public/auth.html?mode=register" class="sd-btn-primary text-center" @click="mobileMenuOpen = false">Commencer gratuitement</a>
+                        <a href="./pages/public/auth.html?mode=login" class="sd-btn-ghost text-center"
+                            @click="mobileMenuOpen = false">Se connecter</a>
+                        <a href="./pages/public/auth.html?mode=register" class="sd-btn-primary text-center"
+                            @click="mobileMenuOpen = false">Commencer gratuitement</a>
                     </div>
                 </template>
                 <template x-if="isLoggedIn">
                     <div class="flex flex-col gap-3">
-                        <a href="./pages/public/profile-web.html" class="sd-btn-ghost text-center" @click="mobileMenuOpen = false">Mon Profil</a>
-                        <button @click="isLoggedIn = false; mobileMenuOpen = false" class="sd-btn-primary text-center">Déconnexion</button>
+                        <a href="./pages/public/profile-web.html" class="sd-btn-ghost text-center"
+                            @click="mobileMenuOpen = false">Mon Profil</a>
+                        <button @click="isLoggedIn = false; mobileMenuOpen = false"
+                            class="sd-btn-primary text-center">Déconnexion</button>
                     </div>
                 </template>
             </div>

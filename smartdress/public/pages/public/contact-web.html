@@ -37,18 +37,18 @@
     <!-- Header -->
     <header id="navbar" class="sd-navbar scrolled !fixed !bg-white/90">
         <div class="max-w-screen-xl mx-auto px-6 lg:px-12 flex items-center justify-between h-full">
-            <a href="../../index.html" class="sd-logo">Smart<span>Dress</span></a>
+            <a href="/" class="sd-logo">Smart<span>Dress</span></a>
             
             <nav class="hidden lg:flex items-center gap-8">
-                <a href="../../index.html#features" class="sd-navlink">Fonctionnalités</a>
-                <a href="../../index.html#how" class="sd-navlink">Comment ça marche</a>
-                <a href="../../index.html#trust" class="sd-navlink">Témoignages</a>
-                <a href="contact-web.html" class="sd-navlink">Contact</a>
+                <a href="/#features" class="sd-navlink">Fonctionnalités</a>
+                <a href="/#how" class="sd-navlink">Comment ça marche</a>
+                <a href="/#trust" class="sd-navlink">Témoignages</a>
+                <a href="/contact" class="sd-navlink">Contact</a>
             </nav>
 
             <div class="hidden lg:flex items-center gap-3">
-                <a href="auth.html?mode=login" class="sd-btn-ghost">Se connecter</a>
-                <a href="auth.html?mode=register" class="sd-btn-primary">Commencer</a>
+                <a href="/pages/public/auth.html?mode=login" class="sd-btn-ghost">Se connecter</a>
+                <a href="/pages/public/auth.html?mode=register" class="sd-btn-primary">Commencer</a>
             </div>
         </div>
     </header>
@@ -62,7 +62,7 @@
             <div class="space-y-10">
                 <div class="space-y-4">
                     <div class="flex items-center gap-6 mb-2">
-                        <a href="../../index.html" class="w-12 h-12 flex items-center justify-center bg-white rounded-2xl text-bark hover:bg-moss hover:text-white transition-all shadow-xl shadow-bark/5 border border-tan/10 group">
+                        <a href="/" class="w-12 h-12 flex items-center justify-center bg-white rounded-2xl text-bark hover:bg-moss hover:text-white transition-all shadow-xl shadow-bark/5 border border-tan/10 group">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transition-transform group-hover:-translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 19l-7-7 7-7" />
                         </svg>
@@ -143,13 +143,13 @@
     <footer class="sd-footer !mt-20">
         <div class="max-w-screen-xl mx-auto px-6 lg:px-12 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
             <div>
-                <a href="../../index.html" class="sd-logo sd-logo--light">Smart<span>Dress</span></a>
+                <a href="/" class="sd-logo sd-logo--light">Smart<span>Dress</span></a>
                 <p class="sd-footer-tag">Votre garde-robe digitale intelligente. Suggestions de tenues basées sur la météo et vos préférences.</p>
             </div>
             <div>
                 <h4 class="sd-footer-heading">Application</h4>
                 <ul class="sd-footer-links">
-                    <li><a href="../../index.html#features">Fonctionnalités</a></li>
+                    <li><a href="/#features">Fonctionnalités</a></li>
                     <li><a href="#">Garde-robe</a></li>
                     <li><a href="#">Suggestions</a></li>
                     <li><a href="#">Notifications</a></li>
@@ -158,16 +158,16 @@
             <div>
                 <h4 class="sd-footer-heading">Compte</h4>
                 <ul class="sd-footer-links">
-                    <li><a href="auth.html?mode=register">S'inscrire</a></li>
-                    <li><a href="auth.html?mode=login">Se connecter</a></li>
+                    <li><a href="/pages/public/auth.html?mode=register">S'inscrire</a></li>
+                    <li><a href="/pages/public/auth.html?mode=login">Se connecter</a></li>
                 </ul>
             </div>
             <div>
                 <h4 class="sd-footer-heading">Projet</h4>
                 <ul class="sd-footer-links">
-                    <li><a href="about-web.html">À propos</a></li>
+                    <li><a href="/pages/public/about-web.html">À propos</a></li>
                     <li><a href="#">Rapport PFF</a></li>
-                    <li><a href="contact-web.html">Contact</a></li>
+                    <li><a href="/contact">Contact</a></li>
                     <li><a href="#">Mentions légales</a></li>
                 </ul>
             </div>

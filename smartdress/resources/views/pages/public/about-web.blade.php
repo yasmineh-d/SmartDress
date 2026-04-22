@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fr text-slate-900">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartDress - À Propos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bark: '#5C4A35',
+                        moss: '#889063',
+                        tan: '#CFBB99',
+                        bone: '#E5D7C4',
+                        cream: '#F5EEE4',
+                        offwhite: '#FDFAF6',
+                        deeptan: '#B8A07E',
+                    },
+                    fontFamily: {
+                        display: ['"Cormorant Garamond"', 'serif'],
+                        body: ['"DM Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="../../assets/css/charte.css">
+    <link rel="stylesheet" href="../../assets/css/style-landing.css">
+</head>
+
+<body class="bg-offwhite font-body text-bark min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header id="navbar" class="sd-navbar scrolled !fixed !bg-white/90">
+        <div class="max-w-screen-xl mx-auto px-6 lg:px-12 flex items-center h-full gap-12">
+            <a href="../../index.html" class="sd-logo">Smart<span>Dress</span></a>
+            
+            <nav class="hidden lg:flex items-center gap-8">
+                <a href="dashboard-web.html" class="sd-navlink">Dashboard</a>
+                <a href="garde-robe-web.html" class="sd-navlink">Garde-Robe</a>
+                <a href="favoris-web.html" class="sd-navlink">Favoris</a>
+                <a href="profile-web.html" class="sd-navlink">Profil</a>
+            </nav>
+
+            <div class="ml-auto hidden lg:flex items-center gap-3">
+                <a href="../../index.html" class="sd-btn-ghost !py-2 !px-4 !text-[10px]">Déconnexion</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="h-20"></div>
+
+    <main class="flex-1 max-w-4xl w-full mx-auto p-8 lg:p-20 space-y-16">
+        
+        <section class="text-center space-y-6 relative">
+            <div class="flex items-center justify-center gap-6 mb-4">
+                <a href="dashboard-web.html" class="w-12 h-12 flex items-center justify-center bg-white rounded-2xl text-bark hover:bg-moss hover:text-white transition-all shadow-xl shadow-bark/5 border border-tan/10 group">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transition-transform group-hover:-translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 19l-7-7 7-7" />
+                </svg>
+            </a>
+            <h1 class="text-6xl font-display font-medium text-bark italic">Notre <span class="text-moss">Mission</span></h1>
+            </div>
+            <p class="text-xl text-tan font-light max-w-2xl mx-auto leading-relaxed">
+                SmartDress est né de la volonté de simplifier le quotidien tout en favorisant une mode plus consciente et organisée.
+            </p>
+        </section>
+
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6">
+                <h2 class="text-3xl font-display font-medium text-bark italic">L'intelligence au service de votre style</h2>
+                <p class="text-bark/70 leading-relaxed">
+                    Nous croyons que chaque vêtement a une histoire et une place. Notre application utilise l'intelligence artificielle pour vous aider à redécouvrir votre garde-robe, créer des tenues harmonieuses et réduire le gaspillage vestimentaire.
+                </p>
+                <div class="flex gap-4">
+                    <div class="flex-1 p-6 bg-white rounded-3xl border border-tan/10 shadow-sm">
+                        <p class="text-moss font-bold text-2xl font-display">100%</p>
+                        <p class="text-[9px] text-tan uppercase tracking-widest font-bold">Personnalisé</p>
+                    </div>
+                    <div class="flex-1 p-6 bg-white rounded-3xl border border-tan/10 shadow-sm">
+                        <p class="text-moss font-bold text-2xl font-display">Eco</p>
+                        <p class="text-[9px] text-tan uppercase tracking-widest font-bold">Responsable</p>
+                    </div>
+                </div>
+            </div>
+            <div class="aspect-square bg-cream rounded-[4rem] overflow-hidden shadow-2xl rotate-3">
+                <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80" alt="Fashion" class="w-full h-full object-cover">
+            </div>
+        </section>
+
+        <section class="bg-bark text-white p-12 lg:p-20 rounded-[4rem] text-center space-y-8 relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-moss/20 rounded-full blur-3xl -mr-32 -mt-32"></div>
+            <h2 class="text-4xl font-display font-medium italic relative z-10">Rejoignez l'aventure SmartDress</h2>
+            <p class="text-bone/60 max-w-xl mx-auto font-light relative z-10">
+                Plus qu'une application, une nouvelle façon de vivre la mode au quotidien. Organisez, créez, rayonnez.
+            </p>
+            <a href="contact-web.html" class="inline-block px-10 py-5 bg-moss text-white rounded-full text-[10px] font-bold uppercase tracking-[0.2em] shadow-xl shadow-moss/20 hover:bg-white hover:text-bark transition-all relative z-10">
+                Nous Contacter
+            </a>
+        </section>
+
+    </main>
+
+    <!-- FOOTER (Style Home) -->
+    <footer class="sd-footer !mt-20">
+        <div class="max-w-screen-xl mx-auto px-6 lg:px-12 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+            <div>
+                <a href="../../index.html" class="sd-logo sd-logo--light">Smart<span>Dress</span></a>
+                <p class="sd-footer-tag">Votre garde-robe digitale intelligente. Suggestions de tenues basées sur la météo et vos préférences.</p>
+            </div>
+            <div>
+                <h4 class="sd-footer-heading">Application</h4>
+                <ul class="sd-footer-links">
+                    <li><a href="dashboard-web.html">Dashboard</a></li>
+                    <li><a href="garde-robe-web.html">Garde-Robe</a></li>
+                    <li><a href="favoris-web.html">Favoris</a></li>
+                    <li><a href="#">Suggestions</a></li>
+                    <li><a href="#">Notifications</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="sd-footer-heading">Compte</h4>
+                <ul class="sd-footer-links">
+                    <li><a href="profile-web.html">Mon profil</a></li>
+                    <li><a href="#">Paramètres</a></li>
+                    <li><a href="../../index.html">Déconnexion</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="sd-footer-heading">Projet</h4>
+                <ul class="sd-footer-links">
+                    <li><a href="about-web.html">À propos</a></li>
+                    <li><a href="contact-web.html">Contact</a></li>
+                    <li><a href="#">Mentions légales</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="sd-footer-bottom">
+            <span>© 2025–2026 SmartDress · Yasmine Haddad</span>
+            <span>Formation Développement Mobile · Mode Bootcamp</span>
+        </div>
+    </footer>
+
+</body>
+</html>
+

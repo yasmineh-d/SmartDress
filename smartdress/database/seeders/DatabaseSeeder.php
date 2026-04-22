@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,           // 👤 Crée les utilisateurs et leur attribue des rôles
             VetementSeeder::class,       // 👕 Ajoute les vêtements pour un utilisateur
             TenueSeeder::class,          // 👗 Crée des tenues et les lie aux vêtements
+            CommentaireSeeder::class,    // 💬 Ajoute des commentaires sur les tenues
         ]);
     }
 }

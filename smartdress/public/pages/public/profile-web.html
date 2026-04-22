@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="fr text-slate-900">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartDress - Mon Profil (Web)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bark: '#5C4A35',
+                        moss: '#889063',
+                        tan: '#CFBB99',
+                        bone: '#E5D7C4',
+                        cream: '#F5EEE4',
+                        offwhite: '#FDFAF6',
+                    },
+                    fontFamily: {
+                        display: ['"Cormorant Garamond"', 'serif'],
+                        body: ['"DM Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="../../assets/css/charte.css">
+    <link rel="stylesheet" href="../../assets/css/style-landing.css">
+    <!-- Preline UI -->
+    <script src="https://cdn.jsdelivr.net/npm/preline/dist/preline.js"></script>
+</head>
+
+<body class="bg-offwhite font-body text-bark min-h-screen flex flex-col">
+
+    <!-- Header (Style Home) -->
+    <header id="navbar" class="sd-navbar scrolled !fixed !bg-white/90">
+        <div class="max-w-screen-xl mx-auto px-6 lg:px-12 flex items-center h-full gap-12">
+            <a href="../../index.html" class="sd-logo">Smart<span>Dress</span></a>
+
+            <nav class="hidden lg:flex items-center gap-8">
+                <a href="dashboard-web.html" class="sd-navlink">Dashboard</a>
+                <a href="garde-robe-web.html" class="sd-navlink">Garde-Robe</a>
+                <a href="favoris-web.html" class="sd-navlink">Favoris</a>
+                <a href="#" class="sd-navlink !opacity-100 !text-moss font-bold border-b-2 border-moss pb-1">Profil</a>
+            </nav>
+
+            <div class="ml-auto hidden lg:flex items-center gap-3">
+                <a href="../../index.html" class="sd-btn-ghost !py-2 !px-4 !text-[10px]">Déconnexion</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="h-20"></div> <!-- Spacer for fixed navbar -->
+
+    <main class="flex-1 max-w-5xl w-full mx-auto p-12">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+
+            <!-- Left: Profile Summary -->
+            <aside class="space-y-8">
+                <div
+                    class="bg-white p-10 rounded-[3rem] shadow-xl shadow-bark/5 border border-tan/10 text-center space-y-6">
+                    <div class="relative w-32 h-32 mx-auto">
+                        <div class="w-full h-full rounded-[2.5rem] bg-gradient-to-tr from-bark to-tan p-1">
+                            <div
+                                class="w-full h-full bg-white rounded-[2.2rem] overflow-hidden flex items-center justify-center">
+                                <img id="profile-avatar" src="https://ui-avatars.com/api/?name=User&background=5C4A35&color=fff&size=256"
+                                    alt="Avatar Large" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <input type="file" id="profile-photo-input" class="hidden" accept="image/*">
+                        <button onclick="document.getElementById('profile-photo-input').click()"
+                            class="absolute bottom-0 right-0 w-10 h-10 bg-moss text-white rounded-full shadow-lg border-4 border-white flex items-center justify-center hover:scale-110 transition-transform">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                    d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl font-display font-medium text-bark italic leading-tight">Yasmine Haddad</h2>
+                        <p class="text-tan text-[10px] font-bold uppercase tracking-widest mt-1">Membre depuis Mars 2026
+                        </p>
+                    </div>
+                    <button onclick="location.href='edit-profile-web.html'"
+                        class="w-full py-4 bg-bark text-white rounded-full text-[10px] font-bold uppercase tracking-[0.2em] shadow-lg shadow-bark/20 hover:bg-moss transition-all">
+                        Modifier le profil
+                    </button>
+                </div>
+
+                <div class="bg-cream/30 p-8 rounded-[2.5rem] border border-tan/10">
+                    <h3 class="text-[10px] font-bold text-tan uppercase tracking-widest mb-4">Abonnement</h3>
+                    <div class="flex items-center justify-between">
+                        <span class="text-bark font-bold">Plan Premium</span>
+                        <span class="text-moss font-bold text-xs">Actif</span>
+                    </div>
+                    <div class="mt-4 h-1.5 w-full bg-tan/20 rounded-full overflow-hidden">
+                        <div class="h-full w-2/3 bg-moss"></div>
+                    </div>
+                    <p class="mt-4 text-[10px] text-tan font-medium">Prochaine facture : 15 Avril 2026</p>
+                </div>
+            </aside>
+
+            <!-- Right: Settings & Preferences -->
+            <section class="lg:col-span-2 space-y-10">
+                <!-- Preferences -->
+                <div class="space-y-4">
+                    <h3 class="px-2 text-[11px] font-bold text-tan uppercase tracking-widest">Vos Préférences de Style
+                    </h3>
+                    <div class="bg-white rounded-[2.5rem] border border-tan/10 overflow-hidden shadow-xl shadow-bark/5">
+                        <div class="divide-y divide-tan/5">
+                            <div class="p-8 flex items-center justify-between hover:bg-cream/20 transition-colors">
+                                <div class="flex items-center gap-6">
+                                    <div
+                                        class="w-14 h-14 bg-cream rounded-2xl flex items-center justify-center text-2xl">
+                                        👗</div>
+                                    <div>
+                                        <p class="text-base font-bold text-bark">Style de prédilection</p>
+                                        <p class="text-xs text-tan font-light">L'algorithme suggère des tenues basées
+                                            sur ce choix.</p>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col gap-4 w-full max-w-[250px]">
+                                    <!-- Toggle Auto/Manual -->
+                                    <div class="flex items-center justify-between px-2">
+                                        <span class="text-[10px] font-bold text-tan uppercase tracking-widest">Mode Automatique (IA)</span>
+                                        <button id="auto-style-toggle" class="w-10 h-5 bg-tan/20 rounded-full relative transition-colors duration-300">
+                                            <div id="toggle-dot" class="absolute left-1 top-1 w-3 h-3 bg-white rounded-full transition-transform duration-300"></div>
+                                        </button>
+                                    </div>
+
+                                    <div class="relative w-full">
+                                        <div id="auto-style-overlay" class="absolute inset-0 z-10 bg-white/60 backdrop-blur-[2px] rounded-[18px] flex items-center justify-center hidden">
+                                            <div class="flex items-center gap-2">
+                                                <svg class="animate-spin h-3 w-3 text-moss" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                                </svg>
+                                                <span class="text-[10px] font-bold text-moss uppercase tracking-widest">Analyse IA...</span>
+                                            </div>
+                                        </div>
+
+                                        <select id="style-select" data-hs-select='{
+                                            "placeholder": "Choisir le style...",
+                                            "toggleTag": "<button type=\"button\" aria-expanded=\"false\"></button>",
+                                            "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-3 ps-5 pe-10 flex gap-x-2 text-nowrap w-full cursor-pointer bg-offwhite border border-tan/20 rounded-[18px] text-start text-xs font-bold text-moss focus:outline-none focus:ring-2 focus:ring-moss/20 focus:border-moss transition-all",
+                                            "dropdownClasses": "mt-2 z-50 w-full max-h-72 p-2 space-y-1 bg-white border border-tan/10 rounded-[20px] overflow-hidden overflow-y-auto shadow-2xl",
+                                            "optionClasses": "py-2 px-4 w-full text-xs text-bark font-medium cursor-pointer hover:bg-cream/50 rounded-[12px] focus:outline-none focus:bg-cream transition-colors",
+                                            "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"hidden hs-selected:block\"><svg class=\"shrink-0 size-3 text-moss\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg></span></div>"
+                                          }'>
+                                            <option value="">Style</option>
+                                            <option selected>Casual Chic</option>
+                                            <option>Bohème</option>
+                                            <option>Minimaliste</option>
+                                            <option>Business</option>
+                                        </select>
+                                        <div class="absolute top-1/2 end-4 -translate-y-1/2 pointer-events-none text-tan">
+                                            <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24"
+                                                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="m7 15 5 5 5-5"></path>
+                                                <path d="m7 9 5-5 5 5"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-8 flex items-center justify-between hover:bg-cream/20 transition-colors">
+                                <div class="flex items-center gap-6">
+                                    <div
+                                        class="w-14 h-14 bg-cream rounded-2xl flex items-center justify-center text-2xl">
+                                        🔔</div>
+                                    <div>
+                                        <p class="text-base font-bold text-bark">Notifications quotidienne</p>
+                                        <p class="text-xs text-tan font-light">Recevez votre tenue suggérée chaque
+                                            matin.</p>
+                                    </div>
+                                </div>
+                                <button id="notification-toggle-web" class="w-14 h-8 bg-moss rounded-full relative p-1 transition-all">
+                                    <div id="notification-dot-web" class="absolute right-1 top-1 w-6 h-6 bg-white rounded-full shadow-sm transition-transform duration-300"></div>
+                                </button>
+                            </div>
+                            <div class="p-8 flex items-center justify-between hover:bg-cream/20 transition-colors">
+                                <div class="flex items-center gap-6">
+                                    <div
+                                        class="w-14 h-14 bg-cream rounded-2xl flex items-center justify-center text-2xl">
+                                        📍</div>
+                                    <div>
+                                        <p class="text-base font-bold text-bark">Localisation</p>
+                                        <p class="text-xs text-tan font-light">Utilisé pour les prévisions météo
+                                            locales.</p>
+                                    </div>
+                                </div>
+                                <span class="text-sm font-bold text-bark">Casablanca, Maroc</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Privacy & Security -->
+                <div class="space-y-4">
+                    <h3 class="px-2 text-[11px] font-bold text-tan uppercase tracking-widest">Sécurité du Compte</h3>
+                    <div
+                        class="bg-white rounded-[2.5rem] border border-tan/10 overflow-hidden shadow-xl shadow-bark/5 divide-y divide-tan/5">
+                        <button onclick="location.href='change-password-web.html'"
+                            class="w-full p-8 flex items-center justify-between hover:bg-cream/20 transition-colors text-left">
+                            <div class="flex items-center gap-6">
+                                <div
+                                    class="w-14 h-14 bg-cream/50 rounded-2xl flex items-center justify-center text-2xl">
+                                    🔒</div>
+                                <div>
+                                    <p class="text-base font-bold text-bark">Mot de passe</p>
+                                    <p class="text-xs text-tan font-light">Dernière modification : il y a 3 mois</p>
+                                </div>
+                            </div>
+                            <svg class="w-6 h-6 text-tan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                        <button
+                            class="w-full p-8 flex items-center justify-between hover:bg-red-50/30 transition-colors text-left group">
+                            <div class="flex items-center gap-6">
+                                <div
+                                    class="w-14 h-14 bg-red-50 text-red-400 rounded-2xl flex items-center justify-center text-2xl group-hover:bg-red-100 transition-colors">
+                                    🗑️</div>
+                                <div>
+                                    <p class="text-base font-bold text-red-500">Supprimer le compte</p>
+                                    <p class="text-xs text-red-400 font-light">Toutes vos données seront effacées
+                                        définitivement.</p>
+                                </div>
+                            </div>
+                            <svg class="w-6 h-6 text-red-300 group-hover:text-red-500" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- FOOTER (Style Home) -->
+    <footer class="sd-footer !mt-20">
+        <div class="max-w-screen-xl mx-auto px-6 lg:px-12 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+            <div>
+                <a href="../../index.html" class="sd-logo sd-logo--light">Smart<span>Dress</span></a>
+                <p class="sd-footer-tag">Votre garde-robe digitale intelligente. Suggestions de tenues basées sur la météo et vos préférences.</p>
+            </div>
+            <div>
+                <h4 class="sd-footer-heading">Application</h4>
+                <ul class="sd-footer-links">
+                    <li><a href="dashboard-web.html">Dashboard</a></li>
+                    <li><a href="garde-robe-web.html">Garde-robe</a></li>
+                    <li><a href="favoris-web.html">Favoris</a></li>
+                    <li><a href="#">Suggestions</a></li>
+                    <li><a href="#">Notifications</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="sd-footer-heading">Compte</h4>
+                <ul class="sd-footer-links">
+                    <li><a href="profile-web.html">Mon profil</a></li>
+                    <li><a href="#">Paramètres</a></li>
+                    <li><a href="../../index.html">Déconnexion</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="sd-footer-heading">Projet</h4>
+                <ul class="sd-footer-links">
+                    <li><a href="about-web.html">À propos</a></li>
+                    <li><a href="contact-web.html">Contact</a></li>
+                    <li><a href="#">Mentions légales</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="sd-footer-bottom">
+            <span>© 2025–2026 SmartDress · Yasmine Haddad</span>
+            <span>Formation Développement Mobile · Mode Bootcamp</span>
+        </div>
+    </footer>
+
+    <!-- Floating Action Button (+) -->
+    <button id="add-item-btn" class="fixed bottom-8 right-8 w-16 h-16 bg-moss text-white rounded-full shadow-2xl flex items-center justify-center hover:bg-bark hover:scale-110 active:scale-95 transition-all z-40 group">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 transition-transform group-hover:rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4" />
+        </svg>
+    </button>
+
+    <!-- Overlay / Backdrop -->
+    <div id="modal-overlay" class="fixed inset-0 bg-bark/60 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-300"></div>
+
+    <!-- Modal : Ajouter un vêtement -->
+    <div id="modal-add" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-[3rem] shadow-2xl z-[60] hidden opacity-0 scale-95 transition-all duration-300 w-full max-w-xl p-12">
+        <div class="flex items-center justify-between mb-10">
+            <div class="space-y-1">
+                <h2 class="text-3xl font-display font-medium text-bark italic">Ajouter au <span class="text-moss">Dressing</span></h2>
+                <p class="text-tan text-xs font-medium uppercase tracking-widest">Nouvel article</p>
+            </div>
+            <button onclick="closeModal('modal-add')" class="w-12 h-12 flex items-center justify-center bg-cream/50 rounded-2xl text-tan hover:text-bark hover:bg-cream transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <form class="grid grid-cols-1 md:grid-cols-2 gap-10" onsubmit="return false;">
+            <!-- Upload Zone -->
+            <div class="space-y-4">
+                <input type="file" id="item-photo-input" class="hidden" accept="image/*">
+                <div id="upload-zone" onclick="document.getElementById('item-photo-input').click()" 
+                    class="aspect-square bg-cream/20 border-2 border-dashed border-tan/20 rounded-[2.5rem] flex flex-col items-center justify-center text-tan hover:bg-cream/40 transition-all cursor-pointer group overflow-hidden relative">
+                    <div id="upload-placeholder" class="flex flex-col items-center justify-center">
+                        <div class="w-20 h-20 bg-white rounded-3xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-moss" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                        </div>
+                        <span class="text-xs font-bold uppercase tracking-widest">Prendre une photo</span>
+                        <p class="text-[9px] text-tan/60 mt-2 px-6 text-center">Glissez une image ou cliquez pour parcourir</p>
+                    </div>
+                    <img id="item-photo-preview" class="absolute inset-0 w-full h-full object-cover hidden" alt="Preview">
+                </div>
+            </div>
+
+            <!-- Fields Zone -->
+            <div class="flex flex-col justify-between py-2">
+                <div class="space-y-6">
+                    <div class="space-y-1.5">
+                        <label class="px-2 text-[10px] font-bold text-tan uppercase tracking-widest">Nom de l'article</label>
+                        <input type="text" placeholder="Ex: Veste en cuir vintage" class="w-full px-5 py-4 bg-white border border-tan/10 rounded-2xl focus:border-moss outline-none transition-all font-medium placeholder:text-tan/30 text-sm">
+                    </div>
+
+                    <div class="space-y-1.5 relative">
+                        <label class="px-2 text-[10px] font-bold text-tan uppercase tracking-widest">Catégorie</label>
+                        <select data-hs-select='{
+                            "placeholder": "Choisir...",
+                            "toggleTag": "<button type=\"button\" aria-expanded=\"false\"></button>",
+                            "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-4 ps-5 pe-12 flex gap-x-2 text-nowrap w-full cursor-pointer bg-white border border-tan/10 rounded-2xl text-start text-sm font-medium focus:ring-1 focus:ring-moss appearance-none",
+                            "dropdownClasses": "mt-2 z-50 w-full max-h-72 p-1 space-y-0.5 bg-white border border-tan/10 rounded-2xl overflow-hidden overflow-y-auto shadow-2xl",
+                            "optionClasses": "py-3 px-5 w-full text-sm text-bark cursor-pointer hover:bg-cream/50 rounded-xl focus:outline-none focus:bg-cream/50 transition-colors",
+                            "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"hidden hs-selected:block\"><svg class=\"shrink-0 size-3.5 text-moss\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg></span></div>"
+                          }'>
+                            <option value="">Choisir...</option>
+                            <option value="hauts">Hauts</option>
+                            <option value="bas">Bas</option>
+                            <option value="chaussures">Chaussures</option>
+                            <option value="accessoires">Accessoires</option>
+                        </select>
+                        <div class="absolute top-[2.4rem] end-4 pointer-events-none">
+                            <svg class="shrink-0 size-4 text-tan/60" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m7 15 5 5 5-5"></path><path d="m7 9 5-5 5 5"></path></svg>
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="closeModal('modal-add')" class="w-full py-5 bg-moss text-white rounded-full text-[10px] font-bold uppercase tracking-[0.2em] shadow-xl shadow-moss/20 hover:bg-bark transition-all mt-8">
+                    Ajouter au dressing
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Preline JS -->
+    <script src="https://cdn.jsdelivr.net/npm/preline/dist/preline.js"></script>
+
+    <script>
+        // ── Style Hybrid Logic (Auto/Manual) ──
+        const autoStyleBtn = document.getElementById('auto-style-toggle');
+        const toggleDot = document.getElementById('toggle-dot');
+        const styleOverlay = document.getElementById('auto-style-overlay');
+        const styleSelect = document.getElementById('style-select');
+        let isAuto = false;
+
+        autoStyleBtn.addEventListener('click', () => {
+            isAuto = !isAuto;
+            
+            if (isAuto) {
+                // UI Switch
+                autoStyleBtn.classList.add('bg-moss');
+                autoStyleBtn.classList.remove('bg-tan/20');
+                toggleDot.style.transform = 'translateX(20px)';
+                
+                // Overlay & Simulation
+                styleOverlay.classList.remove('hidden');
+                
+                // Simulate AI Detection
+                setTimeout(() => {
+                    // Update select value (mock detection)
+                    // Note: Preline requires specific API to update text but here we just show the state
+                    styleOverlay.innerHTML = `
+                         <div class="flex items-center gap-2">
+                            <span class="text-xl">✨</span>
+                            <span class="text-[10px] font-bold text-moss uppercase tracking-widest">Détecté : Minimaliste</span>
+                        </div>
+                    `;
+                }, 1500);
+            } else {
+                // UI Switch back
+                autoStyleBtn.classList.remove('bg-moss');
+                autoStyleBtn.classList.add('bg-tan/20');
+                toggleDot.style.transform = 'translateX(0)';
+                
+                // Hide overlay
+                styleOverlay.classList.add('hidden');
+                styleOverlay.innerHTML = `
+                    <div class="flex items-center gap-2">
+                        <svg class="animate-spin h-3 w-3 text-moss" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        <span class="text-[10px] font-bold text-moss uppercase tracking-widest">Analyse IA...</span>
+                    </div>
+                `;
+            }
+        });
+
+        // ── Notification Toggle Logic (Web) ──
+        const notifBtn = document.getElementById('notification-toggle-web');
+        const notifDot = document.getElementById('notification-dot-web');
+        let notifEnabled = true;
+
+        notifBtn.addEventListener('click', () => {
+            notifEnabled = !notifEnabled;
+            if (notifEnabled) {
+                notifBtn.classList.replace('bg-tan/20', 'bg-moss');
+                notifDot.classList.replace('left-1', 'right-1');
+                notifDot.style.transform = 'translateX(0)';
+            } else {
+                notifBtn.classList.replace('bg-moss', 'bg-tan/20');
+                // Since it's absolute right-1, moving to left means negative translation or changing classes
+                // Let's use simpler transform for consistency
+                notifDot.style.transform = 'translateX(-24px)';
+            }
+        });
+
+        // ── Modal logic Web ──
+        const modalOverlay = document.getElementById('modal-overlay');
+        const addItemBtn = document.getElementById('add-item-btn');
+
+        function openModal(id) {
+            const modal = document.getElementById(id);
+            modalOverlay.classList.remove('hidden');
+            setTimeout(() => modalOverlay.classList.add('opacity-100'), 10);
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.add('opacity-100', 'scale-100');
+                modal.classList.remove('scale-95');
+            }, 50);
+        }
+
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            modal.classList.remove('opacity-100', 'scale-100');
+            modal.classList.add('scale-95');
+            modalOverlay.classList.remove('opacity-100');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modalOverlay.classList.add('hidden');
+            }, 300);
+        }
+
+        if (addItemBtn) addItemBtn.addEventListener('click', () => openModal('modal-add'));
+        if (modalOverlay) modalOverlay.addEventListener('click', () => closeModal('modal-add'));
+
+        // ── Photo Upload Preview Logic (Add Item) ──
+        const photoInput = document.getElementById('item-photo-input');
+        const photoPreview = document.getElementById('item-photo-preview');
+        const uploadPlaceholder = document.getElementById('upload-placeholder');
+
+        if (photoInput) {
+            photoInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        photoPreview.src = e.target.result;
+                        photoPreview.classList.remove('hidden');
+                        uploadPlaceholder.classList.add('hidden');
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+
+        // ── Profile Photo Upload logic ──
+        const profilePhotoInput = document.getElementById('profile-photo-input');
+        const profileAvatar = document.getElementById('profile-avatar');
+
+        if (profilePhotoInput) {
+            profilePhotoInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        profileAvatar.src = e.target.result;
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
