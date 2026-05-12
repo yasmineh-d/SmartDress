@@ -6,6 +6,8 @@ use App\Http\Controllers\TenueController;
 use App\Http\Controllers\FavorisController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
+use App\Models\Vetement;
+
 
 // --- Pages Publiques ---
 Route::get('/', function () {
@@ -32,8 +34,15 @@ Route::middleware(['auth'])->group(function () {
     })->name('dashboard');
 
     Route::get('/garde-robe', function () {
-        return view('pages.public.garde-robe-web');
+        $vetements = auth()->user()
+            ->vetements()
+            ->with('photos')
+            ->latest()
+            ->get();
+
+        return view('pages.public.garde-robe-web', compact('vetements'));
     })->name('garde-robe');
+
 
     Route::get('/favoris', function () {
         return view('pages.public.favoris-web');
