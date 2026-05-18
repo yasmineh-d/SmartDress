@@ -183,12 +183,12 @@
                         <div data-category="{{ $category }}"
                             class="clothing-card group relative bg-white rounded-[2.5rem] border border-tan/10 p-3 shadow-xl shadow-bark/5 hover:-translate-y-2 transition-all duration-300">
 
-                            <div class="aspect-square bg-cream/30 rounded-[2rem] flex items-center justify-center text-6xl relative overflow-hidden transition-colors group-hover:bg-cream/50">
+                            <div class="aspect-[4/5] bg-cream/30 rounded-[2rem] flex items-center justify-center text-6xl relative overflow-hidden transition-colors group-hover:bg-cream/50">
                                 @if ($photo)
                                     <img
                                         src="{{ asset('storage/' . $photo->url) }}"
                                         alt="{{ $vetement->nom }}"
-                                        class="w-full h-full object-cover zoom-img transition-transform duration-500"
+                                        class="w-full h-full object-contain p-2 zoom-img transition-transform duration-500"
                                     >
                                 @else
                                     <span class="zoom-img transition-transform duration-500">
@@ -203,12 +203,21 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                                         </svg>
                                     </button>
-                                    <button class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan hover:text-bark shadow-sm">
+                                    <button class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan hover:text-bark shadow-sm" title="Voir détails">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                             <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                                         </svg>
                                     </button>
+                                    <form action="{{ route('vetements.destroy', $vetement->id) }}" method="POST" class="m-0 p-0" onsubmit="return confirm('Voulez-vous vraiment supprimer ce vêtement ?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan hover:text-red-500 hover:bg-red-50 shadow-sm transition-colors" title="Supprimer">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                            </svg>
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
 
@@ -316,10 +325,11 @@
             </button>
         </div>
 
-        <form class="grid grid-cols-1 md:grid-cols-2 gap-10" onsubmit="return false;">
+        <form action="{{ route('vetements.store') }}" method="POST" enctype="multipart/form-data" class="grid grid-cols-1 md:grid-cols-2 gap-10">
+            @csrf
             <!-- Upload Zone -->
             <div class="space-y-4">
-                <input type="file" id="item-photo-input" class="hidden" accept="image/*">
+                <input type="file" name="photo" id="item-photo-input" class="hidden" accept="image/*" required>
                 <div id="upload-zone" onclick="document.getElementById('item-photo-input').click()" 
                     class="aspect-square bg-cream/20 border-2 border-dashed border-tan/20 rounded-[2.5rem] flex flex-col items-center justify-center text-tan hover:bg-cream/40 transition-all cursor-pointer group overflow-hidden relative">
                     <div id="upload-placeholder" class="flex flex-col items-center justify-center">
@@ -341,12 +351,12 @@
                 <div class="space-y-6">
                     <div class="space-y-1.5">
                         <label class="px-2 text-[10px] font-bold text-tan uppercase tracking-widest">Nom de l'article</label>
-                        <input type="text" placeholder="Ex: Veste en cuir vintage" class="w-full px-5 py-4 bg-white border border-tan/10 rounded-2xl focus:border-moss outline-none transition-all font-medium placeholder:text-tan/30 text-sm">
+                        <input type="text" name="nom" required placeholder="Ex: Veste en cuir vintage" class="w-full px-5 py-4 bg-white border border-tan/10 rounded-2xl focus:border-moss outline-none transition-all font-medium placeholder:text-tan/30 text-sm">
                     </div>
 
                     <div class="space-y-1.5 relative">
                         <label class="px-2 text-[10px] font-bold text-tan uppercase tracking-widest">Catégorie</label>
-                        <select data-hs-select='{
+                        <select name="categorie" required data-hs-select='{
                             "placeholder": "Choisir...",
                             "toggleTag": "<button type=\"button\" aria-expanded=\"false\"></button>",
                             "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-4 ps-5 pe-12 flex gap-x-2 text-nowrap w-full cursor-pointer bg-white border border-tan/10 rounded-2xl text-start text-sm font-medium focus:ring-1 focus:ring-moss appearance-none",
@@ -366,7 +376,7 @@
                     </div>
                 </div>
 
-                <button id="save-item-btn" type="button" onclick="addItemToGrid()" class="w-full py-5 bg-moss text-white rounded-full text-[10px] font-bold uppercase tracking-[0.2em] shadow-xl shadow-moss/20 hover:bg-bark transition-all mt-8">
+                <button type="submit" class="w-full py-5 bg-moss text-white rounded-full text-[10px] font-bold uppercase tracking-[0.2em] shadow-xl shadow-moss/20 hover:bg-bark transition-all mt-8">
                     Ajouter au dressing
                 </button>
             </div>

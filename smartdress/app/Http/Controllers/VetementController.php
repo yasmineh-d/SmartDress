@@ -33,14 +33,33 @@ class VetementController extends Controller
         $validated = $request->validate([
             'nom' => 'required|string|max:255',
             'categorie' => 'required|string',
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048', // Validation pour la photo
             'couleur' => 'nullable|string',
             'saison' => 'nullable|string',
             'style' => 'nullable|string',
         ]);
 
-        $vetement = Auth::user()->vetements()->create($validated);
+        // Créer le vêtement
+        $vetement = Auth::user()->vetements()->create([
+            'nom' => $validated['nom'],
+            'categorie' => $validated['categorie'],
+            'couleur' => $validated['couleur'] ?? null,
+            'saison' => $validated['saison'] ?? null,
+            'style' => $validated['style'] ?? null,
+        ]);
 
-        return redirect()->route('vetements.index')->with('success', 'Vêtement ajouté avec succès !');
+        // Gérer l'upload de la photo
+        if ($request->hasFile('photo')) {
+            $path = $request->file('photo')->store('photos', 'public');
+            
+            // Créer la relation Photo
+            $vetement->photos()->create([
+                'url' => $path,
+                'dateUpload' => now(), // Ajout de la date requise
+            ]);
+        }
+
+        return redirect()->route('garde-robe')->with('success', 'Vêtement ajouté avec succès !');
     }
 
     /**
@@ -82,8 +101,19 @@ class VetementController extends Controller
      */
     public function destroy(Vetement $vetement)
     {
+        // 1. On parcourt toutes les photos liées à ce vêtement
+        foreach ($vetement->photos as $photo) {
+            if (\Illuminate\Support\Facades\Storage::disk('public')->exists($photo->url)) {
+                \Illuminate\Support\Facades\Storage::disk('public')->delete($photo->url);
+            }
+        }
+
+        // 2. On supprime les relations en base de données
+        $vetement->photos()->delete();
+
+        // 3. On supprime le vêtement
         $vetement->delete();
 
-        return redirect()->route('vetements.index')->with('success', 'Vêtement supprimé !');
+        return redirect()->route('garde-robe')->with('success', 'Vêtement supprimé !');
     }
 }
