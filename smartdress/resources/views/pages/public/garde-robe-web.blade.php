@@ -196,13 +196,32 @@
                                     </span>
                                 @endif
 
+                                @php
+                                    $isFavorited = in_array($vetement->id, $favorisIds);
+                                    $favoriRecord = $isFavorited ? auth()->user()->favoris()->where('vetement_id', $vetement->id)->first() : null;
+                                @endphp
                                 <div class="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                    <button onclick="toggleFavorite(event, this)"
-                                        class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan shadow-sm transition-colors">
-                                        <svg class="w-4 h-4 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                        </svg>
-                                    </button>
+                                    @if($isFavorited)
+                                        <form action="{{ route('favoris-api.destroy', $favoriRecord->id) }}" method="POST" class="m-0 p-0">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-red-500 shadow-sm transition-colors" title="Retirer des favoris">
+                                                <svg class="w-4 h-4 text-red-500" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                                </svg>
+                                            </button>
+                                        </form>
+                                    @else
+                                        <form action="{{ route('favoris-api.store') }}" method="POST" class="m-0 p-0">
+                                            @csrf
+                                            <input type="hidden" name="vetement_id" value="{{ $vetement->id }}">
+                                            <button type="submit" class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan hover:text-red-500 shadow-sm transition-colors" title="Ajouter aux favoris">
+                                                <svg class="w-4 h-4 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                                </svg>
+                                            </button>
+                                        </form>
+                                    @endif
                                     <button class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan hover:text-bark shadow-sm" title="Voir détails">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />

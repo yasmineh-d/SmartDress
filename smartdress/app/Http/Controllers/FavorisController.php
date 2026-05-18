@@ -39,8 +39,10 @@ class FavorisController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Favoris $favori)
+    public function destroy($id)
     {
+        $favori = Favoris::findOrFail($id);
+
         if ($favori->user_id !== Auth::id()) {
             abort(403);
         }

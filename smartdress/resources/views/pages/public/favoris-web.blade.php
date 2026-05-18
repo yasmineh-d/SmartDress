@@ -175,160 +175,62 @@
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="clothing-grid">
-                    <!-- Cards using the mobile data structure but desktop layout -->
-                    <!-- Card 1 -->
-                    <div data-category="hauts"
-                        class="clothing-card group relative bg-white rounded-[2.5rem] border border-tan/10 p-3 shadow-xl shadow-bark/5 hover:-translate-y-2 transition-all duration-300">
-                        <div
-                            class="aspect-square bg-cream/30 rounded-[2rem] flex items-center justify-center text-6xl relative overflow-hidden transition-colors group-hover:bg-cream/50">
-                            <span class="zoom-img transition-transform duration-500">👕</span>
-                            <div
-                                class="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <button
-                                    class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan hover:text-moss shadow-sm"><svg
-                                        class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                        <path
-                                            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                                    </svg></button>
-                                <button
-                                    class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan hover:text-bark shadow-sm"><svg
-                                        class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                        <path
-                                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                    </svg></button>
-                            </div>
-                        </div>
-                        <div class="p-4 space-y-1">
-                            <p class="text-[10px] font-bold text-tan uppercase tracking-widest">Haut / Coton</p>
-                            <h4 class="text-lg font-display font-medium text-bark italic">T-Shirt Basique Blanc</h4>
-                        </div>
-                    </div>
+                    @forelse ($favoris as $favori)
+                        @if($favori->vetement)
+                            @php
+                                $vetement = $favori->vetement;
+                                $photo = $vetement->photos->first();
+                                $category = strtolower($vetement->categorie);
+                            @endphp
 
-                    <!-- Card 2 -->
-                    <div data-category="hauts"
-                        class="clothing-card group relative bg-white rounded-[2.5rem] border border-tan/10 p-3 shadow-xl shadow-bark/5 hover:-translate-y-2 transition-all duration-300">
-                        <div
-                            class="aspect-square bg-bone/20 rounded-[2rem] flex items-center justify-center text-6xl relative overflow-hidden transition-colors group-hover:bg-bone/40">
-                            <span class="zoom-img transition-transform duration-500">🧥</span>
-                            <div
-                                class="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <button onclick="toggleFavorite(event, this)"
-                                    class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-red-500 shadow-sm transition-colors"><svg
-                                        class="w-4 h-4 transition-colors text-red-500" fill="currentColor"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                    </svg></button>
-                                <button
-                                    class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan hover:text-bark shadow-sm"><svg
-                                        class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                        <path
-                                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                    </svg></button>
-                            </div>
-                        </div>
-                        <div class="p-4 space-y-1">
-                            <p class="text-[10px] font-bold text-tan uppercase tracking-widest">Haut / Laine</p>
-                            <h4 class="text-lg font-display font-medium text-bark italic">Veste Hiver Bleue</h4>
-                        </div>
-                    </div>
+                            <div data-category="{{ $category }}"
+                                class="clothing-card group relative bg-white rounded-[2.5rem] border border-tan/10 p-3 shadow-xl shadow-bark/5 hover:-translate-y-2 transition-all duration-300">
+                                
+                                <div class="aspect-[4/5] bg-cream/30 rounded-[2rem] flex items-center justify-center text-6xl relative overflow-hidden transition-colors group-hover:bg-cream/50">
+                                    @if ($photo)
+                                        <img
+                                            src="{{ asset('storage/' . $photo->url) }}"
+                                            alt="{{ $vetement->nom }}"
+                                            class="w-full h-full object-contain p-2 zoom-img transition-transform duration-500"
+                                        >
+                                    @else
+                                        <span class="zoom-img transition-transform duration-500">
+                                            {{ $category === 'hauts' ? '👕' : ($category === 'bas' ? '👖' : ($category === 'chaussures' ? '👟' : '🧥')) }}
+                                        </span>
+                                    @endif
 
-                    <!-- Card 3 -->
-                    <div data-category="bas"
-                        class="clothing-card group relative bg-white rounded-[2.5rem] border border-tan/10 p-3 shadow-xl shadow-bark/5 hover:-translate-y-2 transition-all duration-300">
-                        <div
-                            class="aspect-square bg-cream/30 rounded-[2rem] flex items-center justify-center text-6xl relative overflow-hidden transition-colors group-hover:bg-cream/50">
-                            <span class="zoom-img transition-transform duration-500">👖</span>
-                            <div
-                                class="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <button
-                                    class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan hover:text-moss shadow-sm"><svg
-                                        class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                        <path
-                                            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                                    </svg></button>
-                                <button
-                                    class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan hover:text-bark shadow-sm"><svg
-                                        class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                        <path
-                                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                    </svg></button>
+                                    <div class="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <form action="{{ route('favoris-api.destroy', $favori->id) }}" method="POST" class="m-0 p-0" onsubmit="return confirm('Retirer ce vêtement des favoris ?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-red-500 shadow-sm transition-colors" title="Retirer des favoris">
+                                                <svg class="w-4 h-4 text-red-500" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                                </svg>
+                                            </button>
+                                        </form>
+                                        <button class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan hover:text-bark shadow-sm" title="Voir détails">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="p-4 space-y-1">
+                                    <p class="text-[10px] font-bold text-tan uppercase tracking-widest">
+                                        {{ $vetement->categorie }} / {{ $vetement->saison ?? 'Sans saison' }}
+                                    </p>
+                                    <h4 class="text-lg font-display font-medium text-bark italic">
+                                        {{ $vetement->nom }}
+                                    </h4>
+                                </div>
                             </div>
-                        </div>
-                        <div class="p-4 space-y-1">
-                            <p class="text-[10px] font-bold text-tan uppercase tracking-widest">Bas / Denim</p>
-                            <h4 class="text-lg font-display font-medium text-bark italic">Jean Slim Noir</h4>
-                        </div>
-                    </div>
-
-                    <!-- Card 4 -->
-                    <div data-category="chaussures"
-                        class="clothing-card group relative bg-white rounded-[2.5rem] border border-tan/10 p-3 shadow-xl shadow-bark/5 hover:-translate-y-2 transition-all duration-300">
-                        <div
-                            class="aspect-square bg-bone/20 rounded-[2rem] flex items-center justify-center text-6xl relative overflow-hidden transition-colors group-hover:bg-bone/40">
-                            <span class="zoom-img transition-transform duration-500">👟</span>
-                            <div
-                                class="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <button onclick="toggleFavorite(event, this)"
-                                    class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-red-500 shadow-sm transition-colors"><svg
-                                        class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                        <path
-                                            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                                    </svg></button>
-                            </div>
-                        </div>
-                        <div class="p-4 space-y-1">
-                            <p class="text-[10px] font-bold text-tan uppercase tracking-widest">Chaussures / Sport</p>
-                            <h4 class="text-lg font-display font-medium text-bark italic">Sneakers Grises</h4>
-                        </div>
-                    </div>
-
-                    <!-- Card 5 -->
-                    <div data-category="accessoires"
-                        class="clothing-card group relative bg-white rounded-[2.5rem] border border-tan/10 p-3 shadow-xl shadow-bark/5 hover:-translate-y-2 transition-all duration-300">
-                        <div
-                            class="aspect-square bg-cream/30 rounded-[2rem] flex items-center justify-center text-6xl relative overflow-hidden transition-colors group-hover:bg-cream/50">
-                            <span class="zoom-img transition-transform duration-500">👜</span>
-                            <div
-                                class="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <button onclick="toggleFavorite(event, this)"
-                                    class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-red-500 shadow-sm transition-colors"><svg
-                                        class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                        <path
-                                            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                                    </svg></button>
-                            </div>
-                        </div>
-                        <div class="p-4 space-y-1">
-                            <p class="text-[10px] font-bold text-tan uppercase tracking-widest">Accessoire / Cuir</p>
-                            <h4 class="text-lg font-display font-medium text-bark italic">Sac à Main Tan</h4>
-                        </div>
-                    </div>
-
-                    <!-- Card 6 -->
-                    <div data-category="bas"
-                        class="clothing-card group relative bg-white rounded-[2.5rem] border border-tan/10 p-3 shadow-xl shadow-bark/5 hover:-translate-y-2 transition-all duration-300">
-                        <div
-                            class="aspect-square bg-bone/20 rounded-[2rem] flex items-center justify-center text-6xl relative overflow-hidden transition-colors group-hover:bg-bone/40">
-                            <span class="zoom-img transition-transform duration-500">👖</span>
-                            <div
-                                class="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <button onclick="toggleFavorite(event, this)"
-                                    class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-red-500 shadow-sm transition-colors"><svg
-                                        class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                        <path
-                                            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                                    </svg></button>
-                            </div>
-                        </div>
-                        <div class="p-4 space-y-1">
-                            <p class="text-[10px] font-bold text-tan uppercase tracking-widest">Bas / Chino</p>
-                            <h4 class="text-lg font-display font-medium text-bark italic">Pantalon Beige</h4>
-                        </div>
-                    </div>
+                        @endif
+                    @empty
+                        <p class="text-tan col-span-full text-center py-10 text-lg">Vous n'avez pas encore de vêtements favoris.</p>
+                    @endforelse
                 </div>
 
                 <!-- Pagination -->
