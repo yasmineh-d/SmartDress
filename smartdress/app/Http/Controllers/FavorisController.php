@@ -22,33 +22,55 @@ class FavorisController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $request->validate([
             'vetement_id' => 'nullable|exists:vetements,id',
-            'tenue_id' => 'nullable|exists:tenues,id',
+            'tenue_id'    => 'nullable|exists:tenues,id',
         ]);
 
-        if (is_null($validated['vetement_id']) && is_null($validated['tenue_id'])) {
-            return back()->with('error', 'Veuillez sélectionner un vêtement ou une tenue.');
+        // Eviter les doublons
+        $exists = Favoris::where('user_id', Auth::id())
+            ->where('vetement_id', $request->vetement_id)
+            ->where('tenue_id', $request->tenue_id)
+            ->exists();
+
+        if ($exists) {
+            if ($request->wantsJson()) {
+                return response()->json(['success' => false, 'message' => 'Déjà en favoris']);
+            }
+            return back()->with('error', 'Déjà en favoris.');
         }
 
-        Auth::user()->favoris()->create($validated);
+        $favori = Favoris::create([
+            'user_id'     => Auth::id(),
+            'vetement_id' => $request->vetement_id,
+            'tenue_id'    => $request->tenue_id,
+        ]);
 
-        return back()->with('success', 'Ajouté aux favoris !');
+        if ($request->wantsJson()) {
+            return response()->json(['success' => true, 'id' => $favori->id]);
+        }
+        return back()->with('success', 'Ajouté aux favoris.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
         $favori = Favoris::findOrFail($id);
 
         if ($favori->user_id !== Auth::id()) {
+            if ($request->wantsJson()) {
+                return response()->json(['error' => 'Forbidden'], 403);
+            }
             abort(403);
         }
 
         $favori->delete();
 
+        if ($request->wantsJson()) {
+            return response()->json(['success' => true]);
+        }
         return back()->with('success', 'Retiré des favoris.');
     }
 }

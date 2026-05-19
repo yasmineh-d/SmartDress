@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SmartDress - Ma Garde-Robe (Web)</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;700&display=swap"
         rel="stylesheet">
@@ -200,28 +201,13 @@
                                     $isFavorited = in_array($vetement->id, $favorisIds);
                                     $favoriRecord = $isFavorited ? auth()->user()->favoris()->where('vetement_id', $vetement->id)->first() : null;
                                 @endphp
-                                <div class="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                    @if($isFavorited)
-                                        <form action="{{ route('favoris-api.destroy', $favoriRecord->id) }}" method="POST" class="m-0 p-0">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-red-500 shadow-sm transition-colors" title="Retirer des favoris">
-                                                <svg class="w-4 h-4 text-red-500" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                                </svg>
-                                            </button>
-                                        </form>
-                                    @else
-                                        <form action="{{ route('favoris-api.store') }}" method="POST" class="m-0 p-0">
-                                            @csrf
-                                            <input type="hidden" name="vetement_id" value="{{ $vetement->id }}">
-                                            <button type="submit" class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan hover:text-red-500 shadow-sm transition-colors" title="Ajouter aux favoris">
-                                                <svg class="w-4 h-4 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                                </svg>
-                                            </button>
-                                        </form>
-                                    @endif
+                                <div class="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity"
+                                     x-data="favoriteToggle({{ $isFavorited ? 'true' : 'false' }}, '{{ $isFavorited ? route('favoris-api.destroy', $favoriRecord->id) : route('favoris-api.store') }}', {{ $vetement->id }})">
+                                    <button @click="toggle" type="button" class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center shadow-sm transition-colors" :class="isFav ? 'text-red-500' : 'text-tan hover:text-red-500'" title="Ajouter/Retirer des favoris">
+                                        <svg class="w-4 h-4 transition-colors" :class="isFav ? 'text-red-500' : ''" :fill="isFav ? 'currentColor' : 'none'" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                        </svg>
+                                    </button>
                                     <button class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan hover:text-bark shadow-sm" title="Voir détails">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -472,21 +458,42 @@
             itemCount.textContent = cards.length;
         });
 
-        function toggleFavorite(e, btn) {
-            e.stopPropagation(); // Prevent opening things underneath
-            const svg = btn.querySelector('svg');
-            const isFavorited = svg.getAttribute('fill') === 'currentColor';
-            
-            if (isFavorited) {
-                // Remove from favorites
-                svg.setAttribute('fill', 'none');
-                svg.classList.remove('text-red-500');
-            } else {
-                // Add to favorites
-                svg.setAttribute('fill', 'currentColor');
-                svg.classList.add('text-red-500');
-            }
-        }
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('favoriteToggle', (initialState, initialUrl, vetementId) => ({
+                isFav: initialState,
+                url: initialUrl,
+                vetementId: vetementId,
+                async toggle() {
+                    this.isFav = !this.isFav;
+                    
+                    try {
+                        const method = this.isFav ? 'POST' : 'DELETE';
+                        const body = this.isFav ? JSON.stringify({ vetement_id: this.vetementId }) : null;
+                        const targetUrl = this.isFav ? '{{ route('favoris-api.store') }}' : this.url;
+                        
+                        const response = await fetch(targetUrl, {
+                            method: method,
+                            headers: {
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json'
+                            },
+                            body: body
+                        });
+                        
+                        if (!response.ok) throw new Error('Network error');
+                        
+                        const data = await response.json();
+                        if (this.isFav && data.id) {
+                            this.url = '/favoris-api/' + data.id;
+                        }
+                    } catch (error) {
+                        this.isFav = !this.isFav;
+                        console.error("Erreur lors de la mise en favori", error);
+                    }
+                }
+            }));
+        });
 
         // ── Modal logic Web ──
         const modalOverlay = document.getElementById('modal-overlay');
