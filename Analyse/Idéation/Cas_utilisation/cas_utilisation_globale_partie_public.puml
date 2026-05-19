@@ -1,0 +1,40 @@
+@startuml
+left to right direction
+
+skinparam backgroundColor #F7F5F0
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+
+skinparam actor {
+    BorderColor #5C4A35
+    FontColor #2F2F2F
+}
+skinparam usecase {
+    BackgroundColor #F5EEE4
+    BorderColor #889063
+    FontColor #2F2F2F
+}
+
+skinparam rectangle {
+    BackgroundColor #FFFFFF
+    BorderColor #5C4A35
+    FontColor #000000
+    RoundCorner 20
+}
+
+actor Utilisateur
+actor Administrateur
+actor Mobile
+
+rectangle "Partie Publique" {
+
+usecase "Consulter landing page" as UC1
+usecase "Consommer l'API" as UC2
+
+}
+
+Utilisateur --> UC1
+Administrateur --> UC1
+Mobile --> UC2
+@enduml
