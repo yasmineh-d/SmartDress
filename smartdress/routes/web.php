@@ -30,22 +30,36 @@ Route::get('/login', function () {
 // --- Pages Utilisateur (Web) ---
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
-        return view('pages.public.dashboard-web');
+        $user = auth()->user();
+        $hauts = $user->vetements()->where('categorie', 'hauts')->with('photos')->get();
+        $bas = $user->vetements()->where('categorie', 'bas')->with('photos')->get();
+        
+        $totalArticles = $user->vetements()->count();
+        $totalFavoris = $user->favoris()->count();
+
+        return view('pages.public.dashboard-web', compact('hauts', 'bas', 'totalArticles', 'totalFavoris'));
     })->name('dashboard');
 
     Route::get('/garde-robe', function () {
-        $vetements = auth()->user()
-            ->vetements()
+        $user = auth()->user();
+        $vetements = $user->vetements()
             ->with('photos')
             ->latest()
             ->get();
+        
+        $favorisIds = $user->favoris()->pluck('vetement_id')->toArray();
 
-        return view('pages.public.garde-robe-web', compact('vetements'));
+        return view('pages.public.garde-robe-web', compact('vetements', 'favorisIds'));
     })->name('garde-robe');
 
 
     Route::get('/favoris', function () {
-        return view('pages.public.favoris-web');
+        $favoris = auth()->user()
+            ->favoris()
+            ->with(['vetement.photos', 'tenue'])
+            ->latest()
+            ->get();
+        return view('pages.public.favoris-web', compact('favoris'));
     })->name('favoris');
 
     Route::get('/profil', function () {

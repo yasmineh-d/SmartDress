@@ -107,11 +107,11 @@
             <div class="grid grid-cols-2 gap-4">
                 <div class="bg-bark p-6 rounded-[2rem] text-white space-y-2">
                     <p class="text-[9px] font-bold opacity-60 uppercase tracking-widest">Articles</p>
-                    <p class="text-3xl font-display italic">42</p>
+                    <p class="text-3xl font-display italic">{{ $totalArticles ?? 42 }}</p>
                 </div>
                 <div class="bg-moss p-6 rounded-[2rem] text-white space-y-2">
                     <p class="text-[9px] font-bold opacity-60 uppercase tracking-widest">Favoris</p>
-                    <p class="text-3xl font-display italic">12</p>
+                    <p class="text-3xl font-display italic">{{ $totalFavoris ?? 12 }}</p>
                 </div>
             </div>
 
@@ -158,13 +158,15 @@
                     <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(207,187,153,0.15)_0%,transparent_70%)]"></div>
                     
                     <div class="relative flex flex-col items-center gap-8 scale-110">
-                        <div class="w-48 h-48 bg-white rounded-[2.5rem] border-4 border-white shadow-xl flex items-center justify-center flex-col transform -rotate-3 transition-all hover:rotate-0 hover:scale-105" id="top-box">
-                            <span class="text-6xl mb-3" id="top-icon">👕</span>
-                            <span class="text-[11px] font-bold text-tan uppercase tracking-widest" id="top-name">T-Shirt Blanc</span>
+                        <div class="w-48 h-48 bg-white rounded-[2.5rem] border-4 border-white shadow-xl flex items-center justify-center flex-col transform -rotate-3 transition-all hover:rotate-0 hover:scale-105 overflow-hidden relative" id="top-box">
+                            <img id="top-img" src="" class="absolute inset-0 w-full h-full object-contain p-2 hidden">
+                            <span class="text-6xl mb-3 relative z-10" id="top-icon">👕</span>
+                            <span class="text-[11px] font-bold text-tan uppercase tracking-widest relative z-10 bg-white/90 px-3 py-1 rounded-full shadow-sm mt-auto mb-2 text-center" id="top-name">T-Shirt Blanc</span>
                         </div>
-                        <div class="w-52 h-60 bg-bone/20 rounded-[2.5rem] border-4 border-white shadow-xl flex items-center justify-center flex-col transform rotate-2 transition-all hover:rotate-0 hover:scale-105" id="bottom-box">
-                            <span class="text-6xl mb-3" id="bottom-icon">👖</span>
-                            <span class="text-[11px] font-bold text-deeptan uppercase tracking-widest" id="bottom-name">Jean Slim Bleu</span>
+                        <div class="w-52 h-60 bg-bone/20 rounded-[2.5rem] border-4 border-white shadow-xl flex items-center justify-center flex-col transform rotate-2 transition-all hover:rotate-0 hover:scale-105 overflow-hidden relative" id="bottom-box">
+                            <img id="bottom-img" src="" class="absolute inset-0 w-full h-full object-contain p-2 hidden">
+                            <span class="text-6xl mb-3 relative z-10" id="bottom-icon">👖</span>
+                            <span class="text-[11px] font-bold text-deeptan uppercase tracking-widest relative z-10 bg-white/90 px-3 py-1 rounded-full shadow-sm mt-auto mb-2 text-center" id="bottom-name">Jean Slim Bleu</span>
                         </div>
                     </div>
 
@@ -281,41 +283,66 @@
     </div>
 
     <script>
-        const outfits = [
-            { title: "Casual Moderne", top: "👕", topName: "T-Shirt Blanc", topBg: "bg-white", bottom: "👖", bottomName: "Jean Slim Bleu", bottomBg: "bg-bone/20" },
-            { title: "Élégance Soirée", top: "👔", topName: "Chemise Noire", topBg: "bg-slate-800 text-white", bottom: "👖", bottomName: "Pantalon Costume", bottomBg: "bg-slate-300" },
-            { title: "Weekend Chill", top: "🧥", topName: "Hoodie Moss", topBg: "bg-moss text-white", bottom: "🩳", bottomName: "Short Cargo", bottomBg: "bg-tan/20" }
-        ];
+        const userHauts = @json($hauts);
+        const userBas = @json($bas);
+        const storageUrl = "{{ asset('storage') }}";
 
-        let currentIndex = 0;
         const refreshBtn = document.getElementById('refresh-outfit');
         const titleEl = document.getElementById('outfit-title');
+        
         const topIcon = document.getElementById('top-icon');
+        const topImg = document.getElementById('top-img');
         const topName = document.getElementById('top-name');
-        const topBox = document.getElementById('top-box');
+        
         const bottomIcon = document.getElementById('bottom-icon');
+        const bottomImg = document.getElementById('bottom-img');
         const bottomName = document.getElementById('bottom-name');
-        const bottomBox = document.getElementById('bottom-box');
+
+        function generateLook() {
+            if (userHauts.length > 0 && userBas.length > 0) {
+                const randomHaut = userHauts[Math.floor(Math.random() * userHauts.length)];
+                const randomBas = userBas[Math.floor(Math.random() * userBas.length)];
+                
+                const titles = ["Casual Moderne", "Mix & Match", "Tenue du Jour", "Look Confort", "Élégance Simple"];
+                titleEl.textContent = titles[Math.floor(Math.random() * titles.length)];
+                
+                topName.textContent = randomHaut.nom;
+                if (randomHaut.photos && randomHaut.photos.length > 0) {
+                    topImg.src = storageUrl + "/" + randomHaut.photos[0].url;
+                    topImg.classList.remove('hidden');
+                    topIcon.classList.add('hidden');
+                } else {
+                    topImg.classList.add('hidden');
+                    topIcon.classList.remove('hidden');
+                }
+
+                bottomName.textContent = randomBas.nom;
+                if (randomBas.photos && randomBas.photos.length > 0) {
+                    bottomImg.src = storageUrl + "/" + randomBas.photos[0].url;
+                    bottomImg.classList.remove('hidden');
+                    bottomIcon.classList.add('hidden');
+                } else {
+                    bottomImg.classList.add('hidden');
+                    bottomIcon.classList.remove('hidden');
+                }
+            } else {
+                titleEl.textContent = "Besoin de plus de vêtements !";
+                topName.textContent = "Ajoutez un haut";
+                bottomName.textContent = "Ajoutez un bas";
+            }
+        }
 
         refreshBtn.addEventListener('click', () => {
             refreshBtn.classList.add('opacity-50', 'pointer-events-none');
             
             setTimeout(() => {
-                currentIndex = (currentIndex + 1) % outfits.length;
-                const o = outfits[currentIndex];
-                
-                titleEl.textContent = o.title;
-                topIcon.textContent = o.top;
-                topName.textContent = o.topName;
-                topBox.className = `w-48 h-48 ${o.topBg.split(' ')[0]} rounded-[2.5rem] border-4 border-white shadow-xl flex items-center justify-center flex-col transform -rotate-3 transition-all hover:rotate-0 hover:scale-105`;
-                
-                bottomIcon.textContent = o.bottom;
-                bottomName.textContent = o.bottomName;
-                bottomBox.className = `w-52 h-60 ${o.bottomBg} rounded-[2.5rem] border-4 border-white shadow-xl flex items-center justify-center flex-col transform rotate-2 transition-all hover:rotate-0 hover:scale-105`;
-
+                generateLook();
                 refreshBtn.classList.remove('opacity-50', 'pointer-events-none');
             }, 600);
         });
+
+        // Generate first look on load
+        window.addEventListener('load', generateLook);
 
         // ── Modal logic Web ──
         const modalOverlay = document.getElementById('modal-overlay');

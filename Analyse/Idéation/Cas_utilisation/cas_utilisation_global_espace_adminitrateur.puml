@@ -1,0 +1,45 @@
+@startuml
+left to right direction
+
+skinparam backgroundColor #F7F5F0
+skinparam shadowing false
+skinparam packageStyle rectangle
+
+skinparam actor {
+    BorderColor #5C4A35
+    FontColor #2F2F2F
+}
+
+skinparam usecase {
+    BackgroundColor #F5EEE4
+    BorderColor #889063
+    FontColor #2F2F2F
+}
+
+skinparam rectangle {
+    BackgroundColor #FFFFFF
+    BorderColor #5C4A35
+    FontColor #000000
+    RoundCorner 20
+}
+
+actor Administrateur
+
+rectangle "Espace Administrateur" {
+
+  usecase "S'authentifier" as UC1
+
+  usecase "Gérer utilisateurs" as UC2
+  usecase "Consulter statistiques" as UC3
+  usecase "Modérer contenu" as UC4
+
+}
+
+Administrateur -- UC2
+Administrateur -- UC3
+Administrateur -- UC4
+
+UC2 ..> UC1 : <<include>>
+UC3 ..> UC1 : <<include>>
+UC4 ..> UC1 : <<include>>
+@enduml
