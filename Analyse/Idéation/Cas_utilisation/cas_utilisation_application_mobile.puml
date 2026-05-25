@@ -1,0 +1,105 @@
+@startuml
+left to right direction
+
+'========================
+' STYLE GLOBAL (AGRANDI + GRAS)
+'========================
+skinparam backgroundColor #F7F5F0
+skinparam shadowing false
+skinparam packageStyle rectangle
+
+' 👉 TEXTE GLOBAL
+skinparam defaultFontSize 18
+skinparam defaultFontStyle bold
+
+' 👉 ACTORS
+skinparam actorFontSize 20
+skinparam actorFontStyle bold
+
+' 👉 USE CASES
+skinparam usecaseFontSize 18
+skinparam usecaseFontStyle bold
+
+' 👉 RECTANGLES
+skinparam rectangleFontSize 18
+skinparam rectangleFontStyle bold
+
+' 👉 FLÈCHES / TEXTE RELATIONS
+skinparam ArrowFontStyle bold
+skinparam ArrowThickness 2
+
+'========================
+' STYLE ACTORS
+'========================
+skinparam actor {
+    BorderColor #5C4A35
+    FontColor #2F2F2F
+    FontStyle bold
+}
+
+'========================
+' STYLE USE CASES
+'========================
+skinparam usecase {
+    BackgroundColor #F5EEE4
+    BorderColor #889063
+    FontColor #2F2F2F
+    FontStyle bold
+}
+
+'========================
+' STYLE RECTANGLES
+'========================
+skinparam rectangle {
+    BackgroundColor #FFFFFF
+    BorderColor #5C4A35
+    FontColor #000000
+    FontStyle bold
+    RoundCorner 20
+}
+
+'========================
+' ACTORS
+'========================
+actor "Utilisateur" as U
+actor "Administrateur" as A
+actor "Serveur Web / IA" as W
+
+'========================
+' SYSTEM
+'========================
+rectangle "Application Mobile" {
+
+    usecase "S'authentifier" as UC_LOGIN
+
+    usecase "Gérer garde-robe" as UC_DRESSING
+    usecase "Consulter suggestions\nIA & Météo" as UC_SUGGEST
+    usecase "Consulter profil" as UC_PROFILE
+    usecase "Consulter statistiques" as UC_STATS
+    usecase "Interagir avec API\n(Météo, IA, Stockage)" as UC_API
+}
+
+'========================
+' ASSOCIATIONS
+'========================
+U -- UC_DRESSING
+U -- UC_SUGGEST
+U -- UC_PROFILE
+
+A -- UC_STATS
+
+W -- UC_API
+
+'========================
+' INCLUDE
+'========================
+UC_DRESSING ..> UC_LOGIN : <<include>>
+UC_SUGGEST ..> UC_LOGIN : <<include>>
+UC_PROFILE ..> UC_LOGIN : <<include>>
+UC_STATS ..> UC_LOGIN : <<include>>
+
+UC_DRESSING ..> UC_API : <<include>>
+UC_SUGGEST ..> UC_API : <<include>>
+UC_STATS ..> UC_API : <<include>>
+
+@enduml
