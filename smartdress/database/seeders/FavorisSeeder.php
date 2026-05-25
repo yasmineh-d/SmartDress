@@ -2,20 +2,21 @@
 
 namespace Database\Seeders;
 
-use App\Models\Commentaire;
+use App\Models\Favoris;
 use App\Models\Tenue;
 use App\Models\User;
+use App\Models\Vetement;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
 
-class CommentaireSeeder extends Seeder
+class FavorisSeeder extends Seeder
 {
     /**
-     * Cree des commentaires depuis un CSV.
+     * Cree des favoris depuis un CSV.
      */
     public function run(): void
     {
-        $csvPath = database_path('data/commentaires.csv');
+        $csvPath = database_path('data/favoris.csv');
 
         if (!File::exists($csvPath)) {
             return;
@@ -32,21 +33,26 @@ class CommentaireSeeder extends Seeder
             $row = str_getcsv($line);
             $data = array_combine($header, $row);
 
-            if (!$data || empty($data['user_email']) || empty($data['tenue_nom']) || empty($data['contenu'])) {
+            if (!$data || empty($data['user_email'])) {
                 continue;
             }
 
             $user = User::where('email', $data['user_email'])->first();
-            $tenue = Tenue::where('nom', $data['tenue_nom'])->first();
+            $vetement = !empty($data['vetement_nom'])
+                ? Vetement::where('nom', $data['vetement_nom'])->first()
+                : null;
+            $tenue = !empty($data['tenue_nom'])
+                ? Tenue::where('nom', $data['tenue_nom'])->first()
+                : null;
 
-            if (!$user || !$tenue) {
+            if (!$user || (!$vetement && !$tenue)) {
                 continue;
             }
 
-            Commentaire::firstOrCreate([
-                'contenu' => $data['contenu'],
+            Favoris::firstOrCreate([
                 'user_id' => $user->id,
-                'tenue_id' => $tenue->id,
+                'vetement_id' => $vetement?->id,
+                'tenue_id' => $tenue?->id,
             ]);
         }
     }

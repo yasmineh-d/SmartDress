@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use App\Models\Role;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\File;
 
 class UserSeeder extends Seeder
 {
@@ -14,36 +14,46 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        // 🔹 Récupération des rôles existants
-        $adminRole = Role::where('nom', 'admin')->first();
-        $userRole = Role::where('nom', 'utilisateur')->first();
+        $csvPath = database_path('data/users.csv');
 
-        // 👑 Création ou récupération de l'admin
-        $admin = User::firstOrCreate(
-            ['email' => 'admin@smartdress.com'],
-            [
-                'name' => 'Admin SmartDress',
-                'password' => Hash::make('password'),
-            ]
-        );
-
-        // 🔐 Associer le rôle admin
-        if ($adminRole) {
-            $admin->roles()->syncWithoutDetaching([$adminRole->id]);
+        if (!File::exists($csvPath)) {
+            return;
         }
 
-        // 👤 Création ou récupération d'un utilisateur simple
-        $user = User::firstOrCreate(
-            ['email' => 'user@smartdress.com'],
-            [
-                'name' => 'Yasmine User',
-                'password' => Hash::make('password'),
-            ]
-        );
+        $lines = explode("\n", File::get($csvPath));
+        $header = str_getcsv(array_shift($lines));
 
-        // 🔐 Associer le rôle utilisateur
-        if ($userRole) {
-            $user->roles()->syncWithoutDetaching([$userRole->id]);
+        foreach ($lines as $line) {
+            if (empty(trim($line))) {
+                continue;
+            }
+
+            $row = str_getcsv($line);
+            $data = array_combine($header, $row);
+
+            if (!$data || empty($data['email']) || empty($data['role'])) {
+                continue;
+            }
+
+            $user = User::updateOrCreate(
+                ['email' => $data['email']],
+                [
+                    'name' => $data['name'] ?? 'Utilisateur SmartDress',
+                    'password' => $data['password'] ?? 'password',
+                ]
+            );
+
+            $emailVerifiedAt = !empty($data['email_verified_at']) ? $data['email_verified_at'] : null;
+            if ($user->email_verified_at != $emailVerifiedAt) {
+                $user->email_verified_at = $emailVerifiedAt;
+                $user->save();
+            }
+
+            $role = Role::where('nom', $data['role'])->first();
+
+            if ($role) {
+                $user->roles()->syncWithoutDetaching([$role->id]);
+            }
         }
     }
 }
