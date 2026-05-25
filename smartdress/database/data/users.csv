@@ -1,0 +1,3 @@
+name,email,password,role,email_verified_at
+Admin SmartDress,admin@smartdress.com,password,admin,2026-05-25 12:00:00
+Yasmine User,user@smartdress.com,password,utilisateur,2026-05-25 12:00:00
