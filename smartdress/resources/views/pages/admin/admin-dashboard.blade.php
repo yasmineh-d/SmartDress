@@ -34,7 +34,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style-landing.css') }}">
 </head>
 
-<body class="bg-offwhite font-body text-bark min-h-screen" x-data="adminDashboard">
+<body class="bg-offwhite font-body text-bark min-h-screen" x-data="adminDashboard()">
 
     <script>
         document.addEventListener('alpine:init', () => {
