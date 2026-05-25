@@ -1,0 +1,67 @@
+@startuml
+skinparam actorStyle awesome
+top to bottom direction
+
+'========================
+' STYLE GLOBAL
+'========================
+skinparam backgroundColor #F8F4EE
+skinparam shadowing false
+skinparam packageStyle rectangle
+skinparam roundcorner 15
+
+skinparam actor {
+    BorderColor #604E34
+    FontColor #2F2F2F
+    BackgroundColor #F8F4EE
+}
+
+skinparam usecase {
+    BackgroundColor #F8F4EE
+    BorderColor #828B61
+    FontColor #2F2F2F
+    ArrowColor #828B61
+}
+
+skinparam rectangle {
+    BorderColor #604E34
+    FontColor #2F2F2F
+    BackgroundColor #FFFFFF
+}
+
+'========================
+' ACTEURS
+'========================
+actor "Utilisateur" as U
+actor "Web (Laravel)" as WEB
+
+'========================
+' SYSTÈME
+'========================
+rectangle "Sprint 2 - Application Mobile (SmartDress)" {
+
+    usecase "Sélectionner un style\nde tenue" as UC1
+    usecase "Consulter la météo\nen temps réel" as UC2
+    usecase "Consulter statistiques\npersonnelles" as UC3
+    usecase "Fournir l'API mobile" as UC4
+}
+
+'========================
+' ASSOCIATIONS
+'========================
+U -- UC1
+U -- UC2
+U -- UC3
+
+WEB -- UC4
+
+'========================
+' INCLUSIONS VERS S'AUTHENTIFIER
+'========================
+usecase "S'authentifier" as UC_AUTH
+
+UC1 ..> UC_AUTH : <<include>>
+UC2 ..> UC_AUTH : <<include>>
+UC3 ..> UC_AUTH : <<include>>
+
+@enduml

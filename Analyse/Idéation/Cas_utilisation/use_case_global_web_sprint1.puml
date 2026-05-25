@@ -1,0 +1,72 @@
+@startuml
+skinparam actorStyle awesome
+left to right direction
+
+'========================
+' STYLE GLOBAL
+'========================
+skinparam backgroundColor #F7F5F0
+skinparam shadowing false
+
+skinparam actor {
+    BorderColor #5C4A35
+    FontColor #2F2F2F
+    BackgroundColor #F5EEE4
+}
+
+skinparam usecase {
+    BackgroundColor #F5EEE4
+    BorderColor #889063
+    FontColor #2F2F2F
+    ArrowColor #889063
+}
+
+'========================
+' ACTEURS
+'========================
+actor "Mobile" as Mobile
+actor "Utilisateur" as U
+actor "Administrateur" as Admin
+
+'========================
+' CAS D'UTILISATION
+'========================
+
+' --- Mobile ---
+usecase "Consommer l'API" as UC_API
+
+' --- Utilisateur ---
+
+usecase "Gérer la garde-robe\n(Vêtements & Photos)" as UC_DRESSING
+usecase "Consulter les suggestions\nde tenues" as UC_SUGGEST
+usecase "Gérer les favoris" as UC_FAVORITES
+usecase "Consulter son profil" as UC_PROFILE
+
+' --- Administrateur ---
+usecase "Consulter les statistiques\nglobales" as UC_STATS
+
+' --- Authentification (hub à droite) ---
+usecase "S'authentifier" as UC_AUTH
+
+'========================
+' ASSOCIATIONS ACTEURS -> CAS
+'========================
+Mobile -- UC_API
+
+U -- UC_DRESSING
+U -- UC_SUGGEST
+U -- UC_FAVORITES
+U -- UC_PROFILE
+
+Admin -- UC_STATS
+
+'========================
+' INCLUSIONS VERS S'AUTHENTIFIER
+'========================
+UC_DRESSING ..> UC_AUTH : <<include>>
+UC_SUGGEST ..> UC_AUTH : <<include>>
+UC_FAVORITES ..> UC_AUTH : <<include>>
+UC_PROFILE ..> UC_AUTH : <<include>>
+UC_STATS ..> UC_AUTH : <<include>>
+
+@enduml

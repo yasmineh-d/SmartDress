@@ -1,0 +1,68 @@
+@startuml
+skinparam actorStyle awesome
+left to right direction
+
+'========================
+' STYLE GLOBAL
+'========================
+skinparam backgroundColor #F7F5F0
+skinparam shadowing false
+
+skinparam actor {
+    BorderColor #5C4A35
+    FontColor #2F2F2F
+    BackgroundColor #F5EEE4
+}
+
+skinparam usecase {
+    BackgroundColor #F5EEE4
+    BorderColor #889063
+    FontColor #2F2F2F
+    ArrowColor #889063
+}
+
+'========================
+' ACTEURS
+'========================
+actor "Utilisateur" as U
+actor "Administrateur" as Admin
+
+'========================
+' CAS D'UTILISATION
+'========================
+
+' --- Utilisateur ---
+usecase "Recevoir suggestions météo\nen temps réel" as UC1
+usecase "Sélectionner un style\nde tenue" as UC2
+usecase "Consulter statistiques\npersonnelles" as UC3
+
+' --- Administrateur ---
+usecase "Consulter statistiques\navancées" as UC4
+usecase "Superviser les activités\nutilisateurs" as UC5
+usecase "Exporter les données\n(utilisateurs)" as UC6
+
+' --- Hub Authentification ---
+usecase "S'authentifier" as UC_AUTH
+
+'========================
+' ASSOCIATIONS ACTEURS -> CAS
+'========================
+U -- UC1
+U -- UC2
+U -- UC3
+
+Admin -- UC4
+Admin -- UC5
+Admin -- UC6
+
+'========================
+' INCLUSIONS VERS S'AUTHENTIFIER
+'========================
+UC1 ..> UC_AUTH : <<include>>
+UC2 ..> UC_AUTH : <<include>>
+UC3 ..> UC_AUTH : <<include>>
+UC4 ..> UC_AUTH : <<include>>
+UC5 ..> UC_AUTH : <<include>>
+UC6 ..> UC_AUTH : <<include>>
+
+@enduml
