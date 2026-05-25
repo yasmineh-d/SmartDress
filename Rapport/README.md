@@ -68,48 +68,72 @@ Dans le cadre de ma formation en développement web, nous devons réaliser un pr
 
 ---
 
-# Objectif de Project
+# Objectif du Projet
 
-.
+**Smart-Dress** est une plateforme complète de gestion de garde-robe digitale, conçue pour répondre aux besoins d'organisation vestimentaire des utilisateurs au quotidien. Développée dans le cadre du programme **SoliCode**, cette solution centralise l'ensemble des processus liés à l'habillement : gestion des vêtements, planification des tenues, suivi de l'historique, adaptation aux conditions météorologiques, et bien plus encore.
+
+Conçue selon une architecture modulaire, Smart-Dress permet une intégration progressive de modules spécialisés, chacun dédié à un aspect précis de la gestion du style. Dans ce cadre, le module **Garde-robe Digitale et Recommandation** s'inscrit comme un composant essentiel, visant à faciliter la planification et le choix quotidien des tenues par les utilisateurs.
 
 ---
 
-# Cahier de charge
+### Fonctionnalités clés du module Garde-robe Digitale et Recommandation :
 
-## Description :
-SmartDress est une application mobile intelligente qui permet aux utilisateurs de gérer leur garde-robe de manière digitale et de recevoir des suggestions de tenues automatiques basées sur la météo et leurs préférences personnelles.
+* ❖ **Planification et organisation des tenues :** Les utilisateurs peuvent saisir le contenu de leur garde-robe, définir les catégories de vêtements (hauts, bas, chaussures), ainsi que les saisons et styles associés.
+* ❖ **Suivi et suggestions personnalisées :** Possibilité d'obtenir des suggestions automatiques d'ensembles harmonieux adaptés en temps réel à la météo du jour et aux préférences personnelles de l'utilisateur.
+* ❖ **Accessibilité multi-supports :** Interface intuitive et responsive, accessible depuis tout type d'appareil (ordinateur, tablette, smartphone).
+* ❖ **Gestion centralisée :** Les données saisies sont accessibles aux différents profils (utilisateurs pour leur garde-robe privée, administrateurs pour la modération et les statistiques globales) selon les droits définis.
+* ❖ **Sécurité et confidentialité :** Protection des données personnelles assurée, garantissant le respect de la confidentialité des informations et de la garde-robe de chaque utilisateur.
 
-## Objectifs principaux
-- Numériser et organiser physiquement la garde-robe via une interface mobile.
-- Réduire le temps d'indécision matinale grâce à des suggestions intelligentes.
-- Adapter les tenues aux conditions météorologiques réelles.
-- Optimiser l'utilisation de tous les vêtements possédés (éviter l'oubli).
-- Faciliter une consommation de mode plus responsable et organisée.
+L'intégration du module **Garde-robe Digitale et Recommandation** dans **Smart-Dress** a pour but d'offrir une solution numérique simple et efficace pour améliorer la planification et le suivi des tenues, tout en facilitant le gain de temps et l'optimisation des vêtements possédés par les utilisateurs.
 
-## Utilisateurs et rôles
-1. **Utilisateur** : Gère sa garde-robe, consulte les suggestions, classe ses vêtements par style et saison.
-2. **Admin** : Supervise la plateforme, gère les informations de base, surveille les flux de données et assure le bon fonctionnement du système.
+---
 
-## Fonctionnalités clés
-- Création de compte et authentification sécurisée.
-- Recherche et filtrage des vêtements par catégorie, style et saison.
-- Suivi des suggestions de tenues quotidiennes et historique.
-- Gestion complète de la garde-robe digitale (Ajout, Modification, Suppression).
-- Tableau de bord et statistiques d'utilisation (pour l'administrateur).
-- Notifications quotidiennes pour les tenues et alertes météo.
+# Cahier des charges
 
-## Contraintes
-- Interface mobile intuitive et esthétique.
-- Rapidité des algorithmes de recommandation.
-- Sécurité et confidentialité des données utilisateurs.
-- Accessibilité et ergonomie.
+SmartDress est une plateforme complète de gestion de garde-robe digitale, conçue pour répondre aux besoins d'organisation vestimentaire des utilisateurs au quotidien. Développée dans le cadre du programme SoliCode, cette solution centralise l'ensemble des processus liés à l'habillement : gestion des vêtements, planification des tenues, suivi de l'historique, adaptation aux conditions météorologiques, et bien plus encore.
 
-## Critères de réussite
-- Fluidité de la numérisation des vêtements.
-- Pertinence des recommandations par rapport à la météo.
-- Réduction du temps passé par l'utilisateur à choisir sa tenue.
-- Stabilité technique (disponibilité des API externes).
-- Satisfaction globale des utilisateurs lors des phases de test.
+<p align="center">
+  <img src="images/cahier_des_charges.png" alt="Cahier des charges" width="50%" />
+  <br />
+  <em>Figure 3 : Cahier des charges</em>
+</p>
+
+### Utilisateurs Cibles :
+
+* ❖ **Utilisateurs :** Pour organiser leur garde-robe digitale, planifier leurs tenues au quotidien et recevoir des suggestions adaptées à leurs préférences et à la météo.
+* ❖ **Administration :** Pour accéder aux statistiques globales d'utilisation, modérer le contenu et assurer le bon fonctionnement technique et fonctionnel de la plateforme.
+
+### Fonctionnalités Principales :
+
+* ❖ **Tableau de bord synthétique :** Affichage de la garde-robe numérisée, de l'état météo en temps réel et des suggestions intelligentes de tenues recommandées pour la journée.
+* ❖ **Saisie rapide des vêtements :** Permet aux utilisateurs d'enregistrer et de catégoriser rapidement le détail de leurs vêtements (hauts, bas, chaussures) par couleur, saison et style.
+* ❖ **Consultation filtrée :** Visualisation des vêtements par catégorie, couleur, style, date ou saison, facilitant le suivi et la recherche.
+* ❖ **Modification et suppression :** Possibilité de modifier ou de supprimer les vêtements et tenues précédemment enregistrés dans la garde-robe digitale.
+* ❖ **Génération de rapports :** Production de rapports d'utilisation et de statistiques exportables pour le suivi par l'utilisateur et l'administrateur.
+* ❖ **Notifications :** Alertes quotidiennes concernant les suggestions de tenues et les rappels météorologiques.
+
+### Contraintes Techniques et Fonctionnelles :
+
+* ❖ **Développement avec Tailwind CSS et Preline :** Choix technologiques modernes pour le tableau de bord et l'interface utilisateur.
+* ❖ **Utilisation de Chart.js :** Intégration de graphiques dynamiques pour le suivi des statistiques personnelles d'utilisation.
+* ❖ **Interface utilisateur claire et responsive :** Adaptabilité optimale sur ordinateurs, tablettes et smartphones.
+* ❖ **Sécurité des données :** Protection rigoureuse des données privées de garde-robe et des saisies utilisateurs.
+* ❖ **Respect des bonnes pratiques d'ergonomie :** Assurer une expérience utilisateur fluide, rapide et intuitive.
+
+### Livrables Attendus :
+
+* ❖ Une interface de tableau de bord claire et fonctionnelle pour la gestion et le suivi des vêtements et des suggestions de tenues.
+* ❖ Un module de saisie et de numérisation des vêtements (avec photos et caractéristiques).
+* ❖ Une documentation utilisateur destinée aux utilisateurs et à l'administration.
+* ❖ Une présentation de démonstration du système pour valider son fonctionnement et son ergonomie.
+
+### Planification Globale :
+
+* ❖ **Sprint 1 :** Réalisation de l'interface du tableau de bord, authentification des comptes, et gestion de base de la garde-robe (MVP).
+* ❖ **Sprint 2 :** Intégration des données météorologiques réelles et optimisation de l'algorithme de suggestion.
+* ❖ **Sprint 3 (facultatif) :** Optimisation ergonomique de l'interface mobile et ajout de fonctionnalités complémentaires de partage et de favoris.
+
+Grâce à une approche agile et une modélisation précise du besoin, ce projet pose des bases solides pour le développement d'une application fiable, évolutive et intégrée dans l'écosystème **Smart-Dress**. Ce contexte met en lumière la pertinence de la solution proposée et illustre son apport tant sur le plan technique que pratique.
 
 ---
 
