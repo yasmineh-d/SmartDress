@@ -3,17 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Models\Vetement;
+use App\Services\VetementService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class VetementController extends Controller
 {
+    public function __construct(
+        private readonly VetementService $vetementService
+    ) {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $vetements = Auth::user()->vetements ?? Vetement::where('user_id', Auth::id())->get();
+        $vetements = $this->vetementService->getForUser(Auth::user());
+
         return view('vetements.index', compact('vetements'));
     }
 
@@ -33,31 +41,13 @@ class VetementController extends Controller
         $validated = $request->validate([
             'nom' => 'required|string|max:255',
             'categorie' => 'required|string',
-            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048', // Validation pour la photo
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'couleur' => 'nullable|string',
             'saison' => 'nullable|string',
             'style' => 'nullable|string',
         ]);
 
-        // Créer le vêtement
-        $vetement = Auth::user()->vetements()->create([
-            'nom' => $validated['nom'],
-            'categorie' => $validated['categorie'],
-            'couleur' => $validated['couleur'] ?? null,
-            'saison' => $validated['saison'] ?? null,
-            'style' => $validated['style'] ?? null,
-        ]);
-
-        // Gérer l'upload de la photo
-        if ($request->hasFile('photo')) {
-            $path = $request->file('photo')->store('photos', 'public');
-            
-            // Créer la relation Photo
-            $vetement->photos()->create([
-                'url' => $path,
-                'dateUpload' => now(), // Ajout de la date requise
-            ]);
-        }
+        $this->vetementService->createForUser(Auth::user(), $validated, $request->file('photo'));
 
         return redirect()->route('garde-robe')->with('success', 'Vêtement ajouté avec succès !');
     }
@@ -91,7 +81,7 @@ class VetementController extends Controller
             'style' => 'nullable|string',
         ]);
 
-        $vetement->update($validated);
+        $this->vetementService->update($vetement, $validated);
 
         return redirect()->route('vetements.index')->with('success', 'Vêtement mis à jour !');
     }
@@ -101,18 +91,7 @@ class VetementController extends Controller
      */
     public function destroy(Vetement $vetement)
     {
-        // 1. On parcourt toutes les photos liées à ce vêtement
-        foreach ($vetement->photos as $photo) {
-            if (\Illuminate\Support\Facades\Storage::disk('public')->exists($photo->url)) {
-                \Illuminate\Support\Facades\Storage::disk('public')->delete($photo->url);
-            }
-        }
-
-        // 2. On supprime les relations en base de données
-        $vetement->photos()->delete();
-
-        // 3. On supprime le vêtement
-        $vetement->delete();
+        $this->vetementService->deleteWithPhotos($vetement);
 
         return redirect()->route('garde-robe')->with('success', 'Vêtement supprimé !');
     }

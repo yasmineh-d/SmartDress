@@ -2,35 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use Illuminate\Http\Request;
+use App\Services\AdminDashboardService;
 
 class AdminController extends Controller
 {
+    public function __construct(
+        private readonly AdminDashboardService $adminDashboardService
+    ) {
+    }
+
     public function index()
     {
-        $users = User::with('roles')->get()->map(function($user) {
-            return [
-                'id' => $user->id,
-                'name' => $user->name,
-                'email' => $user->email,
-                'role' => $user->roles->first()?->nom ?? 'User',
-                'status' => 'Actif',
-            ];
-        });
-
+        $users = $this->adminDashboardService->getUsersForDashboard();
         $totalUsers = $users->count();
-        
-        $firstUser = $users->first();
-        $activities = [
-            [
-                'id' => 1, 
-                'initial' => $firstUser ? substr($firstUser['name'], 0, 2) : 'YA', 
-                'name' => $firstUser ? $firstUser['name'] : 'Admin', 
-                'action' => 'Connexion système', 
-                'time' => 'Maintenant'
-            ],
-        ];
+        $activities = $this->adminDashboardService->getRecentActivities($users);
 
         return view('pages.admin.admin-dashboard', compact('users', 'totalUsers', 'activities'));
     }

@@ -3,18 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tenue;
-use App\Models\Vetement;
+use App\Services\TenueService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class TenueController extends Controller
 {
+    public function __construct(
+        private readonly TenueService $tenueService
+    ) {
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $tenues = Auth::user()->tenues ?? Tenue::where('user_id', Auth::id())->get();
+        $tenues = $this->tenueService->getForUser(Auth::user());
+
         return view('tenues.index', compact('tenues'));
     }
 
@@ -23,7 +29,8 @@ class TenueController extends Controller
      */
     public function create()
     {
-        $vetements = Auth::user()->vetements;
+        $vetements = $this->tenueService->getAvailableClothesForUser(Auth::user());
+
         return view('tenues.create', compact('vetements'));
     }
 
@@ -40,11 +47,7 @@ class TenueController extends Controller
             'vetements.*' => 'exists:vetements,id',
         ]);
 
-        $tenue = Auth::user()->tenues()->create($validated);
-
-        if ($request->has('vetements')) {
-            $tenue->vetements()->sync($request->vetements);
-        }
+        $this->tenueService->createForUser(Auth::user(), $validated);
 
         return redirect()->route('tenues.index')->with('success', 'Tenue créée avec succès !');
     }
@@ -62,7 +65,8 @@ class TenueController extends Controller
      */
     public function edit(Tenue $tenue)
     {
-        $vetements = Auth::user()->vetements;
+        $vetements = $this->tenueService->getAvailableClothesForUser(Auth::user());
+
         return view('tenues.edit', compact('tenue', 'vetements'));
     }
 
@@ -79,11 +83,7 @@ class TenueController extends Controller
             'vetements.*' => 'exists:vetements,id',
         ]);
 
-        $tenue->update($validated);
-
-        if ($request->has('vetements')) {
-            $tenue->vetements()->sync($request->vetements);
-        }
+        $this->tenueService->update($tenue, $validated);
 
         return redirect()->route('tenues.index')->with('success', 'Tenue mise à jour !');
     }
@@ -93,8 +93,7 @@ class TenueController extends Controller
      */
     public function destroy(Tenue $tenue)
     {
-        $tenue->vetements()->detach();
-        $tenue->delete();
+        $this->tenueService->delete($tenue);
 
         return redirect()->route('tenues.index')->with('success', 'Tenue supprimée !');
     }

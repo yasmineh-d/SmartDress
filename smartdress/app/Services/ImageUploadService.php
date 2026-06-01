@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -38,10 +39,16 @@ class ImageUploadService
      */
     public function deleteImage(?string $path): bool
     {
-        if ($path && Storage::disk('public')->exists($path)) {
-            return Storage::disk('public')->delete($path);
+        if (!$path) {
+            return false;
         }
 
-        return false;
+        $disk = Storage::disk('public');
+
+        if ($disk->exists($path)) {
+            File::delete($disk->path($path));
+        }
+
+        return !$disk->exists($path);
     }
 }

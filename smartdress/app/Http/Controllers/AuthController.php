@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\AuthService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+    public function __construct(
+        private readonly AuthService $authService
+    ) {
+    }
+
     /**
      * Gère la tentative de connexion.
      */
@@ -17,17 +22,11 @@ class AuthController extends Controller
             'password' => ['required'],
         ]);
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
+        if ($this->authService->attemptLogin($credentials)) {
+            $this->authService->regenerateSession($request);
+            $user = $this->authService->user();
 
-            $user = Auth::user();
-
-            // Redirection forcée selon le rôle
-            if ($user->hasRole('admin')) {
-                return redirect('/admin');
-            }
-
-            return redirect('/dashboard');
+            return redirect($this->authService->redirectPathFor($user));
         }
 
         return back()->withErrors([
@@ -40,10 +39,7 @@ class AuthController extends Controller
      */
     public function logout(Request $request)
     {
-        Auth::logout();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        $this->authService->logout($request);
 
         return redirect('/');
     }

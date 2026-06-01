@@ -5,9 +5,44 @@ namespace App\Services;
 use App\Models\User;
 use App\Models\Vetement;
 use App\Models\Tenue;
+use Illuminate\Support\Collection;
 
 class AdminDashboardService
 {
+    /**
+     * Récupère les utilisateurs formatés pour le tableau de bord admin.
+     */
+    public function getUsersForDashboard(): Collection
+    {
+        return User::with('roles')->get()->map(function (User $user) {
+            return [
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+                'role' => $user->roles->first()?->nom ?? 'User',
+                'status' => 'Actif',
+            ];
+        });
+    }
+
+    /**
+     * Récupère les activités affichées dans le tableau de bord admin.
+     */
+    public function getRecentActivities(Collection $users): array
+    {
+        $firstUser = $users->first();
+
+        return [
+            [
+                'id' => 1,
+                'initial' => $firstUser ? substr($firstUser['name'], 0, 2) : 'YA',
+                'name' => $firstUser ? $firstUser['name'] : 'Admin',
+                'action' => 'Connexion système',
+                'time' => 'Maintenant',
+            ],
+        ];
+    }
+
     /**
      * Récupère le nombre total d'utilisateurs inscrits sur la plateforme.
      * 

@@ -2,18 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Favoris;
+use App\Services\FavorisService;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class FavorisController extends Controller
 {
+    public function __construct(
+        private readonly FavorisService $favorisService
+    ) {
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $favoris = Auth::user()->favoris()->with(['vetement', 'tenue'])->get();
+        $favoris = $this->favorisService->getForUser(Auth::user());
+
         return view('favoris.index', compact('favoris'));
     }
 
@@ -22,33 +29,25 @@ class FavorisController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'vetement_id' => 'nullable|exists:vetements,id',
             'tenue_id'    => 'nullable|exists:tenues,id',
         ]);
 
-        // Eviter les doublons
-        $exists = Favoris::where('user_id', Auth::id())
-            ->where('vetement_id', $request->vetement_id)
-            ->where('tenue_id', $request->tenue_id)
-            ->exists();
-
-        if ($exists) {
+        if ($this->favorisService->existsForUser(Auth::user(), $validated)) {
             if ($request->wantsJson()) {
                 return response()->json(['success' => false, 'message' => 'Déjà en favoris']);
             }
+
             return back()->with('error', 'Déjà en favoris.');
         }
 
-        $favori = Favoris::create([
-            'user_id'     => Auth::id(),
-            'vetement_id' => $request->vetement_id,
-            'tenue_id'    => $request->tenue_id,
-        ]);
+        $favori = $this->favorisService->createForUser(Auth::user(), $validated);
 
         if ($request->wantsJson()) {
             return response()->json(['success' => true, 'id' => $favori->id]);
         }
+
         return back()->with('success', 'Ajouté aux favoris.');
     }
 
@@ -57,20 +56,20 @@ class FavorisController extends Controller
      */
     public function destroy($id, Request $request)
     {
-        $favori = Favoris::findOrFail($id);
-
-        if ($favori->user_id !== Auth::id()) {
+        try {
+            $this->favorisService->deleteForUser((int) $id, Auth::user());
+        } catch (AuthorizationException) {
             if ($request->wantsJson()) {
                 return response()->json(['error' => 'Forbidden'], 403);
             }
+
             abort(403);
         }
-
-        $favori->delete();
 
         if ($request->wantsJson()) {
             return response()->json(['success' => true]);
         }
+
         return back()->with('success', 'Retiré des favoris.');
     }
 }

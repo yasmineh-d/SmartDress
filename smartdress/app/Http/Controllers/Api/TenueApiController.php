@@ -4,18 +4,22 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Tenue;
+use App\Services\TenueService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class TenueApiController extends Controller
 {
+    public function __construct(
+        private readonly TenueService $tenueService
+    ) {
+    }
+
     public function index(): JsonResponse
     {
-        $tenues = Tenue::with('vetements')->get();
-
         return response()->json([
             'success' => true,
-            'data' => $tenues,
+            'data' => $this->tenueService->getAllWithClothes(),
         ]);
     }
 
@@ -30,26 +34,20 @@ class TenueApiController extends Controller
             'vetements.*' => 'exists:vetements,id',
         ]);
 
-        $tenue = Tenue::create($validated);
-
-        if ($request->has('vetements')) {
-            $tenue->vetements()->sync($request->vetements);
-        }
+        $tenue = $this->tenueService->create($validated);
 
         return response()->json([
             'success' => true,
             'message' => 'Tenue créée avec succès.',
-            'data' => $tenue->load('vetements'),
+            'data' => $tenue,
         ], 201);
     }
 
     public function show(int $id): JsonResponse
     {
-        $tenue = Tenue::with('vetements')->findOrFail($id);
-
         return response()->json([
             'success' => true,
-            'data' => $tenue,
+            'data' => $this->tenueService->findWithClothes($id),
         ]);
     }
 
@@ -63,23 +61,18 @@ class TenueApiController extends Controller
             'vetements.*' => 'exists:vetements,id',
         ]);
 
-        $tenue->update($validated);
-
-        if ($request->has('vetements')) {
-            $tenue->vetements()->sync($request->vetements);
-        }
+        $updatedTenue = $this->tenueService->update($tenue, $validated);
 
         return response()->json([
             'success' => true,
             'message' => 'Tenue mise à jour avec succès.',
-            'data' => $tenue->load('vetements'),
+            'data' => $updatedTenue,
         ]);
     }
 
     public function destroy(Tenue $tenue): JsonResponse
     {
-        $tenue->vetements()->detach();
-        $tenue->delete();
+        $this->tenueService->delete($tenue);
 
         return response()->json([
             'success' => true,
