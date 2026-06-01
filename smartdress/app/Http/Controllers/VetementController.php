@@ -20,8 +20,7 @@ class VetementController extends Controller
      */
     public function index()
     {
-        $vetements = $this->vetementService->getForUser(Auth::user());
-
+        $vetements = $this->vetementService->getForUser(Auth::user(), true);
         return view('vetements.index', compact('vetements'));
     }
 
@@ -38,17 +37,28 @@ class VetementController extends Controller
      */
     public function store(Request $request)
     {
+        \Log::info('=== STORE VETEMENT START ===');
+        \Log::info('Auth user: ' . (Auth::check() ? Auth::id() : 'NOT LOGGED IN'));
+        \Log::info('Has photo file: ' . ($request->hasFile('photo') ? 'YES' : 'NO'));
+        \Log::info('Request data: ', $request->except('photo'));
+
         $validated = $request->validate([
             'nom' => 'required|string|max:255',
             'categorie' => 'required|string',
-            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048', // Validation pour la photo
             'couleur' => 'nullable|string',
             'saison' => 'nullable|string',
             'style' => 'nullable|string',
         ]);
 
-        $this->vetementService->createForUser(Auth::user(), $validated, $request->file('photo'));
+        $vetement = $this->vetementService->createForUser(
+            Auth::user(),
+            $validated,
+            $request->file('photo')
+        );
 
+        \Log::info('Vetement created: id=' . $vetement->id . ' user_id=' . $vetement->user_id);
+        \Log::info('=== STORE VETEMENT END ===');
         return redirect()->route('garde-robe')->with('success', 'Vêtement ajouté avec succès !');
     }
 
