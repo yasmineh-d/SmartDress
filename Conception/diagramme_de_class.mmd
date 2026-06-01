@@ -1,0 +1,82 @@
+@startuml
+title SmartDress - Class Diagram
+
+left to right direction
+skinparam classAttributeIconSize 0
+
+class Administrateur
+class Utilisateur {
+    +Integer id
+    +String nom
+    +String email
+    +String motDePasse
+    +String initiales
+    +StatutUtilisateur statut
+    +DateTime created_at
+    +DateTime updated_at
+}
+
+class Role {
+    +Integer id
+    +String nom
+    +String guard_name
+    +DateTime created_at
+    +DateTime updated_at
+}
+
+class Permission {
+    +Integer id
+    +String nom
+    +String guard_name
+    +DateTime created_at
+    +DateTime updated_at
+}
+
+class Activite {
+    +Integer id
+    +String action
+    +DateTime horodatage
+}
+
+class Favoris {
+    +Integer id
+    +String style
+    +String couleurFavoris
+    +String saisonFavoris
+}
+
+class Tenue {
+    +Integer id
+    +String nom
+    +DateTime dateCreation
+    +DateTime datePlanifiee
+}
+
+class Vetement {
+    +Integer id
+    +String nom
+    +CategorieVetement categorie
+    +String couleur
+    +String imageUrl
+}
+
+class Photo {
+    +Integer id
+    +String url
+    +DateTime dateUpload
+}
+
+Administrateur --|> Utilisateur
+
+Utilisateur "1" -- "0..*" Role : possède
+Utilisateur "1" -- "0..*" Activite : génère
+Utilisateur "1" -- "0..*" Favoris : configure
+Utilisateur "1" -- "0..*" Tenue : crée
+Utilisateur "1" -- "0..*" Vetement : possède
+
+Role "*" -- "*" Permission : accorde
+
+Tenue "1" -- "1..*" Vetement : composée_de
+Vetement "1" -- "0..*" Photo : contient
+
+@enduml
