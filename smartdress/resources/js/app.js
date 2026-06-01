@@ -1,5 +1,5 @@
-import Alpine from "alpinejs";
-import "./dashboard.js";
+import adminDashboard from "./components/admin/adminDashboard.js";
 
 window.Alpine = Alpine;
+Alpine.data('adminDashboard', adminDashboard);
 Alpine.start();
