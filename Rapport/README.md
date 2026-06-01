@@ -1,3 +1,9 @@
+<p align="center">
+  <img src="images/ofppt-logo.png" alt="Logo OFPPT" width="20%" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="images/logo-solicode.png" alt="Logo Solicode" width="20%" />
+</p>
+
 # Rapport de Projet de Fin de Formation  
 ## SmartDress : Développement d’une Solution intelligente pour la recommandation et la gestion de garde-robe digitale 
 ### Formation de Développement Mobile – Mode Bootcamp  
@@ -7,7 +13,8 @@
 **Réalisée par :** Yasmine Haddad  
 **Encadré par :** Mr. Essarraj Fouad  
 
-**Année de Formation :** 2025/2026
+**Année de Formation :** 2025/2026  
+**Date de Soutenance :** 12 Juin 2026  
 
 ---
 

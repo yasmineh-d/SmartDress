@@ -149,7 +149,8 @@ style: |
 
 **Réalisée par :** <span class="highlight">Haddad Yasmine</span>  
 **Encadré par :** <span class="highlight">M. ESSARRAJ Fouad</span>  
-**Filière :** Développement Mobile 
+**Filière :** Développement Mobile  
+**Date de soutenance :** 12 Juin 2026  
 
 ---
 
