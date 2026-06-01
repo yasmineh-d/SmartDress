@@ -616,6 +616,34 @@
     </script>
 
 
+    <!-- Premium Floating Toast Notifications -->
+    @if ($errors->any() || session('success'))
+        <div class="fixed bottom-5 right-5 z-[100] flex flex-col gap-3 max-w-sm pointer-events-none">
+            @if (session('success'))
+                <div class="pointer-events-auto p-4 rounded-3xl bg-moss/95 backdrop-blur-md text-white shadow-2xl border border-white/20 flex items-center gap-3 animate-bounce">
+                    <span class="text-xl">✨</span>
+                    <div>
+                        <h5 class="font-bold text-xs uppercase tracking-wider text-cream">Succès</h5>
+                        <p class="text-xs font-light opacity-90">{{ session('success') }}</p>
+                    </div>
+                </div>
+            @endif
+
+            @if ($errors->any())
+                <div class="pointer-events-auto p-4 rounded-3xl bg-bark/95 backdrop-blur-md text-white shadow-2xl border border-red-500/20 flex items-start gap-3">
+                    <span class="text-xl text-red-400">⚠️</span>
+                    <div>
+                        <h5 class="font-bold text-xs uppercase tracking-wider text-red-300">Erreur</h5>
+                        <ul class="text-xs font-light opacity-90 list-disc list-inside mt-1 space-y-1">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            @endif
+        </div>
+    @endif
 </body>
 
 </html>

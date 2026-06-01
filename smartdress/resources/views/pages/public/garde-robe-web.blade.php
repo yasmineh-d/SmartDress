@@ -73,27 +73,27 @@
                     <button id="btn-cat-all" onclick="setSidebarCategory('all')"
                         class="sidebar-cat-btn flex items-center justify-between px-4 py-3 bg-moss text-white rounded-xl shadow-md text-sm font-bold transition-all">
                         <span>Tout</span>
-                        <span class="opacity-60 font-medium tracking-wider">5</span>
+                        <span class="opacity-60 font-medium tracking-wider">{{ $vetements->count() }}</span>
                     </button>
                     <button id="btn-cat-hauts" onclick="setSidebarCategory('hauts')"
                         class="sidebar-cat-btn flex items-center justify-between px-4 py-3 text-bark hover:bg-cream/30 rounded-xl text-sm font-medium transition-colors">
                         <span>Hauts</span>
-                        <span class="text-tan tracking-wider">2</span>
+                        <span class="text-tan tracking-wider">{{ $vetements->filter(fn($v) => strtolower($v->categorie) === 'hauts')->count() }}</span>
                     </button>
                     <button id="btn-cat-bas" onclick="setSidebarCategory('bas')"
                         class="sidebar-cat-btn flex items-center justify-between px-4 py-3 text-bark hover:bg-cream/30 rounded-xl text-sm font-medium transition-colors">
                         <span>Bas</span>
-                        <span class="text-tan tracking-wider">1</span>
+                        <span class="text-tan tracking-wider">{{ $vetements->filter(fn($v) => strtolower($v->categorie) === 'bas')->count() }}</span>
                     </button>
                     <button id="btn-cat-chaussures" onclick="setSidebarCategory('chaussures')"
                         class="sidebar-cat-btn flex items-center justify-between px-4 py-3 text-bark hover:bg-cream/30 rounded-xl text-sm font-medium transition-colors">
                         <span>Chaussures</span>
-                        <span class="text-tan tracking-wider">1</span>
+                        <span class="text-tan tracking-wider">{{ $vetements->filter(fn($v) => strtolower($v->categorie) === 'chaussures')->count() }}</span>
                     </button>
                     <button id="btn-cat-accessoires" onclick="setSidebarCategory('accessoires')"
                         class="sidebar-cat-btn flex items-center justify-between px-4 py-3 text-bark hover:bg-cream/30 rounded-xl text-sm font-medium transition-colors">
                         <span>Accessoires</span>
-                        <span class="text-tan tracking-wider">1</span>
+                        <span class="text-tan tracking-wider">{{ $vetements->filter(fn($v) => strtolower($v->categorie) === 'accessoires')->count() }}</span>
                     </button>
                 </div>
             </div>
@@ -613,6 +613,34 @@
     </script>
 
 
+    <!-- Premium Floating Toast Notifications -->
+    @if ($errors->any() || session('success'))
+        <div class="fixed bottom-5 right-5 z-[100] flex flex-col gap-3 max-w-sm pointer-events-none">
+            @if (session('success'))
+                <div class="pointer-events-auto p-4 rounded-3xl bg-moss/95 backdrop-blur-md text-white shadow-2xl border border-white/20 flex items-center gap-3 animate-bounce">
+                    <span class="text-xl">✨</span>
+                    <div>
+                        <h5 class="font-bold text-xs uppercase tracking-wider text-cream">Succès</h5>
+                        <p class="text-xs font-light opacity-90">{{ session('success') }}</p>
+                    </div>
+                </div>
+            @endif
+
+            @if ($errors->any())
+                <div class="pointer-events-auto p-4 rounded-3xl bg-bark/95 backdrop-blur-md text-white shadow-2xl border border-red-500/20 flex items-start gap-3">
+                    <span class="text-xl text-red-400">⚠️</span>
+                    <div>
+                        <h5 class="font-bold text-xs uppercase tracking-wider text-red-300">Erreur</h5>
+                        <ul class="text-xs font-light opacity-90 list-disc list-inside mt-1 space-y-1">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            @endif
+        </div>
+    @endif
 </body>
 
 </html>
