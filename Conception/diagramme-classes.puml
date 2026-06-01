@@ -4,8 +4,7 @@ title SmartDress - Class Diagram
 left to right direction
 skinparam classAttributeIconSize 0
 
-class Administrateur
-class Utilisateur {
+class Member {
     +Integer id
     +String nom
     +String email
@@ -38,11 +37,9 @@ class Activite {
     +DateTime horodatage
 }
 
-class Favoris {
+class Favori {
     +Integer id
-    +String style
-    +String couleurFavoris
-    +String saisonFavoris
+    +DateTime dateAjout
 }
 
 class Tenue {
@@ -66,13 +63,13 @@ class Photo {
     +DateTime dateUpload
 }
 
-Administrateur --|> Utilisateur
+Member "*" -- "*" Role : possède
+Member "1" -- "0..*" Activite : génère
 
-Utilisateur "1" -- "0..*" Role : possède
-Utilisateur "1" -- "0..*" Activite : génère
-Utilisateur "1" -- "0..*" Favoris : configure
-Utilisateur "1" -- "0..*" Tenue : crée
-Utilisateur "1" -- "0..*" Vetement : possède
+Member "1" -- "0..*" Tenue : crée
+
+
+Vetement "1" -- "0..*" Favori : concerne
 
 Role "*" -- "*" Permission : accorde
 
