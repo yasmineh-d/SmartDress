@@ -9,7 +9,7 @@ class AdminController extends Controller
 {
     public function index()
     {
-        $users = User::with('roles')->get()->map(function($user) {
+        $users = User::with('roles')->get()->map(function ($user) {
             return [
                 'id' => $user->id,
                 'name' => $user->name,
@@ -20,14 +20,14 @@ class AdminController extends Controller
         });
 
         $totalUsers = $users->count();
-        
+
         $firstUser = $users->first();
         $activities = [
             [
-                'id' => 1, 
-                'initial' => $firstUser ? substr($firstUser['name'], 0, 2) : 'YA', 
-                'name' => $firstUser ? $firstUser['name'] : 'Admin', 
-                'action' => 'Connexion système', 
+                'id' => 1,
+                'initial' => $firstUser ? substr($firstUser['name'], 0, 2) : 'YA',
+                'name' => $firstUser ? $firstUser['name'] : 'Admin',
+                'action' => 'Connexion système',
                 'time' => 'Maintenant'
             ],
         ];

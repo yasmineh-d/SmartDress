@@ -33,7 +33,7 @@ Route::middleware(['auth'])->group(function () {
         $user = auth()->user();
         $hauts = $user->vetements()->where('categorie', 'hauts')->with('photos')->get();
         $bas = $user->vetements()->where('categorie', 'bas')->with('photos')->get();
-        
+
         $totalArticles = $user->vetements()->count();
         $totalFavoris = $user->favoris()->count();
 
@@ -46,7 +46,7 @@ Route::middleware(['auth'])->group(function () {
             ->with('photos')
             ->latest()
             ->get();
-        
+
         $favorisIds = $user->favoris()->pluck('vetement_id')->toArray();
 
         return view('pages.public.garde-robe-web', compact('vetements', 'favorisIds'));
@@ -91,5 +91,7 @@ Route::resource('tenues', TenueController::class);
 Route::resource('favoris-api', FavorisController::class);
 
 // --- Compatibilité Mobiles ---
-Route::get('/mobile/dashboard', function () { return view('pages.public.dashboard_mobile'); })->name('mobile.dashboard');
-Route::get('/mobile/edit-profile', function () { return view('pages.public.edit-profile-mobile'); })->name('mobile.profile.edit');
+Route::get('/mobile/dashboard', function () {
+    return view('pages.public.dashboard_mobile'); })->name('mobile.dashboard');
+Route::get('/mobile/edit-profile', function () {
+    return view('pages.public.edit-profile-mobile'); })->name('mobile.profile.edit');

@@ -115,16 +115,16 @@
                 },
                 get filteredActivities() {
                     return this.activities.filter(a => {
-                        const matchesSearch = a.name.toLowerCase().includes(this.search.toLowerCase()) || 
-                                             a.action.toLowerCase().includes(this.search.toLowerCase());
+                        const matchesSearch = a.name.toLowerCase().includes(this.search.toLowerCase()) ||
+                            a.action.toLowerCase().includes(this.search.toLowerCase());
                         const matchesFilter = this.filter === 'all' || a.action.toLowerCase().includes(this.filter.toLowerCase());
                         return matchesSearch && matchesFilter;
                     });
                 },
                 get filteredUsers() {
                     return this.users.filter(u => {
-                        const matchesSearch = u.name.toLowerCase().includes(this.search.toLowerCase()) || 
-                               u.email.toLowerCase().includes(this.search.toLowerCase());
+                        const matchesSearch = u.name.toLowerCase().includes(this.search.toLowerCase()) ||
+                            u.email.toLowerCase().includes(this.search.toLowerCase());
                         const matchesRole = this.roleFilter === 'all' || u.role.toLowerCase() === this.roleFilter.toLowerCase();
                         const matchesStatus = this.statusFilter === 'all' || u.status.toLowerCase() === this.statusFilter.toLowerCase();
                         return matchesSearch && matchesRole && matchesStatus;
