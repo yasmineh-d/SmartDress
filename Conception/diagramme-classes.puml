@@ -31,12 +31,6 @@ class Permission {
     +DateTime updated_at
 }
 
-class Activite {
-    +Integer id
-    +String action
-    +DateTime horodatage
-}
-
 class Favori {
     +Integer id
     +DateTime dateAjout
@@ -64,7 +58,6 @@ class Photo {
 }
 
 Member "*" -- "*" Role : possède
-Member "1" -- "0..*" Activite : génère
 
 Member "1" -- "0..*" Tenue : crée
 
