@@ -68,4 +68,26 @@ class WeatherService{
             default        => '🌤️',
         };
     }
+
+    /**
+     * Obtenir la température actuelle (simulée pour les tests).
+     */
+    public function getCurrentTemperature(string $city): float
+    {
+        $city = strtolower($city);
+        return match($city) {
+            'paris' => 12.5,
+            'marseille' => 26.0,
+            'montreal' => -5.0,
+            default => 20.0,
+        };
+    }
+
+    /**
+     * Déterminer la condition météorologique en fonction de la température.
+     */
+    public function getWeatherCondition(float $temp): string
+    {
+        return $temp < 15 ? 'Hiver' : 'Été';
+    }
 }

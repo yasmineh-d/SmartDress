@@ -42,7 +42,8 @@
                 scrolled: false,
                 mobileMenuOpen: false,
                 isLoggedIn: true,
-                tab: 'dashboard',
+                // MODIFICATION ICI : On lit l'onglet stocké en session, sinon 'dashboard' par défaut
+                tab: sessionStorage.getItem('admin_active_tab') || 'dashboard',
                 search: '',
                 filter: 'all',
                 roleFilter: 'all',
@@ -56,6 +57,13 @@
                 currentActivity: { id: null, name: '', action: 'Génération de tenue', initial: '' },
                 currentUser: { id: null, name: '', email: '', role: 'User', status: 'Actif' },
                 rowToDelete: null,
+
+                // Étape pour changer d'onglet et enregistrer le choix
+                changeTab(targetTab) {
+                    this.tab = targetTab;
+                    this.search = '';
+                    sessionStorage.setItem('admin_active_tab', targetTab);
+                },
 
                 openAddModal() {
                     this.isEditing = false;
@@ -134,6 +142,7 @@
         })
     </script>
 
+    <!-- NAVBAR -->
     <header id="navbar" class="sd-navbar !fixed" :class="{ 'scrolled': scrolled }"
         @scroll.window="scrolled = (window.pageYOffset > 20)">
         <div class="max-w-screen-xl mx-auto px-6 lg:px-12 flex items-center justify-between h-full">
@@ -160,6 +169,7 @@
                 </div>
             </div>
 
+            <!-- Mobile hamburger -->
             <button type="button" class="lg:hidden sd-hamburger" @click="mobileMenuOpen = !mobileMenuOpen"
                 :aria-expanded="mobileMenuOpen">
                 <span class="sr-only">Menu</span>
@@ -172,6 +182,7 @@
             </button>
         </div>
 
+        <!-- Mobile menu -->
         <div x-show="mobileMenuOpen" x-transition:enter="transition ease-out duration-200"
             x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
             class="lg:hidden bg-offwhite border-t border-tan/30 shadow-xl" style="display: none;">
@@ -190,13 +201,15 @@
     </header>
 
     <div class="flex min-h-screen pt-20">
+        <!-- Sidebar -->
         <aside class="hidden lg:flex flex-col w-64 bg-white border-r border-tan/10 min-h-[calc(100vh-80px)]">
             <div class="p-8 border-b border-tan/5">
                 <a href="{{ url('/') }}" class="sd-logo">Smart<span>Dress</span></a>
                 <p class="text-[10px] font-bold text-tan uppercase tracking-widest mt-1">Console Admin</p>
             </div>
             <nav class="flex-1 p-6 space-y-2">
-                <button @click="tab = 'dashboard'; search = ''"
+                <!-- MODIFICATION : Utilisation de changeTab() -->
+                <button @click="changeTab('dashboard')"
                     :class="tab === 'dashboard' ? 'bg-moss/10 text-moss' : 'text-tan hover:bg-cream/30'"
                     class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold uppercase tracking-widest transition-all">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
@@ -206,7 +219,8 @@
                     </svg>
                     Dashboard
                 </button>
-                <button @click="tab = 'users'; search = ''"
+                <!-- MODIFICATION : Utilisation de changeTab() -->
+                <button @click="changeTab('users')"
                     :class="tab === 'users' ? 'bg-moss/10 text-moss' : 'text-tan hover:bg-cream/30'"
                     class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold uppercase tracking-widest transition-all">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
@@ -242,6 +256,7 @@
                     </div>
                 </div>
 
+                <!-- Widgets de statistiques dynamiques -->
                 <div x-show="tab === 'dashboard'" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
                     <div class="bg-white p-8 rounded-[2rem] border border-tan/10 shadow-sm">
                         <div class="w-12 h-12 bg-moss/10 text-moss rounded-2xl flex items-center justify-center mb-6">
@@ -280,7 +295,9 @@
                     </div>
                 </div>
 
+                <!-- Main Content Area -->
                 <div class="bg-white rounded-[3rem] shadow-sm border border-tan/10 overflow-hidden">
+                    <!-- Table Header -->
                     <div
                         class="p-8 lg:p-12 border-b border-cream flex flex-col sm:flex-row sm:items-center justify-between gap-6">
                         <div class="flex items-center gap-4">
@@ -297,6 +314,7 @@
                             </button>
                         </div>
 
+                        <!-- Search and Filter -->
                         <div class="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
                             <div class="relative w-full sm:w-64">
                                 <span class="absolute inset-y-0 left-4 flex items-center text-tan/40">
@@ -349,7 +367,7 @@
                                     <option value="inactif">Inactif</option>
                                 </select>
                                 <div class="absolute top-1/2 end-3.5 -translate-y-1/2 pointer-events-none text-tan">
-                                    <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24"
+                                    <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/xl" width="24"
                                         height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                         stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="m7 15 5 5 5-5"></path>
@@ -360,6 +378,7 @@
                         </div>
                     </div>
 
+                    <!-- Dashboard Table -->
                     <div x-show="tab === 'dashboard'" class="overflow-x-auto">
                         <table class="w-full text-left">
                             <thead class="bg-cream/20 text-tan text-[9px] font-bold uppercase tracking-[0.25em]">
@@ -411,6 +430,7 @@
                         </table>
                     </div>
 
+                    <!-- Users Table -->
                     <div x-show="tab === 'users'" class="overflow-x-auto">
                         <table class="w-full text-left">
                             <thead class="bg-cream/20 text-tan text-[9px] font-bold uppercase tracking-[0.25em]">
@@ -473,6 +493,7 @@
         </main>
     </div>
 
+    <!-- FOOTER -->
     <footer class="sd-footer">
         <div class="max-w-screen-xl mx-auto px-6 lg:px-12 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
             <div>
@@ -514,6 +535,7 @@
         </div>
     </footer>
 
+    <!-- Modals -->
     <div x-show="showModal"
         class="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-bark/40 backdrop-blur-sm" x-cloak>
         <div class="bg-white w-full max-w-md rounded-[3rem] p-10 shadow-2xl border border-tan/10"
@@ -525,14 +547,12 @@
                 <template x-if="modalType === 'activity'">
                     <div class="space-y-6">
                         <div>
-                            <label
-                                class="text-[10px] font-bold text-tan uppercase tracking-widest mb-2 block">Nom</label>
+                            <label class="text-[10px] font-bold text-tan uppercase tracking-widest mb-2 block">Nom</label>
                             <input type="text" x-model="currentActivity.name"
                                 class="w-full px-6 py-4 bg-cream/30 border border-tan/10 rounded-2xl focus:border-moss outline-none text-sm">
                         </div>
                         <div>
-                            <label
-                                class="text-[10px] font-bold text-tan uppercase tracking-widest mb-2 block">Action</label>
+                            <label class="text-[10px] font-bold text-tan uppercase tracking-widest mb-2 block">Action</label>
                             <div class="relative">
                                 <select x-model="currentActivity.action"
                                     class="relative py-4 ps-6 pe-12 flex gap-x-2 text-nowrap w-full cursor-pointer bg-cream/30 border border-tan/10 rounded-2xl text-start text-sm font-medium text-bark focus:outline-none focus:ring-2 focus:ring-moss/20 focus:border-moss transition-all appearance-none">
@@ -555,21 +575,18 @@
                 <template x-if="modalType === 'user'">
                     <div class="space-y-6">
                         <div>
-                            <label class="text-[10px] font-bold text-tan uppercase tracking-widest mb-2 block">Nom
-                                complet</label>
+                            <label class="text-[10px] font-bold text-tan uppercase tracking-widest mb-2 block">Nom complet</label>
                             <input type="text" x-model="currentUser.name"
                                 class="w-full px-6 py-4 bg-cream/30 border border-tan/10 rounded-2xl focus:border-moss outline-none text-sm">
                         </div>
                         <div>
-                            <label
-                                class="text-[10px] font-bold text-tan uppercase tracking-widest mb-2 block">Email</label>
+                            <label class="text-[10px] font-bold text-tan uppercase tracking-widest mb-2 block">Email</label>
                             <input type="email" x-model="currentUser.email"
                                 class="w-full px-6 py-4 bg-cream/30 border border-tan/10 rounded-2xl focus:border-moss outline-none text-sm">
                         </div>
                         <div class="grid grid-cols-2 gap-4">
                             <div>
-                                <label
-                                    class="text-[10px] font-bold text-tan uppercase tracking-widest mb-2 block">Rôle</label>
+                                <label class="text-[10px] font-bold text-tan uppercase tracking-widest mb-2 block">Rôle</label>
                                 <div class="relative">
                                     <select x-model="currentUser.role"
                                         class="relative py-4 ps-6 py-4 pe-12 flex gap-x-2 text-nowrap w-full cursor-pointer bg-cream/30 border border-tan/10 rounded-2xl text-start text-sm font-medium text-bark focus:outline-none focus:ring-2 focus:ring-moss/20 focus:border-moss transition-all appearance-none">
@@ -587,8 +604,7 @@
                                 </div>
                             </div>
                             <div>
-                                <label
-                                    class="text-[10px] font-bold text-tan uppercase tracking-widest mb-2 block">Statut</label>
+                                <label class="text-[10px] font-bold text-tan uppercase tracking-widest mb-2 block">Statut</label>
                                 <div class="relative">
                                     <select x-model="currentUser.status"
                                         class="relative py-4 ps-6 py-4 pe-12 flex gap-x-2 text-nowrap w-full cursor-pointer bg-cream/30 border border-tan/10 rounded-2xl text-start text-sm font-medium text-bark focus:outline-none focus:ring-2 focus:ring-moss/20 focus:border-moss transition-all appearance-none">
@@ -619,13 +635,13 @@
         </div>
     </div>
 
+    <!-- Confirm Delete Modal -->
     <div x-show="showDeleteModal"
         class="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-bark/40 backdrop-blur-sm" x-cloak>
         <div class="bg-white w-full max-w-sm rounded-[3rem] p-10 text-center shadow-2xl border border-tan/10"
             @click.away="showDeleteModal = false">
             <h2 class="text-2xl font-display font-medium text-bark italic mb-4">Confirmation</h2>
-            <p class="text-sm text-bark/60 mb-8">Voulez-vous vraiment supprimer cet élément ? Cette action est
-                irréversible.</p>
+            <p class="text-sm text-bark/60 mb-8">Voulez-vous vraiment supprimer cet élément ? Cette action est irréversible.</p>
             <div class="flex gap-4">
                 <button @click="showDeleteModal = false"
                     class="flex-1 py-4 border border-tan/10 text-tan hover:text-bark font-bold text-[10px] uppercase tracking-widest rounded-full">Annuler</button>

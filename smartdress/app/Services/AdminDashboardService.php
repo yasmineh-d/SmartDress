@@ -14,7 +14,13 @@ class AdminDashboardService
      */
     public function getUsersForDashboard(): Collection
     {
-        return User::all();
+        $users = User::with('roles')->get();
+        foreach ($users as $user) {
+            $roleName = $user->roles->first()?->nom;
+            $user->setAttribute('role', $roleName === 'admin' ? 'Admin' : 'User');
+            $user->setAttribute('status', 'Actif');
+        }
+        return $users;
     }
 
     /**
@@ -56,5 +62,41 @@ class AdminDashboardService
     {
         // Compte le nombre de lignes dans ta table tenues
         return Tenue::count();
+    }
+
+    /**
+     * Obtenir le nombre total d'utilisateurs.
+     */
+    public function getTotalUsersCount(): int
+    {
+        return User::count();
+    }
+
+    /**
+     * Obtenir le nombre total de vêtements (alias pour le test).
+     */
+    public function cloneAllClothesCount(): int
+    {
+        return $this->getTotalVetements();
+    }
+
+    /**
+     * Obtenir le nombre total de tenues (alias pour le test).
+     */
+    public function getTotalOutfitsCount(): int
+    {
+        return $this->getTotalTenues();
+    }
+
+    /**
+     * Calculer le nombre moyen de vêtements par utilisateur.
+     */
+    public function getAverageClothesPerUser(): float
+    {
+        $usersCount = User::count();
+        if ($usersCount === 0) {
+            return 0.0;
+        }
+        return Vetement::count() / $usersCount;
     }
 }
