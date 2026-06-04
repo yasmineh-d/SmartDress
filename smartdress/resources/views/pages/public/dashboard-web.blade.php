@@ -88,15 +88,15 @@
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-[10px] font-bold text-tan uppercase tracking-[0.2em]">Météo locale</p>
-                        <p class="text-sm font-medium text-bark">{{ $meteo['ville'] }}, MA</p>
+                        <p class="text-sm font-medium text-bark">{{ $meteo['ville'] ?? 'Tanger' }}, MA</p>
                     </div>
                     <div class="w-16 h-16 bg-cream flex items-center justify-center rounded-2xl shadow-inner border border-tan/10 text-4xl">
                         ⛅
                     </div>
                 </div>
                 <div class="flex items-baseline gap-2">
-                    <span class="text-5xl font-display font-semibold text-bark">{{ $meteo['temperature'] }}°</span>
-                    <span class="text-xl text-moss italic font-medium">{{ $meteo['icone'] }}</span>
+                    <span class="text-5xl font-display font-semibold text-bark">{{ $meteo['temperature'] ?? 24 }}°</span>
+                    <span class="text-xl text-moss italic font-medium">{{ $meteo['icone'] ?? 'Ensoleillé' }}</span>
                 </div>
                 <p class="text-xs text-bark/60 leading-relaxed font-light">
                     Conditions idéales pour une tenue légère et respirante aujourd'hui.
@@ -224,13 +224,11 @@
             </button>
         </div>
 
-        {{-- ✅ FORMULAIRE CORRIGÉ : action, method, enctype, @csrf --}}
         <form id="form-add-vetement" action="{{ route('vetements.store') }}" method="POST" enctype="multipart/form-data" class="grid grid-cols-1 md:grid-cols-2 gap-10">
             @csrf
 
             <!-- Upload Zone -->
             <div class="space-y-4">
-                {{-- ✅ name="photo" ajouté --}}
                 <input type="file" id="item-photo-input" name="photo" class="hidden" accept="image/*">
                 <div id="upload-zone" onclick="document.getElementById('item-photo-input').click()" 
                     class="aspect-square bg-cream/20 border-2 border-dashed border-tan/20 rounded-[2.5rem] flex flex-col items-center justify-center text-tan hover:bg-cream/40 transition-all cursor-pointer group overflow-hidden relative">
@@ -249,25 +247,16 @@
             </div>
 
             <!-- Fields Zone -->
-            <div class="flex flex-col justify-between py-2">
-                <div class="space-y-6">
+            <div class="flex flex-col justify-between py-2 space-y-6">
+                <div class="space-y-4">
                     <div class="space-y-1.5">
                         <label class="px-2 text-[10px] font-bold text-tan uppercase tracking-widest">Nom de l'article</label>
-                        {{-- ✅ name="nom" ajouté --}}
                         <input type="text" name="nom" placeholder="Ex: Veste en cuir vintage" class="w-full px-5 py-4 bg-white border border-tan/10 rounded-2xl focus:border-moss outline-none transition-all font-medium placeholder:text-tan/30 text-sm">
                     </div>
 
                     <div class="space-y-1.5 relative">
                         <label class="px-2 text-[10px] font-bold text-tan uppercase tracking-widest">Catégorie</label>
-                        {{-- ✅ name="categorie" ajouté --}}
-                        <select name="categorie" data-hs-select='{
-                            "placeholder": "Choisir...",
-                            "toggleTag": "<button type=\"button\" aria-expanded=\"false\"></button>",
-                            "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-4 ps-5 pe-12 flex gap-x-2 text-nowrap w-full cursor-pointer bg-white border border-tan/10 rounded-2xl text-start text-sm font-medium focus:ring-1 focus:ring-moss appearance-none",
-                            "dropdownClasses": "mt-2 z-50 w-full max-h-72 p-1 space-y-0.5 bg-white border border-tan/10 rounded-2xl overflow-hidden overflow-y-auto shadow-2xl",
-                            "optionClasses": "py-3 px-5 w-full text-sm text-bark cursor-pointer hover:bg-cream/50 rounded-xl focus:outline-none focus:bg-cream/50 transition-colors",
-                            "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"hidden hs-selected:block\"><svg class=\"shrink-0 size-3.5 text-moss\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg></span></div>"
-                          }'>
+                        <select name="categorie" class="w-full py-4 ps-5 pe-12 bg-white border border-tan/10 rounded-2xl text-sm font-medium focus:ring-1 focus:ring-moss appearance-none outline-none">
                             <option value="">Choisir...</option>
                             <option value="hauts">Hauts</option>
                             <option value="bas">Bas</option>
@@ -278,10 +267,32 @@
                             <svg class="shrink-0 size-4 text-tan/60" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m7 15 5 5 5-5"></path><path d="m7 9 5-5 5 5"></path></svg>
                         </div>
                     </div>
+
+                    <!-- Sélections des Saisons (Max 2 Choix) -->
+                    <div class="space-y-2">
+                        <label class="px-2 text-[10px] font-bold text-tan uppercase tracking-widest block">Saisons (Max 2)</label>
+                        <div class="grid grid-cols-2 gap-2 text-xs">
+                            <label class="flex items-center gap-2 bg-cream/20 p-2.5 rounded-xl border border-tan/10 cursor-pointer hover:bg-cream/50 transition-colors">
+                                <input type="checkbox" name="saison[]" value="printemps" class="saison-checkbox rounded text-moss focus:ring-moss border-tan/30 size-4">
+                                <span>Printemps</span>
+                            </label>
+                            <label class="flex items-center gap-2 bg-cream/20 p-2.5 rounded-xl border border-tan/10 cursor-pointer hover:bg-cream/50 transition-colors">
+                                <input type="checkbox" name="saison[]" value="ete" class="saison-checkbox rounded text-moss focus:ring-moss border-tan/30 size-4">
+                                <span>Été</span>
+                            </label>
+                            <label class="flex items-center gap-2 bg-cream/20 p-2.5 rounded-xl border border-tan/10 cursor-pointer hover:bg-cream/50 transition-colors">
+                                <input type="checkbox" name="saison[]" value="automne" class="saison-checkbox rounded text-moss focus:ring-moss border-tan/30 size-4">
+                                <span>Automne</span>
+                            </label>
+                            <label class="flex items-center gap-2 bg-cream/20 p-2.5 rounded-xl border border-tan/10 cursor-pointer hover:bg-cream/50 transition-colors">
+                                <input type="checkbox" name="saison[]" value="hiver" class="saison-checkbox rounded text-moss focus:ring-moss border-tan/30 size-4">
+                                <span>Hiver</span>
+                            </label>
+                        </div>
+                    </div>
                 </div>
 
-                {{-- ✅ Bouton soumet le vrai formulaire --}}
-                <button id="save-item-btn" type="button" onclick="addItemToGrid()" class="w-full py-5 bg-moss text-white rounded-full text-[10px] font-bold uppercase tracking-[0.2em] shadow-xl shadow-moss/20 hover:bg-bark transition-all mt-8">
+                <button id="save-item-btn" type="button" onclick="addItemToGrid()" class="w-full py-5 bg-moss text-white rounded-full text-[10px] font-bold uppercase tracking-[0.2em] shadow-xl shadow-moss/20 hover:bg-bark transition-all mt-4">
                     Ajouter au dressing
                 </button>
             </div>
@@ -291,6 +302,7 @@
     <script>
         const userHauts = @json($hauts);
         const userBas = @json($bas);
+        const currentMeteo = @json($meteo);
         const storageUrl = "{{ asset('storage') }}";
 
         const refreshBtn = document.getElementById('refresh-outfit');
@@ -304,10 +316,27 @@
         const bottomImg = document.getElementById('bottom-img');
         const bottomName = document.getElementById('bottom-name');
 
+        // Logique IA de génération de look filtrée selon la météo et la saison
         function generateLook() {
-            if (userHauts.length > 0 && userBas.length > 0) {
-                const randomHaut = userHauts[Math.floor(Math.random() * userHauts.length)];
-                const randomBas = userBas[Math.floor(Math.random() * userBas.length)];
+            const temp = currentMeteo && currentMeteo.temperature ? currentMeteo.temperature : 22;
+            
+            // On cible automatiquement la saison selon le climat réel
+            let saisonCible = 'printemps';
+            if (temp > 25) saisonCible = 'ete';
+            else if (temp < 16) saisonCible = 'hiver';
+            else if (temp >= 16 && temp <= 21) saisonCible = 'automne';
+
+            // Filtrer les hauts et les bas contenant la saison cible dans leur tableau
+            let hautsFiltres = userHauts.filter(h => h.saison && h.saison.includes(saisonCible));
+            let basFiltres = userBas.filter(b => b.saison && b.saison.includes(saisonCible));
+
+            // Fallback s'il n'y a pas encore d'articles pour cette saison spécifique
+            if (hautsFiltres.length === 0) hautsFiltres = userHauts;
+            if (basFiltres.length === 0) basFiltres = userBas;
+
+            if (hautsFiltres.length > 0 && basFiltres.length > 0) {
+                const randomHaut = hautsFiltres[Math.floor(Math.random() * hautsFiltres.length)];
+                const randomBas = basFiltres[Math.floor(Math.random() * basFiltres.length)];
                 
                 const titles = ["Casual Moderne", "Mix & Match", "Tenue du Jour", "Look Confort", "Élégance Simple"];
                 titleEl.textContent = titles[Math.floor(Math.random() * titles.length)];
@@ -348,6 +377,39 @@
 
         window.addEventListener('load', generateLook);
 
+        // Limitation stricte de cois des checkbox à 2 max
+        document.querySelectorAll('.saison-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const checkedCount = document.querySelectorAll('.saison-checkbox:checked').length;
+                if (checkedCount >= 2) {
+                    document.querySelectorAll('.saison-checkbox:not(:checked)').forEach(el => {
+                        el.disabled = true;
+                        el.parentElement.classList.add('opacity-40', 'cursor-not-allowed');
+                    });
+                } else {
+                    document.querySelectorAll('.saison-checkbox').forEach(el => {
+                        el.disabled = false;
+                        el.parentElement.classList.remove('opacity-40', 'cursor-not-allowed');
+                    });
+                }
+            });
+        });
+
+        // Validation complète avant soumission
+        function addItemToGrid() {
+            const nameInput = document.querySelector('#modal-add input[name="nom"]');
+            const categorySelect = document.querySelector('#modal-add select[name="categorie"]');
+            const photoInput = document.getElementById('item-photo-input');
+            const checkedSaisons = document.querySelectorAll('.saison-checkbox:checked');
+
+            if (!nameInput.value) { alert("Veuillez remplir le nom de l'article."); return; }
+            if (!categorySelect.value) { alert("Veuillez choisir une catégorie."); return; }
+            if (!photoInput.files || photoInput.files.length === 0) { alert("Veuillez ajouter une photo."); return; }
+            if (checkedSaisons.length === 0) { alert("Veuillez choisir au moins une saison."); return; }
+
+            document.getElementById('form-add-vetement').submit();
+        }
+
         // ── Modal logic ──
         const modalOverlay = document.getElementById('modal-overlay');
         const addItemBtn = document.getElementById('add-item-btn');
@@ -374,12 +436,8 @@
             }, 300);
         }
 
-        if (addItemBtn) {
-            addItemBtn.addEventListener('click', () => openModal('modal-add'));
-        }
-        if (modalOverlay) {
-            modalOverlay.addEventListener('click', () => closeModal('modal-add'));
-        }
+        if (addItemBtn) addItemBtn.addEventListener('click', () => openModal('modal-add'));
+        if (modalOverlay) modalOverlay.addEventListener('click', () => closeModal('modal-add'));
 
         // ── Photo Upload Preview ──
         const photoInput = document.getElementById('item-photo-input');
@@ -399,29 +457,6 @@
                     reader.readAsDataURL(file);
                 }
             });
-        }
-
-        // ✅ FONCTION CORRIGÉE — soumet le vrai formulaire Laravel
-        function addItemToGrid() {
-            const nameInput = document.querySelector('#modal-add input[name="nom"]');
-            const categorySelect = document.querySelector('#modal-add select[name="categorie"]');
-            const photoInput = document.getElementById('item-photo-input');
-
-            if (!nameInput.value) {
-                alert("Veuillez remplir le nom de l'article.");
-                return;
-            }
-            if (!categorySelect.value) {
-                alert("Veuillez choisir une catégorie.");
-                return;
-            }
-            if (!photoInput.files || photoInput.files.length === 0) {
-                alert("Veuillez ajouter une photo.");
-                return;
-            }
-
-            // Soumettre le formulaire vers Laravel
-            document.getElementById('form-add-vetement').submit();
         }
     </script>
 
@@ -455,5 +490,4 @@
     @endif
 
 </body>
-
 </html>

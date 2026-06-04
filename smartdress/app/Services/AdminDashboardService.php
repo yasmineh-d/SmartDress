@@ -10,83 +10,51 @@ use Illuminate\Support\Collection;
 class AdminDashboardService
 {
     /**
-     * Récupère les utilisateurs formatés pour le tableau de bord admin.
+     * Récupérer les utilisateurs pour le tableau de bord.
      */
     public function getUsersForDashboard(): Collection
     {
-        return User::with('roles')->get()->map(function (User $user) {
-            return [
-                'id' => $user->id,
-                'name' => $user->name,
-                'email' => $user->email,
-                'role' => $user->roles->first()?->nom ?? 'User',
-                'status' => 'Actif',
-            ];
-        });
+        return User::all();
     }
 
     /**
-     * Récupère les activités affichées dans le tableau de bord admin.
+     * Générer ou récupérer les activités récentes.
      */
     public function getRecentActivities(Collection $users): array
     {
-        $firstUser = $users->first();
-
+        // Retourne un tableau d'activités (soit via ta DB, soit tes données de test actuelles)
         return [
             [
                 'id' => 1,
-                'initial' => $firstUser ? substr($firstUser['name'], 0, 2) : 'YA',
-                'name' => $firstUser ? $firstUser['name'] : 'Admin',
-                'action' => 'Connexion système',
-                'time' => 'Maintenant',
+                'name' => $users->first()?->name ?? 'Yasmine Haddad',
+                'action' => 'Génération de tenue - Style Casual',
+                'time' => 'Il y a 5 min',
+                'initial' => 'YH'
             ],
+            [
+                'id' => 2,
+                'name' => $users->last()?->name ?? 'Anas Mansour',
+                'action' => 'Ajout vêtement - Categorie Hauts',
+                'time' => 'Il y a 12 min',
+                'initial' => 'AM'
+            ]
         ];
     }
 
     /**
-     * Récupère le nombre total d'utilisateurs inscrits sur la plateforme.
-     * 
-     * @return int
+     * AJOUT : Compter le nombre total de vêtements sur toute la plateforme.
      */
-    public function getTotalUsersCount(): int
-    {
-        return User::count();
-    }
-
-    /**
-     * Récupère le nombre total de vêtements ajoutés par tous les utilisateurs.
-     * 
-     * @return int
-     */
-    public function cloneAllClothesCount(): int
+    public function getTotalVetements(): int
     {
         return Vetement::count();
     }
 
     /**
-     * Récupère le nombre total de tenues créées sur la plateforme.
-     * 
-     * @return int
+     * AJOUT : Compter le nombre total de tenues générées sur la plateforme.
      */
-    public function getTotalOutfitsCount(): int
+    public function getTotalTenues(): int
     {
+        // Compte le nombre de lignes dans ta table tenues
         return Tenue::count();
-    }
-
-    /**
-     * Calcule la moyenne du nombre de vêtements par utilisateur.
-     * 
-     * @return float
-     */
-    public function getAverageClothesPerUser(): float
-    {
-        $usersCount = $this->getTotalUsersCount();
-        
-        if ($usersCount === 0) {
-            return 0.0;
-        }
-
-        $totalClothes = $this->cloneAllClothesCount();
-        return round($totalClothes / $usersCount, 2);
     }
 }

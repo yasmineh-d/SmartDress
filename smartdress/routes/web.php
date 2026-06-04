@@ -1,13 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Http; // Importation essentielle pour l'API
 use App\Http\Controllers\VetementController;
 use App\Http\Controllers\TenueController;
 use App\Http\Controllers\FavorisController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Models\Vetement;
-
 
 // --- Pages Publiques ---
 Route::get('/', function () {
@@ -38,8 +38,38 @@ Route::middleware(['auth'])->group(function () {
         $totalArticles = $user->vetements()->count();
         $totalFavoris = $user->favoris()->count();
 
-        // Ajout de la variable $meteo pour corriger l'erreur d'affichage
-        $meteo = "Ensoleillé"; 
+        // --- Logique de l'API Météo (Exemple OpenWeather) ---
+        // Remplace 'VOTRE_CLE_API' par ta vraie clé OpenWeatherMap
+        $apiKey = config('services.openweather.key', 'VOTRE_CLE_API'); 
+        $ville = 'Tangier'; 
+
+        try {
+            // Appel de l'API météo
+            $response = Http::get("https://api.openweathermap.org/data/2.5/weather", [
+                'q' => $ville,
+                'appid' => $apiKey,
+                'units' => 'metric',
+                'lang' => 'fr'
+            ]);
+
+            if ($response->successful()) {
+                $data = $response->json();
+                $meteo = [
+                    'ville' => $data['name'] ?? 'Tanger',
+                    'temperature' => round($data['main']['temp'] ?? 22),
+                    'icone' => ucfirst($data['weather'][0]['description'] ?? 'Ensoleillé')
+                ];
+            } else {
+                throw new \Exception("Échec de l'API");
+            }
+        } catch (\Exception $e) {
+            // Valeurs de secours (Fallback) si l'API échoue ou s'il n'y a pas internet
+            $meteo = [
+                'ville' => 'Tanger',
+                'temperature' => 24,
+                'icone' => 'Partiellement nuageux'
+            ];
+        }
 
         return view('pages.public.dashboard-web', compact('hauts', 'bas', 'totalArticles', 'totalFavoris', 'meteo'));
     })->name('dashboard');

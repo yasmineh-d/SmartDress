@@ -10,9 +10,14 @@ class Vetement extends Model
         'nom',
         'categorie',
         'couleur',
-        'saison',
+        'saison', // Ton champ existant
         'style',
         'user_id',
+    ];
+
+    // On ajoute le cast ici pour transformer automatiquement la chaîne JSON en tableau PHP
+    protected $casts = [
+        'saison' => 'array',
     ];
 
     public function user()

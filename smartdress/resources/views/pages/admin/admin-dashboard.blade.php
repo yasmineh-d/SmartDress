@@ -134,7 +134,6 @@
         })
     </script>
 
-    <!-- NAVBAR -->
     <header id="navbar" class="sd-navbar !fixed" :class="{ 'scrolled': scrolled }"
         @scroll.window="scrolled = (window.pageYOffset > 20)">
         <div class="max-w-screen-xl mx-auto px-6 lg:px-12 flex items-center justify-between h-full">
@@ -145,7 +144,7 @@
 
             <div class="hidden lg:flex items-center gap-3">
                 <div class="flex items-center gap-3">
-                    <a href="{{ route("profile") }}"
+                    <a href="{{ route('profile') }}"
                         class="flex items-center gap-2 px-4 py-2 bg-cream/50 rounded-full text-xs font-bold text-bark hover:bg-cream transition-all border border-tan/10">
                         <div
                             class="w-6 h-6 bg-tan rounded-full flex items-center justify-center text-[10px] text-white">
@@ -161,7 +160,6 @@
                 </div>
             </div>
 
-            <!-- Mobile hamburger -->
             <button type="button" class="lg:hidden sd-hamburger" @click="mobileMenuOpen = !mobileMenuOpen"
                 :aria-expanded="mobileMenuOpen">
                 <span class="sr-only">Menu</span>
@@ -174,14 +172,13 @@
             </button>
         </div>
 
-        <!-- Mobile menu -->
         <div x-show="mobileMenuOpen" x-transition:enter="transition ease-out duration-200"
             x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
             class="lg:hidden bg-offwhite border-t border-tan/30 shadow-xl" style="display: none;">
             <div class="px-6 py-4 flex flex-col gap-3">
                 <hr class="border-tan/30 my-1" />
                 <div class="flex flex-col gap-3">
-                    <a href="{{ route("profile") }}" class="sd-btn-ghost text-center"
+                    <a href="{{ route('profile') }}" class="sd-btn-ghost text-center"
                         @click="mobileMenuOpen = false">{{ auth()->user()->name }}</a>
                     <form action="{{ route('logout') }}" method="POST" class="w-full">
                         @csrf
@@ -193,7 +190,6 @@
     </header>
 
     <div class="flex min-h-screen pt-20">
-        <!-- Sidebar -->
         <aside class="hidden lg:flex flex-col w-64 bg-white border-r border-tan/10 min-h-[calc(100vh-80px)]">
             <div class="p-8 border-b border-tan/5">
                 <a href="{{ url('/') }}" class="sd-logo">Smart<span>Dress</span></a>
@@ -224,7 +220,6 @@
         </aside>
 
         <main class="flex-1 bg-offwhite">
-            <!-- Mobile Header -->
             <header
                 class="lg:hidden bg-white border-b border-tan/10 px-6 py-4 flex items-center justify-between sticky top-0 z-50">
                 <a href="{{ url('/') }}" class="sd-logo">Smart<span>Dress</span></a>
@@ -247,7 +242,6 @@
                     </div>
                 </div>
 
-                <!-- Stats (Only on Dashboard) -->
                 <div x-show="tab === 'dashboard'" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
                     <div class="bg-white p-8 rounded-[2rem] border border-tan/10 shadow-sm">
                         <div class="w-12 h-12 bg-moss/10 text-moss rounded-2xl flex items-center justify-center mb-6">
@@ -260,6 +254,7 @@
                         <p class="text-[10px] font-bold text-tan uppercase tracking-widest mb-1">Total Utilisateurs</p>
                         <p class="text-4xl font-display font-medium text-bark italic" x-text="users.length"></p>
                     </div>
+
                     <div class="bg-white p-8 rounded-[2rem] border border-tan/10 shadow-sm">
                         <div class="w-12 h-12 bg-tan/10 text-tan rounded-2xl flex items-center justify-center mb-6">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
@@ -269,8 +264,10 @@
                             </svg>
                         </div>
                         <p class="text-[10px] font-bold text-tan uppercase tracking-widest mb-1">Tenues Générées</p>
-                        <p class="text-4xl font-display font-medium text-bark italic">4,520</p>
+                        <p class="text-4xl font-display font-medium text-bark italic">
+                            {{ number_format($totalTenues ?? 0) }}</p>
                     </div>
+
                     <div class="bg-white p-8 rounded-[2rem] border border-tan/10 shadow-sm">
                         <div class="w-12 h-12 bg-moss/10 text-moss rounded-2xl flex items-center justify-center mb-6">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
@@ -279,14 +276,13 @@
                                     d="M13 10V3L4 14h7v7l9-11h-7z" />
                             </svg>
                         </div>
-                        <p class="text-[10px] font-bold text-tan uppercase tracking-widest mb-1">Status Serveur</p>
-                        <p class="text-4xl font-display font-medium text-bark italic">Parfait</p>
+                        <p class="text-[10px] font-bold text-tan uppercase tracking-widest mb-1">Total Vêtements</p>
+                        <p class="text-4xl font-display font-medium text-bark italic">
+                            {{ number_format($totalVetements ?? 0) }}</p>
                     </div>
                 </div>
 
-                <!-- Main Content Area -->
                 <div class="bg-white rounded-[3rem] shadow-sm border border-tan/10 overflow-hidden">
-                    <!-- Table Header -->
                     <div
                         class="p-8 lg:p-12 border-b border-cream flex flex-col sm:flex-row sm:items-center justify-between gap-6">
                         <div class="flex items-center gap-4">
@@ -303,7 +299,6 @@
                             </button>
                         </div>
 
-                        <!-- Search and Filter -->
                         <div class="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
                             <div class="relative w-full sm:w-64">
                                 <span class="absolute inset-y-0 left-4 flex items-center text-tan/40">
@@ -356,7 +351,7 @@
                                     <option value="inactif">Inactif</option>
                                 </select>
                                 <div class="absolute top-1/2 end-3.5 -translate-y-1/2 pointer-events-none text-tan">
-                                    <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24"
+                                    <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/xl" width="24"
                                         height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                         stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="m7 15 5 5 5-5"></path>
@@ -367,7 +362,6 @@
                         </div>
                     </div>
 
-                    <!-- Dashboard Table -->
                     <div x-show="tab === 'dashboard'" class="overflow-x-auto">
                         <table class="w-full text-left">
                             <thead class="bg-cream/20 text-tan text-[9px] font-bold uppercase tracking-[0.25em]">
@@ -419,7 +413,6 @@
                         </table>
                     </div>
 
-                    <!-- Users Table -->
                     <div x-show="tab === 'users'" class="overflow-x-auto">
                         <table class="w-full text-left">
                             <thead class="bg-cream/20 text-tan text-[9px] font-bold uppercase tracking-[0.25em]">
@@ -482,7 +475,6 @@
         </main>
     </div>
 
-    <!-- FOOTER -->
     <footer class="sd-footer">
         <div class="max-w-screen-xl mx-auto px-6 lg:px-12 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
             <div>
@@ -494,17 +486,17 @@
                 <h4 class="sd-footer-heading">Application</h4>
                 <ul class="sd-footer-links">
                     <li><a href="{{ url('/#features') }}">Fonctionnalités</a></li>
-                    <li><a href="{{ route("garde-robe") }}">Garde-robe</a></li>
-                    <li><a href="{{ route("dashboard") }}">Suggestions</a></li>
+                    <li><a href="{{ route('garde-robe') }}">Garde-robe</a></li>
+                    <li><a href="{{ route('dashboard') }}">Suggestions</a></li>
                     <li><a href="#">Notifications</a></li>
                 </ul>
             </div>
             <div>
                 <h4 class="sd-footer-heading">Compte</h4>
                 <ul class="sd-footer-links">
-                    <li><a href="{{ route("login", ["mode" => "register"]) }}">S'inscrire</a></li>
-                    <li><a href="{{ route("login", ["mode" => "login"]) }}">Se connecter</a></li>
-                    <li><a href="{{ route("profile") }}">Mon profil</a></li>
+                    <li><a href="{{ route('login', ['mode' => 'register']) }}">S'inscrire</a></li>
+                    <li><a href="{{ route('login', ['mode' => 'login']) }}">Se connecter</a></li>
+                    <li><a href="{{ route('profile') }}">Mon profil</a></li>
                     <li><a href="#">Paramètres</a></li>
                 </ul>
             </div>
@@ -524,7 +516,6 @@
         </div>
     </footer>
 
-    <!-- Modal: Add / Edit -->
     <div x-show="showModal"
         class="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-bark/40 backdrop-blur-sm" x-cloak>
         <div class="bg-white w-full max-w-md rounded-[3rem] p-10 shadow-2xl border border-tan/10"
@@ -533,7 +524,6 @@
                 x-text="isEditing ? 'Modifier' : 'Ajouter'"></h2>
 
             <div class="space-y-6">
-                <!-- Activity Fields -->
                 <template x-if="modalType === 'activity'">
                     <div class="space-y-6">
                         <div>
@@ -564,7 +554,6 @@
                     </div>
                 </template>
 
-                <!-- User Fields -->
                 <template x-if="modalType === 'user'">
                     <div class="space-y-6">
                         <div>
@@ -632,7 +621,6 @@
         </div>
     </div>
 
-    <!-- Modal: Confirm Delete -->
     <div x-show="showDeleteModal"
         class="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-bark/40 backdrop-blur-sm" x-cloak>
         <div class="bg-white w-full max-w-sm rounded-[3rem] p-10 text-center shadow-2xl border border-tan/10"
@@ -655,7 +643,6 @@
         }
     </style>
 
-    <!-- Alpine Plugins -->
     <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
 
@@ -672,7 +659,6 @@
             document.querySelectorAll('.observe-me').forEach(el => observer.observe(el));
         });
 
-        // CTA Ripple effect
         document.querySelectorAll('.sd-btn-primary').forEach(btn => {
             btn.addEventListener('click', function (e) {
                 const rect = this.getBoundingClientRect();
@@ -696,7 +682,6 @@
             });
         });
     </script>
-    <!-- Preline JS -->
     <script src="https://cdn.jsdelivr.net/npm/preline/dist/preline.js"></script>
 </body>
 
