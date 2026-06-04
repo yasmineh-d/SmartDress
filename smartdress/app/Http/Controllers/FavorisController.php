@@ -21,7 +21,8 @@ class FavorisController extends Controller
     {
         $favoris = $this->favorisService->getForUser(Auth::user());
 
-        return view('favoris.index', compact('favoris'));
+        // ✅ CORRIGÉ : pointe vers le bon fichier blade
+        return view('pages.public.favoris-web', compact('favoris'));
     }
 
     /**
@@ -31,7 +32,7 @@ class FavorisController extends Controller
     {
         $validated = $request->validate([
             'vetement_id' => 'nullable|exists:vetements,id',
-            'tenue_id'    => 'nullable|exists:tenues,id',
+            'tenue_id' => 'nullable|exists:tenues,id',
         ]);
 
         if ($this->favorisService->existsForUser(Auth::user(), $validated)) {
