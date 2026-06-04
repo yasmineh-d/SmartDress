@@ -29,6 +29,7 @@ Route::get('/login', function () {
 
 // --- Pages Utilisateur (Web) ---
 Route::middleware(['auth'])->group(function () {
+    
     Route::get('/dashboard', function () {
         $user = auth()->user();
         $hauts = $user->vetements()->where('categorie', 'hauts')->with('photos')->get();
@@ -37,7 +38,10 @@ Route::middleware(['auth'])->group(function () {
         $totalArticles = $user->vetements()->count();
         $totalFavoris = $user->favoris()->count();
 
-        return view('pages.public.dashboard-web', compact('hauts', 'bas', 'totalArticles', 'totalFavoris'));
+        // Ajout de la variable $meteo pour corriger l'erreur d'affichage
+        $meteo = "Ensoleillé"; 
+
+        return view('pages.public.dashboard-web', compact('hauts', 'bas', 'totalArticles', 'totalFavoris', 'meteo'));
     })->name('dashboard');
 
     Route::get('/garde-robe', function () {

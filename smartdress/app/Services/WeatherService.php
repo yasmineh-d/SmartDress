@@ -2,41 +2,70 @@
 
 namespace App\Services;
 
-class WeatherService
-{
-    /**
-     * Récupère la température actuelle pour une ville donnée.
-     * Note : Pour cet exemple, on simule une température selon la ville.
-     * Dans un vrai projet, on ferait un appel à l'API OpenWeather.
-     * 
-     * @param string $city
-     * @return float
-     */
-    public function getCurrentTemperature(string $city): float
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Cache;
+
+class WeatherService{
+    public function getMeteo(string $city = null, string $country = null): array
     {
-        // Simulation d'une API de météo
-        switch (strtolower($city)) {
-            case 'paris':
-                return 12.5; // Frais
-            case 'marseille':
-                return 26.0; // Chaud
-            case 'montreal':
-                return -5.0; // Très froid
-            default:
-                // Température par défaut
-                return 20.0;
-        }
+        $city    = $city    ?? config('services.openweather.city', 'Casablanca');
+        $country = $country ?? config('services.openweather.country', 'MA');
+        $apiKey  = config('services.openweather.key');
+
+        // Cache 30 minutes pour ne pas dépasser la limite gratuite
+        return Cache::remember("meteo_{$city}", 1800, function () use ($city, $country, $apiKey) {
+
+            if (!$apiKey) {
+                return $this->getDefaults($city);
+            }
+
+            $response = Http::get("https://api.openweathermap.org/data/2.5/weather", [
+                'q'     => "{$city},{$country}",
+                'appid' => $apiKey,
+                'units' => 'metric',
+                'lang'  => 'fr',
+            ]);
+
+            if ($response->successful()) {
+                $data = $response->json();
+                return [
+                    'ville'       => $data['name'],
+                    'temperature' => round($data['main']['temp']),
+                    'description' => ucfirst($data['weather'][0]['description']),
+                    'icone'       => $this->getEmoji($data['weather'][0]['main']),
+                    'humidite'    => $data['main']['humidity'],
+                    'vent'        => round($data['wind']['speed']),
+                ];
+            }
+
+            return $this->getDefaults($city);
+        });
     }
 
-    /**
-     * Détermine si le temps est considéré comme "froid" ou "chaud" pour s'habiller.
-     */
-    public function getWeatherCondition(float $temperature): string
+    private function getDefaults(string $city): array
     {
-        if ($temperature < 15) {
-            return 'Hiver';
-        }
+        return [
+            'ville'       => $city,
+            'temperature' => 24,
+            'description' => 'Ensoleillé',
+            'icone'       => '☀️',
+            'humidite'    => 50,
+            'vent'        => 10,
+        ];
+    }
 
-        return 'Été';
+    private function getEmoji(string $condition): string
+    {
+        return match($condition) {
+            'Clear'        => '☀️',
+            'Clouds'       => '⛅',
+            'Rain'         => '🌧️',
+            'Drizzle'      => '🌦️',
+            'Thunderstorm' => '⛈️',
+            'Snow'         => '❄️',
+            'Mist', 'Fog'  => '🌫️',
+            'Haze'         => '🌁',
+            default        => '🌤️',
+        };
     }
 }

@@ -88,15 +88,15 @@
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-[10px] font-bold text-tan uppercase tracking-[0.2em]">Météo locale</p>
-                        <p class="text-sm font-medium text-bark">Casablanca, MA</p>
+                        <p class="text-sm font-medium text-bark">{{ $meteo['ville'] }}, MA</p>
                     </div>
                     <div class="w-16 h-16 bg-cream flex items-center justify-center rounded-2xl shadow-inner border border-tan/10 text-4xl">
                         ⛅
                     </div>
                 </div>
                 <div class="flex items-baseline gap-2">
-                    <span class="text-5xl font-display font-semibold text-bark">24°</span>
-                    <span class="text-xl text-moss italic font-medium">Ensoleillé</span>
+                    <span class="text-5xl font-display font-semibold text-bark">{{ $meteo['temperature'] }}°</span>
+                    <span class="text-xl text-moss italic font-medium">{{ $meteo['icone'] }}</span>
                 </div>
                 <p class="text-xs text-bark/60 leading-relaxed font-light">
                     Conditions idéales pour une tenue légère et respirante aujourd'hui.

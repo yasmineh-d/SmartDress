@@ -34,5 +34,10 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
+    'openweather' => [
+    'key'     => env('OPENWEATHER_API_KEY'),
+    'city'    => env('OPENWEATHER_CITY', 'Casablanca'),
+    'country' => env('OPENWEATHER_COUNTRY', 'MA'),
+],
 
 ];
