@@ -147,7 +147,7 @@
                 <div class="md:w-1/2 bg-cream/30 relative flex items-center justify-center p-12 min-h-[400px]">
                     <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(207,187,153,0.15)_0%,transparent_70%)]"></div>
                     
-                    <div class="relative flex flex-col items-center gap-8 scale-110">
+                    <div id="outfit-preview-container" class="relative flex flex-col items-center gap-8 scale-110 opacity-0 transition-opacity duration-150">
                         <div class="w-48 h-48 bg-white rounded-[2.5rem] border-4 border-white shadow-xl flex items-center justify-center flex-col transform -rotate-3 transition-all hover:rotate-0 hover:scale-105 overflow-hidden relative" id="top-box">
                             <img id="top-img" src="" class="absolute inset-0 w-full h-full object-contain p-2 hidden">
                             <span class="text-6xl mb-3 relative z-10" id="top-icon">👕</span>
@@ -305,57 +305,110 @@
         let currentBottomId = null;
 
         // Logique IA de génération de look filtrée selon la météo et la saison
-        function generateLook() {
-            const temp = currentMeteo && currentMeteo.temperature ? currentMeteo.temperature : 22;
-            
-            // On cible automatiquement la saison selon le climat réel
-            let saisonCible = 'printemps';
-            if (temp > 25) saisonCible = 'ete';
-            else if (temp < 16) saisonCible = 'hiver';
-            else if (temp >= 16 && temp <= 21) saisonCible = 'automne';
-
-            // Filtrer les hauts et les bas contenant la saison cible dans leur tableau
-            let hautsFiltres = userHauts.filter(h => h.saison && h.saison.includes(saisonCible));
-            let basFiltres = userBas.filter(b => b.saison && b.saison.includes(saisonCible));
-
-            // Fallback s'il n'y a pas encore d'articles pour cette saison spécifique
-            if (hautsFiltres.length === 0) hautsFiltres = userHauts;
-            if (basFiltres.length === 0) basFiltres = userBas;
-
-            if (hautsFiltres.length > 0 && basFiltres.length > 0) {
-                const randomHaut = hautsFiltres[Math.floor(Math.random() * hautsFiltres.length)];
-                const randomBas = basFiltres[Math.floor(Math.random() * basFiltres.length)];
+        function generateLook(forceRandom = false) {
+            try {
+                console.log("generateLook called with forceRandom =", forceRandom);
+                // Récupération de la température PHP de Laravel directement dans le JS
+                const temp = {{ $meteo['temperature'] ?? 22 }};
+                console.log("Current temp:", temp);
                 
-                // Sauvegarde des IDs de la suggestion en cours
-                currentTopId = randomHaut.id;
-                currentBottomId = randomBas.id;
+                // Détermination de la saison cible (avec la bonne casse et accents)
+                let saisonCible = 'Printemps';
+                if (temp > 25) saisonCible = 'Été';
+                else if (temp < 16) saisonCible = 'Hiver';
+                else if (temp >= 16 && temp <= 21) saisonCible = 'Automne';
+                console.log("Target season:", saisonCible);
 
-                const titles = ["Casual Moderne", "Mix & Match", "Tenue du Jour", "Look Confort", "Élégance Simple"];
-                titleEl.textContent = titles[Math.floor(Math.random() * titles.length)];
+                // Filtrage selon la saison
+                let hautsFiltres = userHauts.filter(h => {
+                    // Supporte si saison est un tableau ou une chaîne
+                    const saison = Array.isArray(h.saison) ? h.saison.join(' ') : (h.saison || '');
+                    return saison.includes(saisonCible) || saison.includes('Toute saison');
+                });
                 
-                topName.textContent = randomHaut.nom;
-                if (randomHaut.photos && randomHaut.photos.length > 0) {
-                    topImg.src = storageUrl + "/" + randomHaut.photos[0].url;
-                    topImg.classList.remove('hidden');
-                    topIcon.classList.add('hidden');
-                } else {
-                    topImg.classList.add('hidden');
-                    topIcon.classList.remove('hidden');
+                let basFiltres = userBas.filter(b => {
+                    const saison = Array.isArray(b.saison) ? b.saison.join(' ') : (b.saison || '');
+                    return saison.includes(saisonCible) || saison.includes('Toute saison');
+                });
+                console.log("Filtered hauts count:", hautsFiltres.length);
+                console.log("Filtered bas count:", basFiltres.length);
+
+                // Fallback si aucun vêtement ne correspond à la météo
+                if (hautsFiltres.length === 0) {
+                    console.log("Fallback to all hauts");
+                    hautsFiltres = userHauts;
+                }
+                if (basFiltres.length === 0) {
+                    console.log("Fallback to all bas");
+                    basFiltres = userBas;
                 }
 
-                bottomName.textContent = randomBas.nom;
-                if (randomBas.photos && randomBas.photos.length > 0) {
-                    bottomImg.src = storageUrl + "/" + randomBas.photos[0].url;
-                    bottomImg.classList.remove('hidden');
-                    bottomIcon.classList.add('hidden');
+                if (hautsFiltres.length > 0 && basFiltres.length > 0) {
+                    let randomHaut;
+                    let randomBas;
+
+                    // Si on ne force pas le changement ET qu'un look est déjà sauvegardé
+                    if (!forceRandom && localStorage.getItem('smartdress_top_id') && localStorage.getItem('smartdress_bottom_id')) {
+                        const savedTopId = parseInt(localStorage.getItem('smartdress_top_id'));
+                        const savedBottomId = parseInt(localStorage.getItem('smartdress_bottom_id'));
+                        console.log("Loading saved outfit from localStorage:", savedTopId, savedBottomId);
+
+                        randomHaut = userHauts.find(h => h.id === savedTopId) || hautsFiltres[0];
+                        randomBas = userBas.find(b => b.id === savedBottomId) || basFiltres[0];
+                    } else {
+                        // Choix aléatoire
+                        console.log("Choosing a random outfit...");
+                        randomHaut = hautsFiltres[Math.floor(Math.random() * hautsFiltres.length)];
+                        randomBas = basFiltres[Math.floor(Math.random() * basFiltres.length)];
+
+                        // Sauvegarde pour le prochain rafraîchissement
+                        localStorage.setItem('smartdress_top_id', randomHaut.id);
+                        localStorage.setItem('smartdress_bottom_id', randomBas.id);
+                        console.log("Saved new outfit to localStorage:", randomHaut.id, randomBas.id);
+                    }
+                    
+                    // Mise à jour des variables globales pour le bouton "Porter"
+                    currentTopId = randomHaut.id;
+                    currentBottomId = randomBas.id;
+
+                    const titles = ["Casual Moderne", "Mix & Match", "Tenue du Jour", "Look Confort", "Élégance Simple"];
+                    titleEl.textContent = titles[Math.floor(Math.random() * titles.length)];
+                    
+                    topName.textContent = randomHaut.nom;
+                    if (randomHaut.photos && randomHaut.photos.length > 0) {
+                        topImg.src = storageUrl + "/" + randomHaut.photos[0].url;
+                        topImg.classList.remove('hidden');
+                        topIcon.classList.add('hidden');
+                    } else {
+                        topImg.classList.add('hidden');
+                        topIcon.classList.remove('hidden');
+                    }
+
+                    bottomName.textContent = randomBas.nom;
+                    if (randomBas.photos && randomBas.photos.length > 0) {
+                        bottomImg.src = storageUrl + "/" + randomBas.photos[0].url;
+                        bottomImg.classList.remove('hidden');
+                        bottomIcon.classList.add('hidden');
+                    } else {
+                        bottomImg.classList.add('hidden');
+                        bottomIcon.classList.remove('hidden');
+                    }
                 } else {
-                    bottomImg.classList.add('hidden');
-                    bottomIcon.classList.remove('hidden');
+                    console.log("Not enough garments to generate a look.");
+                    titleEl.textContent = "Besoin de plus de vêtements !";
+                    topName.textContent = "Ajoutez un haut";
+                    bottomName.textContent = "Ajoutez un bas";
                 }
-            } else {
-                titleEl.textContent = "Besoin de plus de vêtements !";
-                topName.textContent = "Ajoutez un haut";
-                bottomName.textContent = "Ajoutez un bas";
+                const previewContainer = document.getElementById('outfit-preview-container');
+                if (previewContainer) {
+                    previewContainer.classList.remove('opacity-0');
+                }
+            } catch (err) {
+                console.error("Error in generateLook:", err);
+                const previewContainer = document.getElementById('outfit-preview-container');
+                if (previewContainer) {
+                    previewContainer.classList.remove('opacity-0');
+                }
             }
         }
 
@@ -393,12 +446,12 @@
         refreshBtn.addEventListener('click', () => {
             refreshBtn.classList.add('opacity-50', 'pointer-events-none');
             setTimeout(() => {
-                generateLook();
+                generateLook(true); // Force un changement
                 refreshBtn.classList.remove('opacity-50', 'pointer-events-none');
             }, 600);
         });
 
-        window.addEventListener('load', generateLook);
+        generateLook(false); // Chargement immédiat sans forcer (utilise la mémoire)
 
         // Limitation stricte de cois des checkbox à 2 max
         document.querySelectorAll('.saison-checkbox').forEach(checkbox => {

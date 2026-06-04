@@ -116,7 +116,13 @@
                         @if($jour['tenues']->isEmpty())
                             <div class="flex flex-col sm:flex-row items-center justify-between gap-4 py-3">
                                 <div class="flex items-center gap-4 text-bark/50">
-                                    <span class="text-3xl">👗</span>
+                                    <svg class="w-12 h-12 text-black fill-current" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M 195 150 C 180 120 170 80 180 50 C 200 40 230 60 256 90 C 282 60 312 40 332 50 C 342 80 332 120 317 150 Z" />
+                                        <path d="M 195 150 Q 256 160 317 150 L 317 175 Q 256 185 195 175 Z" />
+                                        <path d="M 195 175 Q 256 185 317 175 C 348 240 430 360 442 420 C 448 450 400 470 256 470 C 112 470 64 450 70 420 C 82 360 164 240 195 175 Z" />
+                                        <path d="M 215 270 Q 180 350 125 435" stroke="white" stroke-width="8" stroke-linecap="round" fill="none" />
+                                        <path d="M 297 270 Q 332 350 387 435" stroke="white" stroke-width="8" stroke-linecap="round" fill="none" />
+                                    </svg>
                                     <div>
                                         <p class="text-sm font-medium">Aucune tenue planifiée</p>
                                         <p class="text-xs text-bark/40 font-light">Laissez parler votre créativité pour ce jour.</p>

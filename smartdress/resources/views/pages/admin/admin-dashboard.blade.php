@@ -254,7 +254,7 @@
                         <p class="text-[10px] font-bold text-tan uppercase tracking-widest mb-1">Total Utilisateurs</p>
                         <p class="text-4xl font-display font-medium text-bark italic" x-text="users.length"></p>
                     </div>
-
+                    
                     <div class="bg-white p-8 rounded-[2rem] border border-tan/10 shadow-sm">
                         <div class="w-12 h-12 bg-tan/10 text-tan rounded-2xl flex items-center justify-center mb-6">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
@@ -264,8 +264,7 @@
                             </svg>
                         </div>
                         <p class="text-[10px] font-bold text-tan uppercase tracking-widest mb-1">Tenues Générées</p>
-                        <p class="text-4xl font-display font-medium text-bark italic">
-                            {{ number_format($totalTenues ?? 0) }}</p>
+                        <p class="text-4xl font-display font-medium text-bark italic">{{ number_format($totalTenues ?? 0) }}</p>
                     </div>
 
                     <div class="bg-white p-8 rounded-[2rem] border border-tan/10 shadow-sm">
@@ -277,8 +276,7 @@
                             </svg>
                         </div>
                         <p class="text-[10px] font-bold text-tan uppercase tracking-widest mb-1">Total Vêtements</p>
-                        <p class="text-4xl font-display font-medium text-bark italic">
-                            {{ number_format($totalVetements ?? 0) }}</p>
+                        <p class="text-4xl font-display font-medium text-bark italic">{{ number_format($totalVetements ?? 0) }}</p>
                     </div>
                 </div>
 
@@ -351,7 +349,7 @@
                                     <option value="inactif">Inactif</option>
                                 </select>
                                 <div class="absolute top-1/2 end-3.5 -translate-y-1/2 pointer-events-none text-tan">
-                                    <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/xl" width="24"
+                                    <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24"
                                         height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                         stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="m7 15 5 5 5-5"></path>
@@ -574,7 +572,7 @@
                                     class="text-[10px] font-bold text-tan uppercase tracking-widest mb-2 block">Rôle</label>
                                 <div class="relative">
                                     <select x-model="currentUser.role"
-                                        class="relative py-4 ps-6 pe-12 flex gap-x-2 text-nowrap w-full cursor-pointer bg-cream/30 border border-tan/10 rounded-2xl text-start text-sm font-medium text-bark focus:outline-none focus:ring-2 focus:ring-moss/20 focus:border-moss transition-all appearance-none">
+                                        class="relative py-4 ps-6 py-4 pe-12 flex gap-x-2 text-nowrap w-full cursor-pointer bg-cream/30 border border-tan/10 rounded-2xl text-start text-sm font-medium text-bark focus:outline-none focus:ring-2 focus:ring-moss/20 focus:border-moss transition-all appearance-none">
                                         <option value="User">User</option>
                                         <option value="Admin">Admin</option>
                                     </select>
@@ -593,7 +591,7 @@
                                     class="text-[10px] font-bold text-tan uppercase tracking-widest mb-2 block">Statut</label>
                                 <div class="relative">
                                     <select x-model="currentUser.status"
-                                        class="relative py-4 ps-6 pe-12 flex gap-x-2 text-nowrap w-full cursor-pointer bg-cream/30 border border-tan/10 rounded-2xl text-start text-sm font-medium text-bark focus:outline-none focus:ring-2 focus:ring-moss/20 focus:border-moss transition-all appearance-none">
+                                        class="relative py-4 ps-6 py-4 pe-12 flex gap-x-2 text-nowrap w-full cursor-pointer bg-cream/30 border border-tan/10 rounded-2xl text-start text-sm font-medium text-bark focus:outline-none focus:ring-2 focus:ring-moss/20 focus:border-moss transition-all appearance-none">
                                         <option value="Actif">Actif</option>
                                         <option value="Inactif">Inactif</option>
                                     </select>
