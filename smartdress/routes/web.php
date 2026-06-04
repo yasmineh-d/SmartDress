@@ -73,6 +73,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/changer-mot-de-passe', function () {
         return view('pages.public.change-password-web');
     })->name('password.change');
+
+    // --- Resources (API/CRUD) ---
+    Route::resource('vetements', VetementController::class);
+    Route::resource('tenues', TenueController::class);
+    Route::resource('favoris-api', FavorisController::class);
 });
 
 
@@ -83,12 +88,6 @@ Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard')
 // --- Authentification (Logique) ---
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-
-// --- Resources (API/CRUD) ---
-Route::resource('vetements', VetementController::class);
-Route::resource('tenues', TenueController::class);
-Route::resource('favoris-api', FavorisController::class);
 
 // --- Compatibilité Mobiles ---
 Route::get('/mobile/dashboard', function () { return view('pages.public.dashboard_mobile'); })->name('mobile.dashboard');

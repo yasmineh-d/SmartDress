@@ -78,22 +78,26 @@
                     <button id="btn-cat-hauts" onclick="setSidebarCategory('hauts')"
                         class="sidebar-cat-btn flex items-center justify-between px-4 py-3 text-bark hover:bg-cream/30 rounded-xl text-sm font-medium transition-colors">
                         <span>Hauts</span>
-                        <span class="text-tan tracking-wider">{{ $vetements->filter(fn($v) => strtolower($v->categorie) === 'hauts')->count() }}</span>
+                        <span
+                            class="text-tan tracking-wider">{{ $vetements->filter(fn($v) => strtolower($v->categorie) === 'hauts')->count() }}</span>
                     </button>
                     <button id="btn-cat-bas" onclick="setSidebarCategory('bas')"
                         class="sidebar-cat-btn flex items-center justify-between px-4 py-3 text-bark hover:bg-cream/30 rounded-xl text-sm font-medium transition-colors">
                         <span>Bas</span>
-                        <span class="text-tan tracking-wider">{{ $vetements->filter(fn($v) => strtolower($v->categorie) === 'bas')->count() }}</span>
+                        <span
+                            class="text-tan tracking-wider">{{ $vetements->filter(fn($v) => strtolower($v->categorie) === 'bas')->count() }}</span>
                     </button>
                     <button id="btn-cat-chaussures" onclick="setSidebarCategory('chaussures')"
                         class="sidebar-cat-btn flex items-center justify-between px-4 py-3 text-bark hover:bg-cream/30 rounded-xl text-sm font-medium transition-colors">
                         <span>Chaussures</span>
-                        <span class="text-tan tracking-wider">{{ $vetements->filter(fn($v) => strtolower($v->categorie) === 'chaussures')->count() }}</span>
+                        <span
+                            class="text-tan tracking-wider">{{ $vetements->filter(fn($v) => strtolower($v->categorie) === 'chaussures')->count() }}</span>
                     </button>
                     <button id="btn-cat-accessoires" onclick="setSidebarCategory('accessoires')"
                         class="sidebar-cat-btn flex items-center justify-between px-4 py-3 text-bark hover:bg-cream/30 rounded-xl text-sm font-medium transition-colors">
                         <span>Accessoires</span>
-                        <span class="text-tan tracking-wider">{{ $vetements->filter(fn($v) => strtolower($v->categorie) === 'accessoires')->count() }}</span>
+                        <span
+                            class="text-tan tracking-wider">{{ $vetements->filter(fn($v) => strtolower($v->categorie) === 'accessoires')->count() }}</span>
                     </button>
                 </div>
             </div>
@@ -130,7 +134,8 @@
                     <div class="space-y-1">
                         <h2 class="text-4xl font-display font-medium text-bark italic">Ma <span
                                 class="text-moss">Garde-Robe</span></h2>
-                        <p class="text-tan text-xs font-medium tracking-wide">Affichage de <span id="item-count">42</span> articles</p>
+                        <p class="text-tan text-xs font-medium tracking-wide">Affichage de <span
+                                id="item-count">42</span> articles</p>
                     </div>
 
                     <div class="flex flex-col sm:flex-row items-center gap-4 w-full md:w-auto">
@@ -165,7 +170,9 @@
                             </select>
 
                             <div class="absolute top-1/2 end-3 -translate-y-1/2 pointer-events-none">
-                                <svg class="shrink-0 size-3.5 text-tan" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <svg class="shrink-0 size-3.5 text-tan" xmlns="http://www.w3.org/2000/svg" width="24"
+                                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
                                     <path d="m7 15 5 5 5-5"></path>
                                     <path d="m7 9 5-5 5 5"></path>
                                 </svg>
@@ -184,13 +191,11 @@
                         <div data-category="{{ $category }}"
                             class="clothing-card group relative bg-white rounded-[2.5rem] border border-tan/10 p-3 shadow-xl shadow-bark/5 hover:-translate-y-2 transition-all duration-300">
 
-                            <div class="aspect-[4/5] bg-cream/30 rounded-[2rem] flex items-center justify-center text-6xl relative overflow-hidden transition-colors group-hover:bg-cream/50">
+                            <div
+                                class="aspect-[4/5] bg-cream/30 rounded-[2rem] flex items-center justify-center text-6xl relative overflow-hidden transition-colors group-hover:bg-cream/50">
                                 @if ($photo)
-                                    <img
-                                        src="{{ asset('storage/' . $photo->url) }}"
-                                        alt="{{ $vetement->nom }}"
-                                        class="w-full h-full object-contain p-2 zoom-img transition-transform duration-500"
-                                    >
+                                    <img src="{{ asset('storage/' . $photo->url) }}" alt="{{ $vetement->nom }}"
+                                        class="w-full h-full object-contain p-2 zoom-img transition-transform duration-500">
                                 @else
                                     <span class="zoom-img transition-transform duration-500">
                                         {{ $category === 'hauts' ? '👕' : ($category === 'bas' ? '👖' : ($category === 'chaussures' ? '👟' : '🧥')) }}
@@ -202,24 +207,38 @@
                                     $favoriRecord = $isFavorited ? auth()->user()->favoris()->where('vetement_id', $vetement->id)->first() : null;
                                 @endphp
                                 <div class="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity"
-                                     x-data="favoriteToggle({{ $isFavorited ? 'true' : 'false' }}, '{{ $isFavorited ? route('favoris-api.destroy', $favoriRecord->id) : route('favoris-api.store') }}', {{ $vetement->id }})">
-                                    <button @click="toggle" type="button" class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center shadow-sm transition-colors" :class="isFav ? 'text-red-500' : 'text-tan hover:text-red-500'" title="Ajouter/Retirer des favoris">
-                                        <svg class="w-4 h-4 transition-colors" :class="isFav ? 'text-red-500' : ''" :fill="isFav ? 'currentColor' : 'none'" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                    x-data="favoriteToggle({{ $isFavorited ? 'true' : 'false' }}, '{{ $isFavorited ? route('favoris-api.destroy', $favoriRecord->id) : route('favoris-api.store') }}', {{ $vetement->id }})">
+                                    <button @click="toggle" type="button"
+                                        class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center shadow-sm transition-colors"
+                                        :class="isFav ? 'text-red-500' : 'text-tan hover:text-red-500'"
+                                        title="Ajouter/Retirer des favoris">
+                                        <svg class="w-4 h-4 transition-colors" :class="isFav ? 'text-red-500' : ''"
+                                            :fill="isFav ? 'currentColor' : 'none'" viewBox="0 0 24 24"
+                                            stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                                         </svg>
                                     </button>
-                                    <button class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan hover:text-bark shadow-sm" title="Voir détails">
+                                    <button
+                                        class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan hover:text-bark shadow-sm"
+                                        title="Voir détails">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                            <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                            <path
+                                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                                         </svg>
                                     </button>
-                                    <form action="{{ route('vetements.destroy', $vetement->id) }}" method="POST" class="m-0 p-0" onsubmit="return confirm('Voulez-vous vraiment supprimer ce vêtement ?');">
+                                    <form action="{{ route('vetements.destroy', $vetement->id) }}" method="POST"
+                                        class="m-0 p-0"
+                                        onsubmit="return confirm('Voulez-vous vraiment supprimer ce vêtement ?');">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan hover:text-red-500 hover:bg-red-50 shadow-sm transition-colors" title="Supprimer">
+                                        <button type="submit"
+                                            class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan hover:text-red-500 hover:bg-red-50 shadow-sm transition-colors"
+                                            title="Supprimer">
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                             </svg>
                                         </button>
                                     </form>
@@ -243,20 +262,32 @@
                 <!-- Pagination -->
                 <div class="flex items-center justify-center pt-16 pb-12 mt-12 border-t border-tan/10 relative z-20">
                     <nav class="flex items-center gap-2" aria-label="Pagination">
-                        <button type="button" class="min-w-[40px] flex justify-center items-center text-tan hover:bg-cream/50 p-2.5 text-sm rounded-xl disabled:opacity-50 disabled:pointer-events-none transition-all" disabled>
-                            <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <button type="button"
+                            class="min-w-[40px] flex justify-center items-center text-tan hover:bg-cream/50 p-2.5 text-sm rounded-xl disabled:opacity-50 disabled:pointer-events-none transition-all"
+                            disabled>
+                            <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
                                 <path d="m15 18-6-6 6-6"></path>
                             </svg>
                             <span class="sr-only">Précédent</span>
                         </button>
-                        <button type="button" class="min-w-[40px] flex justify-center items-center bg-moss text-white py-2.5 text-sm font-bold rounded-xl shadow-lg shadow-moss/20" aria-current="page">1</button>
-                        <button type="button" class="min-w-[40px] flex justify-center items-center text-bark hover:bg-cream/50 py-2.5 text-sm font-medium rounded-xl transition-all">2</button>
-                        <button type="button" class="min-w-[40px] flex justify-center items-center text-bark hover:bg-cream/50 py-2.5 text-sm font-medium rounded-xl transition-all">3</button>
+                        <button type="button"
+                            class="min-w-[40px] flex justify-center items-center bg-moss text-white py-2.5 text-sm font-bold rounded-xl shadow-lg shadow-moss/20"
+                            aria-current="page">1</button>
+                        <button type="button"
+                            class="min-w-[40px] flex justify-center items-center text-bark hover:bg-cream/50 py-2.5 text-sm font-medium rounded-xl transition-all">2</button>
+                        <button type="button"
+                            class="min-w-[40px] flex justify-center items-center text-bark hover:bg-cream/50 py-2.5 text-sm font-medium rounded-xl transition-all">3</button>
                         <div class="px-2 text-tan text-xs font-bold tracking-widest">...</div>
-                        <button type="button" class="min-w-[40px] flex justify-center items-center text-bark hover:bg-cream/50 py-2.5 text-sm font-medium rounded-xl transition-all">12</button>
-                        <button type="button" class="min-w-[40px] flex justify-center items-center text-tan hover:bg-cream/50 p-2.5 text-sm rounded-xl transition-all">
+                        <button type="button"
+                            class="min-w-[40px] flex justify-center items-center text-bark hover:bg-cream/50 py-2.5 text-sm font-medium rounded-xl transition-all">12</button>
+                        <button type="button"
+                            class="min-w-[40px] flex justify-center items-center text-tan hover:bg-cream/50 p-2.5 text-sm rounded-xl transition-all">
                             <span class="sr-only">Suivant</span>
-                            <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
                                 <path d="m9 18 6-6-6-6"></path>
                             </svg>
                         </button>
@@ -271,7 +302,8 @@
         <div class="max-w-screen-xl mx-auto px-6 lg:px-12 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
             <div>
                 <a href="{{ url("/") }}" class="sd-logo sd-logo--light">Smart<span>Dress</span></a>
-                <p class="sd-footer-tag">Votre garde-robe digitale intelligente. Suggestions de tenues basées sur la météo et vos préférences.</p>
+                <p class="sd-footer-tag">Votre garde-robe digitale intelligente. Suggestions de tenues basées sur la
+                    météo et vos préférences.</p>
             </div>
             <div>
                 <h4 class="sd-footer-heading">Application</h4>
@@ -307,47 +339,61 @@
     </footer>
 
     <!-- Floating Action Button (+) -->
-    <button id="add-item-btn" class="fixed bottom-8 right-8 w-16 h-16 bg-moss text-white rounded-full shadow-2xl flex items-center justify-center hover:bg-bark hover:scale-110 active:scale-95 transition-all z-40 group">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 transition-transform group-hover:rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <button id="add-item-btn"
+        class="fixed bottom-8 right-8 w-16 h-16 bg-moss text-white rounded-full shadow-2xl flex items-center justify-center hover:bg-bark hover:scale-110 active:scale-95 transition-all z-40 group">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 transition-transform group-hover:rotate-90" fill="none"
+            viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4" />
         </svg>
     </button>
 
     <!-- Overlay / Backdrop -->
-    <div id="modal-overlay" class="fixed inset-0 bg-bark/60 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-300"></div>
+    <div id="modal-overlay"
+        class="fixed inset-0 bg-bark/60 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-300"></div>
 
     <!-- Modal : Ajouter un vêtement -->
-    <div id="modal-add" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-[3rem] shadow-2xl z-[60] hidden opacity-0 scale-95 transition-all duration-300 w-full max-w-xl p-12">
+    <div id="modal-add"
+        class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-[3rem] shadow-2xl z-[60] hidden opacity-0 scale-95 transition-all duration-300 w-full max-w-xl p-12">
         <div class="flex items-center justify-between mb-10">
             <div class="space-y-1">
-                <h2 class="text-3xl font-display font-medium text-bark italic">Ajouter au <span class="text-moss">Dressing</span></h2>
+                <h2 class="text-3xl font-display font-medium text-bark italic">Ajouter au <span
+                        class="text-moss">Dressing</span></h2>
                 <p class="text-tan text-xs font-medium uppercase tracking-widest">Nouvel article</p>
             </div>
-            <button onclick="closeModal('modal-add')" class="w-12 h-12 flex items-center justify-center bg-cream/50 rounded-2xl text-tan hover:text-bark hover:bg-cream transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <button onclick="closeModal('modal-add')"
+                class="w-12 h-12 flex items-center justify-center bg-cream/50 rounded-2xl text-tan hover:text-bark hover:bg-cream transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </button>
         </div>
 
-        <form action="{{ route('vetements.store') }}" method="POST" enctype="multipart/form-data" class="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <form action="{{ route('vetements.store') }}" method="POST" enctype="multipart/form-data"
+            class="grid grid-cols-1 md:grid-cols-2 gap-10">
             @csrf
             <!-- Upload Zone -->
             <div class="space-y-4">
                 <input type="file" name="photo" id="item-photo-input" class="hidden" accept="image/*" required>
-                <div id="upload-zone" onclick="document.getElementById('item-photo-input').click()" 
+                <div id="upload-zone" onclick="document.getElementById('item-photo-input').click()"
                     class="aspect-square bg-cream/20 border-2 border-dashed border-tan/20 rounded-[2.5rem] flex flex-col items-center justify-center text-tan hover:bg-cream/40 transition-all cursor-pointer group overflow-hidden relative">
                     <div id="upload-placeholder" class="flex flex-col items-center justify-center">
-                        <div class="w-20 h-20 bg-white rounded-3xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-moss" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <div
+                            class="w-20 h-20 bg-white rounded-3xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-moss" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
                             </svg>
                         </div>
                         <span class="text-xs font-bold uppercase tracking-widest">Prendre une photo</span>
-                        <p class="text-[9px] text-tan/60 mt-2 px-6 text-center">Glissez une image ou cliquez pour parcourir</p>
+                        <p class="text-[9px] text-tan/60 mt-2 px-6 text-center">Glissez une image ou cliquez pour
+                            parcourir</p>
                     </div>
-                    <img id="item-photo-preview" class="absolute inset-0 w-full h-full object-cover hidden" alt="Preview">
+                    <img id="item-photo-preview" class="absolute inset-0 w-full h-full object-cover hidden"
+                        alt="Preview">
                 </div>
             </div>
 
@@ -355,8 +401,10 @@
             <div class="flex flex-col justify-between py-2">
                 <div class="space-y-6">
                     <div class="space-y-1.5">
-                        <label class="px-2 text-[10px] font-bold text-tan uppercase tracking-widest">Nom de l'article</label>
-                        <input type="text" name="nom" required placeholder="Ex: Veste en cuir vintage" class="w-full px-5 py-4 bg-white border border-tan/10 rounded-2xl focus:border-moss outline-none transition-all font-medium placeholder:text-tan/30 text-sm">
+                        <label class="px-2 text-[10px] font-bold text-tan uppercase tracking-widest">Nom de
+                            l'article</label>
+                        <input type="text" name="nom" required placeholder="Ex: Veste en cuir vintage"
+                            class="w-full px-5 py-4 bg-white border border-tan/10 rounded-2xl focus:border-moss outline-none transition-all font-medium placeholder:text-tan/30 text-sm">
                     </div>
 
                     <div class="space-y-1.5 relative">
@@ -376,12 +424,18 @@
                             <option value="accessoires">Accessoires</option>
                         </select>
                         <div class="absolute top-[2.4rem] end-4 pointer-events-none">
-                            <svg class="shrink-0 size-4 text-tan/60" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m7 15 5 5 5-5"></path><path d="m7 9 5-5 5 5"></path></svg>
+                            <svg class="shrink-0 size-4 text-tan/60" xmlns="http://www.w3.org/2000/svg" width="24"
+                                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m7 15 5 5 5-5"></path>
+                                <path d="m7 9 5-5 5 5"></path>
+                            </svg>
                         </div>
                     </div>
                 </div>
 
-                <button type="submit" class="w-full py-5 bg-moss text-white rounded-full text-[10px] font-bold uppercase tracking-[0.2em] shadow-xl shadow-moss/20 hover:bg-bark transition-all mt-8">
+                <button type="submit"
+                    class="w-full py-5 bg-moss text-white rounded-full text-[10px] font-bold uppercase tracking-[0.2em] shadow-xl shadow-moss/20 hover:bg-bark transition-all mt-8">
                     Ajouter au dressing
                 </button>
             </div>
@@ -427,16 +481,16 @@
         function filterItems() {
             const query = searchInput.value.toLowerCase();
             const selectVal = filterSelect.value.toLowerCase();
-            
+
             let visibleCount = 0;
             cards.forEach(card => {
                 const title = card.querySelector('h4').textContent.toLowerCase();
                 const desc = card.querySelector('p').textContent.toLowerCase();
                 const category = card.dataset.category || '';
-                
+
                 const matchSearch = title.includes(query) || desc.includes(query);
                 const matchSelect = selectVal === 'all' || category === selectVal;
-                
+
                 const isVisible = matchSearch && matchSelect;
                 card.classList.toggle('hidden', !isVisible);
                 if (isVisible) visibleCount++;
@@ -465,12 +519,12 @@
                 vetementId: vetementId,
                 async toggle() {
                     this.isFav = !this.isFav;
-                    
+
                     try {
                         const method = this.isFav ? 'POST' : 'DELETE';
                         const body = this.isFav ? JSON.stringify({ vetement_id: this.vetementId }) : null;
                         const targetUrl = this.isFav ? '{{ route('favoris-api.store') }}' : this.url;
-                        
+
                         const response = await fetch(targetUrl, {
                             method: method,
                             headers: {
@@ -480,9 +534,9 @@
                             },
                             body: body
                         });
-                        
+
                         if (!response.ok) throw new Error('Network error');
-                        
+
                         const data = await response.json();
                         if (this.isFav && data.id) {
                             this.url = '/favoris-api/' + data.id;
@@ -530,11 +584,11 @@
         const uploadPlaceholder = document.getElementById('upload-placeholder');
 
         if (photoInput) {
-            photoInput.addEventListener('change', function(e) {
+            photoInput.addEventListener('change', function (e) {
                 const file = e.target.files[0];
                 if (file) {
                     const reader = new FileReader();
-                    reader.onload = function(e) {
+                    reader.onload = function (e) {
                         photoPreview.src = e.target.result;
                         photoPreview.classList.remove('hidden');
                         uploadPlaceholder.classList.add('hidden');
@@ -564,7 +618,7 @@
             const newCard = document.createElement('div');
             newCard.className = 'clothing-card group bg-white p-3 rounded-[2.5rem] border border-tan/10 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500 cursor-pointer relative overflow-hidden';
             newCard.dataset.category = category;
-            
+
             newCard.innerHTML = `
                 <div class="aspect-[4/5] bg-cream/40 rounded-[2rem] overflow-hidden relative mb-4">
                     <img src="${imgSrc}" alt="${name}" class="w-full h-full object-cover zoom-img transition-transform duration-700">
@@ -586,7 +640,7 @@
 
             // Simulation addition to grid
             clothingGrid.prepend(newCard);
-            
+
             // Animation
             newCard.style.opacity = '0';
             newCard.style.transform = 'translateY(20px)';
@@ -606,7 +660,7 @@
             photoPreview.classList.add('hidden');
             document.getElementById('upload-placeholder').classList.remove('hidden');
             closeModal('modal-add');
-            
+
             // Re-apply filters if any
             filterItems();
         }
@@ -617,7 +671,8 @@
     @if ($errors->any() || session('success'))
         <div class="fixed bottom-5 right-5 z-[100] flex flex-col gap-3 max-w-sm pointer-events-none">
             @if (session('success'))
-                <div class="pointer-events-auto p-4 rounded-3xl bg-moss/95 backdrop-blur-md text-white shadow-2xl border border-white/20 flex items-center gap-3 animate-bounce">
+                <div
+                    class="pointer-events-auto p-4 rounded-3xl bg-moss/95 backdrop-blur-md text-white shadow-2xl border border-white/20 flex items-center gap-3 animate-bounce">
                     <span class="text-xl">✨</span>
                     <div>
                         <h5 class="font-bold text-xs uppercase tracking-wider text-cream">Succès</h5>
@@ -627,7 +682,8 @@
             @endif
 
             @if ($errors->any())
-                <div class="pointer-events-auto p-4 rounded-3xl bg-bark/95 backdrop-blur-md text-white shadow-2xl border border-red-500/20 flex items-start gap-3">
+                <div
+                    class="pointer-events-auto p-4 rounded-3xl bg-bark/95 backdrop-blur-md text-white shadow-2xl border border-red-500/20 flex items-start gap-3">
                     <span class="text-xl text-red-400">⚠️</span>
                     <div>
                         <h5 class="font-bold text-xs uppercase tracking-wider text-red-300">Erreur</h5>

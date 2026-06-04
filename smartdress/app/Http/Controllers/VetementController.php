@@ -12,7 +12,6 @@ class VetementController extends Controller
     public function __construct(
         private readonly VetementService $vetementService
     ) {
-        $this->middleware('auth');
     }
 
     /**

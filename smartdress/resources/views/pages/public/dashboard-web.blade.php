@@ -200,7 +200,6 @@
         </section>
     </main>
 
-    
     <!-- Floating Action Button (+) -->
     <button id="add-item-btn" class="fixed bottom-8 right-8 w-16 h-16 bg-moss text-white rounded-full shadow-2xl flex items-center justify-center hover:bg-bark hover:scale-110 active:scale-95 transition-all z-40 group">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 transition-transform group-hover:rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -225,10 +224,14 @@
             </button>
         </div>
 
-        <form class="grid grid-cols-1 md:grid-cols-2 gap-10" onsubmit="return false;">
+        {{-- ✅ FORMULAIRE CORRIGÉ : action, method, enctype, @csrf --}}
+        <form id="form-add-vetement" action="{{ route('vetements.store') }}" method="POST" enctype="multipart/form-data" class="grid grid-cols-1 md:grid-cols-2 gap-10">
+            @csrf
+
             <!-- Upload Zone -->
             <div class="space-y-4">
-                <input type="file" id="item-photo-input" class="hidden" accept="image/*">
+                {{-- ✅ name="photo" ajouté --}}
+                <input type="file" id="item-photo-input" name="photo" class="hidden" accept="image/*">
                 <div id="upload-zone" onclick="document.getElementById('item-photo-input').click()" 
                     class="aspect-square bg-cream/20 border-2 border-dashed border-tan/20 rounded-[2.5rem] flex flex-col items-center justify-center text-tan hover:bg-cream/40 transition-all cursor-pointer group overflow-hidden relative">
                     <div id="upload-placeholder" class="flex flex-col items-center justify-center">
@@ -250,12 +253,14 @@
                 <div class="space-y-6">
                     <div class="space-y-1.5">
                         <label class="px-2 text-[10px] font-bold text-tan uppercase tracking-widest">Nom de l'article</label>
-                        <input type="text" placeholder="Ex: Veste en cuir vintage" class="w-full px-5 py-4 bg-white border border-tan/10 rounded-2xl focus:border-moss outline-none transition-all font-medium placeholder:text-tan/30 text-sm">
+                        {{-- ✅ name="nom" ajouté --}}
+                        <input type="text" name="nom" placeholder="Ex: Veste en cuir vintage" class="w-full px-5 py-4 bg-white border border-tan/10 rounded-2xl focus:border-moss outline-none transition-all font-medium placeholder:text-tan/30 text-sm">
                     </div>
 
                     <div class="space-y-1.5 relative">
                         <label class="px-2 text-[10px] font-bold text-tan uppercase tracking-widest">Catégorie</label>
-                        <select data-hs-select='{
+                        {{-- ✅ name="categorie" ajouté --}}
+                        <select name="categorie" data-hs-select='{
                             "placeholder": "Choisir...",
                             "toggleTag": "<button type=\"button\" aria-expanded=\"false\"></button>",
                             "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-4 ps-5 pe-12 flex gap-x-2 text-nowrap w-full cursor-pointer bg-white border border-tan/10 rounded-2xl text-start text-sm font-medium focus:ring-1 focus:ring-moss appearance-none",
@@ -275,6 +280,7 @@
                     </div>
                 </div>
 
+                {{-- ✅ Bouton soumet le vrai formulaire --}}
                 <button id="save-item-btn" type="button" onclick="addItemToGrid()" class="w-full py-5 bg-moss text-white rounded-full text-[10px] font-bold uppercase tracking-[0.2em] shadow-xl shadow-moss/20 hover:bg-bark transition-all mt-8">
                     Ajouter au dressing
                 </button>
@@ -334,17 +340,15 @@
 
         refreshBtn.addEventListener('click', () => {
             refreshBtn.classList.add('opacity-50', 'pointer-events-none');
-            
             setTimeout(() => {
                 generateLook();
                 refreshBtn.classList.remove('opacity-50', 'pointer-events-none');
             }, 600);
         });
 
-        // Generate first look on load
         window.addEventListener('load', generateLook);
 
-        // ── Modal logic Web ──
+        // ── Modal logic ──
         const modalOverlay = document.getElementById('modal-overlay');
         const addItemBtn = document.getElementById('add-item-btn');
 
@@ -377,7 +381,7 @@
             modalOverlay.addEventListener('click', () => closeModal('modal-add'));
         }
 
-        // ── Photo Upload Preview Logic ──
+        // ── Photo Upload Preview ──
         const photoInput = document.getElementById('item-photo-input');
         const photoPreview = document.getElementById('item-photo-preview');
         const uploadPlaceholder = document.getElementById('upload-placeholder');
@@ -397,33 +401,31 @@
             });
         }
 
-        // ── Dynamic Add Item Logic ──
+        // ✅ FONCTION CORRIGÉE — soumet le vrai formulaire Laravel
         function addItemToGrid() {
-            const nameInput = document.querySelector('#modal-add input[type="text"]');
-            const categorySelect = document.querySelector('#modal-add select');
-            const photoPreview = document.getElementById('item-photo-preview');
+            const nameInput = document.querySelector('#modal-add input[name="nom"]');
+            const categorySelect = document.querySelector('#modal-add select[name="categorie"]');
+            const photoInput = document.getElementById('item-photo-input');
 
-            if (!nameInput.value || !categorySelect.value) {
-                alert("Veuillez remplir le nom et la catégorie.");
+            if (!nameInput.value) {
+                alert("Veuillez remplir le nom de l'article.");
+                return;
+            }
+            if (!categorySelect.value) {
+                alert("Veuillez choisir une catégorie.");
+                return;
+            }
+            if (!photoInput.files || photoInput.files.length === 0) {
+                alert("Veuillez ajouter une photo.");
                 return;
             }
 
-            // Since dashboard-web doesn't have a grid of items (it has outfits),
-            // we will simulate the "success" and maybe show a toast or a visual hint.
-            // For now, let's just show an alert and follow the same reset logic for consistency.
-            
-            alert(`Article "${nameInput.value}" ajouté avec succès à la catégorie ${categorySelect.value} !`);
-
-            // Reset and close
-            nameInput.value = '';
-            HSSelect.getInstance('#modal-add select', true).element.setValue('');
-            photoPreview.src = '';
-            photoPreview.classList.add('hidden');
-            document.getElementById('upload-placeholder').classList.remove('hidden');
-            closeModal('modal-add');
+            // Soumettre le formulaire vers Laravel
+            document.getElementById('form-add-vetement').submit();
         }
     </script>
-    <!-- Premium Floating Toast Notifications -->
+
+    <!-- Toast Notifications -->
     @if ($errors->any() || session('success'))
         <div class="fixed bottom-5 right-5 z-[100] flex flex-col gap-3 max-w-sm pointer-events-none">
             @if (session('success'))
@@ -451,7 +453,7 @@
             @endif
         </div>
     @endif
+
 </body>
 
 </html>
-
