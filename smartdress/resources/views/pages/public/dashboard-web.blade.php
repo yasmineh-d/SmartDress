@@ -30,7 +30,6 @@
     </script>
     <link rel="stylesheet" href="../../assets/css/charte.css">
     <link rel="stylesheet" href="../../assets/css/style-landing.css">
-    <!-- Preline UI -->
     <script src="https://cdn.jsdelivr.net/npm/preline/dist/preline.js"></script>
     <style>
         .clothing-card:hover .zoom-effect { transform: scale(1.1); }
@@ -39,7 +38,6 @@
 
 <body class="bg-offwhite font-body text-bark min-h-screen flex flex-col">
 
-    <!-- Header (Style Home) -->
     <header id="navbar" class="sd-navbar scrolled !fixed !bg-white/90">
         <div class="max-w-screen-xl mx-auto px-6 lg:px-12 flex items-center h-full gap-12">
             <a href="{{ url("/") }}" class="sd-logo">Smart<span>Dress</span></a>
@@ -77,13 +75,9 @@
         </div>
     </header>
 
-    <div class="h-20"></div> <!-- Spacer for fixed navbar -->
-
-    <main class="flex-1 max-w-7xl w-full mx-auto p-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+    <div class="h-20"></div> <main class="flex-1 max-w-7xl w-full mx-auto p-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
         
-        <!-- Left Column: Metrics & Quick Actions (Col-4) -->
         <aside class="lg:col-span-4 space-y-8">
-            <!-- Weather Widget -->
             <div class="bg-white p-8 rounded-[2.5rem] shadow-xl shadow-bark/5 border border-tan/10 space-y-6">
                 <div class="flex items-center justify-between">
                     <div>
@@ -103,7 +97,6 @@
                 </p>
             </div>
 
-            <!-- Stats / Info -->
             <div class="grid grid-cols-2 gap-4">
                 <div class="bg-bark p-6 rounded-[2rem] text-white space-y-2">
                     <p class="text-[9px] font-bold opacity-60 uppercase tracking-widest">Articles</p>
@@ -115,7 +108,6 @@
                 </div>
             </div>
 
-            <!-- Quick Access -->
             <div class="space-y-4">
                 <h3 class="px-4 text-[10px] font-bold text-tan uppercase tracking-widest">Navigation Rapide</h3>
                 <div class="grid grid-cols-1 gap-2">
@@ -128,7 +120,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
                         </svg>
                     </a>
-                    <a href="#" class="flex items-center justify-between p-4 bg-white rounded-2xl border border-tan/10 hover:border-moss transition-all group">
+                    <a href="{{ route('planning.index') }}" class="flex items-center justify-between p-4 bg-white rounded-2xl border border-tan/10 hover:border-moss transition-all group">
                         <div class="flex items-center gap-4">
                             <span class="text-xl">📅</span>
                             <span class="text-sm font-medium text-bark">Planning de la semaine</span>
@@ -150,10 +142,8 @@
             </div>
         </aside>
 
-        <!-- Right Column: Suggestion (Col-8) -->
         <section class="lg:col-span-8">
             <div class="bg-white rounded-[3rem] shadow-2xl shadow-bark/5 overflow-hidden border border-tan/10 flex flex-col md:flex-row h-full">
-                <!-- Visual Part -->
                 <div class="md:w-1/2 bg-cream/30 relative flex items-center justify-center p-12 min-h-[400px]">
                     <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(207,187,153,0.15)_0%,transparent_70%)]"></div>
                     
@@ -175,7 +165,6 @@
                     </div>
                 </div>
 
-                <!-- Info Part -->
                 <div class="md:w-1/2 p-12 flex flex-col justify-center space-y-10">
                     <div class="space-y-4">
                         <h2 class="text-5xl font-display font-medium text-bark leading-tight italic" id="outfit-title">Casual Moderne</h2>
@@ -185,7 +174,7 @@
                     </div>
 
                     <div class="space-y-4 pt-4">
-                        <button class="w-full py-6 bg-moss text-white font-body font-bold text-xs tracking-[0.25em] uppercase rounded-full shadow-2xl shadow-moss/30 hover:bg-bark hover:translate-y-[-4px] transition-all transform duration-300">
+                        <button id="btn-porter-ensemble" type="button" class="w-full py-6 bg-moss text-white font-body font-bold text-xs tracking-[0.25em] uppercase rounded-full shadow-2xl shadow-moss/30 hover:bg-bark hover:translate-y-[-4px] transition-all transform duration-300">
                             Porter cet ensemble
                         </button>
                         <button id="refresh-outfit" class="w-full py-5 text-tan hover:text-bark font-body font-bold uppercase tracking-[0.2em] rounded-2xl hover:bg-cream/50 transition-all flex items-center justify-center gap-3 group">
@@ -200,17 +189,14 @@
         </section>
     </main>
 
-    <!-- Floating Action Button (+) -->
     <button id="add-item-btn" class="fixed bottom-8 right-8 w-16 h-16 bg-moss text-white rounded-full shadow-2xl flex items-center justify-center hover:bg-bark hover:scale-110 active:scale-95 transition-all z-40 group">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 transition-transform group-hover:rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4" />
         </svg>
     </button>
 
-    <!-- Overlay / Backdrop -->
     <div id="modal-overlay" class="fixed inset-0 bg-bark/60 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-300"></div>
 
-    <!-- Modal : Ajouter un vêtement -->
     <div id="modal-add" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-[3rem] shadow-2xl z-[60] hidden opacity-0 scale-95 transition-all duration-300 w-full max-w-xl p-12">
         <div class="flex items-center justify-between mb-10">
             <div class="space-y-1">
@@ -227,7 +213,6 @@
         <form id="form-add-vetement" action="{{ route('vetements.store') }}" method="POST" enctype="multipart/form-data" class="grid grid-cols-1 md:grid-cols-2 gap-10">
             @csrf
 
-            <!-- Upload Zone -->
             <div class="space-y-4">
                 <input type="file" id="item-photo-input" name="photo" class="hidden" accept="image/*">
                 <div id="upload-zone" onclick="document.getElementById('item-photo-input').click()" 
@@ -246,7 +231,6 @@
                 </div>
             </div>
 
-            <!-- Fields Zone -->
             <div class="flex flex-col justify-between py-2 space-y-6">
                 <div class="space-y-4">
                     <div class="space-y-1.5">
@@ -268,7 +252,6 @@
                         </div>
                     </div>
 
-                    <!-- Sélections des Saisons (Max 2 Choix) -->
                     <div class="space-y-2">
                         <label class="px-2 text-[10px] font-bold text-tan uppercase tracking-widest block">Saisons (Max 2)</label>
                         <div class="grid grid-cols-2 gap-2 text-xs">
@@ -306,6 +289,7 @@
         const storageUrl = "{{ asset('storage') }}";
 
         const refreshBtn = document.getElementById('refresh-outfit');
+        const porterBtn = document.getElementById('btn-porter-ensemble'); // Capturer le bouton porter ensemble
         const titleEl = document.getElementById('outfit-title');
         
         const topIcon = document.getElementById('top-icon');
@@ -315,6 +299,10 @@
         const bottomIcon = document.getElementById('bottom-icon');
         const bottomImg = document.getElementById('bottom-img');
         const bottomName = document.getElementById('bottom-name');
+
+        // Variables pour garder en mémoire les ID de la suggestion actuelle
+        let currentTopId = null;
+        let currentBottomId = null;
 
         // Logique IA de génération de look filtrée selon la météo et la saison
         function generateLook() {
@@ -338,6 +326,10 @@
                 const randomHaut = hautsFiltres[Math.floor(Math.random() * hautsFiltres.length)];
                 const randomBas = basFiltres[Math.floor(Math.random() * basFiltres.length)];
                 
+                // Sauvegarde des IDs de la suggestion en cours
+                currentTopId = randomHaut.id;
+                currentBottomId = randomBas.id;
+
                 const titles = ["Casual Moderne", "Mix & Match", "Tenue du Jour", "Look Confort", "Élégance Simple"];
                 titleEl.textContent = titles[Math.floor(Math.random() * titles.length)];
                 
@@ -365,6 +357,37 @@
                 topName.textContent = "Ajoutez un haut";
                 bottomName.textContent = "Ajoutez un bas";
             }
+        }
+
+        // Événement clic : Enregistrer l'ensemble au planning via Fetch API
+        if (porterBtn) {
+            porterBtn.addEventListener('click', () => {
+                if (!currentTopId || !currentBottomId) {
+                    alert("Aucun ensemble n'a été généré.");
+                    return;
+                }
+
+                fetch("{{ route('planning.store') }}", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                    },
+                    body: JSON.stringify({
+                        top_id: currentTopId,
+                        bottom_id: currentBottomId
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert("✨ Succès : " + data.message);
+                    } else {
+                        alert("Erreur lors de l'enregistrement.");
+                    }
+                })
+                .catch(error => console.error("Erreur:", error));
+            });
         }
 
         refreshBtn.addEventListener('click', () => {
@@ -460,7 +483,6 @@
         }
     </script>
 
-    <!-- Toast Notifications -->
     @if ($errors->any() || session('success'))
         <div class="fixed bottom-5 right-5 z-[100] flex flex-col gap-3 max-w-sm pointer-events-none">
             @if (session('success'))
@@ -490,4 +512,5 @@
     @endif
 
 </body>
+
 </html>

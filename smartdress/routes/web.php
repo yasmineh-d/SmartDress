@@ -8,6 +8,7 @@ use App\Http\Controllers\FavorisController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Models\Vetement;
+use App\Http\Controllers\PlanningController;
 
 // --- Pages Publiques ---
 Route::get('/', function () {
@@ -107,6 +108,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/changer-mot-de-passe', function () {
         return view('pages.public.change-password-web');
     })->name('password.change');
+
+    // --- Planning de la semaine ---
+    Route::get('/planning', [PlanningController::class, 'index'])->name('planning.index');
+    Route::post('/planning', [PlanningController::class, 'store'])->name('planning.store');
+    Route::delete('/planning/{planning}', [PlanningController::class, 'destroy'])->name('planning.destroy');
 
     // --- Resources (API/CRUD) ---
     Route::resource('vetements', VetementController::class);
