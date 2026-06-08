@@ -122,13 +122,7 @@
                 </div>
             </div>
 
-            <!-- Nettoyage IA -->
-            <div class="bg-bark p-6 rounded-[2rem] text-white space-y-2">
-                <p class="text-[9px] font-bold opacity-60 uppercase tracking-widest">Nettoyage IA</p>
-                <p class="text-xs font-light opacity-80 leading-relaxed">
-                    {{ $favoris->count() > 0 ? $favoris->count() . ' articles en favoris.' : 'Aucun favori pour le moment.' }}
-                </p>
-            </div>
+
         </aside>
 
         <!-- Contenu principal -->

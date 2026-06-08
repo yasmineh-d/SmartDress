@@ -116,14 +116,7 @@
                 </div>
             </div>
 
-            <div class="pt-10">
-                <div class="p-6 bg-bark rounded-[2rem] text-center space-y-3">
-                    <p class="text-[10px] font-bold text-tan uppercase tracking-widest">Nettoyage IA</p>
-                    <p class="text-xs text-bone font-light">3 articles n'ont pas été portés depuis longtemps.</p>
-                    <button class="text-[9px] font-bold text-white underline tracking-widest uppercase">Voir le
-                        rapport</button>
-                </div>
-            </div>
+
         </aside>
 
         <!-- Main Grid Area -->
