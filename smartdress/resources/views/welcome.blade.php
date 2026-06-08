@@ -152,7 +152,7 @@
             </p>
 
             <div class="flex flex-wrap gap-3 mb-8 sd-anim" style="animation-delay:.55s">
-                <a href="{{ route("login") }}" class="sd-btn-primary sd-btn-lg">Essayer gratuitement</a>
+                <a href="{{ route("login") }}" class="sd-btn-primary sd-btn-lg">Commencer maintenant</a>
                 <a href="#how" class="sd-btn-ghost sd-btn-lg">Comment ça marche</a>
             </div>
 

@@ -47,7 +47,6 @@
                 <a href="{{ route("garde-robe") }}" class="sd-navlink">Garde-Robe</a>
                 <a href="{{ route("favoris") }}" class="sd-navlink">Favoris</a>
                 <a href="{{ route("profile") }}" class="sd-navlink">Profil</a>
-                <a href="{{ route("contact") }}" class="sd-navlink">Contact</a>
             </nav>
 
             <div class="ml-auto hidden lg:flex items-center gap-3">

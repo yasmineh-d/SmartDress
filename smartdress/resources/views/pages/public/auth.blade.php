@@ -40,9 +40,9 @@
         <div class="absolute inset-0 bg-bark/20 mix-blend-multiply"></div>
     </div>
 
-    <div class="w-full max-w-[320px] my-8 relative z-10">
+    <div class="w-full max-w-[450px] my-8 relative z-10">
         <!-- Form Container -->
-        <div class="bg-white p-6 rounded-[2.5rem] shadow-2xl shadow-bark/40 space-y-5 relative overflow-hidden">
+        <div class="bg-white p-10 rounded-[3rem] shadow-2xl shadow-bark/40 space-y-6 relative overflow-hidden">
             
             <div class="space-y-4">
                 <div class="flex items-center gap-3">
