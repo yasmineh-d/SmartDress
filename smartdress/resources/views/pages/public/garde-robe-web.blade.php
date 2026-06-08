@@ -63,10 +63,10 @@
 
     <div class="h-20"></div> <!-- Spacer for fixed navbar -->
 
-    <div class="flex-1 flex flex-col lg:flex-row min-h-screen">
+    <div class="flex-1 flex flex-col lg:flex-row">
         <!-- Sidebar Filters -->
         <aside
-            class="w-full lg:w-72 bg-white border-r border-tan/10 flex flex-col p-8 space-y-10 lg:sticky lg:top-20 lg:h-[calc(100vh-80px)] overflow-y-auto">
+            class="w-full lg:w-72 bg-white border-r border-tan/10 flex flex-col p-8 space-y-10 lg:sticky lg:top-20">
             <div class="space-y-4">
                 <h3 class="text-[10px] font-bold text-tan uppercase tracking-widest">Catégories</h3>
                 <div class="flex flex-col gap-1">
@@ -121,7 +121,7 @@
 
         <!-- Main Grid Area -->
         <!-- Main Grid Area -->
-        <main class="flex-1 p-10 pb-40 bg-offwhite/50 overflow-y-auto">
+        <main class="flex-1 p-10 pb-40 bg-offwhite/50">
             <div class="max-w-6xl mx-auto space-y-8">
                 <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
                     <div class="space-y-1">
