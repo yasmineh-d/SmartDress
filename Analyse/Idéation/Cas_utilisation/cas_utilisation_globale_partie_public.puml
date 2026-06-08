@@ -23,7 +23,7 @@ skinparam rectangle {
     RoundCorner 20
 }
 
-actor Visiteur
+actor Member
 actor Administrateur
 actor Mobile
 
@@ -34,7 +34,7 @@ usecase "Consommer l'API" as UC2
 
 }
 
-Visiteur -- UC1
+Member -- UC1
 Administrateur -- UC1
 Mobile -- UC2
 @enduml

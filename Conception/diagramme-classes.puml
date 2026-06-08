@@ -4,13 +4,27 @@ title SmartDress - Class Diagram
 left to right direction
 skinparam classAttributeIconSize 0
 
+enum CategorieVetement {
+    HAUTS
+    BAS
+    CHAUSSURES
+    ACCESSOIRES
+}
+
+enum Saison {
+    HIVER
+    PRINTEMPS
+    ETE
+    AUTOMNE
+}
+
 class Member {
     +Integer id
     +String nom
     +String email
     +String motDePasse
     +String initiales
-    +StatutUtilisateur statut
+    +isActive
     +DateTime created_at
     +DateTime updated_at
 }
@@ -31,42 +45,48 @@ class Permission {
     +DateTime updated_at
 }
 
-class Favori {
-    +Integer id
-    +DateTime dateAjout
-}
-
-class Tenue {
-    +Integer id
-    +String nom
-    +DateTime dateCreation
-    +DateTime datePlanifiee
-}
-
 class Vetement {
     +Integer id
     +String nom
-    +CategorieVetement categorie
     +String couleur
-    +String imageUrl
+    +Boolean is_Favori
+    +DateTime created_at
+    +DateTime updated_at
 }
 
 class Photo {
     +Integer id
     +String url
-    +DateTime dateUpload
+    +DateTime created_at
+    +DateTime updated_at
+}
+
+class Tenue {
+    +Integer id
+    +String nom
+    +DateTime created_at
+    +DateTime updated_at
+}
+
+class Planning {
+    +Integer id
+    +Date datePlanifiee
+    +DateTime created_at
+    +DateTime updated_at
 }
 
 Member "*" -- "*" Role : possède
-
-Member "1" -- "0..*" Tenue : crée
-
-
-Vetement "1" -- "0..*" Favori : concerne
-
 Role "*" -- "*" Permission : accorde
 
-Tenue "1" -- "1..*" Vetement : composée_de
+
 Vetement "1" -- "0..*" Photo : contient
 
+Member "1" -- "0..*" Tenue : crée
+Tenue "1" *-- "1..*" Vetement : composée_de
+
+Member "1" -- "0..*" Planning : planifie
+Planning "1" -- "0..*" Tenue : programme
+
+Vetement ..> CategorieVetement : utilise
+Vetement ..> Saison
 @enduml
