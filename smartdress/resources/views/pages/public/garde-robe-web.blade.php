@@ -56,7 +56,26 @@
             </nav>
 
             <div class="ml-auto hidden lg:flex items-center gap-3">
-                <a href="{{ url("/") }}" class="sd-btn-ghost !py-2 !px-4 !text-[10px]">Déconnexion</a>
+                @auth
+                <div class="flex items-center gap-3">
+                    <a href="{{ route('profile') }}"
+                        class="flex items-center gap-2 px-4 py-2 bg-cream/50 rounded-full text-xs font-bold text-bark hover:bg-cream transition-all border border-tan/10">
+                        <div class="w-6 h-6 bg-tan rounded-full flex items-center justify-center text-[10px] text-white">
+                            {{ auth()->user()->initials() }}
+                        </div>
+                        {{ auth()->user()->name }}
+                    </a>
+                    <form action="{{ route('logout') }}" method="POST" class="inline">
+                        @csrf
+                        <button type="submit" class="text-xs font-bold text-tan hover:text-bark uppercase tracking-widest px-2 transition-all">Déconnexion</button>
+                    </form>
+                </div>
+                @else
+                <div class="flex items-center gap-3">
+                    <a href="{{ route('login', ['mode' => 'login']) }}" class="sd-btn-ghost">Se connecter</a>
+                    <a href="{{ route('login', ['mode' => 'register']) }}" class="sd-btn-primary">Commencer</a>
+                </div>
+                @endauth
             </div>
         </div>
     </header>
@@ -205,6 +224,12 @@
                         @endphp
 
                         <div data-category="{{ $category }}" data-saison="{{ $saisonsList }}"
+                            data-nom="{{ $vetement->nom }}"
+                            data-display-saison="{{ $formattedSaison }}"
+                            data-couleur="{{ $vetement->couleur ?? 'Non spécifiée' }}"
+                            data-style="{{ $vetement->style ?? 'Non spécifié' }}"
+                            data-image="{{ $photo ? asset('storage/' . $photo->url) : '' }}"
+                            data-emoji="{{ $category === 'hauts' ? '👕' : ($category === 'bas' ? '👖' : ($category === 'chaussures' ? '👟' : '🧥')) }}"
                             class="clothing-card group relative bg-white rounded-[2.5rem] border border-tan/10 p-3 shadow-xl shadow-bark/5 hover:-translate-y-2 transition-all duration-300">
 
                             <div
@@ -236,6 +261,8 @@
                                         </svg>
                                     </button>
                                     <button
+                                        onclick="openDetailsModal(this)"
+                                        type="button"
                                         class="w-8 h-8 bg-white border border-tan/10 rounded-full flex items-center justify-center text-tan hover:text-bark shadow-sm"
                                         title="Voir détails">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -478,6 +505,62 @@
                 </button>
             </div>
         </form>
+    </div>
+
+    <!-- Modal : Détails d'un vêtement -->
+    <div id="modal-details"
+        class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-[3rem] shadow-2xl z-[60] hidden opacity-0 scale-95 transition-all duration-300 w-full max-w-2xl p-10">
+        <div class="flex items-center justify-between mb-8">
+            <div class="space-y-1">
+                <h2 class="text-3xl font-display font-medium text-bark italic" id="details-title-display">Détails du <span class="text-moss">Vêtement</span></h2>
+                <p class="text-tan text-xs font-medium uppercase tracking-widest" id="details-category-display">Catégorie</p>
+            </div>
+            <button onclick="closeModal('modal-details')"
+                class="w-12 h-12 flex items-center justify-center bg-cream/50 rounded-2xl text-tan hover:text-bark hover:bg-cream transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Zone Image -->
+            <div class="aspect-square bg-cream/20 border border-tan/10 rounded-[2.5rem] flex items-center justify-center overflow-hidden relative">
+                <img id="details-image-display" class="w-full h-full object-contain p-4 hidden" alt="Détails vêtement">
+                <span id="details-emoji-display" class="text-8xl hidden">👕</span>
+            </div>
+
+            <!-- Zone Fiche Technique -->
+            <div class="flex flex-col justify-between py-2 space-y-6">
+                <div class="space-y-4">
+                    <div class="border-b border-tan/10 pb-3">
+                        <span class="text-[10px] font-bold text-tan uppercase tracking-widest block mb-1">Nom</span>
+                        <p class="text-lg font-medium text-bark" id="details-nom-display">Nom du vêtement</p>
+                    </div>
+
+                    <div class="border-b border-tan/10 pb-3">
+                        <span class="text-[10px] font-bold text-tan uppercase tracking-widest block mb-1">Saisons</span>
+                        <p class="text-sm font-medium text-bark" id="details-saison-display">Printemps, Été</p>
+                    </div>
+
+                    <div class="border-b border-tan/10 pb-3">
+                        <span class="text-[10px] font-bold text-tan uppercase tracking-widest block mb-1">Couleur</span>
+                        <p class="text-sm font-medium text-bark" id="details-couleur-display">Non spécifiée</p>
+                    </div>
+
+                    <div>
+                        <span class="text-[10px] font-bold text-tan uppercase tracking-widest block mb-1">Style</span>
+                        <p class="text-sm font-medium text-bark" id="details-style-display">Non spécifié</p>
+                    </div>
+                </div>
+
+                <button onclick="closeModal('modal-details')"
+                    class="w-full py-4 bg-moss text-white rounded-full text-[10px] font-bold uppercase tracking-[0.2em] shadow-xl shadow-moss/20 hover:bg-bark transition-all mt-4">
+                    Fermer
+                </button>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -735,6 +818,41 @@
 
             // Re-apply filters if any
             filterItems();
+        }
+
+        function openDetailsModal(button) {
+            const card = button.closest('.clothing-card');
+            if (!card) return;
+
+            const nom = card.dataset.nom || 'Sans nom';
+            const category = card.dataset.category || 'Non spécifiée';
+            const saison = card.dataset.displaySaison || 'Toutes saisons';
+            const couleur = card.dataset.couleur || 'Non spécifiée';
+            const style = card.dataset.style || 'Non spécifié';
+            const image = card.dataset.image;
+            const emoji = card.dataset.emoji || '👗';
+
+            // Set content
+            document.getElementById('details-nom-display').textContent = nom;
+            document.getElementById('details-category-display').textContent = category;
+            document.getElementById('details-saison-display').textContent = saison;
+            document.getElementById('details-couleur-display').textContent = couleur;
+            document.getElementById('details-style-display').textContent = style;
+
+            const imgEl = document.getElementById('details-image-display');
+            const emojiEl = document.getElementById('details-emoji-display');
+
+            if (image) {
+                imgEl.src = image;
+                imgEl.classList.remove('hidden');
+                emojiEl.classList.add('hidden');
+            } else {
+                imgEl.classList.add('hidden');
+                emojiEl.textContent = emoji;
+                emojiEl.classList.remove('hidden');
+            }
+
+            openModal('modal-details');
         }
     </script>
 
