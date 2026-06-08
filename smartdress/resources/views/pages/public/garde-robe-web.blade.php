@@ -105,14 +105,14 @@
             <div class="space-y-4">
                 <h3 class="text-[10px] font-bold text-tan uppercase tracking-widest">Saisons</h3>
                 <div class="flex flex-wrap gap-2">
-                    <button
-                        class="px-4 py-2 border border-tan/20 rounded-lg text-xs font-bold text-tan hover:border-moss hover:bg-moss hover:text-white transition-all">Hiver</button>
-                    <button
-                        class="px-4 py-2 border border-tan/20 rounded-lg text-xs font-bold text-tan hover:border-moss hover:bg-moss hover:text-white transition-all">Printemps</button>
-                    <button
-                        class="px-4 py-2 border border-tan/20 rounded-lg text-xs font-bold text-tan hover:border-moss hover:bg-moss hover:text-white transition-all">Été</button>
-                    <button
-                        class="px-4 py-2 border border-tan/20 rounded-lg text-xs font-bold text-tan hover:border-moss hover:bg-moss hover:text-white transition-all">Automne</button>
+                    <button id="btn-season-hiver" onclick="setSeasonFilter('hiver')"
+                        class="season-btn px-4 py-2 border border-tan/20 rounded-lg text-xs font-bold text-tan hover:border-moss hover:bg-moss hover:text-white transition-all">Hiver</button>
+                    <button id="btn-season-printemps" onclick="setSeasonFilter('printemps')"
+                        class="season-btn px-4 py-2 border border-tan/20 rounded-lg text-xs font-bold text-tan hover:border-moss hover:bg-moss hover:text-white transition-all">Printemps</button>
+                    <button id="btn-season-ete" onclick="setSeasonFilter('ete')"
+                        class="season-btn px-4 py-2 border border-tan/20 rounded-lg text-xs font-bold text-tan hover:border-moss hover:bg-moss hover:text-white transition-all">Été</button>
+                    <button id="btn-season-automne" onclick="setSeasonFilter('automne')"
+                        class="season-btn px-4 py-2 border border-tan/20 rounded-lg text-xs font-bold text-tan hover:border-moss hover:bg-moss hover:text-white transition-all">Automne</button>
                 </div>
             </div>
 
@@ -179,9 +179,32 @@
                         @php
                             $photo = $vetement->photos->first();
                             $category = strtolower($vetement->categorie);
+                            
+                            // Seasons list for JavaScript filtering
+                            $saisonsList = '';
+                            if (is_array($vetement->saison)) {
+                                $saisonsList = implode(',', array_map('strtolower', $vetement->saison));
+                            } elseif (is_string($vetement->saison)) {
+                                $saisonsList = strtolower($vetement->saison);
+                            }
+
+                            // Pretty display format for seasons
+                            $formattedSaison = 'Sans saison';
+                            if (!empty($vetement->saison)) {
+                                if (is_array($vetement->saison)) {
+                                    $formattedSaison = implode(', ', array_map(function($s) {
+                                        $s = strtolower($s);
+                                        if ($s === 'ete') return 'Été';
+                                        return ucfirst($s);
+                                    }, $vetement->saison));
+                                } else {
+                                    $s = strtolower($vetement->saison);
+                                    $formattedSaison = ($s === 'ete') ? 'Été' : ucfirst($s);
+                                }
+                            }
                         @endphp
 
-                        <div data-category="{{ $category }}"
+                        <div data-category="{{ $category }}" data-saison="{{ $saisonsList }}"
                             class="clothing-card group relative bg-white rounded-[2.5rem] border border-tan/10 p-3 shadow-xl shadow-bark/5 hover:-translate-y-2 transition-all duration-300">
 
                             <div
@@ -240,7 +263,7 @@
 
                             <div class="p-4 space-y-1">
                                 <p class="text-[10px] font-bold text-tan uppercase tracking-widest">
-                                    {{ $vetement->categorie }} / {{ $vetement->saison ?? 'Sans saison' }}
+                                    {{ $vetement->categorie }} / {{ $formattedSaison }}
                                 </p>
                                 <h4 class="text-lg font-display font-medium text-bark italic">
                                     {{ $vetement->nom }}
@@ -425,6 +448,28 @@
                             </svg>
                         </div>
                     </div>
+
+                    <div class="space-y-1.5">
+                        <label class="px-2 text-[10px] font-bold text-tan uppercase tracking-widest">Saisons adaptées</label>
+                        <div class="flex flex-wrap gap-2 p-3 bg-white border border-tan/10 rounded-2xl">
+                            <label class="flex items-center gap-2 text-sm text-bark font-medium cursor-pointer px-2 py-1">
+                                <input type="checkbox" name="saison[]" value="hiver" class="w-4 h-4 rounded border-tan/20 text-moss focus:ring-moss focus:ring-offset-0">
+                                Hiver
+                            </label>
+                            <label class="flex items-center gap-2 text-sm text-bark font-medium cursor-pointer px-2 py-1">
+                                <input type="checkbox" name="saison[]" value="printemps" class="w-4 h-4 rounded border-tan/20 text-moss focus:ring-moss focus:ring-offset-0">
+                                Printemps
+                            </label>
+                            <label class="flex items-center gap-2 text-sm text-bark font-medium cursor-pointer px-2 py-1">
+                                <input type="checkbox" name="saison[]" value="ete" class="w-4 h-4 rounded border-tan/20 text-moss focus:ring-moss focus:ring-offset-0">
+                                Été
+                            </label>
+                            <label class="flex items-center gap-2 text-sm text-bark font-medium cursor-pointer px-2 py-1">
+                                <input type="checkbox" name="saison[]" value="automne" class="w-4 h-4 rounded border-tan/20 text-moss focus:ring-moss focus:ring-offset-0">
+                                Automne
+                            </label>
+                        </div>
+                    </div>
                 </div>
 
                 <button type="submit"
@@ -442,6 +487,31 @@
         const cards = document.querySelectorAll('.clothing-card');
         const itemCount = document.getElementById('item-count');
         const categoryButtons = document.querySelectorAll('aside .flex.flex-col button');
+
+        let activeSeason = 'all';
+
+        function setSeasonFilter(season) {
+            if (activeSeason === season) {
+                activeSeason = 'all';
+            } else {
+                activeSeason = season;
+            }
+
+            // Update season buttons active class styling
+            const buttons = document.querySelectorAll('.season-btn');
+            buttons.forEach(btn => {
+                const btnSeason = btn.id.replace('btn-season-', '');
+                if (btnSeason === activeSeason) {
+                    btn.classList.add('bg-moss', 'border-moss', 'text-white');
+                    btn.classList.remove('border-tan/20', 'text-tan');
+                } else {
+                    btn.classList.remove('bg-moss', 'border-moss', 'text-white');
+                    btn.classList.add('border-tan/20', 'text-tan');
+                }
+            });
+
+            filterItems();
+        }
 
         function setSidebarCategory(cat) {
             // Update UI
@@ -480,11 +550,20 @@
                 const title = card.querySelector('h4').textContent.toLowerCase();
                 const desc = card.querySelector('p').textContent.toLowerCase();
                 const category = card.dataset.category || '';
+                const seasonsAttr = card.dataset.saison || '';
 
                 const matchSearch = title.includes(query) || desc.includes(query);
                 const matchSelect = selectVal === 'all' || category === selectVal;
+                
+                let matchSeason = false;
+                if (activeSeason === 'all') {
+                    matchSeason = true;
+                } else {
+                    const cardSeasons = seasonsAttr.split(',').map(s => s.trim().toLowerCase());
+                    matchSeason = cardSeasons.includes(activeSeason.toLowerCase());
+                }
 
-                const isVisible = matchSearch && matchSelect;
+                const isVisible = matchSearch && matchSelect && matchSeason;
                 card.classList.toggle('hidden', !isVisible);
                 if (isVisible) visibleCount++;
             });

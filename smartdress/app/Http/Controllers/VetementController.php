@@ -46,7 +46,8 @@ class VetementController extends Controller
             'categorie' => 'required|string',
             'photo' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048', // Validation pour la photo
             'couleur' => 'nullable|string',
-            'saison' => 'nullable|string',
+            'saison' => 'nullable|array',
+            'saison.*' => 'string|in:hiver,printemps,ete,automne',
             'style' => 'nullable|string',
         ]);
 
@@ -86,7 +87,8 @@ class VetementController extends Controller
             'nom' => 'required|string|max:255',
             'categorie' => 'required|string',
             'couleur' => 'nullable|string',
-            'saison' => 'nullable|string',
+            'saison' => 'nullable|array',
+            'saison.*' => 'string|in:hiver,printemps,ete,automne',
             'style' => 'nullable|string',
         ]);
 
