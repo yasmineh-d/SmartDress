@@ -188,8 +188,23 @@
 
                                 <!-- Info -->
                                 <div class="p-4">
+                                    @php
+                                        $formattedSaison = 'Sans saison';
+                                        if (!empty($vetement->saison)) {
+                                            if (is_array($vetement->saison)) {
+                                                $formattedSaison = implode(', ', array_map(function($s) {
+                                                    $s = strtolower($s);
+                                                    if ($s === 'ete') return 'Été';
+                                                    return ucfirst($s);
+                                                }, $vetement->saison));
+                                            } else {
+                                                $s = strtolower($vetement->saison);
+                                                $formattedSaison = ($s === 'ete') ? 'Été' : ucfirst($s);
+                                            }
+                                        }
+                                    @endphp
                                     <p class="text-[9px] font-bold text-tan uppercase tracking-widest mb-1">
-                                        {{ ucfirst($vetement->categorie) }} / {{ $vetement->saison ?? 'Sans saison' }}
+                                        {{ ucfirst($vetement->categorie) }} / {{ $formattedSaison }}
                                     </p>
                                     <p class="text-sm font-display italic text-bark">{{ $vetement->nom }}</p>
                                 </div>
