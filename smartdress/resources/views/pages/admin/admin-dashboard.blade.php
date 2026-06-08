@@ -42,23 +42,28 @@
                 scrolled: false,
                 mobileMenuOpen: false,
                 isLoggedIn: true,
-                // MODIFICATION ICI : On lit l'onglet stocké en session, sinon 'dashboard' par défaut
                 tab: sessionStorage.getItem('admin_active_tab') || 'dashboard',
                 search: '',
                 filter: 'all',
                 roleFilter: 'all',
                 statusFilter: 'all',
+                // ── GARDE-ROBE : nouveaux filtres ──
+                categoryFilter: 'all',
+                statutGardeRobeFilter: 'all',
                 activities: @json($activities),
                 users: @json($users),
+                // ── GARDE-ROBE : données vêtements ──
+                vetements: @json($vetements ?? []),
                 showModal: false,
                 showDeleteModal: false,
                 isEditing: false,
                 modalType: 'activity',
                 currentActivity: { id: null, name: '', action: 'Génération de tenue', initial: '' },
                 currentUser: { id: null, name: '', email: '', role: 'User', status: 'Actif' },
+                // ── GARDE-ROBE : vêtement courant ──
+                currentVetement: { id: null, nom: '', categorie: '', utilisateur: '', statut: 'Validé', image: '' },
                 rowToDelete: null,
 
-                // Étape pour changer d'onglet et enregistrer le choix
                 changeTab(targetTab) {
                     this.tab = targetTab;
                     this.search = '';
@@ -70,23 +75,33 @@
                     if (this.tab === 'dashboard') {
                         this.modalType = 'activity';
                         this.currentActivity = { id: Date.now(), name: '', action: 'Génération de tenue', initial: '' };
+                    } else if (this.tab === 'garde-robe') {
+                        // ── GARDE-ROBE ──
+                        this.modalType = 'vetement';
+                        this.currentVetement = { id: Date.now(), nom: '', categorie: '', utilisateur: '', statut: 'Validé', image: '' };
                     } else {
                         this.modalType = 'user';
                         this.currentUser = { id: Date.now(), name: '', email: '', role: 'User', status: 'Actif' };
                     }
                     this.showModal = true;
                 },
+
                 openEditModal(item) {
                     this.isEditing = true;
                     if (this.tab === 'dashboard') {
                         this.modalType = 'activity';
                         this.currentActivity = { ...item };
+                    } else if (this.tab === 'garde-robe') {
+                        // ── GARDE-ROBE ──
+                        this.modalType = 'vetement';
+                        this.currentVetement = { ...item };
                     } else {
                         this.modalType = 'user';
                         this.currentUser = { ...item };
                     }
                     this.showModal = true;
                 },
+
                 save() {
                     if (this.modalType === 'activity') {
                         if (!this.currentActivity.name) return;
@@ -96,6 +111,15 @@
                             this.activities[index] = { ...this.currentActivity, time: 'Just now' };
                         } else {
                             this.activities.unshift({ ...this.currentActivity, time: 'Just now' });
+                        }
+                    } else if (this.modalType === 'vetement') {
+                        // ── GARDE-ROBE ──
+                        if (!this.currentVetement.nom) return;
+                        if (this.isEditing) {
+                            const index = this.vetements.findIndex(v => v.id === this.currentVetement.id);
+                            this.vetements[index] = { ...this.currentVetement };
+                        } else {
+                            this.vetements.unshift({ ...this.currentVetement });
                         }
                     } else {
                         if (!this.currentUser.name || !this.currentUser.email) return;
@@ -108,19 +132,25 @@
                     }
                     this.showModal = false;
                 },
+
                 confirmDelete(id) {
                     this.rowToDelete = id;
                     this.showDeleteModal = true;
                 },
+
                 deleteItem() {
                     if (this.tab === 'dashboard') {
                         this.activities = this.activities.filter(a => a.id !== this.rowToDelete);
+                    } else if (this.tab === 'garde-robe') {
+                        // ── GARDE-ROBE ──
+                        this.vetements = this.vetements.filter(v => v.id !== this.rowToDelete);
                     } else {
                         this.users = this.users.filter(u => u.id !== this.rowToDelete);
                     }
                     this.showDeleteModal = false;
                     this.rowToDelete = null;
                 },
+
                 get filteredActivities() {
                     return this.activities.filter(a => {
                         const matchesSearch = a.name.toLowerCase().includes(this.search.toLowerCase()) ||
@@ -129,6 +159,7 @@
                         return matchesSearch && matchesFilter;
                     });
                 },
+
                 get filteredUsers() {
                     return this.users.filter(u => {
                         const matchesSearch = u.name.toLowerCase().includes(this.search.toLowerCase()) ||
@@ -137,6 +168,47 @@
                         const matchesStatus = this.statusFilter === 'all' || u.status.toLowerCase() === this.statusFilter.toLowerCase();
                         return matchesSearch && matchesRole && matchesStatus;
                     });
+                },
+
+                // ── GARDE-ROBE : getter filtré ──
+                get filteredVetements() {
+                    return this.vetements.filter(v => {
+                        const matchesSearch = (v.nom && v.nom.toLowerCase().includes(this.search.toLowerCase())) ||
+                            (v.utilisateur && v.utilisateur.toLowerCase().includes(this.search.toLowerCase()));
+                        const matchesCategory = this.categoryFilter === 'all' || (v.categorie && v.categorie.toLowerCase() === this.categoryFilter.toLowerCase());
+                        const matchesStatut = this.statutGardeRobeFilter === 'all' || (v.statut && v.statut.toLowerCase() === this.statutGardeRobeFilter.toLowerCase());
+                        return matchesSearch && matchesCategory && matchesStatut;
+                    });
+                },
+
+                // ── GARDE-ROBE : couleur badge statut ──
+                statutClass(statut) {
+                    if (!statut) return 'bg-tan/10 text-tan';
+                    const s = statut.toLowerCase();
+                    if (s === 'validé') return 'bg-moss/10 text-moss';
+                    if (s === 'en attente') return 'bg-tan/20 text-bark';
+                    if (s === 'signalé') return 'bg-red-100 text-red-500';
+                    return 'bg-tan/10 text-tan';
+                },
+
+                // ── GARDE-ROBE : texte dynamique header ──
+                get tabLabel() {
+                    if (this.tab === 'dashboard') return 'System Status';
+                    if (this.tab === 'users') return 'User Management';
+                    if (this.tab === 'garde-robe') return 'Wardrobe Management';
+                    return '';
+                },
+                get tabTitle() {
+                    if (this.tab === 'dashboard') return 'Tableau de Bord';
+                    if (this.tab === 'users') return 'Gestion des Utilisateurs';
+                    if (this.tab === 'garde-robe') return 'Garde-Robe';
+                    return '';
+                },
+                get tableTitle() {
+                    if (this.tab === 'dashboard') return 'Activité Récente';
+                    if (this.tab === 'users') return 'Liste des Utilisateurs';
+                    if (this.tab === 'garde-robe') return 'Tous les Vêtements';
+                    return '';
                 }
             }))
         })
@@ -208,7 +280,6 @@
                 <p class="text-[10px] font-bold text-tan uppercase tracking-widest mt-1">Console Admin</p>
             </div>
             <nav class="flex-1 p-6 space-y-2">
-                <!-- MODIFICATION : Utilisation de changeTab() -->
                 <button @click="changeTab('dashboard')"
                     :class="tab === 'dashboard' ? 'bg-moss/10 text-moss' : 'text-tan hover:bg-cream/30'"
                     class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold uppercase tracking-widest transition-all">
@@ -219,7 +290,7 @@
                     </svg>
                     Dashboard
                 </button>
-                <!-- MODIFICATION : Utilisation de changeTab() -->
+
                 <button @click="changeTab('users')"
                     :class="tab === 'users' ? 'bg-moss/10 text-moss' : 'text-tan hover:bg-cream/30'"
                     class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold uppercase tracking-widest transition-all">
@@ -229,6 +300,18 @@
                             d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                     </svg>
                     Utilisateurs
+                </button>
+
+                <!-- ── GARDE-ROBE : bouton sidebar ── -->
+                <button @click="changeTab('garde-robe')"
+                    :class="tab === 'garde-robe' ? 'bg-moss/10 text-moss' : 'text-tan hover:bg-cream/30'"
+                    class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold uppercase tracking-widest transition-all">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    Garde-Robe
                 </button>
             </nav>
         </aside>
@@ -249,10 +332,11 @@
             <div class="p-6 lg:p-12">
                 <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
                     <div>
+                        <!-- ── Utilise les getters dynamiques ── -->
                         <span class="text-xs font-bold text-moss uppercase tracking-[0.3em] mb-2 block"
-                            x-text="tab === 'dashboard' ? 'System Status' : 'User Management'"></span>
+                            x-text="tabLabel"></span>
                         <h1 class="text-5xl font-display font-medium text-bark italic leading-tight"
-                            x-text="tab === 'dashboard' ? 'Tableau de Bord' : 'Gestion des Utilisateurs'"></h1>
+                            x-text="tabTitle"></h1>
                     </div>
                 </div>
 
@@ -269,7 +353,7 @@
                         <p class="text-[10px] font-bold text-tan uppercase tracking-widest mb-1">Total Utilisateurs</p>
                         <p class="text-4xl font-display font-medium text-bark italic" x-text="users.length"></p>
                     </div>
-                    
+
                     <div class="bg-white p-8 rounded-[2rem] border border-tan/10 shadow-sm">
                         <div class="w-12 h-12 bg-tan/10 text-tan rounded-2xl flex items-center justify-center mb-6">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
@@ -301,8 +385,9 @@
                     <div
                         class="p-8 lg:p-12 border-b border-cream flex flex-col sm:flex-row sm:items-center justify-between gap-6">
                         <div class="flex items-center gap-4">
+                            <!-- ── Utilise le getter dynamique ── -->
                             <h3 class="text-2xl font-display font-medium text-bark italic leading-none"
-                                x-text="tab === 'dashboard' ? 'Activité Récente' : 'Liste des Utilisateurs'"></h3>
+                                x-text="tableTitle"></h3>
                             <button @click="openAddModal()"
                                 class="w-8 h-8 flex items-center justify-center bg-moss text-white rounded-full shadow-lg shadow-moss/20 hover:scale-110 transition-transform"
                                 title="Ajouter">
@@ -327,6 +412,8 @@
                                 <input type="text" x-model="search" placeholder="Rechercher..."
                                     class="w-full pl-10 pr-4 py-3 bg-cream/30 border border-tan/10 rounded-2xl focus:border-moss outline-none text-xs transition-all placeholder:text-tan/50">
                             </div>
+
+                            <!-- Filtre dashboard -->
                             <div x-show="tab === 'dashboard'" class="relative w-full sm:w-48">
                                 <select x-model="filter"
                                     class="relative py-3 ps-4 pe-10 flex gap-x-2 text-nowrap w-full cursor-pointer bg-cream/30 border border-tan/10 rounded-2xl text-start text-xs font-medium text-bark focus:outline-none focus:ring-2 focus:ring-moss/20 focus:border-moss transition-all appearance-none">
@@ -335,14 +422,13 @@
                                     <option value="ajout">Ajout vêtement</option>
                                 </select>
                                 <div class="absolute top-1/2 end-4 -translate-y-1/2 pointer-events-none text-tan">
-                                    <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24"
-                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="m7 15 5 5 5-5"></path>
-                                        <path d="m7 9 5-5 5 5"></path>
+                                    <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="m7 15 5 5 5-5"></path><path d="m7 9 5-5 5 5"></path>
                                     </svg>
                                 </div>
                             </div>
+
+                            <!-- Filtres users -->
                             <div x-show="tab === 'users'" class="relative w-full sm:w-40">
                                 <select x-model="roleFilter"
                                     class="relative py-3 ps-4 pe-10 flex gap-x-2 text-nowrap w-full cursor-pointer bg-cream/30 border border-tan/10 rounded-2xl text-start text-xs font-medium text-bark focus:outline-none focus:ring-2 focus:ring-moss/20 focus:border-moss transition-all appearance-none">
@@ -351,11 +437,8 @@
                                     <option value="user">User</option>
                                 </select>
                                 <div class="absolute top-1/2 end-3.5 -translate-y-1/2 pointer-events-none text-tan">
-                                    <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24"
-                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="m7 15 5 5 5-5"></path>
-                                        <path d="m7 9 5-5 5 5"></path>
+                                    <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="m7 15 5 5 5-5"></path><path d="m7 9 5-5 5 5"></path>
                                     </svg>
                                 </div>
                             </div>
@@ -367,11 +450,40 @@
                                     <option value="inactif">Inactif</option>
                                 </select>
                                 <div class="absolute top-1/2 end-3.5 -translate-y-1/2 pointer-events-none text-tan">
-                                    <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/xl" width="24"
-                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="m7 15 5 5 5-5"></path>
-                                        <path d="m7 9 5-5 5 5"></path>
+                                    <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/xl" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="m7 15 5 5 5-5"></path><path d="m7 9 5-5 5 5"></path>
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <!-- ── GARDE-ROBE : filtres catégorie + statut ── -->
+                            <div x-show="tab === 'garde-robe'" class="relative w-full sm:w-40">
+                                <select x-model="categoryFilter"
+                                    class="relative py-3 ps-4 pe-10 flex gap-x-2 text-nowrap w-full cursor-pointer bg-cream/30 border border-tan/10 rounded-2xl text-start text-xs font-medium text-bark focus:outline-none focus:ring-2 focus:ring-moss/20 focus:border-moss transition-all appearance-none">
+                                    <option value="all">Toutes Catégories</option>
+                                    <option value="tops">Tops</option>
+                                    <option value="bottoms">Bottoms</option>
+                                    <option value="outerwear">Outerwear</option>
+                                    <option value="shoes">Shoes</option>
+                                    <option value="accessories">Accessories</option>
+                                </select>
+                                <div class="absolute top-1/2 end-3.5 -translate-y-1/2 pointer-events-none text-tan">
+                                    <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="m7 15 5 5 5-5"></path><path d="m7 9 5-5 5 5"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div x-show="tab === 'garde-robe'" class="relative w-full sm:w-40">
+                                <select x-model="statutGardeRobeFilter"
+                                    class="relative py-3 ps-4 pe-10 flex gap-x-2 text-nowrap w-full cursor-pointer bg-cream/30 border border-tan/10 rounded-2xl text-start text-xs font-medium text-bark focus:outline-none focus:ring-2 focus:ring-moss/20 focus:border-moss transition-all appearance-none">
+                                    <option value="all">Tous les Statuts</option>
+                                    <option value="validé">Validé</option>
+                                    <option value="en attente">En attente</option>
+                                    <option value="signalé">Signalé</option>
+                                </select>
+                                <div class="absolute top-1/2 end-3.5 -translate-y-1/2 pointer-events-none text-tan">
+                                    <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="m7 15 5 5 5-5"></path><path d="m7 9 5-5 5 5"></path>
                                     </svg>
                                 </div>
                             </div>
@@ -399,27 +511,20 @@
                                                 <p class="text-sm font-bold text-bark" x-text="activity.name"></p>
                                             </div>
                                         </td>
-                                        <td class="px-12 py-8 text-sm text-bark/70 italic" x-text="activity.action">
-                                        </td>
+                                        <td class="px-12 py-8 text-sm text-bark/70 italic" x-text="activity.action"></td>
                                         <td class="px-12 py-8 text-xs text-tan text-center" x-text="activity.time"></td>
                                         <td class="px-12 py-8">
                                             <div class="flex items-center justify-center gap-4">
                                                 <button @click="openEditModal(activity)"
                                                     class="p-2 text-tan hover:text-moss transition-colors">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
-                                                        viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            stroke-width="2"
-                                                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                                     </svg>
                                                 </button>
                                                 <button @click="confirmDelete(activity.id)"
                                                     class="p-2 text-tan hover:text-red-400 transition-colors">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
-                                                        viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            stroke-width="2"
-                                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                                     </svg>
                                                 </button>
                                             </div>
@@ -451,8 +556,7 @@
                                             </div>
                                         </td>
                                         <td class="px-12 py-8">
-                                            <span
-                                                class="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider"
+                                            <span class="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider"
                                                 :class="user.role === 'Admin' ? 'bg-moss/10 text-moss' : 'bg-tan/10 text-tan'"
                                                 x-text="user.role"></span>
                                         </td>
@@ -465,20 +569,14 @@
                                             <div class="flex items-center justify-center gap-4">
                                                 <button @click="openEditModal(user)"
                                                     class="p-2 text-tan hover:text-moss transition-colors">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
-                                                        viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            stroke-width="2"
-                                                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                                     </svg>
                                                 </button>
                                                 <button @click="confirmDelete(user.id)"
                                                     class="p-2 text-tan hover:text-red-400 transition-colors">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
-                                                        viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            stroke-width="2"
-                                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                                     </svg>
                                                 </button>
                                             </div>
@@ -488,52 +586,100 @@
                             </tbody>
                         </table>
                     </div>
+
+                    <!-- ══════════════════════════════════════════════ -->
+                    <!-- GARDE-ROBE TABLE — section ajoutée            -->
+                    <!-- ══════════════════════════════════════════════ -->
+                    <div x-show="tab === 'garde-robe'" class="overflow-x-auto">
+                        <table class="w-full text-left">
+                            <thead class="bg-cream/20 text-tan text-[9px] font-bold uppercase tracking-[0.25em]">
+                                <tr>
+                                    <th class="px-12 py-5">Vêtement</th>
+                                    <th class="px-12 py-5">Catégorie</th>
+                                    <th class="px-12 py-5">Utilisateur</th>
+                                    <th class="px-12 py-5 text-center">Statut</th>
+                                    <th class="px-12 py-5 text-center">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-cream/50">
+                                <template x-for="vetement in filteredVetements" :key="vetement.id">
+                                    <tr class="hover:bg-cream/10 transition-colors">
+
+                                        <!-- Vêtement : image + nom + ID -->
+                                        <td class="px-12 py-6">
+                                            <div class="flex items-center gap-4">
+                                                <!-- Image ou placeholder -->
+                                                <div class="w-12 h-12 rounded-2xl bg-cream border border-tan/10 overflow-hidden flex-shrink-0 flex items-center justify-center">
+                                                    <template x-if="vetement.image">
+                                                        <img :src="vetement.image" :alt="vetement.nom"
+                                                            class="w-full h-full object-cover">
+                                                    </template>
+                                                    <template x-if="!vetement.image">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-tan/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                                        </svg>
+                                                    </template>
+                                                </div>
+                                                <div>
+                                                    <p class="text-sm font-bold text-bark" x-text="vetement.nom"></p>
+                                                    <p class="text-[10px] text-tan" x-text="'ID: #' + vetement.id"></p>
+                                                </div>
+                                            </div>
+                                        </td>
+
+                                        <!-- Catégorie -->
+                                        <td class="px-12 py-6">
+                                            <span class="px-3 py-1 bg-cream rounded-full text-[10px] font-bold text-bark/60 uppercase tracking-wider"
+                                                x-text="vetement.categorie"></span>
+                                        </td>
+
+                                        <!-- Utilisateur -->
+                                        <td class="px-12 py-6 text-sm text-bark/70" x-text="vetement.utilisateur"></td>
+
+                                        <!-- Statut avec badge coloré -->
+                                        <td class="px-12 py-6 text-center">
+                                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider"
+                                                :class="statutClass(vetement.statut)">
+                                                <span class="w-1.5 h-1.5 rounded-full"
+                                                    :class="{
+                                                        'bg-moss': vetement.statut === 'Validé',
+                                                        'bg-bark/40': vetement.statut === 'En attente',
+                                                        'bg-red-400': vetement.statut === 'Signalé'
+                                                    }"></span>
+                                                <span x-text="vetement.statut"></span>
+                                            </span>
+                                        </td>
+
+                                        <!-- Actions -->
+                                        <td class="px-12 py-6">
+                                            <div class="flex items-center justify-center gap-4">
+                                                <button @click="openEditModal(vetement)"
+                                                    class="p-2 text-tan hover:text-moss transition-colors">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                                    </svg>
+                                                </button>
+                                                <button @click="confirmDelete(vetement.id)"
+                                                    class="p-2 text-tan hover:text-red-400 transition-colors">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- ══════════════════════════════════════════════ -->
+
                 </div>
             </div>
         </main>
     </div>
 
-    <!-- FOOTER -->
-    <footer class="sd-footer">
-        <div class="max-w-screen-xl mx-auto px-6 lg:px-12 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-            <div>
-                <a href="{{ url('/') }}" class="sd-logo sd-logo--light">Smart<span>Dress</span></a>
-                <p class="sd-footer-tag">Votre garde-robe digitale intelligente. Suggestions de tenues basées sur la
-                    météo et vos préférences.</p>
-            </div>
-            <div>
-                <h4 class="sd-footer-heading">Application</h4>
-                <ul class="sd-footer-links">
-                    <li><a href="{{ url('/#features') }}">Fonctionnalités</a></li>
-                    <li><a href="{{ route('garde-robe') }}">Garde-robe</a></li>
-                    <li><a href="{{ route('dashboard') }}">Suggestions</a></li>
-                    <li><a href="#">Notifications</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="sd-footer-heading">Compte</h4>
-                <ul class="sd-footer-links">
-                    <li><a href="{{ route('login', ['mode' => 'register']) }}">S'inscrire</a></li>
-                    <li><a href="{{ route('login', ['mode' => 'login']) }}">Se connecter</a></li>
-                    <li><a href="{{ route('profile') }}">Mon profil</a></li>
-                    <li><a href="#">Paramètres</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="sd-footer-heading">Projet</h4>
-                <ul class="sd-footer-links">
-                    <li><a href="#">À propos</a></li>
-                    <li><a href="#">Rapport PFF</a></li>
-                    <li><a href="{{ url('/contact') }}">Contact</a></li>
-                    <li><a href="#">Mentions légales</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="sd-footer-bottom">
-            <span>© 2025–2026 SmartDress · Yasmine Haddad</span>
-            <span>Formation Développement Mobile · Mode Bootcamp</span>
-        </div>
-    </footer>
+
 
     <!-- Modals -->
     <div x-show="showModal"
@@ -560,11 +706,8 @@
                                     <option value="Ajout vêtement">Ajout vêtement</option>
                                 </select>
                                 <div class="absolute top-1/2 end-5 -translate-y-1/2 pointer-events-none text-tan">
-                                    <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
-                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="m7 15 5 5 5-5"></path>
-                                        <path d="m7 9 5-5 5 5"></path>
+                                    <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="m7 15 5 5 5-5"></path><path d="m7 9 5-5 5 5"></path>
                                     </svg>
                                 </div>
                             </div>
@@ -589,16 +732,13 @@
                                 <label class="text-[10px] font-bold text-tan uppercase tracking-widest mb-2 block">Rôle</label>
                                 <div class="relative">
                                     <select x-model="currentUser.role"
-                                        class="relative py-4 ps-6 py-4 pe-12 flex gap-x-2 text-nowrap w-full cursor-pointer bg-cream/30 border border-tan/10 rounded-2xl text-start text-sm font-medium text-bark focus:outline-none focus:ring-2 focus:ring-moss/20 focus:border-moss transition-all appearance-none">
+                                        class="relative py-4 ps-6 pe-12 flex gap-x-2 text-nowrap w-full cursor-pointer bg-cream/30 border border-tan/10 rounded-2xl text-start text-sm font-medium text-bark focus:outline-none focus:ring-2 focus:ring-moss/20 focus:border-moss transition-all appearance-none">
                                         <option value="User">User</option>
                                         <option value="Admin">Admin</option>
                                     </select>
                                     <div class="absolute top-1/2 end-5 -translate-y-1/2 pointer-events-none text-tan">
-                                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
-                                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="m7 15 5 5 5-5"></path>
-                                            <path d="m7 9 5-5 5 5"></path>
+                                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="m7 15 5 5 5-5"></path><path d="m7 9 5-5 5 5"></path>
                                         </svg>
                                     </div>
                                 </div>
@@ -607,16 +747,65 @@
                                 <label class="text-[10px] font-bold text-tan uppercase tracking-widest mb-2 block">Statut</label>
                                 <div class="relative">
                                     <select x-model="currentUser.status"
-                                        class="relative py-4 ps-6 py-4 pe-12 flex gap-x-2 text-nowrap w-full cursor-pointer bg-cream/30 border border-tan/10 rounded-2xl text-start text-sm font-medium text-bark focus:outline-none focus:ring-2 focus:ring-moss/20 focus:border-moss transition-all appearance-none">
+                                        class="relative py-4 ps-6 pe-12 flex gap-x-2 text-nowrap w-full cursor-pointer bg-cream/30 border border-tan/10 rounded-2xl text-start text-sm font-medium text-bark focus:outline-none focus:ring-2 focus:ring-moss/20 focus:border-moss transition-all appearance-none">
                                         <option value="Actif">Actif</option>
                                         <option value="Inactif">Inactif</option>
                                     </select>
                                     <div class="absolute top-1/2 end-5 -translate-y-1/2 pointer-events-none text-tan">
-                                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
-                                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="m7 15 5 5 5-5"></path>
-                                            <path d="m7 9 5-5 5 5"></path>
+                                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="m7 15 5 5 5-5"></path><path d="m7 9 5-5 5 5"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+
+                <!-- ── GARDE-ROBE : modal vêtement ── -->
+                <template x-if="modalType === 'vetement'">
+                    <div class="space-y-6">
+                        <div>
+                            <label class="text-[10px] font-bold text-tan uppercase tracking-widest mb-2 block">Nom du vêtement</label>
+                            <input type="text" x-model="currentVetement.nom"
+                                class="w-full px-6 py-4 bg-cream/30 border border-tan/10 rounded-2xl focus:border-moss outline-none text-sm">
+                        </div>
+                        <div>
+                            <label class="text-[10px] font-bold text-tan uppercase tracking-widest mb-2 block">Utilisateur</label>
+                            <input type="text" x-model="currentVetement.utilisateur"
+                                class="w-full px-6 py-4 bg-cream/30 border border-tan/10 rounded-2xl focus:border-moss outline-none text-sm">
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="text-[10px] font-bold text-tan uppercase tracking-widest mb-2 block">Catégorie</label>
+                                <div class="relative">
+                                    <select x-model="currentVetement.categorie"
+                                        class="relative py-4 ps-6 pe-12 w-full cursor-pointer bg-cream/30 border border-tan/10 rounded-2xl text-sm font-medium text-bark focus:outline-none focus:ring-2 focus:ring-moss/20 focus:border-moss transition-all appearance-none">
+                                        <option value="Tops">Tops</option>
+                                        <option value="Bottoms">Bottoms</option>
+                                        <option value="Outerwear">Outerwear</option>
+                                        <option value="Shoes">Shoes</option>
+                                        <option value="Accessories">Accessories</option>
+                                    </select>
+                                    <div class="absolute top-1/2 end-5 -translate-y-1/2 pointer-events-none text-tan">
+                                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="m7 15 5 5 5-5"></path><path d="m7 9 5-5 5 5"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="text-[10px] font-bold text-tan uppercase tracking-widest mb-2 block">Statut</label>
+                                <div class="relative">
+                                    <select x-model="currentVetement.statut"
+                                        class="relative py-4 ps-6 pe-12 w-full cursor-pointer bg-cream/30 border border-tan/10 rounded-2xl text-sm font-medium text-bark focus:outline-none focus:ring-2 focus:ring-moss/20 focus:border-moss transition-all appearance-none">
+                                        <option value="Validé">Validé</option>
+                                        <option value="En attente">En attente</option>
+                                        <option value="Signalé">Signalé</option>
+                                    </select>
+                                    <div class="absolute top-1/2 end-5 -translate-y-1/2 pointer-events-none text-tan">
+                                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="m7 15 5 5 5-5"></path><path d="m7 9 5-5 5 5"></path>
                                         </svg>
                                     </div>
                                 </div>
@@ -652,9 +841,7 @@
     </div>
 
     <style>
-        [x-cloak] {
-            display: none !important;
-        }
+        [x-cloak] { display: none !important; }
     </style>
 
     <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
@@ -664,12 +851,9 @@
         document.addEventListener('alpine:init', () => {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
+                    if (entry.isIntersecting) entry.target.classList.add('visible');
                 });
             }, { threshold: 0.15 });
-
             document.querySelectorAll('.observe-me').forEach(el => observer.observe(el));
         });
 
