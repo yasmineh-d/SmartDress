@@ -121,7 +121,7 @@
 
         <!-- Main Grid Area -->
         <!-- Main Grid Area -->
-        <main class="flex-1 p-10 pb-40 bg-offwhite/50">
+        <main class="flex-1 p-10 pb-12 bg-offwhite/50">
             <div class="max-w-6xl mx-auto space-y-8">
                 <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
                     <div class="space-y-1">
@@ -253,7 +253,7 @@
                 </div>
 
                 <!-- Pagination -->
-                <div class="flex items-center justify-center pt-16 pb-12 mt-12 border-t border-tan/10 relative z-20">
+                <div class="flex items-center justify-center pt-12 pb-0 mt-8 border-t border-tan/10 relative z-20">
                     <nav class="flex items-center gap-2" aria-label="Pagination">
                         <button type="button"
                             class="min-w-[40px] flex justify-center items-center text-tan hover:bg-cream/50 p-2.5 text-sm rounded-xl disabled:opacity-50 disabled:pointer-events-none transition-all"
@@ -291,7 +291,7 @@
     </div>
 
     <!-- FOOTER (Style Home) -->
-    <footer class="sd-footer !mt-20">
+    <footer class="sd-footer !mt-8">
         <div class="max-w-screen-xl mx-auto px-6 lg:px-12 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
             <div>
                 <a href="{{ url("/") }}" class="sd-logo sd-logo--light">Smart<span>Dress</span></a>
