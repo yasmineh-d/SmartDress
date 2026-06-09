@@ -15,11 +15,11 @@ class VetementApiController extends Controller
     ) {
     }
 
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
         return response()->json([
             'success' => true,
-            'data' => $this->vetementService->getAll(),
+            'data' => $this->vetementService->getForUser($request->user(), true),
         ]);
     }
 
@@ -31,16 +31,18 @@ class VetementApiController extends Controller
             'couleur' => 'nullable|string|max:255',
             'saison' => 'nullable|string|max:255',
             'style' => 'nullable|string|max:255',
-            'user_id' => 'required|exists:users,id',
+            'photo' => 'nullable|image|max:5120',
         ]);
 
-        $vetement = $this->vetementService->create($validated);
+        $photo = $request->file('photo');
+        $vetement = $this->vetementService->createForUser($request->user(), $validated, $photo);
 
         return response()->json([
             'message' => 'Vetement cree avec succes.',
             'data' => $vetement,
         ], 201);
     }
+
 
     public function show(int $id): JsonResponse
     {

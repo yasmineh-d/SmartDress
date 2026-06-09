@@ -2,17 +2,92 @@
 
 @push('x-data-state')
     vetements: [],
+    favoris: [],
     loading: true,
 
     async init() {
+        const token = localStorage.getItem('auth_token');
+        if (!token) {
+            window.location.href = '{{ route("login") }}';
+            return;
+        }
         try {
-            const res = await fetch('http://10.0.2.2:8000/api/vetements');
+            // Récupérer les vêtements
+            const res = await fetch('http://10.0.2.2:8000/api/vetements', {
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                    'Accept': 'application/json'
+                }
+            });
+            if (!res.ok) {
+                if (res.status === 401) {
+                    localStorage.removeItem('auth_token');
+                    window.location.href = '{{ route("login") }}';
+                    return;
+                }
+                throw new Error('Erreur HTTP: ' + res.status);
+            }
             const json = await res.json();
             this.vetements = json.data || json;
+
+            // Récupérer les favoris pour le statut du cœur
+            const resFav = await fetch('http://10.0.2.2:8000/api/favoris', {
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                    'Accept': 'application/json'
+                }
+            });
+            if (resFav.ok) {
+                const jsonFav = await resFav.json();
+                this.favoris = jsonFav.data || jsonFav;
+            }
+
             this.loading = false;
         } catch (err) {
             console.error(err);
             this.loading = false;
+        }
+    },
+
+    isFavorite(itemId) {
+        return this.favoris.some(f => f.vetement_id === itemId);
+    },
+
+    async toggleFavorite(itemId) {
+        const token = localStorage.getItem('auth_token');
+        const existing = this.favoris.find(f => f.vetement_id === itemId);
+        
+        try {
+            if (existing) {
+                // Retirer des favoris
+                const res = await fetch('http://10.0.2.2:8000/api/favoris/' + existing.id, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': 'Bearer ' + token,
+                        'Accept': 'application/json'
+                    }
+                });
+                if (res.ok) {
+                    this.favoris = this.favoris.filter(f => f.vetement_id !== itemId);
+                }
+            } else {
+                // Ajouter aux favoris
+                const res = await fetch('http://10.0.2.2:8000/api/favoris', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer ' + token,
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({ vetement_id: itemId })
+                });
+                if (res.ok) {
+                    const json = await res.json();
+                    this.favoris.push(json.data);
+                }
+            }
+        } catch (err) {
+            console.error(err);
         }
     }
 @endpush
@@ -49,13 +124,15 @@
         <template x-for="item in vetements" :key="item.id">
             <div class="bg-white rounded-[2rem] overflow-hidden border border-tan/10 group">
                 <div class="aspect-square bg-cream/30 flex items-center justify-center p-4 relative">
-                    <template x-if="item.image">
-                        <img :src="item.image" class="w-full h-full object-cover rounded-xl">
+                    <template x-if="item.photos && item.photos.length > 0">
+                        <img :src="'http://10.0.2.2:8000/storage/' + item.photos[0].url" class="w-full h-full object-cover rounded-xl">
                     </template>
-                    <template x-if="!item.image">
-                        <span class="text-4xl" x-text="item.categorie.toLowerCase().includes('haut') ? '👕' : '👖'"></span>
+                    <template x-if="!item.photos || item.photos.length === 0">
+                        <span class="text-4xl" x-text="item.categorie.toLowerCase().includes('haut') ? '👕' : (item.categorie.toLowerCase().includes('bas') ? '👖' : '👟')"></span>
                     </template>
-                    <button class="absolute top-2 right-2 w-8 h-8 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center text-red-300 hover:text-red-500 transition-colors">
+                    <button @click.stop="toggleFavorite(item.id)" 
+                            class="absolute top-2 right-2 w-8 h-8 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center transition-colors"
+                            :class="isFavorite(item.id) ? 'text-red-500' : 'text-red-300 hover:text-red-500'">
                         ❤
                     </button>
                 </div>

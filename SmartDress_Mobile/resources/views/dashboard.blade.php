@@ -8,10 +8,27 @@
     error: null,
 
     async init() {
+        const token = localStorage.getItem('auth_token');
+        if (!token) {
+            window.location.href = '{{ route("login") }}';
+            return;
+        }
         this.fetchWeather();
         try {
-            const res = await fetch('http://10.0.2.2:8000/api/vetements');
-            if (!res.ok) throw new Error('Erreur HTTP: ' + res.status);
+            const res = await fetch('http://10.0.2.2:8000/api/vetements', {
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                    'Accept': 'application/json'
+                }
+            });
+            if (!res.ok) {
+                if (res.status === 401) {
+                    localStorage.removeItem('auth_token');
+                    window.location.href = '{{ route("login") }}';
+                    return;
+                }
+                throw new Error('Erreur HTTP: ' + res.status);
+            }
             const json = await res.json();
             this.vetements = json.data || json;
             this.generateSuggestion();

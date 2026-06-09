@@ -25,3 +25,7 @@ Route::get('/profile', function () {
 Route::get('/stats', function () {
     return view('stats');
 })->name('stats');
+
+Route::get('/login', function () {
+    return view('login');
+})->name('login');

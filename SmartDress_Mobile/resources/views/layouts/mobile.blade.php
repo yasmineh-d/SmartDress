@@ -50,6 +50,67 @@
     x-data="{ 
         mobileMenuOpen: false, 
         modalAddOpen: false,
+        photoPreview: null,
+        previewImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                this.photoPreview = URL.createObjectURL(file);
+            } else {
+                this.photoPreview = null;
+            }
+        },
+        async submitVetement(event) {
+            const form = event.target;
+            const formData = new FormData(form);
+            
+            const checkedSeasons = form.querySelectorAll('.saison-checkbox:checked');
+            if (checkedSeasons.length > 2) {
+                alert('Vous ne pouvez pas sélectionner plus de 2 saisons.');
+                return;
+            }
+            
+            const seasons = Array.from(checkedSeasons).map(cb => cb.value).join(',');
+            formData.delete('saison[]');
+            formData.append('saison', seasons);
+            
+            const token = localStorage.getItem('auth_token');
+            if (!token) {
+                formData.append('user_id', '2'); // Yasmine ID par défaut pour l'étape 1
+            }
+            
+            try {
+                const headers = {};
+                if (token) {
+                    headers['Authorization'] = 'Bearer ' + token;
+                }
+                headers['Accept'] = 'application/json';
+                
+                const res = await fetch('http://10.0.2.2:8000/api/vetements', {
+                    method: 'POST',
+                    headers: headers,
+                    body: formData
+                });
+                
+                if (!res.ok) {
+                    const errData = await res.json();
+                    throw new Error(errData.message || 'Erreur lors de la création');
+                }
+                
+                if (typeof this.init === 'function') {
+                    await this.init();
+                } else {
+                    window.location.reload();
+                }
+                
+                form.reset();
+                this.photoPreview = null;
+                this.modalAddOpen = false;
+                alert('Vêtement ajouté avec succès !');
+            } catch (err) {
+                console.error(err);
+                alert('Erreur : ' + err.message);
+            }
+        },
         @stack('x-data-state')
     }">
 
@@ -62,6 +123,7 @@
     <!-- Mobile Mockup Container -->
     <div class="w-full sm:max-w-md md:max-w-lg h-screen sm:h-auto sm:my-8 bg-offwhite sm:min-h-[90vh] sm:rounded-[3.5rem] shadow-2xl relative z-10 flex flex-col overflow-hidden sm:border-[8px] border-white/20">
 
+        @if(!request()->routeIs('login'))
         <!-- Off-canvas Menu (Sidebar Mobile) -->
         <div class="absolute inset-0 z-[100] transition-transform duration-500 ease-in-out pointer-events-none"
              :class="mobileMenuOpen ? 'translate-x-0' : 'translate-x-[-100%]'" x-cloak>
@@ -104,7 +166,7 @@
                 </nav>
 
                 <div class="p-8 border-t border-tan/10">
-                    <a href="{{ url('/') }}" class="flex items-center gap-4 p-4 text-red-400 hover:text-red-500 transition-colors">
+                    <a href="{{ url('/') }}" @click="localStorage.removeItem('auth_token')" class="flex items-center gap-4 p-4 text-red-400 hover:text-red-500 transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                         </svg>
@@ -134,6 +196,7 @@
                 </div>
             </div>
         </header>
+        @endif
 
         <main class="max-w-full mx-auto p-6 space-y-8 flex-1 overflow-y-auto pb-24">
             @yield('content')
@@ -163,26 +226,56 @@
                     </svg>
                 </button>
             </div>
-            <form class="space-y-6" @submit.prevent="modalAddOpen = false">
+            <form class="space-y-6" @submit.prevent="submitVetement($event)">
                 <div class="flex justify-center">
-                    <div class="w-24 h-24 bg-cream/30 border-2 border-dashed border-tan/20 rounded-3xl flex flex-col items-center justify-center text-tan hover:bg-cream/50 transition-colors cursor-pointer">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
-                        <span class="text-[9px] font-bold uppercase tracking-wider">Photo</span>
-                    </div>
+                    <label class="w-24 h-24 bg-cream/30 border-2 border-dashed border-tan/20 rounded-3xl flex flex-col items-center justify-center text-tan hover:bg-cream/50 transition-colors cursor-pointer relative overflow-hidden">
+                        <input type="file" name="photo" accept="image/*" class="sr-only" @change="previewImage($event)">
+                        <template x-if="photoPreview">
+                            <img :src="photoPreview" class="absolute inset-0 w-full h-full object-cover">
+                        </template>
+                        <template x-if="!photoPreview">
+                            <div class="flex flex-col items-center justify-center text-center p-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                                <span class="text-[9px] font-bold uppercase tracking-wider">Photo</span>
+                            </div>
+                        </template>
+                    </label>
                 </div>
                 <div class="space-y-4">
-                    <input type="text" placeholder="Nom de l'article (ex: Veste cuir)"
+                    <input type="text" name="nom" required placeholder="Nom de l'article (ex: Veste cuir)"
                         class="w-full px-5 py-4 bg-cream/20 border border-tan/10 rounded-2xl focus:border-moss outline-none transition-all font-medium placeholder:text-tan/40 text-sm placeholder:italic">
-                    <select class="w-full px-5 py-4 bg-cream/20 border border-tan/10 rounded-2xl focus:border-moss outline-none transition-all font-medium text-sm text-bark/60 appearance-none">
+                    <select name="categorie" required class="w-full px-5 py-4 bg-cream/20 border border-tan/10 rounded-2xl focus:border-moss outline-none transition-all font-medium text-sm text-bark/60 appearance-none">
                         <option value="">Choisir une catégorie...</option>
-                        <option value="hauts">Hauts</option>
-                        <option value="bas">Bas</option>
-                        <option value="chaussures">Chaussures</option>
+                        <option value="Haut">Hauts</option>
+                        <option value="Bas">Bas</option>
+                        <option value="Chaussures">Chaussures</option>
                     </select>
+                    
+                    <div class="space-y-2">
+                        <label class="px-2 text-[10px] font-bold text-tan uppercase tracking-widest block">Saisons (Max 2)</label>
+                        <div class="grid grid-cols-2 gap-2 text-xs">
+                            <label class="flex items-center gap-2 bg-cream/20 p-2.5 rounded-xl border border-tan/10 cursor-pointer">
+                                <input type="checkbox" name="saison[]" value="printemps" class="saison-checkbox rounded text-moss focus:ring-moss border-tan/30 size-4" @change="if ($el.checked && document.querySelectorAll('.saison-checkbox:checked').length > 2) { $el.checked = false; alert('Vous ne pouvez pas sélectionner plus de 2 saisons.'); }">
+                                <span>Printemps</span>
+                            </label>
+                            <label class="flex items-center gap-2 bg-cream/20 p-2.5 rounded-xl border border-tan/10 cursor-pointer">
+                                <input type="checkbox" name="saison[]" value="ete" class="saison-checkbox rounded text-moss focus:ring-moss border-tan/30 size-4" @change="if ($el.checked && document.querySelectorAll('.saison-checkbox:checked').length > 2) { $el.checked = false; alert('Vous ne pouvez pas sélectionner plus de 2 saisons.'); }">
+                                <span>Été</span>
+                            </label>
+                            <label class="flex items-center gap-2 bg-cream/20 p-2.5 rounded-xl border border-tan/10 cursor-pointer">
+                                <input type="checkbox" name="saison[]" value="automne" class="saison-checkbox rounded text-moss focus:ring-moss border-tan/30 size-4" @change="if ($el.checked && document.querySelectorAll('.saison-checkbox:checked').length > 2) { $el.checked = false; alert('Vous ne pouvez pas sélectionner plus de 2 saisons.'); }">
+                                <span>Automne</span>
+                            </label>
+                            <label class="flex items-center gap-2 bg-cream/20 p-2.5 rounded-xl border border-tan/10 cursor-pointer">
+                                <input type="checkbox" name="saison[]" value="hiver" class="saison-checkbox rounded text-moss focus:ring-moss border-tan/30 size-4" @change="if ($el.checked && document.querySelectorAll('.saison-checkbox:checked').length > 2) { $el.checked = false; alert('Vous ne pouvez pas sélectionner plus de 2 saisons.'); }">
+                                <span>Hiver</span>
+                            </label>
+                        </div>
+                    </div>
                 </div>
                 <button type="submit" class="w-full py-5 bg-bark text-white rounded-full text-[10px] font-bold uppercase tracking-[0.2em] shadow-xl shadow-bark/20 hover:bg-moss transition-all">
                     Ajouter l'article
@@ -190,6 +283,7 @@
             </form>
         </div>
 
+        @if(!request()->routeIs('login'))
         <!-- Bottom Navigation Bar (Mobile Style) -->
         <nav class="sticky bottom-0 left-0 right-0 bg-white/95 backdrop-blur-xl border-t border-tan/10 px-8 py-4 flex justify-between items-center z-50 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
             <a href="{{ route('dashboard') }}" class="flex flex-col items-center gap-1 {{ request()->routeIs('dashboard') ? 'text-moss' : 'text-tan hover:text-bark' }}">
@@ -226,6 +320,7 @@
                 </svg>
             </a>
         </nav>
+        @endif
     </div> <!-- End Mobile Mockup Container -->
 
     @stack('scripts')

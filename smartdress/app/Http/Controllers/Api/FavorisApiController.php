@@ -15,18 +15,17 @@ class FavorisApiController extends Controller
     ) {
     }
 
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
         return response()->json([
             'success' => true,
-            'data' => $this->favorisService->getAllWithRelations(),
+            'data' => $this->favorisService->getForUser($request->user()),
         ]);
     }
 
     public function store(Request $request): JsonResponse
     {
         $validated = $request->validate([
-            'user_id' => 'required|exists:users,id',
             'vetement_id' => 'nullable|exists:vetements,id',
             'tenue_id' => 'nullable|exists:tenues,id',
         ]);
@@ -38,7 +37,14 @@ class FavorisApiController extends Controller
             ], 400);
         }
 
-        $favori = $this->favorisService->create($validated);
+        if ($this->favorisService->existsForUser($request->user(), $validated)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Déjà en favoris.',
+            ], 400);
+        }
+
+        $favori = $this->favorisService->createForUser($request->user(), $validated);
 
         return response()->json([
             'success' => true,

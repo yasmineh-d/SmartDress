@@ -15,11 +15,11 @@ class TenueApiController extends Controller
     ) {
     }
 
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
         return response()->json([
             'success' => true,
-            'data' => $this->tenueService->getAllWithClothes(),
+            'data' => $this->tenueService->getForUser($request->user())->load('vetements'),
         ]);
     }
 
@@ -29,12 +29,11 @@ class TenueApiController extends Controller
             'nom' => 'required|string|max:255',
             'meteo_adaptee' => 'nullable|string',
             'conseil_ia' => 'nullable|string',
-            'user_id' => 'required|exists:users,id',
             'vetements' => 'nullable|array',
             'vetements.*' => 'exists:vetements,id',
         ]);
 
-        $tenue = $this->tenueService->create($validated);
+        $tenue = $this->tenueService->createForUser($request->user(), $validated);
 
         return response()->json([
             'success' => true,
