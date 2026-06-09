@@ -112,7 +112,8 @@
             }
         },
         @stack('x-data-state')
-    }">
+    }"
+    x-init="if(typeof init === 'function') { init(); }">
 
     <!-- Background Flow Effect -->
     <div class="fixed inset-0 z-0 pointer-events-none">
