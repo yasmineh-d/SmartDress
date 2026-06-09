@@ -7,16 +7,31 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
+        Schema::create('saisons', function (Blueprint $table) {
+            $table->id();
+            $table->string('nom')->unique();
+            $table->timestamps();
+        });
+
+        Schema::create('saison_vetement', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('vetement_id')->constrained('vetements')->onDelete('cascade');
+            $table->foreignId('saison_id')->constrained('saisons')->onDelete('cascade');
+            $table->timestamps();
+        });
+
         Schema::table('vetements', function (Blueprint $table) {
-            // On stocke les saisons sous forme de tableau JSON (ex: ["printemps", "ete"])
-            $table->json('saisons')->nullable()->after('categorie');
+            $table->dropColumn('saison');
         });
     }
 
     public function down(): void
     {
         Schema::table('vetements', function (Blueprint $table) {
-            $table->dropColumn('saisons');
+            $table->string('saison')->nullable();
         });
+
+        Schema::dropIfExists('saison_vetement');
+        Schema::dropIfExists('saisons');
     }
 };

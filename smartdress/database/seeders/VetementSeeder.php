@@ -42,7 +42,7 @@ class VetementSeeder extends Seeder
             $data = array_combine($header, $row); // associer colonnes et valeurs
 
             // 👕 Créer le vêtement s'il n'existe pas
-            Vetement::firstOrCreate(
+            $vetement = Vetement::firstOrCreate(
                 [
                     'nom' => $data['nom'],
                     'user_id' => $user->id,
@@ -50,10 +50,21 @@ class VetementSeeder extends Seeder
                 [
                     'categorie' => $data['categorie'],
                     'couleur' => $data['couleur'],
-                    'saison' => $data['saison'],
                     'style' => $data['style'],
                 ]
             );
+
+            // Associer la saison via la relation Many-to-Many
+            $saisonInput = $data['saison'] ?? '';
+            if (!empty($saisonInput)) {
+                if ($saisonInput === 'Toute saison') {
+                    $saisonNames = ['printemps', 'ete', 'automne', 'hiver'];
+                } else {
+                    $saisonNames = [strtolower(trim(str_replace(['É', 'é'], 'e', $saisonInput)))];
+                }
+                $saisonIds = \App\Models\Saison::whereIn('nom', $saisonNames)->pluck('id')->toArray();
+                $vetement->saisons()->sync($saisonIds);
+            }
         }
     }
 }

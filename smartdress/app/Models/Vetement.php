@@ -10,15 +10,23 @@ class Vetement extends Model
         'nom',
         'categorie',
         'couleur',
-        'saison', // Ton champ existant
         'style',
         'user_id',
     ];
 
-    // On ajoute le cast ici pour transformer automatiquement la chaîne JSON en tableau PHP
-    protected $casts = [
-        'saison' => 'array',
-    ];
+    /**
+     * Charger automatiquement la relation saisons.
+     */
+    protected $with = ['saisons'];
+
+    /**
+     * Accesseur : Récupère la liste des noms des saisons associées.
+     * Assure la compatibilité avec toutes les vues existantes.
+     */
+    public function getSaisonAttribute(): array
+    {
+        return $this->saisons->pluck('nom')->toArray();
+    }
 
     public function user()
     {
@@ -33,5 +41,13 @@ class Vetement extends Model
     public function tenues()
     {
         return $this->belongsToMany(Tenue::class, 'tenue_vetement');
+    }
+
+    /**
+     * Relation Many-to-Many avec les Saisons.
+     */
+    public function saisons()
+    {
+        return $this->belongsToMany(Saison::class, 'saison_vetement');
     }
 }

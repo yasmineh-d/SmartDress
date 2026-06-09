@@ -41,7 +41,14 @@ class VetementService
      */
     public function create(array $data): Vetement
     {
-        return Vetement::create($data);
+        $saisonInput = $data['saison'] ?? null;
+        unset($data['saison']);
+
+        $vetement = Vetement::create($data);
+
+        $this->syncSaisons($vetement, $saisonInput);
+
+        return $vetement->load(['photos', 'saisons']);
     }
 
     /**
@@ -51,9 +58,12 @@ class VetementService
      */
     public function createForUser(User $user, array $data, ?UploadedFile $photo = null): Vetement
     {
-        unset($data['photo']);
+        $saisonInput = $data['saison'] ?? null;
+        unset($data['photo'], $data['saison']);
 
         $vetement = $user->vetements()->create($data);
+
+        $this->syncSaisons($vetement, $saisonInput);
 
         if ($photo) {
             $path = $photo->store('photos', 'public');
@@ -64,7 +74,7 @@ class VetementService
             ]);
         }
 
-        return $vetement->load('photos');
+        return $vetement->load(['photos', 'saisons']);
     }
 
     /**
@@ -82,9 +92,37 @@ class VetementService
      */
     public function update(Vetement $vetement, array $data): Vetement
     {
+        $saisonInput = $data['saison'] ?? null;
+        unset($data['saison']);
+
         $vetement->update($data);
 
-        return $vetement->refresh();
+        $this->syncSaisons($vetement, $saisonInput);
+
+        return $vetement->refresh()->load('saisons');
+    }
+
+    /**
+     * Synchronise les saisons de l'input vers la relation pivot Many-to-Many.
+     */
+    private function syncSaisons(Vetement $vetement, mixed $saisonInput): void
+    {
+        if (empty($saisonInput)) {
+            $vetement->saisons()->detach();
+            return;
+        }
+
+        if (is_string($saisonInput)) {
+            $saisonInput = explode(',', $saisonInput);
+        }
+
+        $saisonNames = array_map(function ($s) {
+            // Uniformisation en minuscules et sans accents (ex: "Été" -> "ete")
+            return strtolower(trim(str_replace(['É', 'é'], 'e', $s)));
+        }, (array) $saisonInput);
+
+        $saisonIds = \App\Models\Saison::whereIn('nom', $saisonNames)->pluck('id')->toArray();
+        $vetement->saisons()->sync($saisonIds);
     }
 
     /**
