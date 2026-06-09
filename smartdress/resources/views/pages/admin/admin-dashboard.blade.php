@@ -224,6 +224,7 @@
             </nav>
 
             <div class="hidden lg:flex items-center gap-3">
+                @auth
                 <div class="flex items-center gap-3">
                     <a href="{{ route('profile') }}"
                         class="flex items-center gap-2 px-4 py-2 bg-cream/50 rounded-full text-xs font-bold text-bark hover:bg-cream transition-all border border-tan/10">
@@ -239,6 +240,7 @@
                             class="text-xs font-bold text-tan hover:text-bark uppercase tracking-widest px-2 transition-all">Déconnexion</button>
                     </form>
                 </div>
+                @endauth
             </div>
 
             <!-- Mobile hamburger -->
@@ -261,12 +263,14 @@
             <div class="px-6 py-4 flex flex-col gap-3">
                 <hr class="border-tan/30 my-1" />
                 <div class="flex flex-col gap-3">
+                    @auth
                     <a href="{{ route('profile') }}" class="sd-btn-ghost text-center"
                         @click="mobileMenuOpen = false">{{ auth()->user()->name }}</a>
                     <form action="{{ route('logout') }}" method="POST" class="w-full">
                         @csrf
                         <button type="submit" class="sd-btn-primary w-full text-center">Déconnexion</button>
                     </form>
+                    @endauth
                 </div>
             </div>
         </div>
@@ -335,8 +339,8 @@
                         <!-- ── Utilise les getters dynamiques ── -->
                         <span class="text-xs font-bold text-moss uppercase tracking-[0.3em] mb-2 block"
                             x-text="tabLabel"></span>
-                        <h1 class="text-5xl font-display font-medium text-bark italic leading-tight"
-                            x-text="tabTitle"></h1>
+                        <h1 class="text-5xl font-display font-medium text-bark italic leading-tight" x-text="tabTitle">
+                        </h1>
                     </div>
                 </div>
 
@@ -363,7 +367,8 @@
                             </svg>
                         </div>
                         <p class="text-[10px] font-bold text-tan uppercase tracking-widest mb-1">Tenues Générées</p>
-                        <p class="text-4xl font-display font-medium text-bark italic">{{ number_format($totalTenues ?? 0) }}</p>
+                        <p class="text-4xl font-display font-medium text-bark italic">
+                            {{ number_format($totalTenues ?? 0) }}</p>
                     </div>
 
                     <div class="bg-white p-8 rounded-[2rem] border border-tan/10 shadow-sm">
@@ -375,7 +380,8 @@
                             </svg>
                         </div>
                         <p class="text-[10px] font-bold text-tan uppercase tracking-widest mb-1">Total Vêtements</p>
-                        <p class="text-4xl font-display font-medium text-bark italic">{{ number_format($totalVetements ?? 0) }}</p>
+                        <p class="text-4xl font-display font-medium text-bark italic">
+                            {{ number_format($totalVetements ?? 0) }}</p>
                     </div>
                 </div>
 
@@ -422,8 +428,11 @@
                                     <option value="ajout">Ajout vêtement</option>
                                 </select>
                                 <div class="absolute top-1/2 end-4 -translate-y-1/2 pointer-events-none text-tan">
-                                    <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="m7 15 5 5 5-5"></path><path d="m7 9 5-5 5 5"></path>
+                                    <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24"
+                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="m7 15 5 5 5-5"></path>
+                                        <path d="m7 9 5-5 5 5"></path>
                                     </svg>
                                 </div>
                             </div>
@@ -437,8 +446,11 @@
                                     <option value="user">User</option>
                                 </select>
                                 <div class="absolute top-1/2 end-3.5 -translate-y-1/2 pointer-events-none text-tan">
-                                    <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="m7 15 5 5 5-5"></path><path d="m7 9 5-5 5 5"></path>
+                                    <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24"
+                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="m7 15 5 5 5-5"></path>
+                                        <path d="m7 9 5-5 5 5"></path>
                                     </svg>
                                 </div>
                             </div>
@@ -450,8 +462,11 @@
                                     <option value="inactif">Inactif</option>
                                 </select>
                                 <div class="absolute top-1/2 end-3.5 -translate-y-1/2 pointer-events-none text-tan">
-                                    <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/xl" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="m7 15 5 5 5-5"></path><path d="m7 9 5-5 5 5"></path>
+                                    <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/xl" width="24"
+                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="m7 15 5 5 5-5"></path>
+                                        <path d="m7 9 5-5 5 5"></path>
                                     </svg>
                                 </div>
                             </div>
@@ -468,8 +483,11 @@
                                     <option value="accessories">Accessories</option>
                                 </select>
                                 <div class="absolute top-1/2 end-3.5 -translate-y-1/2 pointer-events-none text-tan">
-                                    <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="m7 15 5 5 5-5"></path><path d="m7 9 5-5 5 5"></path>
+                                    <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24"
+                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="m7 15 5 5 5-5"></path>
+                                        <path d="m7 9 5-5 5 5"></path>
                                     </svg>
                                 </div>
                             </div>
@@ -482,8 +500,11 @@
                                     <option value="signalé">Signalé</option>
                                 </select>
                                 <div class="absolute top-1/2 end-3.5 -translate-y-1/2 pointer-events-none text-tan">
-                                    <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="m7 15 5 5 5-5"></path><path d="m7 9 5-5 5 5"></path>
+                                    <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24"
+                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="m7 15 5 5 5-5"></path>
+                                        <path d="m7 9 5-5 5 5"></path>
                                     </svg>
                                 </div>
                             </div>
@@ -511,20 +532,27 @@
                                                 <p class="text-sm font-bold text-bark" x-text="activity.name"></p>
                                             </div>
                                         </td>
-                                        <td class="px-12 py-8 text-sm text-bark/70 italic" x-text="activity.action"></td>
+                                        <td class="px-12 py-8 text-sm text-bark/70 italic" x-text="activity.action">
+                                        </td>
                                         <td class="px-12 py-8 text-xs text-tan text-center" x-text="activity.time"></td>
                                         <td class="px-12 py-8">
                                             <div class="flex items-center justify-center gap-4">
                                                 <button @click="openEditModal(activity)"
                                                     class="p-2 text-tan hover:text-moss transition-colors">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
+                                                        viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                                     </svg>
                                                 </button>
                                                 <button @click="confirmDelete(activity.id)"
                                                     class="p-2 text-tan hover:text-red-400 transition-colors">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
+                                                        viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                                     </svg>
                                                 </button>
                                             </div>
@@ -556,7 +584,8 @@
                                             </div>
                                         </td>
                                         <td class="px-12 py-8">
-                                            <span class="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider"
+                                            <span
+                                                class="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider"
                                                 :class="user.role === 'Admin' ? 'bg-moss/10 text-moss' : 'bg-tan/10 text-tan'"
                                                 x-text="user.role"></span>
                                         </td>
@@ -569,14 +598,20 @@
                                             <div class="flex items-center justify-center gap-4">
                                                 <button @click="openEditModal(user)"
                                                     class="p-2 text-tan hover:text-moss transition-colors">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
+                                                        viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                                     </svg>
                                                 </button>
                                                 <button @click="confirmDelete(user.id)"
                                                     class="p-2 text-tan hover:text-red-400 transition-colors">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
+                                                        viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                                     </svg>
                                                 </button>
                                             </div>
@@ -609,14 +644,19 @@
                                         <td class="px-12 py-6">
                                             <div class="flex items-center gap-4">
                                                 <!-- Image ou placeholder -->
-                                                <div class="w-12 h-12 rounded-2xl bg-cream border border-tan/10 overflow-hidden flex-shrink-0 flex items-center justify-center">
+                                                <div
+                                                    class="w-12 h-12 rounded-2xl bg-cream border border-tan/10 overflow-hidden flex-shrink-0 flex items-center justify-center">
                                                     <template x-if="vetement.image">
                                                         <img :src="vetement.image" :alt="vetement.nom"
                                                             class="w-full h-full object-cover">
                                                     </template>
                                                     <template x-if="!vetement.image">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-tan/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                            class="w-5 h-5 text-tan/40" fill="none" viewBox="0 0 24 24"
+                                                            stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="1.5"
+                                                                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                                         </svg>
                                                     </template>
                                                 </div>
@@ -629,7 +669,8 @@
 
                                         <!-- Catégorie -->
                                         <td class="px-12 py-6">
-                                            <span class="px-3 py-1 bg-cream rounded-full text-[10px] font-bold text-bark/60 uppercase tracking-wider"
+                                            <span
+                                                class="px-3 py-1 bg-cream rounded-full text-[10px] font-bold text-bark/60 uppercase tracking-wider"
                                                 x-text="vetement.categorie"></span>
                                         </td>
 
@@ -638,10 +679,10 @@
 
                                         <!-- Statut avec badge coloré -->
                                         <td class="px-12 py-6 text-center">
-                                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider"
+                                            <span
+                                                class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider"
                                                 :class="statutClass(vetement.statut)">
-                                                <span class="w-1.5 h-1.5 rounded-full"
-                                                    :class="{
+                                                <span class="w-1.5 h-1.5 rounded-full" :class="{
                                                         'bg-moss': vetement.statut === 'Validé',
                                                         'bg-bark/40': vetement.statut === 'En attente',
                                                         'bg-red-400': vetement.statut === 'Signalé'
@@ -655,14 +696,20 @@
                                             <div class="flex items-center justify-center gap-4">
                                                 <button @click="openEditModal(vetement)"
                                                     class="p-2 text-tan hover:text-moss transition-colors">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
+                                                        viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                                     </svg>
                                                 </button>
                                                 <button @click="confirmDelete(vetement.id)"
                                                     class="p-2 text-tan hover:text-red-400 transition-colors">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
+                                                        viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                                     </svg>
                                                 </button>
                                             </div>
@@ -679,7 +726,47 @@
         </main>
     </div>
 
-
+    <!-- FOOTER -->
+    <footer class="sd-footer">
+        <div class="max-w-screen-xl mx-auto px-6 lg:px-12 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+            <div>
+                <a href="{{ url('/') }}" class="sd-logo sd-logo--light">Smart<span>Dress</span></a>
+                <p class="sd-footer-tag">Votre garde-robe digitale intelligente. Suggestions de tenues basées sur la
+                    météo et vos préférences.</p>
+            </div>
+            <div>
+                <h4 class="sd-footer-heading">Application</h4>
+                <ul class="sd-footer-links">
+                    <li><a href="{{ url('/#features') }}">Fonctionnalités</a></li>
+                    <li><a href="{{ route('garde-robe') }}">Garde-robe</a></li>
+                    <li><a href="{{ route('dashboard') }}">Suggestions</a></li>
+                    <li><a href="#">Notifications</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="sd-footer-heading">Compte</h4>
+                <ul class="sd-footer-links">
+                    <li><a href="{{ route('login', ['mode' => 'register']) }}">S'inscrire</a></li>
+                    <li><a href="{{ route('login', ['mode' => 'login']) }}">Se connecter</a></li>
+                    <li><a href="{{ route('profile') }}">Mon profil</a></li>
+                    <li><a href="#">Paramètres</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="sd-footer-heading">Projet</h4>
+                <ul class="sd-footer-links">
+                    <li><a href="#">À propos</a></li>
+                    <li><a href="#">Rapport PFF</a></li>
+                    <li><a href="{{ url('/contact') }}">Contact</a></li>
+                    <li><a href="#">Mentions légales</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="sd-footer-bottom">
+            <span>© 2025–2026 SmartDress · Yasmine Haddad</span>
+            <span>Formation Développement Mobile · Mode Bootcamp</span>
+        </div>
+    </footer>
 
     <!-- Modals -->
     <div x-show="showModal"
@@ -693,12 +780,14 @@
                 <template x-if="modalType === 'activity'">
                     <div class="space-y-6">
                         <div>
-                            <label class="text-[10px] font-bold text-tan uppercase tracking-widest mb-2 block">Nom</label>
+                            <label
+                                class="text-[10px] font-bold text-tan uppercase tracking-widest mb-2 block">Nom</label>
                             <input type="text" x-model="currentActivity.name"
                                 class="w-full px-6 py-4 bg-cream/30 border border-tan/10 rounded-2xl focus:border-moss outline-none text-sm">
                         </div>
                         <div>
-                            <label class="text-[10px] font-bold text-tan uppercase tracking-widest mb-2 block">Action</label>
+                            <label
+                                class="text-[10px] font-bold text-tan uppercase tracking-widest mb-2 block">Action</label>
                             <div class="relative">
                                 <select x-model="currentActivity.action"
                                     class="relative py-4 ps-6 pe-12 flex gap-x-2 text-nowrap w-full cursor-pointer bg-cream/30 border border-tan/10 rounded-2xl text-start text-sm font-medium text-bark focus:outline-none focus:ring-2 focus:ring-moss/20 focus:border-moss transition-all appearance-none">
@@ -706,8 +795,11 @@
                                     <option value="Ajout vêtement">Ajout vêtement</option>
                                 </select>
                                 <div class="absolute top-1/2 end-5 -translate-y-1/2 pointer-events-none text-tan">
-                                    <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="m7 15 5 5 5-5"></path><path d="m7 9 5-5 5 5"></path>
+                                    <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
+                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="m7 15 5 5 5-5"></path>
+                                        <path d="m7 9 5-5 5 5"></path>
                                     </svg>
                                 </div>
                             </div>
@@ -718,18 +810,21 @@
                 <template x-if="modalType === 'user'">
                     <div class="space-y-6">
                         <div>
-                            <label class="text-[10px] font-bold text-tan uppercase tracking-widest mb-2 block">Nom complet</label>
+                            <label class="text-[10px] font-bold text-tan uppercase tracking-widest mb-2 block">Nom
+                                complet</label>
                             <input type="text" x-model="currentUser.name"
                                 class="w-full px-6 py-4 bg-cream/30 border border-tan/10 rounded-2xl focus:border-moss outline-none text-sm">
                         </div>
                         <div>
-                            <label class="text-[10px] font-bold text-tan uppercase tracking-widest mb-2 block">Email</label>
+                            <label
+                                class="text-[10px] font-bold text-tan uppercase tracking-widest mb-2 block">Email</label>
                             <input type="email" x-model="currentUser.email"
                                 class="w-full px-6 py-4 bg-cream/30 border border-tan/10 rounded-2xl focus:border-moss outline-none text-sm">
                         </div>
                         <div class="grid grid-cols-2 gap-4">
                             <div>
-                                <label class="text-[10px] font-bold text-tan uppercase tracking-widest mb-2 block">Rôle</label>
+                                <label
+                                    class="text-[10px] font-bold text-tan uppercase tracking-widest mb-2 block">Rôle</label>
                                 <div class="relative">
                                     <select x-model="currentUser.role"
                                         class="relative py-4 ps-6 pe-12 flex gap-x-2 text-nowrap w-full cursor-pointer bg-cream/30 border border-tan/10 rounded-2xl text-start text-sm font-medium text-bark focus:outline-none focus:ring-2 focus:ring-moss/20 focus:border-moss transition-all appearance-none">
@@ -737,14 +832,18 @@
                                         <option value="Admin">Admin</option>
                                     </select>
                                     <div class="absolute top-1/2 end-5 -translate-y-1/2 pointer-events-none text-tan">
-                                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="m7 15 5 5 5-5"></path><path d="m7 9 5-5 5 5"></path>
+                                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
+                                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="m7 15 5 5 5-5"></path>
+                                            <path d="m7 9 5-5 5 5"></path>
                                         </svg>
                                     </div>
                                 </div>
                             </div>
                             <div>
-                                <label class="text-[10px] font-bold text-tan uppercase tracking-widest mb-2 block">Statut</label>
+                                <label
+                                    class="text-[10px] font-bold text-tan uppercase tracking-widest mb-2 block">Statut</label>
                                 <div class="relative">
                                     <select x-model="currentUser.status"
                                         class="relative py-4 ps-6 pe-12 flex gap-x-2 text-nowrap w-full cursor-pointer bg-cream/30 border border-tan/10 rounded-2xl text-start text-sm font-medium text-bark focus:outline-none focus:ring-2 focus:ring-moss/20 focus:border-moss transition-all appearance-none">
@@ -752,8 +851,11 @@
                                         <option value="Inactif">Inactif</option>
                                     </select>
                                     <div class="absolute top-1/2 end-5 -translate-y-1/2 pointer-events-none text-tan">
-                                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="m7 15 5 5 5-5"></path><path d="m7 9 5-5 5 5"></path>
+                                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
+                                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="m7 15 5 5 5-5"></path>
+                                            <path d="m7 9 5-5 5 5"></path>
                                         </svg>
                                     </div>
                                 </div>
@@ -766,18 +868,21 @@
                 <template x-if="modalType === 'vetement'">
                     <div class="space-y-6">
                         <div>
-                            <label class="text-[10px] font-bold text-tan uppercase tracking-widest mb-2 block">Nom du vêtement</label>
+                            <label class="text-[10px] font-bold text-tan uppercase tracking-widest mb-2 block">Nom du
+                                vêtement</label>
                             <input type="text" x-model="currentVetement.nom"
                                 class="w-full px-6 py-4 bg-cream/30 border border-tan/10 rounded-2xl focus:border-moss outline-none text-sm">
                         </div>
                         <div>
-                            <label class="text-[10px] font-bold text-tan uppercase tracking-widest mb-2 block">Utilisateur</label>
+                            <label
+                                class="text-[10px] font-bold text-tan uppercase tracking-widest mb-2 block">Utilisateur</label>
                             <input type="text" x-model="currentVetement.utilisateur"
                                 class="w-full px-6 py-4 bg-cream/30 border border-tan/10 rounded-2xl focus:border-moss outline-none text-sm">
                         </div>
                         <div class="grid grid-cols-2 gap-4">
                             <div>
-                                <label class="text-[10px] font-bold text-tan uppercase tracking-widest mb-2 block">Catégorie</label>
+                                <label
+                                    class="text-[10px] font-bold text-tan uppercase tracking-widest mb-2 block">Catégorie</label>
                                 <div class="relative">
                                     <select x-model="currentVetement.categorie"
                                         class="relative py-4 ps-6 pe-12 w-full cursor-pointer bg-cream/30 border border-tan/10 rounded-2xl text-sm font-medium text-bark focus:outline-none focus:ring-2 focus:ring-moss/20 focus:border-moss transition-all appearance-none">
@@ -788,14 +893,18 @@
                                         <option value="Accessories">Accessories</option>
                                     </select>
                                     <div class="absolute top-1/2 end-5 -translate-y-1/2 pointer-events-none text-tan">
-                                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="m7 15 5 5 5-5"></path><path d="m7 9 5-5 5 5"></path>
+                                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
+                                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="m7 15 5 5 5-5"></path>
+                                            <path d="m7 9 5-5 5 5"></path>
                                         </svg>
                                     </div>
                                 </div>
                             </div>
                             <div>
-                                <label class="text-[10px] font-bold text-tan uppercase tracking-widest mb-2 block">Statut</label>
+                                <label
+                                    class="text-[10px] font-bold text-tan uppercase tracking-widest mb-2 block">Statut</label>
                                 <div class="relative">
                                     <select x-model="currentVetement.statut"
                                         class="relative py-4 ps-6 pe-12 w-full cursor-pointer bg-cream/30 border border-tan/10 rounded-2xl text-sm font-medium text-bark focus:outline-none focus:ring-2 focus:ring-moss/20 focus:border-moss transition-all appearance-none">
@@ -804,8 +913,11 @@
                                         <option value="Signalé">Signalé</option>
                                     </select>
                                     <div class="absolute top-1/2 end-5 -translate-y-1/2 pointer-events-none text-tan">
-                                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="m7 15 5 5 5-5"></path><path d="m7 9 5-5 5 5"></path>
+                                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
+                                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="m7 15 5 5 5-5"></path>
+                                            <path d="m7 9 5-5 5 5"></path>
                                         </svg>
                                     </div>
                                 </div>
@@ -830,7 +942,8 @@
         <div class="bg-white w-full max-w-sm rounded-[3rem] p-10 text-center shadow-2xl border border-tan/10"
             @click.away="showDeleteModal = false">
             <h2 class="text-2xl font-display font-medium text-bark italic mb-4">Confirmation</h2>
-            <p class="text-sm text-bark/60 mb-8">Voulez-vous vraiment supprimer cet élément ? Cette action est irréversible.</p>
+            <p class="text-sm text-bark/60 mb-8">Voulez-vous vraiment supprimer cet élément ? Cette action est
+                irréversible.</p>
             <div class="flex gap-4">
                 <button @click="showDeleteModal = false"
                     class="flex-1 py-4 border border-tan/10 text-tan hover:text-bark font-bold text-[10px] uppercase tracking-widest rounded-full">Annuler</button>
@@ -841,7 +954,9 @@
     </div>
 
     <style>
-        [x-cloak] { display: none !important; }
+        [x-cloak] {
+            display: none !important;
+        }
     </style>
 
     <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>

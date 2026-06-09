@@ -14,6 +14,10 @@ class AdminController extends Controller
 
     public function index()
     {
+        if (!auth()->user() || !auth()->user()->hasRole('admin')) {
+            return redirect()->route('dashboard');
+        }
+
         // 1. Récupération des données existantes (Utilisateurs et Activités)
         $users = $this->adminDashboardService->getUsersForDashboard();
         $totalUsers = $users->count();

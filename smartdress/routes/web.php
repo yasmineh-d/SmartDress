@@ -118,11 +118,10 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('vetements', VetementController::class);
     Route::resource('tenues', TenueController::class);
     Route::resource('favoris-api', FavorisController::class);
+
+    // --- Pages Admin ---
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
 });
-
-
-// --- Pages Admin ---
-Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
 
 
 // --- Authentification (Logique) ---
