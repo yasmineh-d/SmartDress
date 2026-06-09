@@ -37,7 +37,7 @@ Route::middleware(['auth'])->group(function () {
         $bas = $user->vetements()->where('categorie', 'bas')->with('photos')->get();
         
         $totalArticles = $user->vetements()->count();
-        $totalFavoris = $user->favoris()->count();
+        $totalFavoris = $user->favoris()->whereNotNull('vetement_id')->count();
 
         // --- Logique de l'API Météo (Exemple OpenWeather) ---
         // Remplace 'VOTRE_CLE_API' par ta vraie clé OpenWeatherMap
@@ -91,6 +91,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/favoris', function () {
         $favoris = auth()->user()
             ->favoris()
+            ->whereNotNull('vetement_id')
             ->with(['vetement.photos', 'tenue'])
             ->latest()
             ->get();

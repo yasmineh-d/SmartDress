@@ -32,7 +32,7 @@ class WardrobeService
         // ou une relation de type "belongsToMany" ("favoris") vers "Vetement".
         // Le seeder ne montrait pas cette structure, on fait une requête factice ou conceptuelle.
         if (method_exists($user, 'favoris')) {
-            return $user->favoris()->with('vetement')->get();
+            return $user->favoris()->whereNotNull('vetement_id')->with('vetement')->get();
         }
 
         // Si la relation n'existe pas encore, on retourne une collection vide.

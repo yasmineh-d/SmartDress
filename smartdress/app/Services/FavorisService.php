@@ -18,11 +18,10 @@ class FavorisService
     }
 
     /**
-     * Retourne les favoris d'un utilisateur.
-     */
     public function getForUser(User $user): Collection
     {
         return $user->favoris()
+            ->whereNotNull('vetement_id')
             ->with(['vetement', 'tenue'])
             ->latest()
             ->get();
