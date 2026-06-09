@@ -859,7 +859,7 @@
 
     <!-- Premium Floating Toast Notifications -->
     @if ($errors->any() || session('success'))
-        <div class="fixed bottom-5 right-5 z-[100] flex flex-col gap-3 max-w-sm pointer-events-none">
+        <div class="fixed bottom-28 right-5 z-[100] flex flex-col gap-3 max-w-sm pointer-events-none">
             @if (session('success'))
                 <div
                     class="pointer-events-auto p-4 rounded-3xl bg-moss/95 backdrop-blur-md text-white shadow-2xl border border-white/20 flex items-center gap-3 animate-bounce">
