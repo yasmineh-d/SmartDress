@@ -216,7 +216,7 @@
                                             locales.</p>
                                     </div>
                                 </div>
-                                <span class="text-sm font-bold text-bark">Casablanca, Maroc</span>
+                                <span class="text-sm font-bold text-bark">Tanger, Maroc</span>
                             </div>
                         </div>
                     </div>

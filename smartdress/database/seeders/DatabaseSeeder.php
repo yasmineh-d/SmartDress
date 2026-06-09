@@ -18,11 +18,11 @@ class DatabaseSeeder extends Seeder
             RolePermissionSeeder::class,
             UserSeeder::class,
             SaisonSeeder::class,
-            VetementSeeder::class,
-            TenueSeeder::class,
-            TenueVetementSeeder::class,
-            CommentaireSeeder::class,
-            FavorisSeeder::class,
+            // VetementSeeder::class,
+            // TenueSeeder::class,
+            // TenueVetementSeeder::class,
+            // CommentaireSeeder::class,
+            // FavorisSeeder::class,
         ]);
     }
 }
