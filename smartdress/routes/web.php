@@ -126,7 +126,7 @@ Route::middleware(['auth'])->group(function () {
 
 // --- Authentification (Logique) ---
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::match(['get', 'post'], '/logout', [AuthController::class, 'logout'])->name('logout');
 
 // --- Compatibilité Mobiles ---
 Route::get('/mobile/dashboard', function () { return view('pages.public.dashboard_mobile'); })->name('mobile.dashboard');
