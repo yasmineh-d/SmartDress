@@ -166,7 +166,7 @@
                 </nav>
 
                 <div class="p-8 border-t border-tan/10">
-                    <a href="{{ url('/') }}" @click="localStorage.removeItem('auth_token')" class="flex items-center gap-4 p-4 text-red-400 hover:text-red-500 transition-colors">
+                    <a href="{{ url('/') }}" @click="localStorage.removeItem('auth_token'); localStorage.removeItem('user_name'); localStorage.removeItem('user_email');" class="flex items-center gap-4 p-4 text-red-400 hover:text-red-500 transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                         </svg>
@@ -190,8 +190,10 @@
                     <span style="font-weight: 600; font-style: italic; color: #889063; margin-left: -0.02em;">Dress</span>
                 </div>
                 <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-tan to-moss p-[2px]">
-                    <div class="w-full h-full bg-white rounded-[10px] flex items-center justify-center overflow-hidden">
-                        <img src="https://ui-avatars.com/api/?name=User&background=889063&color=fff" alt="Avatar">
+                    <div class="w-full h-full bg-white rounded-[10px] flex items-center justify-center overflow-hidden"
+                         x-data="{ avatarUrl: 'https://ui-avatars.com/api/?name=User&background=889063&color=fff' }"
+                         x-init="const name = localStorage.getItem('user_name'); if(name) { avatarUrl = 'https://ui-avatars.com/api/?name=' + encodeURIComponent(name) + '&background=889063&color=fff'; }">
+                        <img :src="avatarUrl" alt="Avatar">
                     </div>
                 </div>
             </div>

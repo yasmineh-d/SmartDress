@@ -1,5 +1,15 @@
 @extends('layouts.mobile', ['title' => 'SmartDress - Statistiques'])
 
+@push('x-data-state')
+    init() {
+        const token = localStorage.getItem('auth_token');
+        if (!token) {
+            window.location.href = '{{ route("login") }}';
+            return;
+        }
+    }
+@endpush
+
 @section('content')
     <h1 class="text-4xl font-display font-medium italic text-bark pb-4">Statistiques</h1>
     

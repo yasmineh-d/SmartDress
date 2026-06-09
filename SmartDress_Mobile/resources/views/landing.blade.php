@@ -47,7 +47,19 @@
 </head>
 
 <body class="font-body bg-offwhite text-bark overflow-x-hidden"
-    x-data="{ mobileMenuOpen: false, scrolled: false, isLoggedIn: {{ auth()->check() ? 'true' : 'false' }} }"
+    x-data="{ 
+        mobileMenuOpen: false, 
+        scrolled: false, 
+        isLoggedIn: false, 
+        userName: '',
+        get initials() {
+            return this.userName ? this.userName.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase() : 'U';
+        },
+        init() {
+            this.isLoggedIn = !!localStorage.getItem('auth_token');
+            this.userName = localStorage.getItem('user_name') || 'Utilisateur';
+        }
+    }"
     @scroll.window="scrolled = (window.pageYOffset > 20)">
 
     <!-- NAVBAR -->
@@ -65,24 +77,21 @@
             <div class="hidden lg:flex items-center gap-3">
                 <template x-if="!isLoggedIn">
                     <div class="flex items-center gap-3">
-                        <a href="{{ url('#') }}" class="sd-btn-ghost">Se connecter</a>
-                        <a href="{{ url('#') }}" class="sd-btn-primary">Commencer</a>
+                        <a href="{{ route('login') }}" class="sd-btn-ghost">Se connecter</a>
+                        <a href="{{ route('login') }}" class="sd-btn-primary">Commencer</a>
                     </div>
                 </template>
                 <template x-if="isLoggedIn">
                     <div class="flex items-center gap-3">
-                        <a href="{{ url('#') }}" class="flex items-center gap-2 px-4 py-2 bg-cream/50 rounded-full text-xs font-bold text-bark hover:bg-cream transition-all border border-tan/10">
-                            <div class="w-6 h-6 bg-tan rounded-full flex items-center justify-center text-[10px] text-white">
-                                {{ strtoupper(substr(auth()->user()->name ?? 'U', 0, 2)) }}
+                        <a href="{{ route('profile') }}" class="flex items-center gap-2 px-4 py-2 bg-cream/50 rounded-full text-xs font-bold text-bark hover:bg-cream transition-all border border-tan/10">
+                            <div class="w-6 h-6 bg-tan rounded-full flex items-center justify-center text-[10px] text-white" x-text="initials">
                             </div>
-                            Mon Profil
+                            <span x-text="userName">Mon Profil</span>
                         </a>
-                        <form method="POST" action="{{ url('#') }}" class="inline">
-                            @csrf
-                            <button type="submit" class="text-xs font-bold text-tan hover:text-bark uppercase tracking-widest px-2 transition-all">
-                                Déconnexion
-                            </button>
-                        </form>
+                        <button @click="localStorage.removeItem('auth_token'); localStorage.removeItem('user_name'); localStorage.removeItem('user_email'); isLoggedIn = false; window.location.reload();" 
+                                class="text-xs font-bold text-tan hover:text-bark uppercase tracking-widest px-2 transition-all">
+                            Déconnexion
+                        </button>
                     </div>
                 </template>
             </div>
@@ -112,17 +121,15 @@
                 <hr class="border-tan/30 my-1" />
                 <template x-if="!isLoggedIn">
                     <div class="flex flex-col gap-3">
-                        <a href="{{ url('#') }}" class="sd-btn-ghost text-center" @click="mobileMenuOpen = false">Se connecter</a>
-                        <a href="{{ url('#') }}" class="sd-btn-primary text-center" @click="mobileMenuOpen = false">Commencer gratuitement</a>
+                        <a href="{{ route('login') }}" class="sd-btn-ghost text-center" @click="mobileMenuOpen = false">Se connecter</a>
+                        <a href="{{ route('login') }}" class="sd-btn-primary text-center" @click="mobileMenuOpen = false">Commencer gratuitement</a>
                     </div>
                 </template>
                 <template x-if="isLoggedIn">
                     <div class="flex flex-col gap-3">
-                        <a href="{{ url('#') }}" class="sd-btn-ghost text-center" @click="mobileMenuOpen = false">Mon Profil</a>
-                        <form method="POST" action="{{ url('#') }}">
-                            @csrf
-                            <button type="submit" class="sd-btn-primary text-center w-full">Déconnexion</button>
-                        </form>
+                        <a href="{{ route('profile') }}" class="sd-btn-ghost text-center" @click="mobileMenuOpen = false">Mon Profil</a>
+                        <button @click="localStorage.removeItem('auth_token'); localStorage.removeItem('user_name'); localStorage.removeItem('user_email'); isLoggedIn = false; window.location.reload();" 
+                                class="sd-btn-primary text-center w-full">Déconnexion</button>
                     </div>
                 </template>
             </div>
@@ -146,7 +153,7 @@
             </p>
 
             <div class="flex flex-wrap gap-3 mb-8 sd-anim" style="animation-delay:.55s">
-                <a href="{{ route('dashboard') }}" class="sd-btn-primary sd-btn-lg">Essayer gratuitement</a>
+                <a :href="isLoggedIn ? '{{ route('dashboard') }}' : '{{ route('login') }}'" class="sd-btn-primary sd-btn-lg">Essayer gratuitement</a>
                 <a href="#how" class="sd-btn-ghost sd-btn-lg">Comment ça marche</a>
             </div>
 
@@ -653,7 +660,7 @@
             <p class="sd-cta-desc">Rejoignez des milliers d'utilisateurs qui ont transformé leur routine matinale grâce
                 à SmartDress.</p>
             <div class="flex flex-wrap justify-center gap-4">
-                <a href="{{ url('#') }}" class="sd-btn-primary sd-btn-lg">Créer un compte gratuit</a>
+                <a :href="isLoggedIn ? '{{ route('dashboard') }}' : '{{ route('login') }}'" class="sd-btn-primary sd-btn-lg">Créer un compte gratuit</a>
                 <a href="#features" class="sd-btn-ghost sd-btn-lg">En savoir plus</a>
             </div>
         </div>
@@ -680,10 +687,10 @@
             <div>
                 <h4 class="sd-footer-heading">Compte</h4>
                 <ul class="sd-footer-links">
-                    <li><a href="{{ url('#') }}">S'inscrire</a></li>
-                    <li><a href="{{ url('#') }}">Se connecter</a></li>
-                    <li><a href="{{ url('#') }}">Mon profil</a></li>
-                    <li><a href="{{ url('#') }}">Paramètres</a></li>
+                    <li><a :href="isLoggedIn ? '{{ route('dashboard') }}' : '{{ route('login') }}'">S'inscrire</a></li>
+                    <li><a :href="isLoggedIn ? '{{ route('dashboard') }}' : '{{ route('login') }}'">Se connecter</a></li>
+                    <li><a :href="isLoggedIn ? '{{ route('profile') }}' : '{{ route('login') }}'">Mon profil</a></li>
+                    <li><a :href="isLoggedIn ? '{{ route('profile') }}' : '{{ route('login') }}'">Paramètres</a></li>
                 </ul>
             </div>
             <div>

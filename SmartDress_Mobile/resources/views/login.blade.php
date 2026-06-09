@@ -46,6 +46,11 @@ function loginForm() {
         password: 'password',         // Pre-filled for easy testing
         loading: false,
         errorMessage: '',
+        init() {
+            if (localStorage.getItem('auth_token')) {
+                window.location.href = '{{ route("dashboard") }}';
+            }
+        },
         async submitLogin() {
             this.loading = true;
             this.errorMessage = '';
