@@ -55,7 +55,7 @@ function loginForm() {
             this.loading = true;
             this.errorMessage = '';
             try {
-                const res = await fetch('http://10.0.2.2:8000/api/login', {
+                const res = await fetch(window.API_BASE + '/api/login', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

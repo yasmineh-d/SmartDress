@@ -14,15 +14,17 @@ class FavorisService
      */
     public function getAllWithRelations(): Collection
     {
-        return Favoris::with(['vetement', 'tenue'])->get();
+        return Favoris::with(['vetement.photos', 'tenue'])->get();
     }
 
     /**
+     * Retourne les favoris d'un utilisateur avec les photos de ses vêtements.
+     */
     public function getForUser(User $user): Collection
     {
         return $user->favoris()
             ->whereNotNull('vetement_id')
-            ->with(['vetement', 'tenue'])
+            ->with(['vetement.photos', 'tenue'])
             ->latest()
             ->get();
     }
@@ -32,7 +34,7 @@ class FavorisService
      */
     public function findWithRelations(int $id): Favoris
     {
-        return Favoris::with(['vetement', 'tenue'])->findOrFail($id);
+        return Favoris::with(['vetement.photos', 'tenue'])->findOrFail($id);
     }
 
     /**

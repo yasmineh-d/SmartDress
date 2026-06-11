@@ -13,7 +13,7 @@
         }
         try {
             // Récupérer les vêtements
-            const res = await fetch('http://10.0.2.2:8000/api/vetements', {
+            const res = await fetch(window.API_BASE + '/api/vetements', {
                 headers: {
                     'Authorization': 'Bearer ' + token,
                     'Accept': 'application/json'
@@ -31,7 +31,7 @@
             this.vetements = json.data || json;
 
             // Récupérer les favoris pour le statut du cœur
-            const resFav = await fetch('http://10.0.2.2:8000/api/favoris', {
+            const resFav = await fetch(window.API_BASE + '/api/favoris', {
                 headers: {
                     'Authorization': 'Bearer ' + token,
                     'Accept': 'application/json'
@@ -60,7 +60,7 @@
         try {
             if (existing) {
                 // Retirer des favoris
-                const res = await fetch('http://10.0.2.2:8000/api/favoris/' + existing.id, {
+                const res = await fetch(window.API_BASE + '/api/favoris/' + existing.id, {
                     method: 'DELETE',
                     headers: {
                         'Authorization': 'Bearer ' + token,
@@ -72,7 +72,7 @@
                 }
             } else {
                 // Ajouter aux favoris
-                const res = await fetch('http://10.0.2.2:8000/api/favoris', {
+                const res = await fetch(window.API_BASE + '/api/favoris', {
                     method: 'POST',
                     headers: {
                         'Authorization': 'Bearer ' + token,
@@ -122,23 +122,25 @@
         </template>
 
         <template x-for="item in vetements" :key="item.id">
-            <div class="bg-white rounded-[2rem] overflow-hidden border border-tan/10 group">
-                <div class="aspect-square bg-cream/30 flex items-center justify-center p-4 relative">
+            <div class="clothing-card group bg-white p-2.5 rounded-[2.5rem] border border-tan/10 shadow-xl shadow-bark/5 hover:-translate-y-1 transition-all duration-300">
+                <div class="aspect-[4/5] bg-cream/30 rounded-[2rem] flex items-center justify-center relative overflow-hidden transition-colors group-hover:bg-cream/50">
                     <template x-if="item.photos && item.photos.length > 0">
-                        <img :src="'http://10.0.2.2:8000/storage/' + item.photos[0].url" class="w-full h-full object-cover rounded-xl">
+                        <img :src="window.API_BASE + '/storage/' + item.photos[0].url" class="w-full h-full object-contain p-2 zoom-img transition-transform duration-500">
                     </template>
                     <template x-if="!item.photos || item.photos.length === 0">
-                        <span class="text-4xl" x-text="item.categorie.toLowerCase().includes('haut') ? '👕' : (item.categorie.toLowerCase().includes('bas') ? '👖' : '👟')"></span>
+                        <span class="text-4xl zoom-img transition-transform duration-500" x-text="item.categorie.toLowerCase().includes('haut') ? '👕' : (item.categorie.toLowerCase().includes('bas') ? '👖' : (item.categorie.toLowerCase().includes('chauss') ? '👟' : '🧥'))"></span>
                     </template>
                     <button @click.stop="toggleFavorite(item.id)" 
-                            class="absolute top-2 right-2 w-8 h-8 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center transition-colors"
-                            :class="isFavorite(item.id) ? 'text-red-500' : 'text-red-300 hover:text-red-500'">
-                        ❤
+                            class="absolute top-3 right-3 w-8 h-8 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center transition-colors shadow-sm z-10"
+                            :class="isFavorite(item.id) ? 'text-red-500' : 'text-tan hover:text-red-500'">
+                        <svg class="w-4 h-4" :fill="isFavorite(item.id) ? 'currentColor' : 'none'" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                        </svg>
                     </button>
                 </div>
-                <div class="p-4">
-                    <p class="text-[10px] font-bold text-moss uppercase tracking-widest" x-text="item.categorie"></p>
-                    <p class="text-sm font-medium text-bark truncate" x-text="item.nom"></p>
+                <div class="p-4 space-y-1">
+                    <p class="text-[10px] font-bold text-tan uppercase tracking-widest" x-text="item.categorie"></p>
+                    <h4 class="text-base font-display font-medium text-bark italic truncate" x-text="item.nom"></h4>
                 </div>
             </div>
         </template>

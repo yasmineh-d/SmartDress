@@ -39,6 +39,14 @@
             }
         }
     </script>
+    <!-- API Base URL Configuration -->
+    <script>
+        // Change this to your API server's IP address
+        // For Android emulator: 'http://10.0.2.2:8000'
+        // For phone/real device: 'http://YOUR_COMPUTER_IP:8000' (e.g. 'http://192.168.2.13:8000')
+        window.API_BASE = 'http://10.0.2.2:8000';
+    </script>
+
     <link rel="stylesheet" href="{{ asset('assets/css/charte.css') }}">
     <style>
         [x-cloak] { display: none !important; }
@@ -85,7 +93,7 @@
                 }
                 headers['Accept'] = 'application/json';
                 
-                const res = await fetch('http://10.0.2.2:8000/api/vetements', {
+                const res = await fetch(window.API_BASE + '/api/vetements', {
                     method: 'POST',
                     headers: headers,
                     body: formData

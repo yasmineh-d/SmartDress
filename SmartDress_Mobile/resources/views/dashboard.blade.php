@@ -15,7 +15,7 @@
         }
         this.fetchWeather();
         try {
-            const res = await fetch('http://10.0.2.2:8000/api/vetements', {
+            const res = await fetch(window.API_BASE + '/api/vetements', {
                 headers: {
                     'Authorization': 'Bearer ' + token,
                     'Accept': 'application/json'
@@ -144,21 +144,21 @@
             <div x-show="!loading && !error" x-cloak class="relative flex flex-col items-center gap-6">
                 <!-- Top -->
                 <div class="w-40 h-40 bg-white rounded-[2rem] border-4 border-white shadow-sm flex items-center justify-center flex-col transition-transform hover:scale-105 overflow-hidden relative">
-                     <template x-if="suggestion.top && suggestion.top.image">
-                         <img :src="suggestion.top.image" class="w-full h-full object-cover">
+                     <template x-if="suggestion.top && suggestion.top.photos && suggestion.top.photos.length > 0">
+                          <img :src="window.API_BASE + '/storage/' + suggestion.top.photos[0].url" class="w-full h-full object-contain p-2">
                      </template>
-                     <template x-if="!suggestion.top || !suggestion.top.image">
-                         <span class="text-4xl mb-2">👕</span>
+                     <template x-if="!suggestion.top || !suggestion.top.photos || suggestion.top.photos.length === 0">
+                          <span class="text-4xl mb-2">👕</span>
                      </template>
                      <div class="absolute bottom-3 text-[9px] font-bold text-tan uppercase tracking-widest" 
                           x-text="suggestion.top ? suggestion.top.nom : 'Pas de haut trouvé'"></div>
                 </div>
                 <!-- Bottom -->
                 <div class="w-44 h-52 bg-bone/30 rounded-[2rem] border-4 border-white shadow-sm flex items-center justify-center flex-col transition-transform hover:scale-105 overflow-hidden relative">
-                    <template x-if="suggestion.bottom && suggestion.bottom.image">
-                        <img :src="suggestion.bottom.image" class="w-full h-full object-cover">
+                    <template x-if="suggestion.bottom && suggestion.bottom.photos && suggestion.bottom.photos.length > 0">
+                        <img :src="window.API_BASE + '/storage/' + suggestion.bottom.photos[0].url" class="w-full h-full object-contain p-2">
                     </template>
-                    <template x-if="!suggestion.bottom || !suggestion.bottom.image">
+                    <template x-if="!suggestion.bottom || !suggestion.bottom.photos || suggestion.bottom.photos.length === 0">
                         <span class="text-4xl mb-2">👖</span>
                     </template>
                     <div class="absolute bottom-3 text-[9px] font-bold text-deeptan uppercase tracking-widest"
