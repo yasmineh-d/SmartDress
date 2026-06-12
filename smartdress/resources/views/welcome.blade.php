@@ -73,22 +73,20 @@
                 <template x-if="isLoggedIn">
                     <div class="flex items-center gap-3">
                         @auth
-                            <a href="{{ route("profile") }}"
-                                class="flex items-center gap-2 px-4 py-2 bg-cream/50 rounded-full text-xs font-bold text-bark hover:bg-cream transition-all border border-tan/10">
-                                <div
-                                    class="w-6 h-6 bg-tan rounded-full flex items-center justify-center text-[10px] text-white">
-                                    {{ auth()->user()->initials() }}
-                                </div>
-                                {{ auth()->user()->name }}
-                            </a>
-                            <form action="{{ route('logout') }}" method="POST" class="inline">
-                                @csrf
-                                <button type="submit"
-                                    class="text-xs font-bold text-tan hover:text-bark uppercase tracking-widest px-2 transition-all">Déconnexion</button>
-                            </form>
+                        <a href="{{ route("profile") }}"
+                            class="flex items-center gap-2 px-4 py-2 bg-cream/50 rounded-full text-xs font-bold text-bark hover:bg-cream transition-all border border-tan/10">
+                            <div
+                                class="w-6 h-6 bg-tan rounded-full flex items-center justify-center text-[10px] text-white">
+                                {{ auth()->user()->initials() }}</div>
+                            {{ auth()->user()->name }}
+                        </a>
+                        <form action="{{ route('logout') }}" method="POST" class="inline">
+                            @csrf
+                            <button type="submit" class="text-xs font-bold text-tan hover:text-bark uppercase tracking-widest px-2 transition-all">Déconnexion</button>
+                        </form>
                         @else
-                            <!-- Fallback si Alpine pense être connecté mais Laravel non -->
-                            <a href="{{ route("login", ["mode" => "login"]) }}" class="sd-btn-ghost">Se connecter</a>
+                        <!-- Fallback si Alpine pense être connecté mais Laravel non -->
+                        <a href="{{ route("login", ["mode" => "login"]) }}" class="sd-btn-ghost">Se connecter</a>
                         @endauth
                     </div>
                 </template>
@@ -606,6 +604,49 @@
         </div>
     </section>
 
+
+    <!-- TESTIMONIALS -->
+    <section id="trust" class="sd-section" style="background:#F5EEE4">
+        <div class="max-w-screen-xl mx-auto px-6 lg:px-12 text-center">
+            <span class="sd-tag">Témoignages</span>
+            <h2 class="sd-section-title mt-3">Ce que disent nos <em>utilisateurs</em></h2>
+        </div>
+        <div class="max-w-screen-xl mx-auto px-6 lg:px-12 mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="sd-testimonial observe-me">
+                <p class="sd-testi-quote">"Je ne pensais pas qu'une app pourrait changer mon rapport aux vêtements.
+                    Maintenant je gagne facilement 15 min chaque matin."</p>
+                <div class="sd-testi-author">
+                    <div class="sd-testi-avatar">S</div>
+                    <div>
+                        <p class="sd-testi-name">Sara M.</p>
+                        <p class="sd-testi-role">Étudiante en design</p>
+                    </div>
+                </div>
+            </div>
+            <div class="sd-testimonial sd-testimonial--featured observe-me" style="transition-delay: 60ms">
+                <p class="sd-testi-quote">"Les suggestions météo sont bluffantes. Plus jamais je ne sors avec le mauvais
+                    manteau. L'interface est belle et fluide."</p>
+                <div class="sd-testi-author">
+                    <div class="sd-testi-avatar">K</div>
+                    <div>
+                        <p class="sd-testi-name">Karim B.</p>
+                        <p class="sd-testi-role">Développeur web</p>
+                    </div>
+                </div>
+            </div>
+            <div class="sd-testimonial observe-me" style="transition-delay: 120ms">
+                <p class="sd-testi-quote">"Enfin une application qui comprend vraiment les besoins de quelqu'un qui a
+                    trop de vêtements et pas assez de temps !"</p>
+                <div class="sd-testi-author">
+                    <div class="sd-testi-avatar">L</div>
+                    <div>
+                        <p class="sd-testi-name">Leila R.</p>
+                        <p class="sd-testi-role">Manager RH</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
 
     <!-- CTA SECTION -->
