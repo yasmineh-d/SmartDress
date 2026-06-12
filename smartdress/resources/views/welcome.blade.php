@@ -59,7 +59,6 @@
             <nav class="hidden lg:flex items-center gap-8">
                 <a href="#features" class="sd-navlink">Fonctionnalités</a>
                 <a href="#how" class="sd-navlink">Comment ça marche</a>
-                <a href="#trust" class="sd-navlink">Témoignages</a>
                 <a href="/contact" class="sd-navlink">Contact</a>
             </nav>
 
@@ -112,7 +111,6 @@
             <div class="px-6 py-4 flex flex-col gap-3">
                 <a href="#features" class="sd-navlink" @click="mobileMenuOpen = false">Fonctionnalités</a>
                 <a href="#how" class="sd-navlink" @click="mobileMenuOpen = false">Comment ça marche</a>
-                <a href="#trust" class="sd-navlink" @click="mobileMenuOpen = false">Témoignages</a>
                 <a href="/contact" class="sd-navlink" @click="mobileMenuOpen = false">Contact</a>
                 <hr class="border-tan/30 my-1" />
                 <template x-if="!isLoggedIn">
@@ -605,48 +603,7 @@
     </section>
 
 
-    <!-- TESTIMONIALS -->
-    <section id="trust" class="sd-section" style="background:#F5EEE4">
-        <div class="max-w-screen-xl mx-auto px-6 lg:px-12 text-center">
-            <span class="sd-tag">Témoignages</span>
-            <h2 class="sd-section-title mt-3">Ce que disent nos <em>utilisateurs</em></h2>
-        </div>
-        <div class="max-w-screen-xl mx-auto px-6 lg:px-12 mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="sd-testimonial observe-me">
-                <p class="sd-testi-quote">"Je ne pensais pas qu'une app pourrait changer mon rapport aux vêtements.
-                    Maintenant je gagne facilement 15 min chaque matin."</p>
-                <div class="sd-testi-author">
-                    <div class="sd-testi-avatar">S</div>
-                    <div>
-                        <p class="sd-testi-name">Sara M.</p>
-                        <p class="sd-testi-role">Étudiante en design</p>
-                    </div>
-                </div>
-            </div>
-            <div class="sd-testimonial sd-testimonial--featured observe-me" style="transition-delay: 60ms">
-                <p class="sd-testi-quote">"Les suggestions météo sont bluffantes. Plus jamais je ne sors avec le mauvais
-                    manteau. L'interface est belle et fluide."</p>
-                <div class="sd-testi-author">
-                    <div class="sd-testi-avatar">K</div>
-                    <div>
-                        <p class="sd-testi-name">Karim B.</p>
-                        <p class="sd-testi-role">Développeur web</p>
-                    </div>
-                </div>
-            </div>
-            <div class="sd-testimonial observe-me" style="transition-delay: 120ms">
-                <p class="sd-testi-quote">"Enfin une application qui comprend vraiment les besoins de quelqu'un qui a
-                    trop de vêtements et pas assez de temps !"</p>
-                <div class="sd-testi-author">
-                    <div class="sd-testi-avatar">L</div>
-                    <div>
-                        <p class="sd-testi-name">Leila R.</p>
-                        <p class="sd-testi-role">Manager RH</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
 
     <!-- CTA SECTION -->

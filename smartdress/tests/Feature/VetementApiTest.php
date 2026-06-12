@@ -25,7 +25,7 @@ class VetementApiTest extends TestCase
             'user_id' => $user->id,
         ]);
 
-        $response = $this->getJson('/api/vetements');
+        $response = $this->actingAs($user, 'sanctum')->getJson('/api/vetements');
 
         $response->assertOk()
             ->assertJsonPath('data.0.nom', 'Chemise');
@@ -36,7 +36,7 @@ class VetementApiTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $response = $this->postJson('/api/vetements', [
+        $response = $this->actingAs($user, 'sanctum')->postJson('/api/vetements', [
             'nom' => 'Jean',
             'categorie' => 'Bas',
             'couleur' => 'Noir',
